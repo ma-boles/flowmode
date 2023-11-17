@@ -1,30 +1,28 @@
-import './App.css';
+import Nav from './components/Nav';
+import BookShelf from './components/BookShelf';
+import Queue from './components/Queue';
+import WishList from './components/WishList';
+import './styles/App.css';
 
 function App() {
   return (
-    <section>
+    <>
+        <Nav />
+
+    <section className='app'>
+
       <div className="header">
-        <h1>Spotify Reads</h1>
+        <h1>Keep track of <br></br>
+         your monthly <br></br>
+         Spotify audiobooks</h1>
       </div>
 
-      <div className="bookShelf">
-        <h2>
-          Book Shelf
-        </h2>
-      </div>
-
-      <div className="queue">
-        <h3>
-          Queue
-        </h3>
-      </div>
-
-      <div className="wishList">
-        <h3>
-          Wish List
-        </h3>
-      </div>
+      <BookShelf />
+      <Queue />
+      <WishList />
     </section>
+    </>
+
   );
 }
 
