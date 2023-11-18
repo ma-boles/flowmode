@@ -13,8 +13,11 @@ function App() {
 
     <section className='app'>
       <Landing />
+      <h2 className="bookShelf--h2">BookShelf</h2>
       <BookShelf />
+      <h3 className="queue--h3">Queue</h3>
       <Queue />
+      <h3 className="wishList--h3">Wish List</h3>
       <WishList />
     </section>
     </>
