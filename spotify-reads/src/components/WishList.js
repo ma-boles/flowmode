@@ -1,12 +1,15 @@
-import React from "react"
+import React from "react";
+import Book from "./Book";
 
 export default function WishList() {
     return (
         <>
             <div className="wishList">
-                <h3 className="wishList--h3">
-                    Wish List
-                </h3>
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
             </div>
         </>
     )

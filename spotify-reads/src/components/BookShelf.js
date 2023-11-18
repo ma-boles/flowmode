@@ -1,12 +1,15 @@
-import React from "react"
+import React from "react";
+import Book from "./Book";
 
 export default function BookShelf() {
     return (
         <>
             <div className="bookShelf">
-                <h2 className="bookShelf--h2">
-                    Book Shelf
-                </h2>
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
             </div>
         </>
     )

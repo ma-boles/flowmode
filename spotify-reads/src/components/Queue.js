@@ -1,12 +1,19 @@
 import React from "react";
+import Book from "./Book";
 
 export default function Queue() {
     return (
         <>
             <div className="queue">
-                <h3 className="queue--h3">
-                    Queue
-                </h3>
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+                <Book />
+
             </div>
         </>
     )
