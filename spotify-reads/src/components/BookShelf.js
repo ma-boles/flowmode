@@ -4,7 +4,7 @@ import Book from "./Book";
 export default function BookShelf() {
     return (
         <>
-            <div className="bookShelf">
+            <div className="bookshelf--container">
                 <Book />
                 <Book />
                 <Book />

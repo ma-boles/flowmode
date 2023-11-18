@@ -4,7 +4,7 @@ import Book from "./Book";
 export default function Queue() {
     return (
         <>
-            <div className="queue">
+            <div className="queue--container">
                 <Book />
                 <Book />
                 <Book />
@@ -13,6 +13,7 @@ export default function Queue() {
                 <Book />
                 <Book />
                 <Book />
+                
 
             </div>
         </>
