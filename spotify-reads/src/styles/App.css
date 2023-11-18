@@ -2,36 +2,76 @@
  /*background-color: #1ED760;*/
   color: whitesmoke;
   margin: 0px;
+  overflow-x: hidden;
 }
 
 .app {
-  height: 100vh;
   background: linear-gradient(180deg, rgba(30,215,96,1) 32%, rgba(0,0,6,1) 85%);
 }
 
 .header {
    background-color: transparent;
 }
+
+
+/* landing section */
+.landing {
+  display: inline-flex;
+  margin: 1rem;
+  padding-top: 5rem;
+}
 h1 {
   font-size: 4rem;
   margin: 0rem 1rem;
-  padding-top: 7rem;
+  padding-top: 8rem;
 }
 
+img {
+mix-blend-mode: multiply;
+height: 20rem;
+margin-top: 1rem;
+margin-left: 2rem;
+}
+
+
+/* bookshelf */
 .bookShelf {
   margin: 1rem;
   padding-top: 2rem;
-  background-color: red;
+  background-color: transparent;
+  border: 1px dotted red;
+  display: inline-flex;
+  overflow-x: scroll;
+  width: 97%;
+
+}
+.book--container {
+  background-color: blue;
+  height: 300px;
+  width: 240px;
+  margin: 1rem;
 }
 
+
+/* queue */
 .queue {
   margin: 1rem;
   padding-top: 2rem;
-  background-color: purple;
+  background-color: transparent;
+  border: 1px dotted purple;
+  display: inline-flex;
+  overflow-x: scroll;
+  width: 97%;
 }
 
+
+/* wish list */
 .wishList {
   margin: 1rem;
   padding-top: 2rem;
-  background-color: rgb(255, 4, 46);
+  background-color: transparent;
+  border: 1px dotted red;
+  display: inline-flex;
+  overflow-x: scroll;
+  width: 97%;
 }
