@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/App.css';
-import Logo from "../images/edit.jpg"
+import Logo from "../images/LandingImg3.jpg"
 
 export default function Landing() {
     return (
