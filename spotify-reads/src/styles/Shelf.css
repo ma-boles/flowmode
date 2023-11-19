@@ -20,11 +20,13 @@
   }
   
   
+  /* book card */
   .book--container {
     background-color: blue;
-    
     margin: 1rem;
     border-radius: 10px;
+    height: 15rem;
+    width: 10rem;
   }
   
   
@@ -50,21 +52,22 @@
   
   
   /* wish list */
-  .wishlist--section {
+  .readinglist--section {
     margin: 4rem 2rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
-  .wishlist--section::-webkit-scrollbar{
+  .readinglist--section::-webkit-scrollbar{
     display: none;
   }
-  .wishlist--h3 {
+  .readinglist--h3 {
     padding: 1rem;
   }
-  .wishlist--container {
+  .readinglist--container {
     background-color: transparent;
     border: 1px dotted red;
     display: inline-flex;
     width: 100%;
   }
+  

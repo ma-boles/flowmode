@@ -9,10 +9,7 @@ export default function Queue() {
                 <Book />
                 <Book />
                 <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
+               
                 
 
             </div>

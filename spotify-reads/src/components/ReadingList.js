@@ -10,6 +10,9 @@ export default function ReadingList() {
                 <Book />
                 <Book />
                 <Book />
+                <Book />
+                <Book />
+
             </div>
         </>
     )

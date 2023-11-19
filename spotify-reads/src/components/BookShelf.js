@@ -7,9 +7,7 @@ export default function BookShelf() {
             <div className="bookshelf--container">
                 <Book />
                 <Book />
-                <Book />
-                <Book />
-                <Book />
+                
             </div>
         </>
     )
