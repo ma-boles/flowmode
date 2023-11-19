@@ -6,7 +6,7 @@
 }
 
 .app {
-  background: linear-gradient(180deg, rgba(30,215,96,1) 32%, rgba(0,0,6,1) 85%);
+  background: linear-gradient(180deg, rgba(30,215,96,1) 50%, rgba(0, 0, 6, 0.498)95%);
 }
 
 .header {
@@ -20,97 +20,24 @@
 }
 .landing {
   display: inline-flex;
-  margin: 1.5rem;
   padding-top: 3rem;
+  margin: auto 1rem;
 }
 h1 {
-  font-size: 4rem;
+  font-size: 3.7rem;
   margin: 0rem 1rem;
   padding-top: 6rem;
+  line-height: 5rem;
 }
 strong {
   font-weight: 800;
 }
 img {
   mix-blend-mode: multiply;
-  height: 20rem;
+  height: 28rem;
   margin-top: 6.5rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
 }
-
-
-/* bookshelf */
-.bookshelf--section {
-  margin: 2rem;
-  padding-top: 3rem;
-  overflow: auto;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.bookshelf--section::-webkit-scrollbar {
-  display: none;
-}
-.bookshelf--h2 {
-  padding: 1rem;
-}
-.bookshelf--container {
-  background-color: transparent;
-  border: 1px dotted red;
-  display: inline-flex;
-  width: 100%;
-  
-}
-
-
-.book--container {
-  background-color: blue;
-  
-  margin: 1rem;
-  border-radius: 10px;
-}
-
-
-/* queue */
-.queue--section {
-  margin: 4rem 2rem;
-  overflow: auto;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.queue--section::-webkit-scrollbar {
-  display: none;
-}
-.queue--h3 {
-  padding: 1rem
-}
-.queue--container {
-  background-color: transparent;
-  border: 1px dotted purple;
-  display: inline-flex;
-  width: 100%;
-}
-
-
-/* wish list */
-.wishlist--section {
-  margin: 4rem 2rem;
-  overflow: auto;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.wishlist--section::-webkit-scrollbar{
-  display: none;
-}
-.wishlist--h3 {
-  padding: 1rem;
-}
-.wishlist--container {
-  background-color: transparent;
-  border: 1px dotted red;
-  display: inline-flex;
-  width: 100%;
-}
-
 
 /* footer section */
 .footer--container {

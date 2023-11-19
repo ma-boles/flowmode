@@ -1,5 +1,6 @@
-import Landing from './components/Landing';
 import Nav from './components/Nav';
+import Landing from './components/Landing';
+import Works from './components/Works';
 import BookShelf from './components/BookShelf';
 import Queue from './components/Queue';
 import WishList from './components/WishList';
@@ -18,6 +19,8 @@ function App() {
         <Landing />
       </section>
 
+      <Works />
+      {/*
       <section className='bookshelf--section'>
         <h2 className="bookshelf--h2">BookShelf</h2>
         <BookShelf />
@@ -30,8 +33,8 @@ function App() {
 
       <section className='wishlist--section'>
         <h3 className="wishlist--h3">Wish List</h3>
-        <WishList />
-      </section>
+  <WishList />
+  </section>*/}
 
       <Footer />
 
