@@ -5,17 +5,34 @@
 .works--container {
     display: inline-flex;
 }
+
+.works--h1 {
+    margin-bottom: 1.5rem;
+}
 .works--card {
 margin: 2rem;
 padding: 2rem;
 background-color: rgba(255, 255, 255, 0.171);
 border-radius: 10px;
+width: 13rem;
 }
 
+.works--number {
+    background-color: transparent;
+    border: 1px double white;
+    width: 3rem;
+    margin-bottom: .7rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.works--h3 {
+    margin-bottom: .5rem;
+}
 .works--button {
     background-color: transparent;
     cursor: pointer;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
     border-radius: 30px;
     border: 1px double white;
     padding: .7rem 3.5rem;
