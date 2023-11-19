@@ -6,7 +6,7 @@
 }
 
 .app {
-  background: linear-gradient(180deg, rgba(30,215,96,1) 50%, rgba(0, 0, 6, 0.498)95%);
+  background: linear-gradient(180deg, rgba(30,215,96,1) 50%, rgba(0, 0, 6, 0.388)95%);
 }
 
 .header {
@@ -20,8 +20,13 @@
 }
 .landing {
   display: inline-flex;
-  padding-top: 3rem;
   margin: auto 1rem;
+}
+
+.landing--h2 {
+  text-align: right;
+  color: black;
+  font-weight: 700;
 }
 h1 {
   font-size: 3.7rem;
