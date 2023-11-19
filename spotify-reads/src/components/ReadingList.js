@@ -1,10 +1,10 @@
 import React from "react";
 import Book from "./Book";
 
-export default function WishList() {
+export default function ReadingList() {
     return (
         <>
-            <div className="wishlist--container">
+            <div className="readinglist--container">
                 <Book />
                 <Book />
                 <Book />
