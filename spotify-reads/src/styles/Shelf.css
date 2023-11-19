@@ -1,0 +1,70 @@
+/* bookshelf */
+.bookshelf--section {
+    margin: 2rem;
+    padding-top: 3rem;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .bookshelf--section::-webkit-scrollbar {
+    display: none;
+  }
+  .bookshelf--h2 {
+    padding: 1rem;
+  }
+  .bookshelf--container {
+    background-color: transparent;
+    border: 1px dotted red;
+    display: inline-flex;
+    width: 100%;
+  }
+  
+  
+  .book--container {
+    background-color: blue;
+    
+    margin: 1rem;
+    border-radius: 10px;
+  }
+  
+  
+  /* queue */
+  .queue--section {
+    margin: 4rem 2rem;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .queue--section::-webkit-scrollbar {
+    display: none;
+  }
+  .queue--h3 {
+    padding: 1rem
+  }
+  .queue--container {
+    background-color: transparent;
+    border: 1px dotted purple;
+    display: inline-flex;
+    width: 100%;
+  }
+  
+  
+  /* wish list */
+  .wishlist--section {
+    margin: 4rem 2rem;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .wishlist--section::-webkit-scrollbar{
+    display: none;
+  }
+  .wishlist--h3 {
+    padding: 1rem;
+  }
+  .wishlist--container {
+    background-color: transparent;
+    border: 1px dotted red;
+    display: inline-flex;
+    width: 100%;
+  }
