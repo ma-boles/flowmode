@@ -1,3 +1,10 @@
+.img--section {
+  text-align: center;
+}
+.shelf--img {
+  margin: auto;
+  height: 35rem;
+}
 /* bookshelf */
 .bookshelf--section {
     margin: 2rem;

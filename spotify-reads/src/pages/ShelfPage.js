@@ -4,6 +4,7 @@ import BookShelf from "../components/BookShelf";
 import Queue from "../components/Queue";
 import ReadingList from "../components/ReadingList";
 
+import Bookshelf from "../images/Bookshelf.jpg"
 import "../styles/App.css";
 import "../styles/Shelf.css"
 
@@ -11,6 +12,10 @@ export default function ShelfPage() {
     return(
         <>
         <Nav />
+        
+        <section className="img--section">
+            <img src={Bookshelf} alt="astronaut lying down reading a book" className="shelf--img"></img>
+        </section>
         
         <section className='bookshelf--section'>
             <h2 className="bookshelf--h2">BookShelf</h2>
