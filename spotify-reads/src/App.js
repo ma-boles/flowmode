@@ -1,8 +1,7 @@
-import Landing from './components/Landing';
-import Works from './components/Works';
-import Footer from './components/Footer';
+import LandingPage from './pages/LandingPage';
 import ShelfPage from './pages/ShelfPage';
 import BrowsePage from './pages/BrowsePage';
+import Footer from './components/Footer';
 
 import "./pages/ShelfPage";
 import './styles/App.css';
@@ -12,16 +11,14 @@ function App() {
     <>
 
     <div className='app'>
-
     <ShelfPage />
-      {/*<section className='landing--section'>
-        <Landing />
-      </section>
 
-  <Works />
-      
-<BrowsePage />
-  */}      <Footer />
+        {/* 
+      <LandingPage />
+
+      <BrowsePage />
+      */}      
+      <Footer />
     </div>
     </>
 
