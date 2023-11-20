@@ -18,7 +18,7 @@ export default function ShelfPage() {
         </section>
         
         <section className='bookshelf--section'>
-            <h2 className="bookshelf--h2">BookShelf</h2>
+            <h2 className="bookshelf--h2">Bookshelf</h2>
             <BookShelf />
         </section>
 
@@ -27,8 +27,10 @@ export default function ShelfPage() {
             <Queue />
         </section>
 
+
         <section className='readinglist--section'>
-            <h3 className="readinglist--h3">Reading List</h3>
+        <h3 className="readinglist--h3">Reading List</h3>
+
             <ReadingList />
         </section>
         

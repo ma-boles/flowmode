@@ -21,9 +21,7 @@
   }
   .bookshelf--container {
     background-color: transparent;
-    border: 1px dotted red;
     display: inline-flex;
-    width: 100%;
   }
   
   
@@ -33,9 +31,13 @@
     margin: 1rem;
     border-radius: 10px;
     height: 15rem;
-    width: 10rem;
+    width: 15rem;
   }
-  
+  .book--ellipsis {
+    height: 1.5rem;
+    filter: invert(1);
+    cursor: pointer;
+  }
   
   /* queue */
   .queue--section {
@@ -52,18 +54,16 @@
   }
   .queue--container {
     background-color: transparent;
-    border: 1px dotted purple;
     display: inline-flex;
-    width: 100%;
   }
   
   
-  /* wish list */
+  /* reading list */
   .readinglist--section {
     margin: 4rem 2rem;
-    overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    overflow: auto;
   }
   .readinglist--section::-webkit-scrollbar{
     display: none;
@@ -73,8 +73,8 @@
   }
   .readinglist--container {
     background-color: transparent;
-    border: 1px dotted red;
     display: inline-flex;
-    width: 100%;
+    
+
   }
   
