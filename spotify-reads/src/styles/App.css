@@ -9,18 +9,13 @@
   background: linear-gradient(180deg, rgba(30,215,96,1) 50%, rgba(0, 0, 6, 0.388)95%);
 }
 
-.header {
-   background-color: transparent;
-}
-
-
 /* landing section */
 .landing--section {
   margin: 1rem ;
+  text-align: center;
 }
 .landing {
-  display: inline-flex;
-  margin: auto 1rem;
+  margin: auto ;
 }
 
 .landing--h2 {
@@ -38,11 +33,9 @@ strong {
   font-weight: 800;
 }
 img {
-  mix-blend-mode: multiply;
-  height: 28rem;
-  margin-top: 6.5rem;
-  margin-left: 1rem;
+  height: 38rem;
 }
+
 
 /* footer section */
 .footer--container {

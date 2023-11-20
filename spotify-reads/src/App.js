@@ -2,6 +2,7 @@ import Landing from './components/Landing';
 import Works from './components/Works';
 import Footer from './components/Footer';
 import ShelfPage from './pages/ShelfPage';
+import BrowsePage from './pages/BrowsePage';
 
 import "./pages/ShelfPage";
 import './styles/App.css';
@@ -17,10 +18,10 @@ function App() {
         <Landing />
       </section>
 
-      <Works />*/}
+  <Works />
       
-
-      <Footer />
+<BrowsePage />
+  */}      <Footer />
     </div>
     </>
 
