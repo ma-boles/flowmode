@@ -17,6 +17,7 @@ export default function Nav() {
                     <a><li>Bookshelf</li></a>
                     <a><li>Queue</li></a>
                     <a><li>Reading List</li></a>
+                    <a><li>Catalogue</li></a>
                     <li className='time' id='time' onClick={changeText}>Time Left</li>
                 </ul>
             </section>
