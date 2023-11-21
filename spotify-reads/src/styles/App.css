@@ -6,7 +6,9 @@
 }
 
 .app {
-  background: linear-gradient(180deg, rgba(30,215,96,1) 50%, rgba(0, 0, 6, 0.388)95%);
+  background: linear-gradient(180deg, rgba(30,215,96,1) 46%, rgba(0, 0, 6, 0.388)90%);
+  /*background: linear-gradient(180deg, rgba(30,215,96,1) 32%, rgba(0, 0, 6, 0.388)85%);*/
+
 }
 
 /* landing section */
