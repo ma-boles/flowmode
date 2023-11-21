@@ -1,6 +1,5 @@
 .works {
     text-align: center;
-
 }
 .works--container {
     display: inline-flex;
@@ -8,13 +7,14 @@
 
 .works--h1 {
     margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
 }
 .works--card {
-margin: 2rem;
-padding: 2rem;
-background-color: rgba(255, 255, 255, 0.171);
-border-radius: 10px;
-width: 13rem;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.171);
+    border-radius: 10px;
+    width: 13rem;
 }
 
 .works--number {
