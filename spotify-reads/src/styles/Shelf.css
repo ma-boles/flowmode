@@ -4,11 +4,20 @@
 .shelf--img {
   margin: auto;
   height: 35rem;
+  padding-bottom: 2rem;
 }
+
+.shelf--hr {
+  width: 95%;
+}
+.shelf--time {
+  text-align: right;
+}
+
 /* bookshelf */
 .bookshelf--section {
     margin: 2rem;
-    padding-top: 3rem;
+    padding-bottom: 2rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -16,8 +25,11 @@
   .bookshelf--section::-webkit-scrollbar {
     display: none;
   }
+  
   .bookshelf--h2 {
-    padding: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
   .bookshelf--container {
     background-color: transparent;
@@ -39,9 +51,11 @@
     cursor: pointer;
   }
   
+  
   /* queue */
   .queue--section {
-    margin: 4rem 2rem;
+    margin:2rem;
+    padding-bottom: 2rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -50,7 +64,9 @@
     display: none;
   }
   .queue--h3 {
-    padding: 1rem
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
   .queue--container {
     background-color: transparent;
@@ -60,7 +76,8 @@
   
   /* reading list */
   .readinglist--section {
-    margin: 4rem 2rem;
+    margin: 2rem;
+    padding-bottom: 2rem;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     overflow: auto;
@@ -74,7 +91,58 @@
   .readinglist--container {
     background-color: transparent;
     display: inline-flex;
-    
-
   }
   
+
+/* addlist */
+.book--add {
+  width: 6rem;
+  height: 3.6rem;
+  background-color: rgb(90, 90, 90);
+  /*display: block;*/
+  display: none;
+}
+.addlist {
+  padding: 0;
+  margin: 0;
+}
+.addlist--button {
+  background-color: transparent;
+  border: none;
+  padding: .3rem 1rem;
+  font-size: .75rem;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+.addlist--button:hover {
+  background-color: grey;
+}
+
+.addlist--add {
+  margin: 0;
+  width: 100%;
+}
+.addlist--add--options {
+ /*display: block;*/
+ display: none;
+ position: absolute;
+ top: 50px;
+ background-color: rgb(90, 90, 90);
+ width: 9rem;
+}
+.addlist--li {
+  cursor: pointer;
+  font-size: .75rem;
+  padding: .5rem;
+  width: 100%;
+  margin: 0;
+}
+.addlist--li:hover {
+  background-color: grey;
+}
+
+.addlist--remove {
+  margin: 0;
+  width: 100%;
+}
