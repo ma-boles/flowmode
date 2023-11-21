@@ -1,6 +1,7 @@
-import LandingPage from './pages/LandingPage';
+/*import LandingPage from './pages/LandingPage';*/
 import ShelfPage from './pages/ShelfPage';
-import BrowsePage from './pages/BrowsePage';
+/*import BrowsePage from './pages/BrowsePage';*/
+
 import Footer from './components/Footer';
 
 import "./pages/ShelfPage";
@@ -10,7 +11,7 @@ function App() {
   return (
     <>
 
-    <div className='app'>
+    <div /*className='app'*/>
     <ShelfPage />
 
         {/* 
