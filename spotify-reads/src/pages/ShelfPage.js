@@ -21,8 +21,8 @@ export default function ShelfPage() {
 
             <section className='bookshelf--section'>
                 <div className="shelf--time">
-                    <p>Total Time:</p>
-                    00:00
+                    <strong><p>Total Time:</p>
+                    00:00</strong>
                 </div>
                 <h2 className="bookshelf--h2">Bookshelf</h2>
                 <BookShelf />
@@ -32,8 +32,8 @@ export default function ShelfPage() {
 
             <section className='queue--section'>
                 <div className="shelf--time">
-                    <p>Total Time:</p>
-                    00:00
+                    <strong><p>Total Time:</p>
+                    00:00</strong>
                 </div>
                 <h3 className="queue--h3">Queue</h3>
                 
