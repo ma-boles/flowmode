@@ -1,4 +1,4 @@
-/*import LandingPage from './pages/LandingPage';*/
+import LandingPage from './pages/LandingPage';
 import ShelfPage from './pages/ShelfPage';
 /*import BrowsePage from './pages/BrowsePage';*/
 
@@ -15,7 +15,7 @@ function App() {
     <ShelfPage />
 
         {/* 
-      <LandingPage />
+    <LandingPage />
 
       <BrowsePage />
       */}      
