@@ -19,14 +19,15 @@
   margin-top: 3rem;
 }
 .top--button {
-  color: white;
-  border-radius: 180px;
-  border: 1px white double;
-  background-color: rgba(6, 6, 6, 0.491);
-  padding: 1rem;
   cursor: pointer;
+  background-color: transparent;
+  border-radius: 180px;
+  border: none;
 }
-
+.img--arrow {
+  filter: invert(.75);
+  height: 3rem;
+}
 
 /* bookshelf */
 .bookshelf--section {
