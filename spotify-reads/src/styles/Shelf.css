@@ -14,11 +14,23 @@
   text-align: right;
 }
 
+.top--button--div {
+  text-align: right;
+  margin-top: 3rem;
+}
+.top--button {
+  color: white;
+  border-radius: 180px;
+  border: 1px white double;
+  background-color: rgba(6, 6, 6, 0.491);
+  padding: 1rem;
+  cursor: pointer;
+}
+
 
 /* bookshelf */
 .bookshelf--section {
     margin: 2rem;
-    padding-bottom: 2.5rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -41,7 +53,6 @@
   /* queue */
   .queue--section {
     margin:2rem;
-    padding-bottom: 2.5rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -63,7 +74,7 @@
   /* reading list */
   .readinglist--section {
     margin: 2rem;
-    padding-bottom: 2rem;
+    margin-bottom: 0rem;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     overflow: auto;
