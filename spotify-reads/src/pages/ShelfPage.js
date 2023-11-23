@@ -20,7 +20,7 @@ export default function ShelfPage() {
             bookshelfRef.current.scrollIntoView({ behavior: 'smooth'});
         } else if (section === 'Queue') {
             queueRef.current.scrollIntoView({ behavior: 'smooth'});
-        } else if (section == 'ReadingList') {
+        } else if (section === 'ReadingList') {
             readinglistRef.current.scrollIntoView({ behavior: 'smooth'});
         };
     }
