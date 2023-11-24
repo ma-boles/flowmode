@@ -6,14 +6,8 @@ export default function ReadingList() {
     return (
         <>
             <div className="readinglist--container">
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-                <Book />
-
+                <Book title="Book 3" author="Author 3" book_time="5hr 20min"/>
+                <Book title="Book 4" author="Author 4" book_time="5hr 20min"/>
             </div>
         </>
     )
