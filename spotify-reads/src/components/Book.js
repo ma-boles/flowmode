@@ -43,13 +43,13 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
                 <ul className="addlist">
                     <li className="addlist--add">
                         <button className="addlist--button" onClick={toggleAddOptions}>
-                            <img src={plus} className="book--icon"></img>
+                            <img src={plus} className="book--icon" alt="add"></img>
                             Add</button>
                     </li>
 
                     <li className="addlist--remove">
                         <button className="addlist--button" onClick={onRemove}>
-                            <img src={remove} className="book--icon"></img>Remove</button>
+                            <img src={remove} className="book--icon" alt="remove"></img>Remove</button>
                     </li>
                 </ul>
             </div> 
