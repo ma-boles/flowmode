@@ -19,7 +19,16 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
         setAddOptionsVisible(!isAddOptionsVisible);
     };
 
+    const ellipsisStyles = {
+        display: isEllipsisVisible ? 'block' : 'none',
+    };
+
+    const addOptionsStyles = {
+        display: isAddOptionsVisible ? 'block' : 'none',
+    };
     
+
+
     return (
         <>
         <div className="book--container">
@@ -38,11 +47,11 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
 
             <img src={ellipsis} alt="ellipsis" className="book--ellipsis" onClick={handleEllipsisClick}></img><br/>
 
-            <div className={`book--add ${isEllipsisVisible ? "visible" : "" }`} id="book--add">
+            <div className= "book--add" id="book--add" style={ellipsisStyles}>
 
                 <ul className="addlist">
                     <li className="addlist--add">
-                        <button className="addlist--button" onClick={toggleAddOptions}>
+                        <button className= "addlist--button" onClick={toggleAddOptions}>
                             <img src={plus} className="book--icon" alt="add"></img>
                             Add</button>
                     </li>
@@ -54,7 +63,7 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
                 </ul>
             </div> 
 
-            <div className={`addlist--add--options ${isAddOptionsVisible ? "visible": ""}`} id="addlist--add--options">
+            <div className= "addlist--add--options" id="addlist--add--options" style={addOptionsStyles}>
                 <li className="addlist--li">
                     <button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>
                 </li>
