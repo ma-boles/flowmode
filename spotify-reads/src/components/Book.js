@@ -6,8 +6,9 @@ import cover from "../images/image-solid.svg";
 import plus from "../images/plus-solid.svg";
 import remove from "../images/trash-solid.svg"
 
-export default function Book({ title, author, book_time, onAddToBookshelf, onAddToQueue, onAddToReadingList, onRemove }) {
+export default function Book({ id, title, author, book_time, onAddToBookshelf, onAddToQueue, onAddToReadingList, onRemove }) {
 
+    const book = { id, title, author, book_time};
     const [ isEllipsisVisible, setEllipsisVisible ] = useState(false);
     const [ isAddOptionsVisible, setAddOptionsVisible ] = useState(false);
 
@@ -47,7 +48,7 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
 
             <img src={ellipsis} alt="ellipsis" className="book--ellipsis" onClick={handleEllipsisClick}></img><br/>
 
-            <div className= "book--add" id="book--add" style={ellipsisStyles}>
+            <div className= "book--add" id={`book--add ${id}`} style={ellipsisStyles}>
 
                 <ul className="addlist">
                     <li className="addlist--add">
@@ -63,7 +64,7 @@ export default function Book({ title, author, book_time, onAddToBookshelf, onAdd
                 </ul>
             </div> 
 
-            <div className= "addlist--add--options" id="addlist--add--options" style={addOptionsStyles}>
+            <div className= "addlist--add--options" id={`addlist--add--options ${id}`} style={addOptionsStyles}>
                 <li className="addlist--li">
                     <button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>
                 </li>
