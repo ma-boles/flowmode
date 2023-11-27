@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Book from "./Book";
 
-export default function BookSection({ title, books, onAdd, onRemove }) {
-    const [ bookStates, setBookStates ] = useState(
-        books.reduce((acc, book) => {
-            acc[book.id] = { isEllipsisVisible: false, isAddOptionsVisible: false };
-        })
-    )
-    
-    
-    };
+export default function BookSection({ title, books, bookStates,handleEllipsisClick, toggleAddOptions, onRemove }) {
 
     return(
         <>
@@ -19,13 +11,19 @@ export default function BookSection({ title, books, onAdd, onRemove }) {
             title={book.title}
             author={book.author}
             book_time={book.book_time}
+            onAddToBookshelf={onAddToBookshelf(book)}
+            onAddToQueue={onAddToQueue(book)}
+            onAddToReadingList={onAddToReadingList(book)}
+            onRemove={onRemove(book)}
+            isEllipsisVisible={bookStates[book.id].isEllipsisVisible}
+            isAddOptionsVisible={bookStates[book.id].isAddOptionsVisible}
             handleEllipsisClick={() => handleEllipsisClick(book.id)}
             toggleAddOptions={() => toggleAddOptions(book.id)}
             />
         ))}
         </>
     )
-}
+};
 
 
 /*(() => {

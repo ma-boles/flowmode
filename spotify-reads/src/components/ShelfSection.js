@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BookSection from "./BookSection";
 
-export default function ShelfSection({ title, books }) {
+export default function ShelfSection({ title, books, onAddToBookshelf, onAddToQueue, onAddToReadingList }) {
 
     const [ bookStates, setBookStates ] = useState(
         books.reduce((acc, book) => {
@@ -24,6 +24,54 @@ export default function ShelfSection({ title, books }) {
         }));
     };
 
+
+    // add logic 
+    const handleAddToBookshelf = (book) => {
+        //check if the book is already in shelf
+        if(!bookshelfBooks.some((b) => b.id === book.id)) {
+            //add book to shelf 
+            setBookshelfBooks((prevBooks) => [...prevBooks, book]);
+            console.log('Book added to bookshelf:', book);
+        } else {
+            console.log('Book is already in bookshelf:', book);
+        }
+    };
+
+    const handleAddToQueue = (book) => {
+        if(!queueBooks.some((b) => b.id === book.id)) {
+            setQueueBooks((prevBooks) => [...prevBooks, book]);
+            console.log('Book added to queue:', book);
+        } else {
+            console.log('Book already in queue:', book);
+        }
+    };
+
+    const handleAddToReadingList = (book) => {
+        if(!readingListBooks.some((b) => b.id === book.id)) {
+            setReadingListBooks((prevBooks) => [...prevBooks, book]);
+            console.log('Book added to reading list:', book);
+        } else {
+            console.log('Book already in reading list:', book);
+        }
+    };
+    
+
+    // remove logic
+    const handleRemoveFromBookshelf = (book) => {
+        setBookshelfBooks((prevBooks) => prevBooks.filter((b) => b.id !== book.id));
+        console.log('Book removed from shelf:', book);
+    };
+
+    const handleRemoveFromQueue = (book) => {
+        setQueueBooks((prevBooks) => prevBooks.filter((b) => b.id !== book.id ));
+        console.log('Book removed from queue:', book);
+    };
+
+    const handleRemoveFromReadingList = (book) => {
+        setReadingListBooks((prevBooks) => prevBooks.filter((b) => b.id !== book.id));
+        console.log('Book removed from reading list:', book);
+    };
+
     return(
         <>
         <BookSection
@@ -31,7 +79,10 @@ export default function ShelfSection({ title, books }) {
         books={books}
         bookStates={bookStates}
         handleEllipsisClick={handleEllipsisClick}
-        toggleAddOptions={toggleAddOptions}/>
+        toggleAddOptions={toggleAddOptions}
+        onAddToBookshelf={onAddToBookshelf}
+        onAddToQueue={onAddToQueue}
+        onAddToReadingList={onAddToReadingList}/>
         </>
     )
 }

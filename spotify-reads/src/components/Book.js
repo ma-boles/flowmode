@@ -6,19 +6,7 @@ import cover from "../images/image-solid.svg";
 import plus from "../images/plus-solid.svg";
 import remove from "../images/trash-solid.svg"
 
-export default function Book({ id, title, author, book_time, onAddToBookshelf, onAddToQueue, onAddToReadingList, onRemove }) {
-
-    const book = { id, title, author, book_time};
-    const [ isEllipsisVisible, setEllipsisVisible ] = useState(false);
-    const [ isAddOptionsVisible, setAddOptionsVisible ] = useState(false);
-
-    const handleEllipsisClick = () => {
-        setEllipsisVisible(!isEllipsisVisible);
-    };
-
-    const toggleAddOptions = () => {
-        setAddOptionsVisible(!isAddOptionsVisible);
-    };
+export default function Book({ id, title, author, book_time, onAddToBookshelf, onAddToQueue, onAddToReadingList, onRemove, isEllipsisVisible, isAddOptionsVisible, handleEllipsisClick, toggleAddOptions }) {
 
     const ellipsisStyles = {
         display: isEllipsisVisible ? 'block' : 'none',
@@ -27,8 +15,6 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
     const addOptionsStyles = {
         display: isAddOptionsVisible ? 'block' : 'none',
     };
-    
-
 
     return (
         <>
@@ -48,7 +34,7 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
 
             <img src={ellipsis} alt="ellipsis" className="book--ellipsis" onClick={handleEllipsisClick}></img><br/>
 
-            <div className= "book--add" id={`book--add ${id}`} style={ellipsisStyles}>
+            <div className= "book--add" /*id={`book--add ${id}`}*/ style={ellipsisStyles}>
 
                 <ul className="addlist">
                     <li className="addlist--add">
@@ -64,7 +50,7 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
                 </ul>
             </div> 
 
-            <div className= "addlist--add--options" id={`addlist--add--options ${id}`} style={addOptionsStyles}>
+            <div className= "addlist--add--options" /*id={`addlist--add--options ${id}`}*/ style={addOptionsStyles}>
                 <li className="addlist--li">
                     <button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>
                 </li>
@@ -90,3 +76,19 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
         var addOptions = document.getElementById("addlist--add--options");
         addOptions.style.display = (addOptions.style.display === 'none') ? 'block' : 'none'
     }*/
+
+    /*const book = { id, title, author, book_time};
+    const [ isEllipsisVisible, setEllipsisVisible ] = useState(false);
+    const [ isAddOptionsVisible, setAddOptionsVisible ] = useState(false);
+
+     const handleEllipsisClick = () => {
+        setEllipsisVisible(!isEllipsisVisible);
+    };
+
+    const toggleAddOptions = () => {
+        setAddOptionsVisible(!isAddOptionsVisible);
+    };
+    
+
+   
+    };*/

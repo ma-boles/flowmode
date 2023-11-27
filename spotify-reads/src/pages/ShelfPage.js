@@ -9,21 +9,25 @@ import Bookshelf from "../images/Bookshelf.jpg"
 import "../styles/App.css";
 import "../styles/Shelf.css"
 
-export default function ShelfPage() {
+export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handleAddToReadingList, handleRemoveFromBookshelf, handleRemoveFromQueue, handleRemoveFromReadingList ) {
 
-    const [ bookshelfBooks, setBookshelfBooks ] = useState(['Book 1', 'Book 2']);
-    const [ queueBooks, setQueueBooks ] = useState(['Book 3', 'Book 4']);
-    const [ readingListBooks, setReadingListBooks ] = useState(['Book 5', 'Book 6']);
+// book data
+    const [ bookshelfBooks, setBookshelfBooks ] = useState([
+        { id: 'book1', title:"Book 1", author:"Author 1", book_time:"10hr 25min" },
+        { id: 'book2', title:"Book 2", author:"Author 2", book_time:"10hr 25min" }
+    ]);
+    const [ queueBooks, setQueueBooks ] = useState([
+        { id: 'book5', title:"Book 5", author:"Author 5", book_time:"7hr 45min" },
+        { id: 'book6', title:"Book 6", author:"Author 6", book_time:"7hr 45min" }
+        ]);
+    const [ readingListBooks, setReadingListBooks ] = useState([
+        { id:'book3', title:"Book 3", author:"Author 3", book_time:"5hr 20min" },
+        { id:'book4', title:"Book 4", author:"Author 4", book_time:"5hr 20min" }
+        ]);
 
-    const handleAddToShelf = (book, shelfSetter) => {
-        shelfSetter((prevBooks) => [...prevBooks, book]);
-    };
-
-    const handleRemoveFromShelf = (book, shelfSetter) => {
-        shelfSetter((prevBooks) => prevBooks.filter((b) => b !== book));
-    };
 
 
+// scroll logic
     const bookshelfRef = useRef(null);
     const queueRef = useRef(null);
     const readinglistRef = useRef(null);
@@ -66,8 +70,8 @@ export default function ShelfPage() {
                 <BookShelf 
                 title="Bookshelf"
                 books={bookshelfBooks}
-                onAdd={(book) => handleAddToShelf(book, setBookshelfBooks)}
-                onRemove={(book) => handleRemoveFromShelf(book, setBookshelfBooks)}/>
+                onAddToBookshelf={handleAddToBookshelf}
+                onRemove={handleRemoveFromBookshelf}/>
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
@@ -89,8 +93,8 @@ export default function ShelfPage() {
                 <Queue 
                 title="Queue"
                 books={queueBooks}
-                onAdd={(book) => handleAddToShelf(book, setQueueBooks)}
-                onRemove={(book) => handleRemoveFromShelf(book, setQueueBooks)}/>
+                onAddToQueue={handleAddToQueue}
+                onRemove={handleRemoveFromQueue}/>
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
@@ -107,8 +111,8 @@ export default function ShelfPage() {
                 <ReadingList 
                 title="Reading List"
                 books={readingListBooks}
-                onAdd={(book) => handleAddToShelf(book, setReadingListBooks)}
-                onRemove={(book) => handleRemoveFromShelf(book, setReadingListBooks)}/>
+                onAddToReadingList={handleAddToReadingList}
+                onRemove={handleRemoveFromReadingList}/>
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
@@ -121,3 +125,10 @@ export default function ShelfPage() {
     )
 }
  
+   /*const handleAddToShelf = (book, shelfSetter) => {
+        shelfSetter((prevBooks) => [...prevBooks, book]);
+    };
+
+    const handleRemoveFromShelf = (book, shelfSetter) => {
+        shelfSetter((prevBooks) => prevBooks.filter((b) => b !== book));
+    };*/
