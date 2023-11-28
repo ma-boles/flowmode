@@ -11,14 +11,7 @@ export default function BookSection({ title, books, bookStates,handleEllipsisCli
             title={book.title}
             author={book.author}
             book_time={book.book_time}
-            onAddToBookshelf={onAddToBookshelf(book)}
-            onAddToQueue={onAddToQueue(book)}
-            onAddToReadingList={onAddToReadingList(book)}
-            onRemove={onRemove(book)}
-            isEllipsisVisible={bookStates[book.id].isEllipsisVisible}
-            isAddOptionsVisible={bookStates[book.id].isAddOptionsVisible}
-            handleEllipsisClick={() => handleEllipsisClick(book.id)}
-            toggleAddOptions={() => toggleAddOptions(book.id)}
+           
             />
         ))}
         </>
