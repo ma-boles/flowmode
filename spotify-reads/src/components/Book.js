@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import MoveBookButton from "./MoveBookButton";
 import "../styles/Book.css"
 
 import ellipsis from "../images/ellipsis-solid.svg";
 import cover from "../images/image-solid.svg";
-import plus from "../images/plus-solid.svg";
+/*import plus from "../images/plus-solid.svg";*/
 import remove from "../images/trash-solid.svg"
 
-export default function Book({ id, title, author, book_time, onAddToBookshelf, onAddToQueue, onAddToReadingList, onRemove, isEllipsisVisible, isAddOptionsVisible, handleEllipsisClick, toggleAddOptions }) {
+export default function Book({ book, id, title, author, book_time, onMoveBook, onRemove, isEllipsisVisible, handleEllipsisClick }) {
 
     const ellipsisStyles = {
         display: isEllipsisVisible ? 'block' : 'none',
-    };
-
-    const addOptionsStyles = {
-        display: isAddOptionsVisible ? 'block' : 'none',
     };
 
     return (
@@ -34,33 +31,31 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
 
             <img src={ellipsis} alt="ellipsis" className="book--ellipsis" onClick={handleEllipsisClick}></img><br/>
 
-            <div className= "book--add" /*id={`book--add ${id}`}*/ style={ellipsisStyles}>
+            <div className= "book--add" id={`book--add ${id}`} style={ellipsisStyles}>
 
                 <ul className="addlist">
-                    <li className="addlist--add">
-                        <button className= "addlist--button" onClick={toggleAddOptions}>
-                            <img src={plus} className="book--icon" alt="add"></img>
-                            Add</button>
+
+                    <li className="addlist--li">
+                        <MoveBookButton book={book} targetShelf="Bookshelf" actionType="move" onMoveBook={onMoveBook}/>
+                        {/*<button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>*/}
+                    </li>
+                    <li className="addlist--li">
+                        <MoveBookButton book={book} targetShelf="Queue" actionType="move" onMoveBook={onMoveBook}/>
+                        {/*<button className="addlist--button" onClick={onAddToQueue}>Add to Queue</button>*/}
+                    </li>
+                    <li className="addlist--li">
+                        <MoveBookButton book={book} targetShelf="Reading List" actionType="move" onMoveBook={onMoveBook}/>
+                        {/*<button className="addlist--button" onClick={onAddToReadingList}>Add to Reading List</button>*/}
                     </li>
 
                     <li className="addlist--remove">
-                        <button className="addlist--button" onClick={onRemove}>
-                            <img src={remove} className="book--icon" alt="remove"></img>Remove</button>
+                        <MoveBookButton book={book} actionType="remove" onRemove={onRemove}/>
+                        {/*<button className="addlist--button" onClick={onRemove}>
+                            <img src={remove} className="book--icon" alt="remove"></img>Remove</button>*/}
                     </li>
+
                 </ul>
             </div> 
-
-            <div className= "addlist--add--options" /*id={`addlist--add--options ${id}`}*/ style={addOptionsStyles}>
-                <li className="addlist--li">
-                    <button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>
-                </li>
-                <li className="addlist--li">
-                    <button className="addlist--button" onClick={onAddToQueue}>Add to Queue</button>
-                </li>
-                <li className="addlist--li">
-                    <button className="addlist--button" onClick={onAddToReadingList}>Add to Reading List</button>
-                </li>
-            </div>
         </div>
         </>
     )
@@ -92,3 +87,38 @@ export default function Book({ id, title, author, book_time, onAddToBookshelf, o
 
    
     };*/
+
+
+    /*<div className= "book--add" id={`book--add ${id}`} style={ellipsisStyles}>
+
+                <ul className="addlist">
+                    <li className="addlist--add">
+                        <button className= "addlist--button" onClick={toggleAddOptions}>
+                            <img src={plus} className="book--icon" alt="add"></img>
+                            Add</button>
+                    </li>
+
+                    <li className="addlist--remove">
+                        <button className="addlist--button" onClick={onRemove}>
+                            <img src={remove} className="book--icon" alt="remove"></img>Remove</button>
+                    </li>
+                </ul>
+            </div> 
+
+            <div className= "addlist--add--options" id={`addlist--add--options ${id}`} style={addOptionsStyles}>
+                <li className="addlist--li">
+                    <button className="addlist--button" onClick={onAddToBookshelf}>Add to Bookshelf</button>
+                </li>
+                <li className="addlist--li">
+                    <button className="addlist--button" onClick={onAddToQueue}>Add to Queue</button>
+                </li>
+                <li className="addlist--li">
+                    <button className="addlist--button" onClick={onAddToReadingList}>Add to Reading List</button>
+                </li>
+    </div>*/
+
+    /*const addOptionsStyles = {
+        display: isAddOptionsVisible ? 'block' : 'none',
+    };*/
+    /*, toggleAddOptions*/
+    /*isAddOptionsVisible,*/
