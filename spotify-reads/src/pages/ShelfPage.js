@@ -9,28 +9,71 @@ import Bookshelf from "../images/Bookshelf.jpg"
 import "../styles/App.css";
 import "../styles/Shelf.css"
 
-export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handleAddToReadingList, handleRemoveFromBookshelf, handleRemoveFromQueue, handleRemoveFromReadingList ) {
+export default function ShelfPage( ) {
 
 // book data
-    const [ bookshelfBooks, setBookshelfBooks ] = useState([
+const [ shelves, setShelves ] = useState({
+
+    bookshelf: [
         { id: 'book1', title:"Book 1", author:"Author 1", book_time:"10hr 25min" },
         { id: 'book2', title:"Book 2", author:"Author 2", book_time:"10hr 25min" }
-    ]);
-    const [ queueBooks, setQueueBooks ] = useState([
+    ],
+    queue: [
         { id: 'book5', title:"Book 5", author:"Author 5", book_time:"7hr 45min" },
         { id: 'book6', title:"Book 6", author:"Author 6", book_time:"7hr 45min" }
-        ]);
-    const [ readingListBooks, setReadingListBooks ] = useState([
+    ],
+    readingList: [
         { id:'book3', title:"Book 3", author:"Author 3", book_time:"5hr 20min" },
         { id:'book4', title:"Book 4", author:"Author 4", book_time:"5hr 20min" }
-        ]);
+        ],
+});
 
+// book add/remove logic
+const handleMoveBook = (book, targetShelfIndex) => {
+    //find index of book in current shelf
+    const currentShelfIndex = shelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
+    //create copies of current and target shelves' book arrays
+    const currentShelfBooks = [...shelves[currentShelfIndex]];
+    const targetShelfBooks = [...shelves[targetShelfIndex]];
+    
+    // remove book from current shelf
+    const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
+    currentShelfBooks.splice(currentIndex, 1);
+    // add book to target shelf
+    targetShelfBooks.push(book);
 
+    // update state with modified shelves
+    setShelves((prevShelves) => {
+        const updatedShelves = [...prevShelves];
+        updatedShelves[currentShelfIndex] = currentShelfBooks;
+        updatedShelves[targetShelfIndex] = targetShelfBooks;
+        return updatedShelves;
+    })
+};
+
+const handleRemoveBook = (book) => {
+    // find index of book in current shelf
+    const currentShelfIndex = shelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
+
+    // create copy of currnet shelf books array
+    const currentShelfBooks = [...shelves[currentShelfIndex]];
+
+    // remove book from its current shelf
+    const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
+    currentShelfBooks.splice(currentIndex, 1);
+    
+    // update state with modified shelf
+    setShelves((prevShelves) => {
+        const updatedShelves = [...prevShelves];
+        updatedShelves[currentShelfIndex] = currentShelfBooks;
+        return updatedShelves;
+    });
+};
 
 // scroll logic
     const bookshelfRef = useRef(null);
     const queueRef = useRef(null);
-    const readinglistRef = useRef(null);
+    const readingListRef = useRef(null);
 
      const scrollToRef = (section) => {
         if(section === 'Bookshelf') {
@@ -38,7 +81,7 @@ export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handl
         } else if (section === 'Queue') {
             queueRef.current.scrollIntoView({ behavior: 'smooth'});
         } else if (section === 'ReadingList') {
-            readinglistRef.current.scrollIntoView({ behavior: 'smooth'});
+            readingListRef.current.scrollIntoView({ behavior: 'smooth'});
         };
     }
 
@@ -69,9 +112,10 @@ export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handl
 
                 <BookShelf 
                 title="Bookshelf"
-                books={bookshelfBooks}
-                onAddToBookshelf={handleAddToBookshelf}
-                onRemove={handleRemoveFromBookshelf}/>
+                books={shelves.bookshelf}
+                onMoveBook={handleMoveBook}
+                onRemove={handleRemoveBook}
+                />
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
@@ -92,9 +136,10 @@ export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handl
 
                 <Queue 
                 title="Queue"
-                books={queueBooks}
-                onAddToQueue={handleAddToQueue}
-                onRemove={handleRemoveFromQueue}/>
+                books={shelves.queue}
+                onMoveBook={handleMoveBook}
+                onRemove={handleRemoveBook}
+                />
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
@@ -105,14 +150,15 @@ export default function ShelfPage( handleAddToBookshelf, handleAddToQueue, handl
 
             <hr className="shelf--hr"/>
 
-            <section className='readinglist--section' ref={readinglistRef}>
+            <section className='readinglist--section' ref={readingListRef}>
                 <h3 className="readinglist--h3">Reading List</h3>
 
                 <ReadingList 
                 title="Reading List"
-                books={readingListBooks}
-                onAddToReadingList={handleAddToReadingList}
-                onRemove={handleRemoveFromReadingList}/>
+                books={shelves.readingList}
+                onMoveBook={handleMoveBook}
+                onRemove={handleRemoveBook}
+                />
 
                 <div className="top--button--div">
                     <button className="top--button" onClick={scrollToTop}>
