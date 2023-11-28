@@ -1,15 +1,16 @@
 import React from "react";
-import BookSection from "./BookSection";
+import Book from "./Book";
 
-export default function Queue() {
-    const books = [
-        
-    ]
 
+export default function Queue({ books, onMoveBook, onRemove}) {
+    
     return (
         <>
             <div className="queue--container">
-                <BookSection books={books}/>
+                {books.map((book) => {
+                    <Book key={book.id} book={book} onMoveBook={onMoveBook} onRemove={onRemove}
+                    />
+                })}
             </div>
         </>
     )

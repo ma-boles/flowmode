@@ -1,25 +1,16 @@
 import React from "react";
-/*import BookSection from "./BookSection";*/
-import ShelfSection from "./ShelfSection";
+import Book from "./Book";
 
-export default function BookShelf({ title, books }) {
+export default function BookShelf({ books, onMoveBook, onRemove }) {
     
-
     return (
         <>
             <div className="bookshelf--container">
-                <ShelfSection 
-                title={title}
-                books={bookshelfBooks}
-                onAddToBookshelf={handleAddToBookshelf}/>
-
+                {books.map((book) => {
+                    <Book key={book.id} book={book} onMoveBook={onMoveBook} onRemove={onRemove}
+                    />
+                })}
             </div>
         </>
     )
 }
-/*
-                <BookSection books={shelfBooks}
-                onAddToBookshelf={handleAddToBookshelf}
-                onAddToQueue={handleAddToQueue}
-                onAddToReadingList={handleAddToReadingList}
-                onRemove={handleRemove}/>*/
