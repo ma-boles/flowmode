@@ -3,7 +3,9 @@
 }
 .shelf--img {
   margin: auto;
-  height: 35rem;
+  /*height: 35rem;*/
+  max-width: 80%;
+  height: 100%;
   padding-bottom: 2rem;
 }
 
@@ -32,6 +34,7 @@
 /* bookshelf */
 .bookshelf--section {
     margin: 2rem;
+    margin-bottom: 3rem;
     overflow: auto;
     justify-content: center;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -55,6 +58,7 @@
   /* queue */
   .queue--section {
     margin:2rem;
+    margin-bottom: 3rem;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */

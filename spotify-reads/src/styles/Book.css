@@ -41,7 +41,7 @@
   
   .book--add {
     width: 10rem;
-    height: 8.8rem;
+    /*height: 8.72rem;*/
     background-color: rgb(70, 70, 70);
     display: none; 
     margin-left: 2rem;
@@ -56,6 +56,7 @@
   cursor: pointer;
   margin: 0;
   border: none;
+  text-align: left;
 }
 
 .move--button:hover {
