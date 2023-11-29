@@ -3,11 +3,11 @@ import Nav from "../components/Nav";
 import BookShelf from "../components/BookShelf";
 import Queue from "../components/Queue";
 import ReadingList from "../components/ReadingList";
-import arrow from "../images/circle-arrow-up-solid.svg"
+import arrow from "../images/circle-arrow-up-solid.svg";
 
-import Bookshelf from "../images/Bookshelf.jpg"
+import Collection from "../images/Collection.jpg";
 import "../styles/App.css";
-import "../styles/Shelf.css"
+import "../styles/Shelf.css";
 
 export default function ShelfPage( ) {
 
@@ -98,7 +98,7 @@ const handleRemoveBook = (book) => {
 
             <div className="shelf">
             <section className="img--section">
-                <img src={Bookshelf} alt="astronaut lying down reading a book" className="shelf--img"></img>
+                <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
             </section>
 
             <hr className="shelf--hr"/>
