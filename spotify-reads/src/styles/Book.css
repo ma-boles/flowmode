@@ -5,7 +5,10 @@
   }
   .book--card {
     background-color: rgba(50, 50, 50, 0.751);
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0rem;
     border-radius: 10px;
     height: 17rem;
     width: 12rem;
@@ -23,31 +26,46 @@
 .book--p--time {
   color: rgba(245, 245, 245, 0.853);
 }
-  .book--ellipsis {
+
+.ellipsis--div {
+  text-align: center;
+}
+
+.book--ellipsis {
     height: 1.5rem;
     filter: invert(1);
     cursor: pointer;
   }
 
-  
   /* addlist */
   
   .book--add {
-    width: 6rem;
-    height: 3.6rem;
+    width: 10rem;
+    height: 8.8rem;
     background-color: rgb(70, 70, 70);
     display: none; 
-    z-index: 10;
-    margin-left: 1rem;
+    margin-left: 2rem;
     position: absolute;
+    border-radius: 5px;
+    z-index: 10
   }  
+.move--button {
+  background-color: transparent;
+  width: 100%;
+  padding: .5rem;
+  cursor: pointer;
+  margin: 0;
+  border: none;
+}
 
-
+.move--button:hover {
+  background-color: grey;
+}
   .addlist {
     padding: 0;
     margin: 0;
   }
-  .addlist--button {
+  /*.addlist--button {
     background-color: transparent;
     border: none;
     padding: .25rem .8rem;
@@ -55,18 +73,14 @@
     width: 100%;
     cursor: pointer;
     text-align: left;
-  }
-  
-  .addlist--button:hover {
-    background-color: grey;
-  }
+  }*/
   
   .book--icon {
     height: .8rem;
     filter: invert(1);
     padding-right: .5rem;
   }
-  .addlist--add {
+ .addlist--add {
     margin: 0;
     width: 100%;
   }
@@ -74,30 +88,24 @@
     display: block;
 }
 
-  
-  .addlist--add--options {
+ .addlist--add--options {
    display: none;
    background-color: rgb(70, 70, 70);
-   width: 9rem;
-   position: absolute;
-   left: 9rem;
-   top: 69.95rem;
-   z-index: 10;
   }
   
   .addlist--li {
-    cursor: pointer;
     font-size: .75rem;
-    padding: .4rem;
     width: 100%;
     margin: 0;
   }
-  .addlist--li:hover {
-    background-color: grey;
-  }
-  
   .addlist--remove {
     margin: 0;
     width: 100%;
   }
+  /*
+  .addlist--li:hover {
+    background-color: grey;
+  }
+  
+  */
  
