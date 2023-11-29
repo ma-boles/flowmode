@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import BookShelf from "../components/BookShelf";
 import Queue from "../components/Queue";
@@ -15,7 +15,7 @@ export default function ShelfPage( ) {
 const [ shelves, setShelves ] = useState({
 
     bookshelf: [
-        { id: 'book1', title:"Book 1", author:"Author 1", book_time:"10hr 25min" },
+        { id: 'book1', title:"Book 1", author:"Author 1", book_time: "10hr 25min"},
         { id: 'book2', title:"Book 2", author:"Author 2", book_time:"10hr 25min" }
     ],
     queue: [
@@ -27,6 +27,54 @@ const [ shelves, setShelves ] = useState({
         { id:'book4', title:"Book 4", author:"Author 4", book_time:"5hr 20min" }
         ],
 });
+
+//function to calculate total time for shelf
+const calculateTotalTime = (books) => {
+    let totalHours = 0;
+    let totalMinutes = 0;
+
+    for (const book of books) {
+        const [hoursStr, minutesStr] = book.book_time.split('hr ');
+
+        // extract hours
+        const hours = parseInt(hoursStr, 10) || 0;
+        totalHours += hours;
+
+        //extract minutes
+        const minutesMatch = minutesStr.match(/\d+/); //extract digits from string
+        const minutes = parseInt(minutesMatch, 10) || 0;
+        totalMinutes += minutes;
+
+        console.log(`${book.title}: ${hours} hr ${minutes} mins`);
+        
+    }
+
+    totalHours += Math.floor(totalMinutes/60);
+    totalMinutes %= 60;
+
+   
+    return {
+        hours: totalHours, 
+        minutes: totalMinutes,
+    };
+};
+
+//function to update the total time for each shelf
+const updateTotalTimes = () => {
+    const updatedShelves = {...shelves};
+
+    for (const shelf in updatedShelves) {
+        updatedShelves[shelf].totalTime = calculateTotalTime(updatedShelves[shelf]);
+    }
+
+    setShelves(updatedShelves);
+};
+
+useEffect(() => {
+    updateTotalTimes();
+}, []);
+
+
 
 // book add/remove logic
 const handleMoveBook = (book, targetShelfIndex) => {
@@ -106,7 +154,7 @@ const handleRemoveBook = (book) => {
             <section className='bookshelf--section' ref={bookshelfRef}>
                 <div className="shelf--time">
                     <strong><p>Total Time:</p>
-                    00:00</strong>
+                    {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
                 </div>
                 <h2 className="bookshelf--h2">Bookshelf</h2>
 
@@ -130,7 +178,7 @@ const handleRemoveBook = (book) => {
             <section className='queue--section' ref={queueRef}>
                 <div className="shelf--time">
                     <strong><p>Total Time:</p>
-                    00:00</strong>
+                    {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
                 </div>
                 <h3 className="queue--h3">Queue</h3>
 
@@ -170,11 +218,3 @@ const handleRemoveBook = (book) => {
         </>
     )
 }
- 
-   /*const handleAddToShelf = (book, shelfSetter) => {
-        shelfSetter((prevBooks) => [...prevBooks, book]);
-    };
-
-    const handleRemoveFromShelf = (book, shelfSetter) => {
-        shelfSetter((prevBooks) => prevBooks.filter((b) => b !== book));
-    };*/
