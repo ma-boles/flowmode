@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Book.css"
 
 export default function MoveBookButton({ book, targetShelf, actionType, onMoveBook, onRemove }) {
 
@@ -12,7 +13,7 @@ export default function MoveBookButton({ book, targetShelf, actionType, onMoveBo
 
     return(
         <>
-            <button onClick={handleButtonClick}>
+            <button onClick={handleButtonClick} className="move--button">
                 {actionType === 'move' ? `Add to ${targetShelf}`: 'Remove'}
             </button>
         </>
