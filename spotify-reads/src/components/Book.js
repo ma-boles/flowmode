@@ -11,7 +11,6 @@ export default function Book({ book, isEllipsisVisible }) {
         display: isEllipsisVisible ? 'block' : 'none',
     };
 
-    console.log('Book component is rendering')
     return (
         <>
         <div className="book--container">
