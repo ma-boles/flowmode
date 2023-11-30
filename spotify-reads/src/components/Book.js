@@ -2,8 +2,7 @@ import React from "react";
 import "../styles/Book.css"
 
 import cover from "../images/image-solid.svg";
-/*import plus from "../images/plus-solid.svg";
-import remove from "../images/trash-solid.svg"*/
+
 
 export default function Book({ book, isEllipsisVisible }) {
 
