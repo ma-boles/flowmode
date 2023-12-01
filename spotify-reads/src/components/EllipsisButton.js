@@ -43,7 +43,8 @@ export default function EllipsisButton({ id, book, onMoveBook, onRemove, onEllip
                  </li>
 
                  <li className="addlist--remove">
-                     <MoveBookButton book={book} actionType="remove" onRemove={onRemove}/>
+                     <MoveBookButton book={book} actionType="remove" 
+                     onClick={() => onRemove(book)}/>
                  </li>
 
              </ul>

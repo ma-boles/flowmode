@@ -9,7 +9,7 @@ import Collection from "../images/Collection.jpg";
 import "../styles/App.css";
 import "../styles/Shelf.css";
 
-export default function ShelfPage( ) {
+export default function ShelfPage() {
 
 // book data
 const [ shelves, setShelves ] = useState({
@@ -100,23 +100,33 @@ const handleMoveBook = (book, targetShelfIndex) => {
 };
 
 const handleRemoveBook = (book) => {
-    // find index of book in current shelf
-    const currentShelfIndex = shelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
+    setShelves((prevShelves) => {
 
-    // create copy of currnet shelf books array
-    const currentShelfBooks = [...shelves[currentShelfIndex]];
+    // find index of book in current shelf
+    const currentShelfIndex = prevShelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
+
+    if(currentShelfIndex === -1) {
+        //book not found in and shelf
+        return prevShelves;
+    }
+
+    // create copy of current shelf books array
+    const currentShelfBooks = [...prevShelves[currentShelfIndex]];
 
     // remove book from its current shelf
     const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
     currentShelfBooks.splice(currentIndex, 1);
     
+    // create a copy of the shelves array
+    const updatedShelves = [...prevShelves];
+
     // update state with modified shelf
-    setShelves((prevShelves) => {
-        const updatedShelves = [...prevShelves];
         updatedShelves[currentShelfIndex] = currentShelfBooks;
+
         return updatedShelves;
     });
 };
+
 
 // scroll logic
     const bookshelfRef = useRef(null);

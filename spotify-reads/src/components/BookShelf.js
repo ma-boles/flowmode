@@ -24,9 +24,10 @@ export default function BookShelf({ books, onMoveBook, onRemove }){
                         key={book.id} 
                         book={book} 
                         onMoveBook={onMoveBook} 
-                        onRemove={onRemove}
                         />
                         <EllipsisButton 
+                        onRemove={onRemove}
+                        book={book.id}
                         onEllipsisClick={(isEllipsisVisible) => 
                         handleEllipsisClick(book.id, isEllipsisVisible)}/>
                     </div>
