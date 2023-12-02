@@ -12,7 +12,16 @@ import "../styles/Shelf.css";
 
 export default function ShelfPage() {
 
+    return(
+        <ShelfProvider>
+            <div>
+                <ShelfPageContent />
+            </div>
+        </ShelfProvider>
+    )
+};
 
+function ShelfPageContent () {
 
 // book data
 const [ shelves, setShelves ] = useState({
@@ -153,87 +162,88 @@ useEffect(() => {
         });
     };
 
-    return(
-        <ShelfProvider>
+
+    return (
         <>
         <Nav scrollToRef={scrollToRef}/>
 
-            <div className="shelf">
-            <section className="img--section">
-                <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
-            </section>
+<div className="shelf">
+<section className="img--section">
+    <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
+</section>
 
-            <hr className="shelf--hr"/>
+<hr className="shelf--hr"/>
 
-            <section className='bookshelf--section' ref={bookshelfRef}>
-                <div className="shelf--time">
-                    <strong><p>Total Time:</p>
-                    {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
-                </div>
-                <h2 className="bookshelf--h2">Bookshelf</h2>
+<section className='bookshelf--section' ref={bookshelfRef}>
+    <div className="shelf--time">
+        <strong><p>Total Time:</p>
+        {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
+    </div>
+    <h2 className="bookshelf--h2">Bookshelf</h2>
 
-                <BookShelf 
-                title="Bookshelf"
-                books={shelves.bookshelf}
-                onMoveBook={handleMoveBook}
-                onRemove={handleRemoveBook}
-                />
+    <BookShelf 
+    title="Bookshelf"
+    books={shelves.bookshelf}
+    onMoveBook={handleMoveBook}
+    onRemove={handleRemoveBook}
+    shelfName="bookshelf"
+    />
 
-                <div className="top--button--div">
-                    <button className="top--button" onClick={scrollToTop}>
-                        <img src={arrow} alt="scroll to top" className="img--arrow"></img>
-                    </button>
-                </div>
-            </section>
+    <div className="top--button--div">
+        <button className="top--button" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+        </button>
+    </div>
+</section>
 
-            <hr className="shelf--hr"/>
+<hr className="shelf--hr"/>
 
 
-            <section className='queue--section' ref={queueRef}>
-                <div className="shelf--time">
-                    <strong><p>Total Time:</p>
-                    {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
-                </div>
-                <h3 className="queue--h3">Queue</h3>
+<section className='queue--section' ref={queueRef}>
+    <div className="shelf--time">
+        <strong><p>Total Time:</p>
+        {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
+    </div>
+    <h3 className="queue--h3">Queue</h3>
 
-                <Queue 
-                title="Queue"
-                books={shelves.queue}
-                onMoveBook={handleMoveBook}
-                onRemove={handleRemoveBook}
-                />
+    <Queue 
+    title="Queue"
+    books={shelves.queue}
+    onMoveBook={handleMoveBook}
+    onRemove={handleRemoveBook}
+    shelfName="queue"
+    />
 
-                <div className="top--button--div">
-                    <button className="top--button" onClick={scrollToTop}>
-                        <img src={arrow} alt="scroll to top" className="img--arrow"></img>
-                    </button>
-                </div>
-            </section>
+    <div className="top--button--div">
+        <button className="top--button" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+        </button>
+    </div>
+</section>
 
-            <hr className="shelf--hr"/>
+<hr className="shelf--hr"/>
 
-            <section className='readinglist--section' ref={readingListRef}>
-                <h3 className="readinglist--h3">Reading List</h3>
+<section className='readinglist--section' ref={readingListRef}>
+    <h3 className="readinglist--h3">Reading List</h3>
 
-                <ReadingList 
-                title="Reading List"
-                books={shelves.readingList}
-                onMoveBook={handleMoveBook}
-                onRemove={handleRemoveBook}
-                />
+    <ReadingList 
+    title="Reading List"
+    books={shelves.readingList}
+    onMoveBook={handleMoveBook}
+    onRemove={handleRemoveBook}
+    shelfName="readingList"
+    />
 
-                <div className="top--button--div">
-                    <button className="top--button" onClick={scrollToTop}>
-                        <img src={arrow} alt="scroll to top" className="img--arrow"></img>
-                    </button>
-                </div>
-            </section>
-        </div>
+    <div className="top--button--div">
+        <button className="top--button" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+        </button>
+    </div>
+</section>
+</div>
         </>
-        </ShelfProvider>
-
     )
-};
+}
 
 
 
