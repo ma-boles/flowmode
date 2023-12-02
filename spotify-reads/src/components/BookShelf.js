@@ -4,7 +4,7 @@ import EllipsisButton from "./EllipsisButton";
 import "../styles/Shelf.css"
 
 
-export default function BookShelf({ books, onMoveBook, onRemove }){
+export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
@@ -13,6 +13,10 @@ export default function BookShelf({ books, onMoveBook, onRemove }){
             ...prevVisibility,
             [bookId]: isEllipsisVisible,
         }));
+    };
+
+    const handleRemoveClick = (book) => {
+        onRemove(book, shelfName);
     };
     
     return (
@@ -26,8 +30,8 @@ export default function BookShelf({ books, onMoveBook, onRemove }){
                         onMoveBook={onMoveBook} 
                         />
                         <EllipsisButton 
-                        onRemove={onRemove}
                         book={book.id}
+                        onRemove={handleRemoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
                         handleEllipsisClick(book.id, isEllipsisVisible)}/>
                     </div>

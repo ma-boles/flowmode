@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 
-export default function ReadingList({ books, onMoveBook, onRemove }) {
+export default function ReadingList({ books, onMoveBook, onRemove, shelfName }) {
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
@@ -13,6 +13,10 @@ export default function ReadingList({ books, onMoveBook, onRemove }) {
         }));
     };
     
+    const handdleRemoveClick = (book) => {
+        onRemove(book, shelfName);
+    };
+
     return (
         <>
             <div className="readinglist--container">
@@ -21,10 +25,11 @@ export default function ReadingList({ books, onMoveBook, onRemove }) {
                 <Book 
                 key={book.id} 
                 book={book} 
-                onMoveBook={() => onMoveBook(book, 'someTargetShelf')} 
-                onRemove={() => onRemove(book)}
+                onMoveBook={onMoveBook} 
                 />
                 <EllipsisButton 
+                book={book.id}
+                onRemove={handdleRemoveClick}
                 onEllipsisClick={(isEllipsisVisible) => 
                 handleEllipsisClick(book.id, isEllipsisVisible)}/>
                 </div>

@@ -3,7 +3,7 @@ import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 
 
-export default function Queue({ books, onMoveBook, onRemove}) {
+export default function Queue({ books, onMoveBook, onRemove, shelfName }) {
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
@@ -14,6 +14,9 @@ export default function Queue({ books, onMoveBook, onRemove}) {
         }));
     };
     
+    const handleRemoveClick = (book) => {
+        onRemove(book, shelfName);
+    };
 
     return (
         <>
@@ -24,9 +27,10 @@ export default function Queue({ books, onMoveBook, onRemove}) {
                         key={book.id} 
                         book={book} 
                         onMoveBook={onMoveBook} 
-                        onRemove={onRemove}
                         />
                         <EllipsisButton 
+                        book={book.id}
+                        onRemove={handleRemoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
                         handleEllipsisClick(book.id, isEllipsisVisible)}
                         />
