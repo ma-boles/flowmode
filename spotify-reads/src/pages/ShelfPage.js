@@ -67,33 +67,43 @@ const handleMoveBook = (book, targetShelfIndex) => {
 
 const handleRemoveBook = (book, shelfName) => {
     setShelves((prevShelves) => {
-console.log('prevShelves:', prevShelves);
-console.log('shelfName:', shelfName);
+        console.log('Removing book:', book)
+        console.log('prevShelves:', prevShelves);
+        console.log('shelfName:', shelfName);
 
 const currentShelf = prevShelves[shelfName];
-console.log('currentShelf:', currentShelf);
+        console.log('currentShelf:', currentShelf);
 
     // find index of book in current shelf
-    const currentShelfIndex = currentShelf.findIndex((b) => b.id === book.id);
+    const currentShelfIndex = currentShelf.findIndex((b) => { 
+        console.log('Checking book ID:', b.id);
+    return b.id === book.id
+    });
 
     if(currentShelfIndex === -1) {
         //book not found in and shelf
+        console.log('Book not found in shelf');
         return prevShelves;
     }
 
-    // create copy of current shelf books array
-    const currentShelfBooks = [...prevShelves[shelfName]];
-    currentShelfBooks.splice(currentShelfIndex, 1);
+    // create copy of current shelf books array and filter to remove book
+    const currentShelfBooks = prevShelves[shelfName].filter((b => b.id !== book.id));
 
-    // create a copy of the shelves array
+    // create a copy of the shelves array with modified shelf
     const updatedShelves = {
         ...prevShelves,
         [shelfName]: currentShelfBooks,
-    };
 
+    };
+    console.log('updatedShelves:', updatedShelves);
         return updatedShelves;
     });
+
 };
+
+useEffect(() => {
+    console.log('Updated Shelves:', shelves);
+}, [shelves]);
 
 //function to calculate total time for shelf
 const calculateTotalTime = (books) => {
