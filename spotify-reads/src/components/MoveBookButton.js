@@ -9,7 +9,7 @@ export default function MoveBookButton({ book, targetShelf, actionType, onMoveBo
         if(actionType === 'move') {
             onMoveBook(book, targetShelf);
         } else if (actionType === 'remove') {
-            onRemove(book);
+            onRemove(book, targetShelf);
         }
     };
 
