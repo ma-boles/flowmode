@@ -15,6 +15,7 @@ export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
         }));
     };
 
+
     const handleRemoveClick = (book) => {
         onRemove(book, shelfName);
     };

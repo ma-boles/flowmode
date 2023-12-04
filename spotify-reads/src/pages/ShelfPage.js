@@ -11,7 +11,7 @@ import "../styles/App.css";
 import "../styles/Shelf.css";
 
 export default function ShelfPage() {
-
+    
     return(
         <ShelfProvider>
             <div>
@@ -71,7 +71,7 @@ const handleRemoveBook = (book, shelfName) => {
         console.log('prevShelves:', prevShelves);
         console.log('shelfName:', shelfName);
 
-const currentShelf = prevShelves[shelfName];
+    const currentShelf = prevShelves[shelfName];
         console.log('currentShelf:', currentShelf);
 
     // find index of book in current shelf
@@ -87,7 +87,8 @@ const currentShelf = prevShelves[shelfName];
     }
 
     // create copy of current shelf books array and filter to remove book
-    const currentShelfBooks = prevShelves[shelfName].filter((b => b.id !== book.id));
+   /* const currentShelfBooks = prevShelves[shelfName].filter((b => b.id !== book.id));*/
+   const currentShelfBooks = [...currentShelf.slice(0, currentShelfIndex), ...currentShelf.slice(currentShelfIndex + 1)];
 
     // create a copy of the shelves array with modified shelf
     const updatedShelves = {
@@ -104,6 +105,7 @@ const currentShelf = prevShelves[shelfName];
 useEffect(() => {
     console.log('Updated Shelves:', shelves);
 }, [shelves]);
+
 
 //function to calculate total time for shelf
 const calculateTotalTime = (books) => {
@@ -191,13 +193,13 @@ useEffect(() => {
     </div>
     <h2 className="bookshelf--h2">Bookshelf</h2>
 
-    <BookShelf 
-    title="Bookshelf"
-    books={shelves.bookshelf}
-    onMoveBook={handleMoveBook}
-    onRemove={handleRemoveBook}
-    shelfName="bookshelf"
-    />
+        <BookShelf 
+        title="Bookshelf"
+        books={shelves.bookshelf}
+        onMoveBook={handleMoveBook}
+        onRemove={handleRemoveBook}
+        shelfName="bookshelf"
+        />
 
     <div className="top--button--div">
         <button className="top--button" onClick={scrollToTop}>
@@ -216,13 +218,13 @@ useEffect(() => {
     </div>
     <h3 className="queue--h3">Queue</h3>
 
-    <Queue 
-    title="Queue"
-    books={shelves.queue}
-    onMoveBook={handleMoveBook}
-    onRemove={handleRemoveBook}
-    shelfName="queue"
-    />
+        <Queue 
+        title="Queue"
+        books={shelves.queue}
+        onMoveBook={handleMoveBook}
+        onRemove={handleRemoveBook}
+        shelfName="queue"
+        />
 
     <div className="top--button--div">
         <button className="top--button" onClick={scrollToTop}>
@@ -236,13 +238,13 @@ useEffect(() => {
 <section className='readinglist--section' ref={readingListRef}>
     <h3 className="readinglist--h3">Reading List</h3>
 
-    <ReadingList 
-    title="Reading List"
-    books={shelves.readingList}
-    onMoveBook={handleMoveBook}
-    onRemove={handleRemoveBook}
-    shelfName="readingList"
-    />
+        <ReadingList 
+        title="Reading List"
+        books={shelves.readingList}
+        onMoveBook={handleMoveBook}
+        onRemove={handleRemoveBook}
+        shelfName="readingList"
+        />
 
     <div className="top--button--div">
         <button className="top--button" onClick={scrollToTop}>

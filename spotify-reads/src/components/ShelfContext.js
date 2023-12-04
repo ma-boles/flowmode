@@ -1,6 +1,15 @@
-import React, { createContext, useState } from "react";
+import React, { useContext, createContext, useState } from "react";
 
 const ShelfContext = createContext();
+
+export const useShelfContext = () => {
+    const context = useContext(ShelfContext);
+
+    if(!context) {
+        throw new Error("useShelfContext must be used within a ShelfProvider");
+    }
+    return context;
+};
 
 const ShelfProvider = ({ children }) => {
     const [ shelves, setShelves ] = useState({
