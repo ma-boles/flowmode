@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 import "../styles/Shelf.css"
 
 
 export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
+
+    useEffect(() => {
+        console.log('Received books:', books);
+    }, [books]);
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
