@@ -28,6 +28,7 @@ const ShelfProvider = ({ children }) => {
     });
 
 
+    // book add/remove logic
 const handleMoveBook = (book, targetShelfIndex) => {
     //find index of book in current shelf
     const currentShelfIndex = shelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
@@ -50,34 +51,42 @@ const handleMoveBook = (book, targetShelfIndex) => {
     })
 };
 
-const handleRemoveBook = (book) => {
+const handleRemoveBook = (book, shelfName) => {
     setShelves((prevShelves) => {
+        console.log('Removing book:', book)
+        console.log('prevShelves:', prevShelves);
+        console.log('shelfName:', shelfName);
+
+    const currentShelf = prevShelves[shelfName];
+        console.log('currentShelf:', currentShelf);
 
     // find index of book in current shelf
-    const currentShelfIndex = prevShelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
+    const currentShelfIndex = Object.keys(prevShelves).findIndex(key => key === shelfName);
 
     if(currentShelfIndex === -1) {
         //book not found in and shelf
+        console.log('ShelfName not found:', shelfName);
         return prevShelves;
     }
 
     // create copy of current shelf books array
-    const currentShelfBooks = [...prevShelves[currentShelfIndex]];
+   const currentShelfBooks = [
+    ...prevShelves[currentShelfIndex]
+];
 
-    // remove book from its current shelf
+    //remove book from its current shelf
     const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
     currentShelfBooks.splice(currentIndex, 1);
-    
-    // create a copy of the shelves array
+
+    //create a copy of the shelves array
     const updatedShelves = [...prevShelves];
 
-    // update state with modified shelf
-        updatedShelves[currentShelfIndex] = currentShelfBooks;
+    //update state with modified shelf
+    updatedShelves[currentShelfIndex] = currentShelfBooks;
 
-        return updatedShelves;
-    });
+    return updatedShelves;
+ });
 };
-
 
 const value = {
     shelves,
