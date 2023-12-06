@@ -57,32 +57,26 @@ const handleRemoveBook = (book, shelfName) => {
         console.log('prevShelves:', prevShelves);
         console.log('shelfName:', shelfName);
 
-    const currentShelf = prevShelves[shelfName];
-        console.log('currentShelf:', currentShelf);
+    // create a copy of the shelves object
+    const updatedShelves = {...prevShelves};
 
-    // find index of book in current shelf
-    const currentShelfIndex = Object.keys(prevShelves).findIndex(key => key === shelfName);
+    // find the index of the book in the spcified shelf
+    const shelfIndex = updatedShelves[shelfName].findIndex((b)=> {
+        const bookId = Number(book.id);
+        const currentBookId = b.id !== undefined ? Number(b.id)
+: undefined;
+        console.log('Comparing:', currentBookId, 'with', bookId, 'Result:', currentBookId === bookId);
+        return currentBookId === bookId;
+        });
 
-    if(currentShelfIndex === -1) {
-        //book not found in and shelf
-        console.log('ShelfName not found:', shelfName);
-        return prevShelves;
+    if(shelfIndex !== -1) {
+        //remove the book from the shelf
+        updatedShelves[shelfName].splice(shelfIndex, 1);
+    } else {
+        console.log('Book not found in shelf:', shelfName);
     }
 
-    // create copy of current shelf books array
-   const currentShelfBooks = [
-    ...prevShelves[currentShelfIndex]
-];
-
-    //remove book from its current shelf
-    const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
-    currentShelfBooks.splice(currentIndex, 1);
-
-    //create a copy of the shelves array
-    const updatedShelves = [...prevShelves];
-
-    //update state with modified shelf
-    updatedShelves[currentShelfIndex] = currentShelfBooks;
+    console.log('Updated shelves:', updatedShelves);
 
     return updatedShelves;
  });

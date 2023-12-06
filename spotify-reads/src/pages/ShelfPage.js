@@ -15,10 +15,9 @@ export default function ShelfPage() {
     const { shelves, handleMoveBook, handleRemoveBook, setShelves } = useShelfContext();
 
     useEffect(() => {
-        console.log('Updated Shelves:', shelves);
+        console.log('Shelves updated:', shelves);
     }, [shelves]);
-
-
+    
     return(
         <ShelfProvider>
             <div>
@@ -32,9 +31,6 @@ function ShelfPageContent ({ setShelves }) {
 
     const { shelves, handleMoveBook, handleRemoveBook } = useShelfContext();
 
-    useEffect(() => {
-        console.log('Shelves updated:', shelves);
-    }, [shelves]);
     
 //function to calculate total time for shelf
 const calculateTotalTime = (books) => {
