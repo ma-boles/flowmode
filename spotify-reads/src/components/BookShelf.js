@@ -39,6 +39,7 @@ export default function BookShelf({ book, books, onMoveBook, onRemove, shelfName
                         />
                         <EllipsisButton 
                         book={book.id}
+                        shelfName="bookshelf"
                         onRemove={handleRemoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
                         handleEllipsisClick(book.id, isEllipsisVisible)}/>

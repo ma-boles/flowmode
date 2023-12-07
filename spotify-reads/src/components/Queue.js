@@ -30,6 +30,7 @@ export default function Queue({ books, onMoveBook, onRemove, shelfName }) {
                         />
                         <EllipsisButton 
                         book={book.id}
+                        shelfName="queue"
                         onRemove={handleRemoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
                         handleEllipsisClick(book.id, isEllipsisVisible)}
