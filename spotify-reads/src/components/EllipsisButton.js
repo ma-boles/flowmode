@@ -4,8 +4,8 @@ import MoveBookButton from "./MoveBookButton";
 import "../styles/Book.css"
 
 
-export default function EllipsisButton({ id, book, onMoveBook, onRemove, onEllipsisClick }) {
-
+export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemove, onEllipsisClick, handleRemoveClick }) {
+    
     // ellipsis click logic
     const [ isEllipsisVisible, setIsEllipsis ] = useState(false);
     
@@ -44,7 +44,7 @@ export default function EllipsisButton({ id, book, onMoveBook, onRemove, onEllip
 
                  <li className="addlist--remove">
                      <MoveBookButton book={book} actionType="remove" 
-                     onRemove={onRemove}/>
+                     handleRemoveBook={handleRemoveClick}/>
                  </li>
 
              </ul>

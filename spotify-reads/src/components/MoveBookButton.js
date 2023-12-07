@@ -1,15 +1,20 @@
 import React from "react";
-import "../styles/Book.css"
+import { useShelfContext } from "./ShelfContext";
+import "../styles/Book.css";
 import plus from "../images/plus-solid.svg";
-import remove from "../images/trash-solid.svg"
+import remove from "../images/trash-solid.svg";
 
-export default function MoveBookButton({ book, targetShelf, actionType, onMoveBook, onRemove }) {
+export default function MoveBookButton({ book, shelfName
+    , targetShelf, actionType, onMoveBook, onRemove }) {
+        const { handleRemoveBook } = useShelfContext();
 
     const handleButtonClick = () => {
         if(actionType === 'move') {
+            // add logic for moving a book
             onMoveBook(book, targetShelf);
         } else if (actionType === 'remove') {
-            onRemove(book, targetShelf);
+            //logic for removing book
+            handleRemoveBook(book, shelfName);
         }
     };
 

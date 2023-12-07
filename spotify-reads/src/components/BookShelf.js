@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useShelfContext } from "./ShelfContext";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 import "../styles/Shelf.css"
 
 
-export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
+export default function BookShelf({ book, books, onMoveBook, onRemove, shelfName }){
+    const { handleRemoveBook } = useShelfContext();
 
     useEffect(() => {
         console.log('Received books:', books);
@@ -21,7 +23,7 @@ export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
 
 
     const handleRemoveClick = (book) => {
-        onRemove(book, shelfName);
+        handleRemoveBook(book, shelfName);
     };
     
     return (
@@ -33,6 +35,7 @@ export default function BookShelf({ books, onMoveBook, onRemove, shelfName }){
                         key={book.id} 
                         book={book} 
                         onMoveBook={onMoveBook} 
+                        shelfName={shelfName}
                         />
                         <EllipsisButton 
                         book={book.id}

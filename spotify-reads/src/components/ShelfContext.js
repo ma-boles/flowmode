@@ -63,10 +63,14 @@ const handleRemoveBook = (book, shelfName) => {
     // find the index of the book in the spcified shelf
     const shelfIndex = updatedShelves[shelfName].findIndex((b)=> {
         const bookId = Number(book.id);
-        const currentBookId = b.id !== undefined ? Number(b.id)
-: undefined;
-        console.log('Comparing:', currentBookId, 'with', bookId, 'Result:', currentBookId === bookId);
-        return currentBookId === bookId;
+        const currentBookId = typeof b.id !== 'undefined' && !isNaN(b.id) ? Number(b.id) : undefined;
+
+        //log type and value of b.id
+        console.log('Type of b.id:', typeof b.id, 'Value of b.id:', b.id);
+
+        //check for NaN or undefined before comparison
+        console.log('Comparing:', currentBookId, 'with', bookId, 'Result:', !isNaN(currentBookId) && !isNaN(bookId) && currentBookId === bookId);
+        return !isNaN(currentBookId) && !isNaN(bookId) && currentBookId === bookId;
         });
 
     if(shelfIndex !== -1) {

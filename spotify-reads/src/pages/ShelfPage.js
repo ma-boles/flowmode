@@ -12,7 +12,7 @@ import "../styles/App.css";
 import "../styles/Shelf.css";
 
 export default function ShelfPage() {
-    const { shelves, handleMoveBook, handleRemoveBook, setShelves } = useShelfContext();
+    const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
 
     useEffect(() => {
         console.log('Shelves updated:', shelves);
@@ -21,13 +21,13 @@ export default function ShelfPage() {
     return(
         <ShelfProvider>
             <div>
-                <ShelfPageContent setShelves={setShelves}/>
+                <ShelfPageContent setShelvesContext={setShelvesContext}/>
             </div>
         </ShelfProvider>
     )
 };
 
-function ShelfPageContent ({ setShelves }) {
+function ShelfPageContent ({ setShelvesContext }) {
 
     const { shelves, handleMoveBook, handleRemoveBook } = useShelfContext();
 
@@ -69,12 +69,12 @@ const updateTotalTimes = () => {
         updatedShelves[shelf].totalTime = calculateTotalTime(updatedShelves[shelf]);
     }
 
-    setShelves(updatedShelves);
+    setShelvesContext(updatedShelves);
 };
 
 useEffect(() => {
     updateTotalTimes();
-}, []);
+}, [setShelvesContext]);
 
 
 // scroll logic
