@@ -21,7 +21,7 @@ export default function MoveBookButton({ book, shelfName
     return(
         <>
             <button onClick={handleButtonClick} className="move--button">
-                {actionType === 'move' ? <img src={plus} alt="add" className="book--icon"></img> : <img src={remove} alt="remove" className="book--icon"></img> }
+                {actionType === 'move' ? (<img src={plus} alt="add" className="book--icon"></img>) : (<img src={remove} alt="remove" className="book--icon"></img>)}
                 {actionType === 'move' ? `Add to ${targetShelf}`: 'Remove'}
             </button>
         </>
