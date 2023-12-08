@@ -27,7 +27,7 @@ export default function ShelfPage() {
     )
 };
 
-function ShelfPageContent ({ setShelvesContext }) {
+function ShelfPageContent ({ setShelvesContext, id }) {
 
     const { shelves, handleMoveBook, handleRemoveBook } = useShelfContext();
 
@@ -120,6 +120,7 @@ useEffect(() => {
 
         <BookShelf 
         title="Bookshelf"
+        id={id}
         books={shelves.bookshelf}
         onMoveBook={handleMoveBook}
         onRemove={handleRemoveBook}
@@ -145,6 +146,7 @@ useEffect(() => {
 
         <Queue 
         title="Queue"
+        id={id}
         books={shelves.queue}
         onMoveBook={handleMoveBook}
         onRemove={handleRemoveBook}
@@ -165,6 +167,7 @@ useEffect(() => {
 
         <ReadingList 
         title="Reading List"
+        id={id}
         books={shelves.readingList}
         onMoveBook={handleMoveBook}
         onRemove={handleRemoveBook}
