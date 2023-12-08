@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 
-export default function ReadingList({ books, onMoveBook, onRemove, shelfName }) {
+export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName }) {
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
@@ -24,11 +24,14 @@ export default function ReadingList({ books, onMoveBook, onRemove, shelfName }) 
                 <div key={book.id} className="ellipsis--div">
                 <Book 
                 key={book.id} 
+                id={book.id}
                 book={book} 
                 onMoveBook={onMoveBook} 
+                shelfName={shelfName}
                 />
                 <EllipsisButton 
-                book={book.id}
+                book={book}
+                id={id}
                 shelfName="readingList"
                 onRemove={handdleRemoveClick}
                 onEllipsisClick={(isEllipsisVisible) => 

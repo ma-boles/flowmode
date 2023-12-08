@@ -5,7 +5,7 @@ import EllipsisButton from "./EllipsisButton";
 import "../styles/Shelf.css"
 
 
-export default function BookShelf({ book, books, onMoveBook, onRemove, shelfName }){
+export default function BookShelf({ id, book, books, onMoveBook, onRemove, shelfName }){
     const { handleRemoveBook } = useShelfContext();
 
     useEffect(() => {
@@ -33,12 +33,14 @@ export default function BookShelf({ book, books, onMoveBook, onRemove, shelfName
                     <div key={book.id} className="ellipsis--div">
                         <Book 
                         key={book.id} 
+                        id={book.id}
                         book={book} 
                         onMoveBook={onMoveBook} 
                         shelfName={shelfName}
                         />
                         <EllipsisButton 
-                        book={book.id}
+                        book={book}
+                        id={id}
                         shelfName="bookshelf"
                         onRemove={handleRemoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
