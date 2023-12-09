@@ -35,7 +35,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                  <li className="addlist--li">
                      <MoveBookButton 
                      book={book} 
-                     targetShelf="Bookshelf" 
+                     targetShelf="bookshelf" 
                      currentShelf={shelfName}
                      actionType="move" 
                      handleMoveBook={handleMoveClick}/>
@@ -43,7 +43,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                  <li className="addlist--li">
                      <MoveBookButton 
                      book={book} 
-                     targetShelf="Queue" 
+                     targetShelf="queue" 
                      currentShelf={shelfName}
                      actionType="move" 
                      handleMoveBook={handleMoveClick}/>
@@ -51,7 +51,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                  <li className="addlist--li">
                      <MoveBookButton 
                      book={book} 
-                     targetShelf="Reading List"
+                     targetShelf="readingList"
                      currentShelf={shelfName} 
                      actionType="move" 
                      handleMoveBook={handleMoveClick}/>
