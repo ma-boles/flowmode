@@ -48,13 +48,11 @@ const calculateTotalTime = (books) => {
         const minutesMatch = minutesStr.match(/\d+/); //extract digits from string
         const minutes = parseInt(minutesMatch, 10) || 0;
         totalMinutes += minutes;
-        
     }
 
     totalHours += Math.floor(totalMinutes/60);
     totalMinutes %= 60;
 
-   
     return {
         hours: totalHours, 
         minutes: totalMinutes,
@@ -62,19 +60,18 @@ const calculateTotalTime = (books) => {
 };
 
 //function to update the total time for each shelf
-const updateTotalTimes = () => {
-    const updatedShelves = {...shelves};
+const updateTotalTimes = (updatedShelves) => {
+    const newShelves  = {...updatedShelves};
 
-    for (const shelf in updatedShelves) {
-        updatedShelves[shelf].totalTime = calculateTotalTime(updatedShelves[shelf]);
+    for (const shelf in newShelves) {
+        newShelves[shelf].totalTime = calculateTotalTime(newShelves[shelf]);
     }
-
-    setShelvesContext(updatedShelves);
+    setShelvesContext(newShelves);
 };
 
 useEffect(() => {
-    updateTotalTimes();
-}, [setShelvesContext]);
+    updateTotalTimes(shelves);
+}, [shelves]);
 
 
 // scroll logic
