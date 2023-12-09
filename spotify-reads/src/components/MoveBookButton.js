@@ -5,13 +5,14 @@ import plus from "../images/plus-solid.svg";
 import remove from "../images/trash-solid.svg";
 
 export default function MoveBookButton({ book, shelfName
-    , targetShelf, actionType, onMoveBook, onRemove }) {
+    , targetShelf, actionType, currentShelf, onMoveBook, onRemove }) {
+        const { handleMoveBook } = useShelfContext();
         const { handleRemoveBook } = useShelfContext();
 
     const handleButtonClick = () => {
         if(actionType === 'move') {
             // add logic for moving a book
-            onMoveBook(book, targetShelf);
+            handleMoveBook(book, currentShelf, targetShelf);
         } else if (actionType === 'remove') {
             //logic for removing book
             handleRemoveBook(book, shelfName);
