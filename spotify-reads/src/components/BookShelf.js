@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useShelfContext } from "./ShelfContext";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 import "../styles/Shelf.css"
 
 
-export default function BookShelf({ id, book, books, onMoveBook, onRemove, shelfName }){
+export default function BookShelf({ id, book, books, onMoveBook, onRemove, currentShelf, targetShelf, shelfName }){
+    const { handleMoveBook } = useShelfContext();
     const { handleRemoveBook } = useShelfContext();
 
     useEffect(() => {
@@ -21,6 +22,9 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, shelf
         }));
     };
 
+    const handleMoveClick = (book) => {
+        handleMoveBook(book, currentShelf, targetShelf);
+    };
 
     const handleRemoveClick = (book) => {
         handleRemoveBook(book, shelfName);
@@ -35,16 +39,19 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, shelf
                         key={book.id} 
                         id={book.id}
                         book={book} 
-                        onMoveBook={onMoveBook} 
+                        onMoveBook={handleMoveClick} 
                         shelfName={shelfName}
                         />
+
                         <EllipsisButton 
                         book={book}
                         id={id}
                         shelfName="bookshelf"
                         onRemove={handleRemoveClick}
+                        onMoveBook={handleMoveClick}
                         onEllipsisClick={(isEllipsisVisible) => 
-                        handleEllipsisClick(book.id, isEllipsisVisible)}/>
+                        handleEllipsisClick(book.id, isEllipsisVisible)}
+                        />
                     </div>
                 ))}
             </div>

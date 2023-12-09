@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
+import { useShelfContext } from "./ShelfContext";
 
 
-export default function Queue({ id, books, onMoveBook, onRemove, shelfName }) {
+export default function Queue({ id, books, onMoveBook, onRemove, shelfName, currentShelf, targetShelf }) {
+    const { handleMoveBook } = useShelfContext();
+    const { handleRemoveBook } = useShelfContext();
 
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
@@ -14,8 +17,12 @@ export default function Queue({ id, books, onMoveBook, onRemove, shelfName }) {
         }));
     };
     
+    const handleMoveClick = (book) => {
+        handleMoveBook(book, currentShelf, targetShelf)
+    };
+
     const handleRemoveClick = (book) => {
-        onRemove(book, shelfName);
+        handleRemoveBook(book, shelfName);
     };
 
     return (
@@ -27,7 +34,7 @@ export default function Queue({ id, books, onMoveBook, onRemove, shelfName }) {
                         key={book.id} 
                         id={book.id}
                         book={book} 
-                        onMoveBook={onMoveBook} 
+                        onMoveBook={handleMoveClick} 
                         shelfName={shelfName}
                         />
                         <EllipsisButton 
