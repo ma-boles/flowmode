@@ -29,27 +29,60 @@ const ShelfProvider = ({ children }) => {
 
 
     // book add/remove logic
-const handleMoveBook = (book, targetShelfIndex) => {
-    //find index of book in current shelf
-    const currentShelfIndex = shelves.findIndex((shelf) => shelf.some((b) => b.id === book.id));
-    //create copies of current and target shelves' book arrays
-    const currentShelfBooks = [...shelves[currentShelfIndex]];
-    const targetShelfBooks = [...shelves[targetShelfIndex]];
-    
-    // remove book from current shelf
-    const currentIndex = currentShelfBooks.findIndex((b) => b.id === book.id);
-    currentShelfBooks.splice(currentIndex, 1);
-    // add book to target shelf
-    targetShelfBooks.push(book);
 
-    // update state with modified shelves
-    setShelves((prevShelves) => {
-        const updatedShelves = [...prevShelves];
-        updatedShelves[currentShelfIndex] = currentShelfBooks;
-        updatedShelves[targetShelfIndex] = targetShelfBooks;
-        return updatedShelves;
-    })
+    const handleMoveBook = (book, currentShelf, targetShelf) => {
+        setShelves((prevShelves) => {
+            console.log('Moving book:', book);
+            console.log('Current shelf:', currentShelf);
+            console.log('Target shelf:', targetShelf);
+
+            // create copy of shelves object 
+            const updatedShelves = {...prevShelves};
+
+            //log the current state of shelves
+            console.log('Current state of shelves:', updatedShelves);
+
+            //check if currentShelf exists in updatedShelves
+            if(!updatedShelves[currentShelf]) {
+                console.log(`Current shelf "${currentShelf}" does not exist in the shelves object.`)
+                return prevShelves;
+            }
+
+            //find index of book in current shelf
+            const currentShelfIndex = updatedShelves[currentShelf].findIndex((b) => {
+                const bookId = Number(book.id);
+                const currentBookId = typeof b.id !== 'undefined' && !isNaN(b.id) ? Number(b.id) : undefined;
+
+                //log type and value of b.id
+                console.log('Type of b.id:', typeof b.id, 'Value of b.id:', b.id);
+
+                //check for NaN or undefined before comparison
+                console.log('Comparing:', currentBookId, 'with', bookId, 'Result:', !isNaN(currentBookId) && !isNaN(bookId) && currentBookId === bookId);
+                return !isNaN(currentBookId) && !isNaN(bookId) && currentBookId === bookId;
+            });
+
+            if(currentShelfIndex !== -1) {
+                //remove the book from the current shelf
+                const removedBook = updatedShelves[currentShelf].splice(currentShelfIndex, 1)[0];
+
+                //check if trgetShelf exists
+                if(updatedShelves[targetShelf]) {
+                    //add the book to existing target shelf
+                    updatedShelves[targetShelf].push(removedBook);
+                } else {
+                    console.log(`Target shelf "${targetShelf}" does not exist in the shelves object.`);
+                }
+            } else {
+                console.log('Book not found in shelf:', currentShelf);
+            }
+
+            console.log('Updated shelves:', updatedShelves);
+            return updatedShelves;
+
+        });
+   
 };
+
 
 const handleRemoveBook = (book, shelfName) => {
     setShelves((prevShelves) => {
