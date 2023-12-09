@@ -4,7 +4,7 @@ import MoveBookButton from "./MoveBookButton";
 import "../styles/Book.css"
 
 
-export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemove, children, onEllipsisClick, handleRemoveClick }) {
+export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemove, currentShelf, targetShelf, children, onEllipsisClick, handleMoveClick, handleRemoveClick }) {
     
     // ellipsis click logic
     const [ isEllipsisVisible, setIsEllipsis ] = useState(false);
@@ -33,17 +33,33 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
              <ul className="addlist">
 
                  <li className="addlist--li">
-                     <MoveBookButton book={book} targetShelf="Bookshelf" actionType="move" onMoveBook={onMoveBook}/>
+                     <MoveBookButton 
+                     book={book} 
+                     targetShelf="Bookshelf" 
+                     currentShelf={shelfName}
+                     actionType="move" 
+                     handleMoveBook={handleMoveClick}/>
                  </li>
                  <li className="addlist--li">
-                     <MoveBookButton book={book} targetShelf="Queue" actionType="move" onMoveBook={onMoveBook}/>
+                     <MoveBookButton 
+                     book={book} 
+                     targetShelf="Queue" 
+                     currentShelf={shelfName}
+                     actionType="move" 
+                     handleMoveBook={handleMoveClick}/>
                  </li>
                  <li className="addlist--li">
-                     <MoveBookButton book={book} targetShelf="Reading List" actionType="move" onMoveBook={onMoveBook}/>
+                     <MoveBookButton 
+                     book={book} 
+                     targetShelf="Reading List"
+                     currentShelf={shelfName} 
+                     actionType="move" 
+                     handleMoveBook={handleMoveClick}/>
                  </li>
 
                  <li className="addlist--remove">
-                     <MoveBookButton book={book} 
+                     <MoveBookButton 
+                     book={book} 
                      id={id}
                      actionType="remove" 
                      handleRemoveBook={handleRemoveClick} shelfName={shelfName}/>
