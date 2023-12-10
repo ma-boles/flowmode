@@ -1,14 +1,11 @@
 * {
- /*background-color: #1ED760;*/
   color: whitesmoke;
   margin: 0px;
   overflow-x: hidden;
 }
 
 .app {
-  background: linear-gradient(180deg, rgba(30,215,96,1) 46%, rgba(0, 0, 6, 0.388)90%);
-  /*background: linear-gradient(180deg, rgba(30,215,96,1) 32%, rgba(0, 0, 6, 0.388)85%);*/
-
+  background: linear-gradient(180deg, rgba(30,215,96, 1) 46%, rgba(0, 0, 6, 0.388)90%);
 }
 
 /* landing section */
