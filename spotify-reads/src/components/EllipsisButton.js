@@ -62,7 +62,8 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                      book={book} 
                      id={id}
                      actionType="remove" 
-                     handleRemoveBook={handleRemoveClick} shelfName={shelfName}/>
+                     handleRemoveBook={handleRemoveClick} 
+                     shelfName={shelfName}/>
                  </li>
 
              </ul>
