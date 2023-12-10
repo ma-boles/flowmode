@@ -122,17 +122,16 @@ useEffect(() => {
         onMoveBook={handleMoveBook}
         onRemove={handleRemoveBook}
         shelfName="bookshelf"
-        />
+        />    
+</section>
 
     <div className="top--button--div">
         <button className="top--button" onClick={scrollToTop}>
             <img src={arrow} alt="scroll to top" className="img--arrow"></img>
         </button>
     </div>
-</section>
 
 <hr className="shelf--hr"/>
-
 
 <section className='queue--section' ref={queueRef}>
     <div className="shelf--time">
@@ -149,13 +148,13 @@ useEffect(() => {
         onRemove={handleRemoveBook}
         shelfName="queue"
         />
+</section>
 
     <div className="top--button--div">
         <button className="top--button" onClick={scrollToTop}>
             <img src={arrow} alt="scroll to top" className="img--arrow"></img>
         </button>
     </div>
-</section>
 
 <hr className="shelf--hr"/>
 
@@ -170,26 +169,15 @@ useEffect(() => {
         onRemove={handleRemoveBook}
         shelfName="readingList"
         />
+</section>
 
-    <div className="top--button--div">
+    <div className="top--button--div--bottom">
         <button className="top--button" onClick={scrollToTop}>
             <img src={arrow} alt="scroll to top" className="img--arrow"></img>
         </button>
     </div>
-</section>
+
 </div>
         </>
     );
 };
-
-
-// create a copy of the shelves array with modified shelf
-{/*const updatedShelves = {
-    ...prevShelves,
-    [shelfName]: currentShelfBooks,
-
-};
-console.log('updatedShelves:', updatedShelves);
-    return updatedShelves
-    
-});*/}
