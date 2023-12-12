@@ -1,55 +1,55 @@
 /* book card */
-.book--container {
+/*.book--container {
     display: inline;
     text-align: center;
-  }
+  }*/
   .book--card {
     background-color: rgba(50, 50, 50, 0.751);
-    margin-top: 1rem;
+    /*margin-top: 1rem;
     margin-right: 1rem;
     margin-left: 1rem;
     margin-bottom: 0rem;
     border-radius: 10px;
     height: 17rem;
     width: 12rem;
-    text-align: center;
+    text-align: center;*/
 
   }
-.book--cover {
+/*.book--cover {
     height: 10rem;
 }
 .book--info {
   text-align: left;
   margin: 0rem 1rem;
-}
+}*/
 
 .book--p--time {
   color: rgba(245, 245, 245, 0.853);
 }
 
-.ellipsis--div {
+/*.ellipsis--div {
   text-align: center;
-}
+}*/
 
-.book--ellipsis {
+/*.book--ellipsis {
     height: 1.5rem;
     filter: invert(1);
     cursor: pointer;
-  }
+  }*/
 
   /* addlist */
   
   .book--add {
-    width: 10rem;
-    /*height: 8.72rem;*/
-    background-color: rgb(70, 70, 70);
+    /*width: 10rem;
     display: none; 
     margin-left: 2rem;
     position: absolute;
     border-radius: 5px;
-    z-index: 10
+    z-index: 10*/
+    background-color: rgb(70, 70, 70);
+
   }  
-.move--button {
+/*.move--button {
   background-color: transparent;
   width: 100%;
   padding: .5rem;
@@ -65,15 +65,6 @@
   .addlist {
     padding: 0;
     margin: 0;
-  }
-  /*.addlist--button {
-    background-color: transparent;
-    border: none;
-    padding: .25rem .8rem;
-    font-size: .75rem;
-    width: 100%;
-    cursor: pointer;
-    text-align: left;
   }*/
   
   .book--icon {
@@ -99,14 +90,9 @@
     width: 100%;
     margin: 0;
   }
-  .addlist--remove {
+  /*.addlist--remove {
     margin: 0;
     width: 100%;
-  }
-  /*
-  .addlist--li:hover {
-    background-color: grey;
-  }
+  }*/
   
-  */
  

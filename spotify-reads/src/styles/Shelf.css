@@ -3,7 +3,6 @@
 }
 .shelf--img {
   margin: auto;
-  /*height: 35rem;*/
   max-width: 80%;
   height: 100%;
   padding-bottom: 2rem;
@@ -39,19 +38,19 @@
 }
 
 /* bookshelf */
-.bookshelf--section {
+/*.bookshelf--section {
     margin: 2rem;
     margin-bottom: 3rem;
     overflow: auto;
     justify-content: center;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+    -ms-overflow-style: none;   IE and Edge 
+    scrollbar-width: none;   Firefox 
+  }*/
   .bookshelf--section::-webkit-scrollbar {
     display: none;
   }
   
-  .bookshelf--h2 {
+ /* .bookshelf--h2 {
     padding-bottom: 1rem;
     padding-right: 1rem;
     padding-left: 1rem;
@@ -59,21 +58,21 @@
   .bookshelf--container {
     background-color: transparent;
     display: inline-flex;
-  }
+  }*/
   
   
   /* queue */
-  .queue--section {
+  /*.queue--section {
     margin:2rem;
     margin-bottom: 3rem;
     overflow: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+    -ms-overflow-style: none;   IE and Edge 
+    scrollbar-width: none;   Firefox 
+  }*/
   .queue--section::-webkit-scrollbar {
     display: none;
   }
-  .queue--h3 {
+  /*.queue--h3 {
     padding-bottom: 1rem;
     padding-right: 1rem;
     padding-left: 1rem;
@@ -81,24 +80,24 @@
   .queue--container {
     background-color: transparent;
     display: inline-flex;
-  }
+  }*/
   
   
   /* reading list */
-  .readinglist--section {
+ /* .readinglist--section {
     margin: 2rem;
     margin-bottom: 0rem;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;   IE and Edge 
+    scrollbar-width: none;   Firefox 
     overflow: auto;
-  }
+  }*/
   .readinglist--section::-webkit-scrollbar{
     display: none;
   }
-  .readinglist--h3 {
+ /* .readinglist--h3 {
     padding: 1rem;
   }
   .readinglist--container {
     background-color: transparent;
     display: inline-flex;
-  }
+  }*/
