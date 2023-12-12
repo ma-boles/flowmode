@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/Book.css"
+import "../styles/styles.css";
+/*import "../styles/Book.css"*/
 
 import cover from "../images/image-solid.svg";
 

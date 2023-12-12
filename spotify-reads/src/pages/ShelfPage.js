@@ -8,8 +8,9 @@ import ReadingList from "../components/ReadingList";
 import arrow from "../images/circle-arrow-up-solid.svg";
 
 import Collection from "../images/Collection.jpg";
-import "../styles/App.css";
-import "../styles/Shelf.css";
+import "../styles/styles.css";
+/*import "../styles/App.css";
+import "../styles/Shelf.css";*/
 
 export default function ShelfPage() {
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
@@ -108,12 +109,12 @@ useEffect(() => {
 
 <hr className="shelf--hr"/>
 
-<section className='bookshelf--section' ref={bookshelfRef}>
+<section className="bg-transparent inline-flex" ref={bookshelfRef}>
     <div className="shelf--time">
         <strong><p>Total Time:</p>
         {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
     </div>
-    <h2 className="bookshelf--h2">Bookshelf</h2>
+    <h2 className="pb-4 pr-4 pl-4">Bookshelf</h2>
 
         <BookShelf 
         title="Bookshelf"
@@ -133,12 +134,12 @@ useEffect(() => {
 
 <hr className="shelf--hr"/>
 
-<section className='queue--section' ref={queueRef}>
+<section className="m-8 mb-12 overflow-auto ms-overflow-style-none scrollbar-none queue--section" ref={queueRef}>
     <div className="shelf--time">
         <strong><p>Total Time:</p>
         {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
     </div>
-    <h3 className="queue--h3">Queue</h3>
+    <h3 className="pb-4 pr-4 pl-4">Queue</h3>
 
         <Queue 
         title="Queue"
@@ -158,8 +159,8 @@ useEffect(() => {
 
 <hr className="shelf--hr"/>
 
-<section className='readinglist--section' ref={readingListRef}>
-    <h3 className="readinglist--h3">Reading List</h3>
+<section className='m-8 mb-0 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
+    <h3 className="p-4">Reading List</h3>
 
         <ReadingList 
         title="Reading List"

@@ -1,5 +1,6 @@
 import React from 'react';
-import '../styles/Nav.css';
+import "../styles/styles.css";
+/*import '../styles/Nav.css';*/
 
 export default function Nav({ scrollToRef }) {
 

@@ -1,5 +1,6 @@
 import React from "react";
-import '../styles/App.css';
+import "../styles/styles.css";
+/*import '../styles/App.css';*/
 import Logo from "../images/Landing1.jpg"
 
 export default function Landing() {

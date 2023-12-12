@@ -1,6 +1,7 @@
 import React from "react";
 import { useShelfContext } from "./ShelfContext";
-import "../styles/Book.css";
+import "../styles/styles.css";
+/*import "../styles/Book.css";*/
 import plus from "../images/plus-solid.svg";
 import remove from "../images/trash-solid.svg";
 
