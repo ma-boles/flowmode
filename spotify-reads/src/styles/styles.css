@@ -1,3 +1,26 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  margin: 0rem;
+  background: linear-gradient(180deg, rgba(29, 185, 84, 1) 46%, rgba(0,0,6,1) 90%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 * {
     color: whitesmoke;
     margin: 0px;
@@ -27,12 +50,41 @@
     height: 38rem;
   }
   
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: (29, 185, 84);
+    justify-content: space-between;
+  }
+
+  .logo--section {
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
 
   /* book card */
 
+  .book--container {
+    display: inline;
+    text-align: center;
+  }
+
   .book--card {
     background-color: rgba(50, 50, 50, 0.751);
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0rem;
+    border-radius: 10px;
+    height: 17rem;
+    width: 12rem;
+    text-align: center;
+    overflow: hidden;
   }
+
+  .book--cover {
+    height: 10rem;
+}
 
 .book--p--time {
   color: rgba(245, 245, 245, 0.853);
@@ -90,6 +142,7 @@
     padding-bottom: 2rem;
   }
   
+  
   .shelf--hr {
     width: 95%;
   }
@@ -119,17 +172,39 @@
     height: 3rem;
   }
   
+  .book--ellipsis {
+    height: 1.5rem;
+    filter: invert(1);
+    cursor: pointer;
+  }
+
 /* bookshelf */ 
+.bookshelf--section {
+  display: inline-flex;
+  /*margin: 2rem;
+  margin-bottom: 3rem;
+  overflow: auto;
+  justify-content: center;*/
+  -ms-overflow-style: none;   /* IE and Edge */
+  scrollbar-width: none;   /* Firefox */
+}
     .bookshelf--section::-webkit-scrollbar {
       display: none;
     }
     
 /* queue */
+
+.queue {
+  display: inline-flex;
+}
     .queue--section::-webkit-scrollbar {
       display: none;
     }
     
 /* reading list */
+.readinglist--section {
+  display: inline-flex;
+}
     .readinglist--section::-webkit-scrollbar{
       display: none;
     }
@@ -150,3 +225,7 @@
  .works--h3 {
      margin-bottom: .5rem;
  }
+
+ /*.footer--p {
+  margin: 2rem;
+}*/
