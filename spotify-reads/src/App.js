@@ -4,8 +4,6 @@ import ShelfPage from './pages/ShelfPage';
 
 import Footer from './components/Footer';
 
-import "./pages/ShelfPage";
-import './styles/App.css';
 
 function App() {
   return (
