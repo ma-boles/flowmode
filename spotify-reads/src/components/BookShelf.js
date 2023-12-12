@@ -32,9 +32,9 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
     
     return (
         <>
-            <div className="bookshelf--container">
+            <div className="m-8 mb-12 overflow-auto justify-center ms-overflow-style-auto scrollbar-none bookshelf--section">
                 {books.map((book) => (
-                    <div key={book.id} className="ellipsis--div">
+                    <div key={book.id} className="text-center">
                         <Book 
                         key={book.id} 
                         id={book.id}

@@ -26,9 +26,9 @@ export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName
 
     return (
         <>
-            <div className="readinglist--container">
+            <div className="bg-transparent inline-flex">
             {books.map((book) => (
-                <div key={book.id} className="ellipsis--div">
+                <div key={book.id} className="text-center">
                 <Book 
                 key={book.id} 
                 id={book.id}

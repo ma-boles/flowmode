@@ -10,7 +10,7 @@ export default function Nav({ scrollToRef }) {
 
     return(
         <>
-            <section className='flex justify-between items-center w-fulls'>
+            <section className='flex justify-between items-center w-full'>
                 <div className='logo--section'>
                     <p className='pt-4 font-bold text-lg mt-2 ml-4'>Spotify Reads</p>
                 </div>
