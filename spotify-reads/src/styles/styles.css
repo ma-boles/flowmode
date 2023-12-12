@@ -1,0 +1,152 @@
+* {
+    color: whitesmoke;
+    margin: 0px;
+    overflow-x: hidden;
+  }
+  
+  .app {
+    background: linear-gradient(180deg, rgba(30,215,96, 1) 46%, rgba(0, 0, 6, 0.388)90%);
+  }
+  
+  /* landing section */
+  .landing--section {
+    margin: 1rem ;
+    text-align: center;
+  }
+ 
+  h1 {
+    font-size: 3.7rem;
+    margin: 0rem 1rem;
+    padding-top: 6rem;
+    line-height: 5rem;
+  }
+  strong {
+    font-weight: 800;
+  }
+  img {
+    height: 38rem;
+  }
+  
+
+  /* book card */
+
+  .book--card {
+    background-color: rgba(50, 50, 50, 0.751);
+  }
+
+.book--p--time {
+  color: rgba(245, 245, 245, 0.853);
+}
+
+/* addlist */
+  
+.book--add {
+    background-color: rgb(70, 70, 70);
+  }  
+  
+  .book--icon {
+    height: .8rem;
+    filter: invert(1);
+    padding-right: .5rem;
+  }
+ .addlist--add {
+    margin: 0;
+    width: 100%;
+  }
+  .visible {
+    display: block;
+}
+
+ .addlist--add--options {
+   display: none;
+   background-color: rgb(70, 70, 70);
+  }
+  
+  .addlist--li {
+    font-size: .75rem;
+    width: 100%;
+    margin: 0;
+  }
+
+.logo {
+    background-color: (29, 185, 84);
+  }
+
+  li {
+    display: inline-block;
+    margin: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .img--section {
+    text-align: center;
+  }
+  .shelf--img {
+    margin: auto;
+    max-width: 80%;
+    height: 100%;
+    padding-bottom: 2rem;
+  }
+  
+  .shelf--hr {
+    width: 95%;
+  }
+  .shelf--time {
+    text-align: right;
+  }
+  
+  .top--button--div {
+    text-align: right;
+    margin-top: 3rem;
+    margin-right: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .top--button--div--bottom {
+    text-align: right;
+    margin-top: 3rem;
+    margin-right: 2rem;
+  }
+  .top--button {
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 180px;
+    border: none;
+  }
+  .img--arrow {
+    filter: invert(.75);
+    height: 3rem;
+  }
+  
+/* bookshelf */ 
+    .bookshelf--section::-webkit-scrollbar {
+      display: none;
+    }
+    
+/* queue */
+    .queue--section::-webkit-scrollbar {
+      display: none;
+    }
+    
+/* reading list */
+    .readinglist--section::-webkit-scrollbar{
+      display: none;
+    }
+
+/* works */
+.works--card {
+     background-color: rgba(255, 255, 255, 0.171);
+ }
+ 
+ .works--number {
+     background-color: transparent;
+     border: 1px double white;
+     width: 3rem;
+     margin-bottom: .7rem;
+     margin-left: auto;
+     margin-right: auto;
+ }
+ .works--h3 {
+     margin-bottom: .5rem;
+ }
