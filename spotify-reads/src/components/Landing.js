@@ -5,9 +5,9 @@ import Logo from "../images/Landing1.jpg"
 export default function Landing() {
     return (
         <>
-        <h2 className="landing--h2">Spotify Reads</h2>
+        <h2 className="text-right text-black font-bold">Spotify Reads</h2>
 
-        <section className="landing">
+        <section className="mx-auto">
             <img src={Logo} alt="astronaut reading a book" />
         </section>
         </>

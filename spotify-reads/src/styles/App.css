@@ -13,7 +13,7 @@
   margin: 1rem ;
   text-align: center;
 }
-.landing {
+/*.landing {
   margin: auto ;
 }
 
@@ -21,7 +21,8 @@
   text-align: right;
   color: black;
   font-weight: 700;
-}
+}*/
+
 h1 {
   font-size: 3.7rem;
   margin: 0rem 1rem;
@@ -37,7 +38,7 @@ img {
 
 
 /* footer section */
-.footer--container {
+/*.footer--container {
   margin-top: 3rem;
 }
 hr { 
@@ -48,4 +49,4 @@ hr {
 .footer--p {
   text-align: right;
   margin: 2rem;
-}
+}*/
