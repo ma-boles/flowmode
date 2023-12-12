@@ -8,31 +8,21 @@ export default function Nav({ scrollToRef }) {
         timeRemaining.textContent = '00:00';
     }
 
-    /*const bookshelfHandleScroll = () => {
-        myRef.current.scrollIntoView({behavior: 'smooth'});
-    }
-    function queueHandleScroll() {
-        alert("queue")
-    }
-    function readingListHandleScroll() {
-        alert("reading list")
-    }*/
-
     return(
         <>
-            <section className='nav'>
+            <section className='flex justify-between items-center w-fulls'>
                 <div className='logo--section'>
-                    <p className='logo--p'>Spotify Reads</p>
+                    <p className='pt-4 font-bold text-lg mt-2 ml-4'>Spotify Reads</p>
                 </div>
                 <div className='links--section'>
-                    <ul>
+                    <ul className='list-none mr-8'>
                         <li onClick={() => scrollToRef('Bookshelf')}>Bookshelf</li>
                         <li onClick={() => scrollToRef('Queue')}>Queue</li>
                         <li onClick={() => scrollToRef('ReadingList')}>Reading List</li>
 
                         <li>Catalogue</li>
 
-                        <li className='time' id='time' onClick={changeText}>Time Left</li>
+                        <li className='bg-transparent p-1 border-1 border-double border-whitesmoke text-base w-20 text-center cursor-pointer' id='time' onClick={changeText}>Time Left</li>
                     </ul>
                 </div>
             </section>

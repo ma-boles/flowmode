@@ -1,16 +1,16 @@
-.nav {
+/*.nav {
   display: flex;
   justify-content: flex-end;
   background-color: (29, 185, 84);
   width: 100%;
   justify-content: space-between;
   margin: 0rem 1rem;
-}
+}*/
 
 .logo {
     background-color: (29, 185, 84);
   }
-  .logo--p {
+ /* .logo--p {
     padding-top: 1rem;
     font-weight: 700;
     font-size: 1.2rem;
@@ -21,7 +21,7 @@
   ul {
     list-style: none;
     margin-right: 2rem;
-  }
+  }*/
   li {
     display: inline-block;
     margin: 1rem;
@@ -30,9 +30,8 @@
     cursor: pointer;
   }
   
-  .time {
+  /*.time {
     background-color: transparent;
-    /*padding: .3rem .5rem;*/
     padding: .25rem;
     border: 1px double whitesmoke;
     font-size: 1rem;
@@ -41,4 +40,4 @@
   }
   .time:hover {
     cursor: pointer;
-  }
+  }*/
