@@ -4,11 +4,11 @@ import "../styles/Works.css"
 export default function Works() {
     return (
         <>
-        <section className="works">
+        <section className="text-center">
 
-            <h1 className="works--h1">How it works</h1>
+            <h1 className="mb-6 pb-4">How it works</h1>
 
-                <div className="works--container">
+                <div className="inline-flex">
                     <div className="works--card">
                         <div className="works--number">
                             1<br/>
@@ -41,7 +41,7 @@ export default function Works() {
                         <p>Sit back, relax, and enjoy listening to selected books on Spotify.</p>
                     </div>
                 </div>
-                <a><button className="works--button">
+                <a><button className="cursor-pointer bg-transparent mt-10 mb-6 rounded-full border-1 border-double border-white py-2 px-14">
                     Log In
                 </button>
                 </a>

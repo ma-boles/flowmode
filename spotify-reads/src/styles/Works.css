@@ -1,4 +1,4 @@
-.works {
+/*.works {
     text-align: center;
 }
 .works--container {
@@ -8,13 +8,14 @@
 .works--h1 {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-}
+}*/
 .works--card {
-    margin: 2rem;
+   /* margin: 2rem;
     padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.171);
     border-radius: 10px;
-    width: 13rem;
+    width: 13rem;*/
+    background-color: rgba(255, 255, 255, 0.171);
+
 }
 
 .works--number {
@@ -28,7 +29,7 @@
 .works--h3 {
     margin-bottom: .5rem;
 }
-.works--button {
+/*.works--button {
     background-color: transparent;
     cursor: pointer;
     margin-top: 2.5rem;
