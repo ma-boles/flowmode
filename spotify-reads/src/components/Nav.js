@@ -1,6 +1,4 @@
 import React from 'react';
-import "../styles/styles.css";
-/*import '../styles/Nav.css';*/
 
 export default function Nav({ scrollToRef }) {
 
@@ -11,9 +9,9 @@ export default function Nav({ scrollToRef }) {
 
     return(
         <>
-            <section className='flex justify-between items-center w-full'>
-                <div className='logo--section'>
-                    <p className='pt-4 font-bold text-lg mt-2 ml-4'>Spotify Reads</p>
+            <section className='nav flex items-center w-full my-0 mx-4'>
+                <div className='mt-4 ml-4'>
+                    <p className='pt-20 font-bold text-lg mt-8 ml-8'>Spotify Reads</p>
                 </div>
                 <div className='links--section'>
                     <ul className='list-none mr-8'>

@@ -27,7 +27,7 @@ export default function Queue({ id, books, onMoveBook, onRemove, shelfName, curr
 
     return (
         <>
-            <div className="bg-transparent inline-flex">
+            <div className="queue bg-transparent">
                 {books.map((book) => (
                     <div key={book.id} className="text-center">
                         <Book 
