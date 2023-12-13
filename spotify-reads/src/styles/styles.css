@@ -2,6 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* index */
 body {
   margin: 0rem;
   background: linear-gradient(180deg, rgba(29, 185, 84, 1) 46%, rgba(0,0,6,1) 90%);
@@ -21,6 +22,7 @@ code {
     monospace;
 }
 
+/* app */
 * {
     color: whitesmoke;
     margin: 0px;
@@ -31,6 +33,41 @@ code {
     background: linear-gradient(180deg, rgba(30,215,96, 1) 46%, rgba(0, 0, 6, 0.388)90%);
   }
   
+/* nav */
+
+.logo {
+  background-color: (29, 185, 84);
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: (29, 185, 84);
+  justify-content: space-between;
+}
+
+.logo--section {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+li {
+  display: inline-block;
+  margin: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+  .time {
+    background-color: transparent;
+    padding: .25rem;
+    border: 1px double whitesmoke;
+    font-size: 1rem;
+    width: 5rem;
+    text-align: center;
+  }
+
   /* landing section */
   .landing--section {
     margin: 1rem ;
@@ -50,17 +87,7 @@ code {
     height: 38rem;
   }
   
-  .nav {
-    display: flex;
-    justify-content: flex-end;
-    background-color: (29, 185, 84);
-    justify-content: space-between;
-  }
 
-  .logo--section {
-    margin-left: 1rem;
-    margin-top: 1rem;
-  }
 
   /* book card */
 
@@ -120,17 +147,7 @@ code {
     margin: 0;
   }
 
-.logo {
-    background-color: (29, 185, 84);
-  }
 
-  li {
-    display: inline-block;
-    margin: 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-  }
 
   .img--section {
     text-align: center;
