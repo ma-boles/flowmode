@@ -1,6 +1,4 @@
 import React from "react";
-import "../styles/styles.css";
-/*import "../styles/Book.css"*/
 
 import cover from "../images/image-solid.svg";
 
@@ -13,10 +11,10 @@ export default function Book({ book, isEllipsisVisible }) {
 
     return (
         <>
-        <div className="text-center inline-block">
+        <div className="book--container">
 
-            <div className="text-center mt-4 mr-4 ml-4 mb-0 rounded-lg h-68 w-48">
-                <img src={cover} alt="book cover" className="h-40"></img>
+            <div className="book--card">
+                <img src={cover} alt="book cover" className="book--card"></img>
 
                 <div className="text-left mx-4">
                     {book.title}<br/>

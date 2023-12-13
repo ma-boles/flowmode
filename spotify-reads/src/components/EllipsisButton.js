@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import ellipsis from "../images/ellipsis-solid.svg";
 import MoveBookButton from "./MoveBookButton";
-import "../styles/styles.css";
-/*import "../styles/Book.css"*/
 
 
 export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemove, currentShelf, targetShelf, children, onEllipsisClick, handleMoveClick, handleRemoveClick }) {
@@ -24,7 +22,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
         <img
         src={ellipsis} 
         alt="ellipsis" 
-        className="cursor-pointer h-6 filter invert" 
+        className="book--ellipsis" 
         onClick={handleEllipsisClick}
         />
 
