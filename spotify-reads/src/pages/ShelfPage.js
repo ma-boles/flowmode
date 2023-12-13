@@ -8,9 +8,7 @@ import ReadingList from "../components/ReadingList";
 import arrow from "../images/circle-arrow-up-solid.svg";
 
 import Collection from "../images/Collection.jpg";
-import "../styles/styles.css";
-/*import "../styles/App.css";
-import "../styles/Shelf.css";*/
+
 
 export default function ShelfPage() {
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
@@ -159,8 +157,10 @@ useEffect(() => {
 
 <hr className="shelf--hr"/>
 
+<h3 className="p-4">Reading List</h3>
+
 <section className='m-8 mb-0 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
-    <h3 className="p-4">Reading List</h3>
+
 
         <ReadingList 
         title="Reading List"
