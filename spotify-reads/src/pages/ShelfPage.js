@@ -100,19 +100,19 @@ useEffect(() => {
         <>
         <Nav scrollToRef={scrollToRef}/>
 
-<div className="shelf">
-<section className="img--section">
-    <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
-</section>
+    <div className="shelf">
+        <section className="text-center">
+            <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
+        </section>
 
-<hr className="shelf--hr"/>
+    <hr className="mx-auto shelf--hr"/>
 
-<section className="bg-transparent inline-flex" ref={bookshelfRef}>
-    <div className="shelf--time">
+    <section className="bg-transparent" ref={bookshelfRef}>
+    <div className="mr-8 mt-4 text-right">
         <strong><p>Total Time:</p>
         {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
     </div>
-    <h2 className="pb-4 pr-4 pl-4">Bookshelf</h2>
+    <h2 className="mt-2 ml-12 font-semibold">Bookshelf</h2>
 
         <BookShelf 
         title="Bookshelf"
@@ -122,6 +122,7 @@ useEffect(() => {
         onRemove={handleRemoveBook}
         shelfName="bookshelf"
         />    
+        
 </section>
 
     <div className="top--button--div">
@@ -130,14 +131,14 @@ useEffect(() => {
         </button>
     </div>
 
-<hr className="shelf--hr"/>
+<hr className="mx-auto shelf--hr"/>
 
 <section className="m-8 mb-12 overflow-auto ms-overflow-style-none scrollbar-none queue--section" ref={queueRef}>
-    <div className="shelf--time">
+    <div className="mr-2 mt-0 text-right">
         <strong><p>Total Time:</p>
         {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
     </div>
-    <h3 className="pb-4 pr-4 pl-4">Queue</h3>
+    <h3 className="ml-4 mb-4 font-semibold">Queue</h3>
 
         <Queue 
         title="Queue"
@@ -155,9 +156,9 @@ useEffect(() => {
         </button>
     </div>
 
-<hr className="shelf--hr"/>
+<hr className="mx-auto shelf--hr"/>
 
-<h3 className="p-4">Reading List</h3>
+<h3 className="ml-12 mt-12">Reading List</h3>
 
 <section className='m-8 mb-0 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
 
