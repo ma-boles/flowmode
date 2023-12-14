@@ -1,6 +1,6 @@
-.img--section {
+/*.img--section {
   text-align: center;
-}
+}*/
 .shelf--img {
   margin: auto;
   max-width: 80%;
@@ -8,12 +8,12 @@
   padding-bottom: 2rem;
 }
 
-.shelf--hr {
+/*.shelf--hr {
   width: 95%;
 }
 .shelf--time {
   text-align: right;
-}
+}*/
 
 .top--button--div {
   text-align: right;
