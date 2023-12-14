@@ -35,21 +35,9 @@ code {
   
 /* nav */
 
-.logo {
+/*.logo {
   background-color: (29, 185, 84);
-}
-
-.nav {
-  display: flex;
-  justify-content: flex-end;
-  background-color: (29, 185, 84);
-  justify-content: space-between;
-}
-
-.logo--section {
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
+}*/
 
 li {
   display: inline-block;
@@ -58,15 +46,6 @@ li {
   font-weight: 500;
   cursor: pointer;
 }
-
-  .time {
-    background-color: transparent;
-    padding: .25rem;
-    border: 1px double whitesmoke;
-    font-size: 1rem;
-    width: 5rem;
-    text-align: center;
-  }
 
   /* landing section */
   .landing--section {
@@ -87,31 +66,13 @@ li {
     height: 38rem;
   }
   
-
-
+  
   /* book card */
-
-  .book--container {
-    display: inline;
-    text-align: center;
-  }
 
   .book--card {
     background-color: rgba(50, 50, 50, 0.751);
-    margin-top: 1rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    margin-bottom: 0rem;
-    border-radius: 10px;
-    height: 17rem;
-    width: 12rem;
-    text-align: center;
-    overflow: hidden;
   }
 
-  .book--cover {
-    height: 10rem;
-}
 
 .book--p--time {
   color: rgba(245, 245, 245, 0.853);
@@ -147,11 +108,7 @@ li {
     margin: 0;
   }
 
-
-
-  .img--section {
-    text-align: center;
-  }
+/* shelf page landing section */
   .shelf--img {
     margin: auto;
     max-width: 80%;
@@ -159,12 +116,8 @@ li {
     padding-bottom: 2rem;
   }
   
-  
   .shelf--hr {
     width: 95%;
-  }
-  .shelf--time {
-    text-align: right;
   }
   
   .top--button--div {
