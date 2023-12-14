@@ -107,7 +107,7 @@ useEffect(() => {
 
     <hr className="mx-auto shelf--hr"/>
 
-    <section className="bg-transparent" ref={bookshelfRef}>
+    <section className="pb-6 bg-transparent" ref={bookshelfRef}>
     <div className="mr-8 mt-4 text-right">
         <strong><p>Total Time:</p>
         {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
@@ -133,7 +133,7 @@ useEffect(() => {
 
 <hr className="mx-auto shelf--hr"/>
 
-<section className="m-8 mb-12 overflow-auto ms-overflow-style-none scrollbar-none queue--section" ref={queueRef}>
+<section className="m-8 mb-12 pb-16 overflow-auto ms-overflow-style-none scrollbar-none queue--section" ref={queueRef}>
     <div className="mr-2 mt-0 text-right">
         <strong><p>Total Time:</p>
         {shelves.queue && shelves.queue.totalTime ? `${shelves.queue.totalTime.hours}hr ${shelves.queue.totalTime.minutes}min` : '00:00' }</strong>
@@ -160,7 +160,7 @@ useEffect(() => {
 
 <h3 className="ml-12 mt-12">Reading List</h3>
 
-<section className='m-8 mb-0 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
+<section className='m-8 mb-0 pb-16 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
 
 
         <ReadingList 
