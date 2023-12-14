@@ -11,10 +11,10 @@ export default function Book({ book, isEllipsisVisible }) {
 
     return (
         <>
-        <div className="book--container">
+        <div className="inline text-center">
 
-            <div className="book--card">
-                <img src={cover} alt="book cover" className="book--card"></img>
+            <div className="my-4 mr-4 ml-4 text-center w-48 h-72 rounded-lg book--card">
+                <img src={cover} alt="book cover" className="mx-auto h-40"></img>
 
                 <div className="text-left mx-4">
                     {book.title}<br/>
