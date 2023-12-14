@@ -4,8 +4,8 @@ export default function Footer () {
     return (
         <>
             <div className="mt-12">
-                <hr className="mx-auto w-95 opacity-60"></hr>
-                <p className="text-right m-8">&copy; mab.dev 2023 </p>
+                <hr className="mx-auto opacity-60 footer--hr"></hr>
+                <p className="m-8 text-right">&copy; mab.dev 2023 </p>
             </div>
         </>
     )
