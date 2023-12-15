@@ -41,7 +41,7 @@ export default function Works() {
                         <p>Sit back, relax, and enjoy listening to selected books on Spotify.</p>
                     </div>
                 </div>
-                <a><button className="cursor-pointer bg-transparent mt-10 mb-6 rounded-full border-1 border-double border-white py-2 px-14">
+                <a><button className="py-2 px-14 mt-10 mb-6 cursor-pointer bg-transparent rounded-full border-1 border-double border-white">
                     Log In
                 </button>
                 </a>
