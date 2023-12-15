@@ -7,7 +7,7 @@ import '../styles/App.css';
 export default function LandingPage() {
     return(
         <>
-        <section className='landing--section'>
+        <section className='m-6 text-center'>
             <Landing />
         </section>
             <Works />
