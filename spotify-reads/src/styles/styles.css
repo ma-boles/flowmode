@@ -69,21 +69,19 @@ li {
   
   /* book card */
 
-  .book--card {
+.book--card {
     background-color: rgba(50, 50, 50, 0.751);
-  }
-
-
+}
 .book--p--time {
   color: rgba(245, 245, 245, 0.853);
 }
+
 
 /* addlist */
   
 .book--add {
     background-color: rgb(70, 70, 70);
   }  
-  
   .book--icon {
     height: .8rem;
     filter: invert(1);
@@ -107,6 +105,7 @@ li {
     width: 100%;
     margin: 0;
   }
+
 
 /* shelf page landing section */
   .shelf--img {
@@ -141,29 +140,20 @@ li {
     filter: invert(.75);
     height: 3rem;
   }
-  
-  .book--ellipsis {
-    height: 1.5rem;
-    filter: invert(1);
-    cursor: pointer;
-  }
+
 
 /* bookshelf */ 
 .bookshelf--section {
   display: inline-flex;
-  /*margin: 2rem;
-  margin-bottom: 3rem;
-  overflow: auto;
-  justify-content: center;*/
   -ms-overflow-style: none;   /* IE and Edge */
   scrollbar-width: none;   /* Firefox */
 }
-    .bookshelf--section::-webkit-scrollbar {
-      display: none;
-    }
+.bookshelf--section::-webkit-scrollbar {
+  display: none;
+}
     
-/* queue */
 
+/* queue */
 .queue {
   display: inline-flex;
 }
@@ -175,15 +165,18 @@ li {
 .readinglist--section {
   display: inline-flex;
 }
-    .readinglist--section::-webkit-scrollbar{
-      display: none;
-    }
+.readinglist--section::-webkit-scrollbar{
+  display: none;
+}
 
 /* works */
 .works--card {
      background-color: rgba(255, 255, 255, 0.171);
+     margin: 2rem;
+     padding: 2rem;
+     border-radius: 10px;
+     width: 13rem;
  }
- 
  .works--number {
      background-color: transparent;
      border: 1px double white;
@@ -196,6 +189,7 @@ li {
      margin-bottom: .5rem;
  }
 
- /*.footer--p {
-  margin: 2rem;
-}*/
+ /* footer */
+ .footer--hr {
+  width: 95%
+ }
