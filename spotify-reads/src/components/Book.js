@@ -13,7 +13,7 @@ export default function Book({ book, isEllipsisVisible }) {
         <>
         <div className="inline text-center">
 
-            <div className="my-4 mr-4 ml-4 text-center w-48 h-72 rounded-lg book--card">
+            <div className="mt-4 mr-4 ml-4 text-center w-48 h-72 rounded-lg book--card">
                 <img src={cover} alt="book cover" className="mx-auto h-40"></img>
 
                 <div className="text-left mx-4">

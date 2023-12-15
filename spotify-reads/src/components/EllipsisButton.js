@@ -22,12 +22,12 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
         <img
         src={ellipsis} 
         alt="ellipsis" 
-        className="book--ellipsis" 
+        className="mx-auto h-6 filter invert cursor-pointer" 
         onClick={handleEllipsisClick}
         />
 
         {isEllipsisVisible && (
-             <div className="w-40 hidden ml-8 rounded-md absolute z-10" id={`book--add ${id}`} style={ellipsisStyles}>
+             <div className="absolute z-10 w-40 ml-8 hidden ronded-md book--add" id={`book--add ${id}`} style={ellipsisStyles}>
 
              <ul className="p-0 m-0">
                  <li className="addlist--li">
