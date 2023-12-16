@@ -8,8 +8,14 @@
   background: linear-gradient(180deg, rgba(30,215,96, 1) 46%, rgba(0, 0, 6, 0.388)90%);
 }
 
+ /*nav*/
+
+/*.logo {
+  background-color: (29, 185, 84);
+}*/
+
 /* landing section */
-.landing--section {
+/*.landing--section {
   margin: 1rem ;
   text-align: center;
 }
@@ -36,6 +42,11 @@ img {
   height: 38rem;
 }
 
+  /*:.addlist--li {
+    font-size: .75rem;
+    width: 100%;
+    margin: 0;
+  }*/
 
 /* footer section */
 /*.footer--container {
