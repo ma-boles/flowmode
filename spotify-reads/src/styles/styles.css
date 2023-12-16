@@ -34,11 +34,6 @@ code {
   }
   
 /* nav */
-
-/*.logo {
-  background-color: (29, 185, 84);
-}*/
-
 li {
   display: inline-block;
   margin: 1rem;
@@ -48,11 +43,6 @@ li {
 }
 
   /* landing section */
-  .landing--section {
-    margin: 1rem ;
-    text-align: center;
-  }
- 
   h1 {
     font-size: 3.7rem;
     margin: 0rem 1rem;
@@ -67,8 +57,12 @@ li {
   }
   
   
-  /* book card */
+/* works */
+.works--card {
+  background-color: rgba(255, 255, 255, 0.171);
+}
 
+/* book card */
 .book--card {
     background-color: rgba(50, 50, 50, 0.751);
 }
@@ -78,14 +72,11 @@ li {
 
 
 /* addlist */
-  
 .book--add {
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(67, 67, 67);
   }  
   .book--icon {
-    height: .8rem;
     filter: invert(1);
-    padding-right: .5rem;
   }
  .addlist--add {
     margin: 0;
@@ -100,66 +91,32 @@ li {
    background-color: rgb(70, 70, 70);
   }
   
-  .addlist--li {
-    font-size: .75rem;
-    width: 100%;
-    margin: 0;
-  }
 
-
-/* shelf page landing section */
-  .shelf--img {
-    margin: auto;
-    max-width: 80%;
-    height: 100%;
-    padding-bottom: 2rem;
-  }
-  
+/* shelf page landing section */ 
   .shelf--hr {
     width: 95%;
   }
-  
-  .top--button--div {
-    text-align: right;
-    margin-top: 3rem;
-    margin-right: 2rem;
-    margin-bottom: 2.5rem;
-  }
-  .top--button--div--bottom {
-    text-align: right;
-    margin-top: 3rem;
-    margin-right: 2rem;
-  }
-  .top--button {
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 180px;
-    border: none;
-  }
   .img--arrow {
     filter: invert(.75);
-    height: 3rem;
   }
 
 
 /* bookshelf */ 
 .bookshelf--section {
-  display: inline-flex;
   -ms-overflow-style: none;   /* IE and Edge */
   scrollbar-width: none;   /* Firefox */
 }
 .bookshelf--section::-webkit-scrollbar {
   display: none;
 }
-    
 
 /* queue */
 .queue {
   display: inline-flex;
 }
-    .queue--section::-webkit-scrollbar {
-      display: none;
-    }
+.queue--section::-webkit-scrollbar {
+  display: none;
+}
     
 /* reading list */
 .readinglist--section {
@@ -169,25 +126,6 @@ li {
   display: none;
 }
 
-/* works */
-.works--card {
-     background-color: rgba(255, 255, 255, 0.171);
-     margin: 2rem;
-     padding: 2rem;
-     border-radius: 10px;
-     width: 13rem;
- }
- .works--number {
-     background-color: transparent;
-     border: 1px double white;
-     width: 3rem;
-     margin-bottom: .7rem;
-     margin-left: auto;
-     margin-right: auto;
- }
- .works--h3 {
-     margin-bottom: .5rem;
- }
 
  /* footer */
  .footer--hr {
