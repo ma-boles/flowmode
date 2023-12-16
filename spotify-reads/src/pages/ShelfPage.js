@@ -101,8 +101,8 @@ useEffect(() => {
         <Nav scrollToRef={scrollToRef}/>
 
     <div className="shelf">
-        <section className="text-center">
-            <img src={Collection} alt="astronaut lying down reading a book" className="shelf--img"></img>
+        <section className="mx-auto w-full max-w-5xl  min-h-screen h-auto pb-8 flex items-center justify-center">
+            <img src={Collection} alt="astronaut lying down reading a book" className="w-full h-auto"></img>
         </section>
 
     <hr className="mx-auto shelf--hr"/>
@@ -125,9 +125,9 @@ useEffect(() => {
         
 </section>
 
-    <div className="top--button--div">
-        <button className="top--button" onClick={scrollToTop}>
-            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+    <div className="mb-9 mr-8 mt-12 text-right">
+        <button className="bg-transparent cursor-pointer rounded-full" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="h-12 img--arrow"></img>
         </button>
     </div>
 
@@ -150,9 +150,9 @@ useEffect(() => {
         />
 </section>
 
-    <div className="top--button--div">
-        <button className="top--button" onClick={scrollToTop}>
-            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+    <div className="mb-9 mr-8 mt-12 text-right">
+        <button className="bg-transparent rounded-full" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="h-12 img--arrow"></img>
         </button>
     </div>
 
@@ -173,9 +173,9 @@ useEffect(() => {
         />
 </section>
 
-    <div className="top--button--div--bottom">
-        <button className="top--button" onClick={scrollToTop}>
-            <img src={arrow} alt="scroll to top" className="img--arrow"></img>
+    <div className="mt-12 mr-8 text-right">
+        <button className="bg-transparent rounded-full" onClick={scrollToTop}>
+            <img src={arrow} alt="scroll to top" className="h-12 img--arrow"></img>
         </button>
     </div>
 
