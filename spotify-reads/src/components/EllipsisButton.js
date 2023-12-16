@@ -30,7 +30,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
              <div className="absolute z-10 w-40 ml-8 hidden ronded-md book--add" id={`book--add ${id}`} style={ellipsisStyles}>
 
              <ul className="p-0 m-0">
-                 <li className="addlist--li">
+                 <li className="m-0 w-full text-sm font-normal">
                      <MoveBookButton 
                      book={book} 
                      targetShelf="bookshelf" 
@@ -38,7 +38,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                      actionType="move" 
                      handleMoveBook={handleMoveClick}/>
                  </li>
-                 <li className="addlist--li">
+                 <li className="m-0 w-full text-sm font-normal">
                      <MoveBookButton 
                      book={book} 
                      targetShelf="queue" 
@@ -46,7 +46,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                      actionType="move" 
                      handleMoveBook={handleMoveClick}/>
                  </li>
-                 <li className="addlist--li">
+                 <li className="m-0 w-full text-sm font-normal">
                      <MoveBookButton 
                      book={book} 
                      targetShelf="readingList"
@@ -55,7 +55,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
                      handleMoveBook={handleMoveClick}/>
                  </li>
 
-                 <li className="m-0 w-full">
+                 <li className="m-0 w-full text-sm font-normal">
                      <MoveBookButton 
                      book={book} 
                      id={id}
