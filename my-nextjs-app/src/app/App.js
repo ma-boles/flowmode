@@ -10,13 +10,13 @@ function App() {
     <>
 
     <div /*className='app'*/>
-    <ShelfPage />
+ {/*    <ShelfPage />*/}
 
         
-  {/* 
+   
    <LandingPage />
-{/*
-      <BrowsePage />
+
+  {/*    <BrowsePage />
       */}      
       <Footer />
     </div>

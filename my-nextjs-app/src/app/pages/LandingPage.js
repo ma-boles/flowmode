@@ -1,6 +1,6 @@
 import React from "react";
-import Landing from "../components/Landing";
-import Works from "../components/Works";
+import Landing from "../components/components/Landing";
+import Works from "../components/components/Works";
 
 import '../styles/App.css';
 

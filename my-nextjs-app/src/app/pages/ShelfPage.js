@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ShelfProvider } from "../components/ShelfContext";
-import { useShelfContext } from "../components/ShelfContext";
-import Nav from "../components/Nav";
-import BookShelf from "../components/BookShelf";
-import Queue from "../components/Queue";
-import ReadingList from "../components/ReadingList";
+import { ShelfProvider } from "../components/components/ShelfContext";
+import { useShelfContext } from "../components/components/ShelfContext";
+import Nav from "../components/components/Nav";
+import BookShelf from "../components/components/BookShelf";
+import Queue from "../components/components/Queue";
+import ReadingList from "../components/components/ReadingList";
 import arrow from "../images/circle-arrow-up-solid.svg";
 
 import Collection from "../images/Collection.jpg";
