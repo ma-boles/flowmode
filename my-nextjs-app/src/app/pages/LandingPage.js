@@ -1,8 +1,8 @@
 import React from "react";
-import Landing from "../components/components/Landing";
-import Works from "../components/components/Works";
+import Landing from "../components/Landing";
+import Works from "../components/Works";
 
-import '../styles/App.css';
+import '../styles/styles.css'
 
 export default function LandingPage() {
     return(
