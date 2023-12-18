@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../images/LandingImg5.jpg"
+import Logo from '../images/LandingImg5.jpg'
 
 export default function Landing() {
     return (
