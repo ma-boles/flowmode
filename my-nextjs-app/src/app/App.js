@@ -1,5 +1,5 @@
 import LandingPage from './pages/LandingPage';
-import ShelfPage from './pages/ShelfPage';
+import ShelfPage from './Shelf/page';
 /*import BrowsePage from './pages/BrowsePage';*/
 
 import Footer from './components/Footer';
