@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/styles.css";
 
 
-export default function Browse() {
+export default function BrowseContent () {
     return(
         <>
             <section className="mx-auto w-full max-w-6xl  min-h-screen h-auto flex items-center justify-center">

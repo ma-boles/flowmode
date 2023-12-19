@@ -7,7 +7,7 @@ import Queue from "./Queue";
 import ReadingList from "./ReadingList";
 
 
-export default function Shelf() {
+export default function ShelfContent () {
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
 
     useEffect(() => {
