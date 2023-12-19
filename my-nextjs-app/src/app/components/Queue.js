@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
-import { useShelfContext } from "./ShelfContext";
+import { useShelfContext } from "../contexts/ShelfContext";
 
 
 export default function Queue({ id, books, onMoveBook, onRemove, shelfName, currentShelf, targetShelf }) {
