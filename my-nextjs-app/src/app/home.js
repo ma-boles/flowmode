@@ -1,9 +1,9 @@
-import LandingPage from './components/HomeContent'
+import HomeContent from './components/HomeContent'
 
 export default function Home() {
   return (
     <main>
-      <LandingPage />
+      <HomeContent />
     </main>
   )
 }
