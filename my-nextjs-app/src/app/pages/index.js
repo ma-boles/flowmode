@@ -1,16 +1,18 @@
-/** @jsxImportSource @emotion /react @jsxRuntime classic @useClient */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/styles.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ShelfProvider } from './contexts/ShelfContext';
+import App from 'next/app';
+import reportWebVitals from '../reportWebVitals';
+import { ShelfProvider } from '../contexts/ShelfContext';
+import Layout from '../components/Layout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ShelfProvider>
-      <App />
+      <Layout>
+        <App />
+      </Layout>
     </ShelfProvider>
   </React.StrictMode>
 );
