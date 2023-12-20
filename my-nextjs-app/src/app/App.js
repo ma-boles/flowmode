@@ -1,5 +1,4 @@
-/** @jsxImportSource @emotion /react @jsxRuntime classic @useClient */
-import HomeContent from './components/HomeContent';
+import Home from './pages/home';
 import Footer from './components/Footer';
 
 
@@ -8,7 +7,7 @@ function App() {
     <>
 
     <div /*className='app'*/>   
-      <HomeContent />
+      <Home />
          
       <Footer />
     </div>
