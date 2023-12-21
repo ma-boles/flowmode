@@ -1,17 +1,15 @@
-import Home from './pages/home';
-import Footer from './components/Footer';
+import Home from './home/page';
 
 
 function App() {
   return (
-    <>
+    <div>
 
     <div /*className='app'*/>   
       <Home />
          
-      <Footer />
     </div>
-    </>
+    </div>
 
   );
 }
