@@ -25,7 +25,7 @@ export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName
     };
 
     return (
-        <>
+        <div>
             <div className="readinglist--section bg-transparent ">
             {books.map((book) => (
                 <div key={book.id} className="text-center">
@@ -46,6 +46,6 @@ export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName
                 </div>
             ))}
             </div>
-        </>
+        </div>
     )
 }

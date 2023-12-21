@@ -3,7 +3,7 @@ import '../styles/styles.css'
 
 export default function HomeContent() {
     return(
-        <>
+        <div>
         <section className='m-6 text-center'>
             <h2 className="text-right text-lg text-black font-bold">Spotify Reads</h2>
 
@@ -59,6 +59,6 @@ export default function HomeContent() {
                 
             </section>
             
-        </>
+        </div>
     )
 }

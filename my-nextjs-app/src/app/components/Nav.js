@@ -8,7 +8,7 @@ export default function Nav({ scrollToRef }) {
     }
 
     return(
-        <>
+        <div>
             <section className='flex justify-between my-0 mx-4 w-full'>
                 <div className='mt-4 ml-4'>
                     <p className='mt-2 ml-4 font-bold text-base'>Spotify Reads</p>
@@ -25,6 +25,6 @@ export default function Nav({ scrollToRef }) {
                     </ul>
                 </div>
             </section>
-        </>
+        </div>
     )
 }

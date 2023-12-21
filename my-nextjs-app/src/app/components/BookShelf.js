@@ -31,7 +31,7 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
     };
     
     return (
-        <>
+        <div>
             <div className="inline-flex m-8 mb-12 overflow-auto justify-center bookshelf--section">
                 {books.map((book) => (
                     <div key={book.id} className="text-center">
@@ -55,6 +55,6 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 }

@@ -17,7 +17,7 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
     };
     
     return(
-        <>
+        <div>
         <img
         src="/ellipsis-solid.svg" 
         alt="ellipsis" 
@@ -66,6 +66,6 @@ export default function EllipsisButton({ id, book, shelfName, onMoveBook, onRemo
              </ul>
          </div> 
         )}
-        </>
+        </div>
     )
 }
