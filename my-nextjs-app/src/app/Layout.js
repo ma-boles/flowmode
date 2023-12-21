@@ -1,7 +1,7 @@
 import React from 'react';
-import HeadComponent from './HeadComponent';
-import Footer from './Footer';
-import './globals.css'
+import HeadComponent from './components/HeadComponent';
+import Footer from './components/Footer';
+import './styles/globals.css';
 import { Inter } from 'next/font/google';
 
 

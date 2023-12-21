@@ -1,6 +1,6 @@
 import React from "react";
 import HeadComponent from "../components/HeadComponent";
-import Layout from "../components/Layout";
+import Layout from "../Layout";
 import ShelfContent from "../components/ShelfContent";
 
 export default function Shelf () {

@@ -1,5 +1,6 @@
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../Layout";
+import '../styles/styles.css';
 import HeadComponent from "../components/HeadComponent";
 import BrowseContent from "../components/BrowseContent";
 
