@@ -1,11 +1,13 @@
-/*import React, { useEffect, useRef } from "react";
+// use client
+import React, { useEffect, useRef } from "react";
 import { ShelfProvider } from "../contexts/ShelfContext";
 import { useShelfContext } from "../contexts/ShelfContext";
 import Nav from "./Nav";
 import BookShelf from "./BookShelf";
 import Queue from "./Queue";
 import ReadingList from "./ReadingList";
-
+import '../styles/globals.css';
+import '../styles/styles.css'
 
 export default function ShelfContent () {
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
@@ -180,12 +182,16 @@ useEffect(() => {
         </>
     );
 };
-*/
+/*
 
 import React from 'react'
-
+import '../styles/globals.css';
+import '../styles/styles.css'
 export default function page() {
   return (
+    <div>
     <div>test page</div>
+    <h1>shelf page</h1>
+    </div>
   )
-}
+}*/
