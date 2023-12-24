@@ -27,7 +27,7 @@ reportWebVitals();*/}
 import React from 'react';
 import { ShelfProvider } from './contexts/ShelfContext';
 import HeadComponent from '../components/HeadComponent';
-import Layout from '../components/Layout';
+import Layout from './Layout';
 import HomeContent from '../components/HomeContent'
 
 export default function Home() {
@@ -38,12 +38,12 @@ export default function Home() {
   };
 
   return (
-    <ShelfProvider>
+    <>
       <Layout metadata={homeMetadata}>
         <HeadComponent metadata={homeMetadata} />
         <HomeContent />
       </Layout>
-    </ShelfProvider>
+    </>
   );
 };
 
