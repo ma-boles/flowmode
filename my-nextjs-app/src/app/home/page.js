@@ -1,7 +1,9 @@
 import React from 'react';
+import '../styles/globals.css';
+import '../styles/styles.css';
 
 import HeadComponent from '../components/HeadComponent';
-import Layout from '../components/Layout';
+import Layout from '../Layout';
 import HomeContent from '../components/HomeContent'
 
 export default function Home() {
