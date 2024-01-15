@@ -1,7 +1,7 @@
 // use client
 import React, { useEffect, useRef } from "react";
-import { ShelfProvider } from "../contexts/ShelfContext";
-import { useShelfContext } from "../contexts/ShelfContext";
+import { ShelfProvider } from "../app/contexts/ShelfContext";
+import { useShelfContext } from "../app/contexts/ShelfContext";
 import Nav from "./Nav";
 import BookShelf from "./BookShelf";
 import Queue from "./Queue";

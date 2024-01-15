@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useShelfContext } from "../contexts/ShelfContext";
+import { useShelfContext } from "../app/contexts/ShelfContext";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
 

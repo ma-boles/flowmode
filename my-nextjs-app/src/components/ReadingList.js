@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Book from "./Book";
 import EllipsisButton from "./EllipsisButton";
-import { useShelfContext } from "../contexts/ShelfContext";
+import { useShelfContext } from "../app/contexts/ShelfContext";
 
 export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName, currentShelf, targetShelf }) {
     const { handleMoveBook } = useShelfContext();
