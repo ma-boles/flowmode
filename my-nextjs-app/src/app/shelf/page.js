@@ -1,15 +1,15 @@
-// use client
+"use client"
 /*import React from "react";
 import HeadComponent from "../../components/HeadComponent";
 import Layout from "../layout";
 import ShelfContent from "../../components/ShelfContent";*/
 import React, { useEffect, useRef } from "react";
-import { ShelfProvider } from "../app/contexts/ShelfContext";
-import { useShelfContext } from "../app/contexts/ShelfContext";
-import Nav from "./navbar/Nav";
-import BookShelf from "./shelf/BookShelf";
-import Queue from "./shelf/Queue";
-import ReadingList from "./shelf/ReadingList";
+import { ShelfProvider } from "../contexts/ShelfContext";
+import { useShelfContext } from "../contexts/ShelfContext";
+import Nav from "@/components/navbar/Nav";
+import BookShelf from "@/components/book/Book";
+import Queue from "@/components/shelf/Queue";
+import ReadingList from "@/components/shelf/ReadingList";
 import '../styles/globals.css';
 import '../styles/styles.css'
 
