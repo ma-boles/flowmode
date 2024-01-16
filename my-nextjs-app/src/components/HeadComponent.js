@@ -1,6 +1,15 @@
 import Head from 'next/head';
 
 export default function HeadComponent({ metadata }) {
+
+    // checks if metadata id defined 
+    if(!metadata || !metadata.title || !metadata.description) {
+        // default values as needed
+        metadata = {
+            title: 'Spotify Reads',
+            description: 'Spotify audiobook tracking tool'
+        }
+    }
     return (
         <Head>
             <meta charSet='utf-8' />
