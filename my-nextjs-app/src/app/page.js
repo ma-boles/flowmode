@@ -1,7 +1,13 @@
 import React from "react";
 import '../styles/styles.css'
 
-export default function HomeContent() {
+export default function HomePage() {
+    
+const metadata = {
+    title: 'Home | Spotify Reads',
+    description: 'Keep track of your monthly Spotify audiobooks'
+  }
+
     return(
         <div>
         <section className='m-6 text-center'>
