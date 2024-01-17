@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useContext, createContext, useState } from "react";
 
 const ShelfContext = createContext();
