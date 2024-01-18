@@ -1,12 +1,12 @@
-import Home from './home/page';
+/*import Home from './home/page';
 
 
 function App() {
   return (
     <div>
 
-    <div /*className='app'*/>   
-      <Home />
+    <div /*className='app'*//*> */  
+     /* <Home />
          
     </div>
     </div>
@@ -14,4 +14,15 @@ function App() {
   );
 }
 
-export default App;
+{/*export default App;
+
+import React from "react";
+import { ShelfProvider } from "../contexts/ShelfContext";
+
+export default function MyApp({ Component, pageProps }) {
+    return (
+        <ShelfProvider>
+            <Component {...pageProps} />
+        </ShelfProvider>
+    );
+};*/
