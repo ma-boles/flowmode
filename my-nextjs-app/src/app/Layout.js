@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google';
 import { ShelfProvider } from './contexts/ShelfContext';
 
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout ({ metadata, children }) {
 
@@ -19,7 +19,7 @@ export default function RootLayout ({ metadata, children }) {
             {children}
           </ShelfProvider>
           <Footer />
-        </body>  
+        </body> 
       </html>
     </>
 
