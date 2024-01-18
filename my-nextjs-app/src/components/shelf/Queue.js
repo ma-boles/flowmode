@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Book from "../book/Book";
 import EllipsisButton from "../book/EllipsisButton";
 import { useShelfContext } from "../../app/contexts/ShelfContext";
@@ -8,6 +8,10 @@ export default function Queue({ id, books, onMoveBook, onRemove, shelfName, curr
     const { handleMoveBook } = useShelfContext();
     const { handleRemoveBook } = useShelfContext();
 
+    useEffect(() => {
+        console.log('Received books:', books);
+    }, [books]);
+    
     const [ bookEllipsisVisibility, setBookEllipsisVisibility ] = useState({});
 
     const handleEllipsisClick =(bookId, isEllipsisVisible) => {
