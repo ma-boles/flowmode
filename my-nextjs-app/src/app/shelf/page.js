@@ -1,8 +1,4 @@
 "use client"
-/*import React from "react";
-import HeadComponent from "../../components/HeadComponent";
-import Layout from "../layout";
-import ShelfContent from "../../components/ShelfContent";*/
 import React, { useEffect, useRef } from "react";
 import { ShelfProvider } from "../contexts/ShelfContext";
 import { useShelfContext } from "../contexts/ShelfContext";
@@ -10,11 +6,16 @@ import Nav from "@/components/navbar/Nav";
 import BookShelf from "@/components/book/Book";
 import Queue from "@/components/shelf/Queue";
 import ReadingList from "@/components/shelf/ReadingList";
-import '../styles/globals.css';
 import '../styles/styles.css'
 
 
 export default function Shelf () {
+
+    const metadata = {
+        title:'Shelf | Spotify Reads',
+        description: 'Organize and place books on to different shelves for easier access while keeping track of monthly listening minutes'
+    }
+
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
 
     useEffect(() => {
@@ -165,7 +166,7 @@ useEffect(() => {
 
     <hr className="mx-auto shelf--hr"/>
 
-    <h3 className="ml-12 mt-12">Reading List</h3>
+    <h3 className="ml-12 mt-12 font-semibold">Reading List</h3>
 
     <section className='m-8 mb-0 pb-16 overflow-auto ms-overflow-style-none scrollbar-none readinglist--section' ref={readingListRef}>
 
@@ -189,33 +190,3 @@ useEffect(() => {
             </>
         );
 };
-/*
-
-import React from 'react'
-import '../styles/globals.css';
-import '../styles/styles.css'
-export default function page() {
-  return (
-    <div>
-    <div>test page</div>
-    <h1>shelf page</h1>
-    </div>
-  )
-}*/
-
-
-
-/*export default function Shelf () {
-    
-    const shelfMetadata = {
-        title:'Shelf | Spotify Reads',
-        description: 'Organize and place books on to different shelves for easier access while keeping track of monthly listening minutes'
-    }
-    return (
-        <Layout metadata={shelfMetadata}>
-           <HeadComponent metadata={shelfMetadata}/>
-          <ShelfContent />
-        </Layout>
-        
-    )
-}*/
