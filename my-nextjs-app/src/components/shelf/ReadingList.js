@@ -3,7 +3,7 @@ import Book from "../book/Book";
 import EllipsisButton from "../book/EllipsisButton";
 import { useShelfContext } from "../../app/contexts/ShelfContext";
 
-export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName, currentShelf, targetShelf }) {
+export default function ReadingList({ id, books, book, onMoveBook, onRemove, shelfName, currentShelf, targetShelf }) {
     const { handleMoveBook } = useShelfContext();
     const { handleRemoveBook } = useShelfContext();
 
@@ -45,11 +45,12 @@ export default function ReadingList({ id, books, onMoveBook, onRemove, shelfName
                 id={id}
                 shelfName="readingList"
                 onRemove={handleRemoveClick}
+                onMoveBook={handleMoveClick}
                 onEllipsisClick={(isEllipsisVisible) => 
                 handleEllipsisClick(book.id, isEllipsisVisible)}/>
                 </div>
             ))}
             </div>
         </div>
-    )
+    );
 }
