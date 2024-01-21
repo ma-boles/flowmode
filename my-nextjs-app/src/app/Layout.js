@@ -1,7 +1,8 @@
 import React from 'react';
 import HeadComponent from '../components/HeadComponent';
 import Footer from '../components/footer/Footer';
-import './styles/globals.css';
+import '@/app/styles/globals.css';
+import '@/app/styles/styles.css';
 import { Inter } from 'next/font/google';
 import { ShelfProvider } from './contexts/ShelfContext';
 
