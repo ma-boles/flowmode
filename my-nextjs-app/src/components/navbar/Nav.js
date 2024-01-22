@@ -1,4 +1,5 @@
 import React from 'react';
+import '@/app/styles/styles.css'
 
 export default function Nav({ scrollToRef }) {
 
@@ -21,7 +22,8 @@ export default function Nav({ scrollToRef }) {
 
                         <li>Catalogue</li>
 
-                        <li className='p-1 text-center text-base bg-transparent w-20 border-solid border-2 border-neutral-100 cursor-pointer' id='time' onClick={changeText}>Time Left</li>
+                        <li className='p-1 text-center text-base bg-transparent w-20 border-solid border-2 border-neutral-100 cursor-pointer' id='time' onClick={changeText}>
+                            <p className=' text-sm'>Time Left</p></li>
                     </ul>
                 </div>
             </section>
