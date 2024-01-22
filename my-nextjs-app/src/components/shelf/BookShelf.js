@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useShelfContext } from "../../app/contexts/ShelfContext";
 import Book from "../book/Book";
 import EllipsisButton from "../book/EllipsisButton";
+import '@/app/styles/styles.css'
 
 
 
@@ -32,7 +33,7 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
     
     return (
         <div>
-            <div className="inline-flex m-8 mb-12 overflow-auto justify-center bookshelf--section">
+            <div className="bg-transparent">
                 {books.map((book) => (
                     <div key={book.id} className="text-center">
                         <Book 
@@ -42,7 +43,6 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
                         onMoveBook={handleMoveClick} 
                         shelfName={shelfName}
                         />
-
                         <EllipsisButton 
                         book={book}
                         id={id}
