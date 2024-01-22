@@ -6,7 +6,7 @@ import Nav from "@/components/navbar/Nav";
 import BookShelf from "@/components/book/Book";
 import Queue from "@/components/shelf/Queue";
 import ReadingList from "@/components/shelf/ReadingList";
-import '../styles/styles.css'
+import '@/app/styles/styles.css'
 
 
 export default function Shelf () {
@@ -116,13 +116,14 @@ useEffect(() => {
 
     <hr className="mx-auto shelf--hr"/>
 
-    <section className="pb-6 bg-transparent" ref={bookshelfRef}>
-        <div className="mr-8 mt-4 text-right">
+    <section className="m-8 mb-12 pb-16 overflow-auto ms-overflow-style-none scrollbar-none bookshelf--section" ref={bookshelfRef}>
+        {/*mr-8 text-right */}
+        <div className=" mr-2 mt-0 text-right">
             <strong><p>Total Time:</p>
             {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
         </div>
-        <h2 className="mt-2 ml-12 font-semibold">Bookshelf</h2>
-
+        <h2 className="mt-2 ml-4 font-semibold">Bookshelf</h2>
+        <div className="bookshelf">
             <BookShelf 
             title="Bookshelf"
             id={id}
@@ -131,6 +132,7 @@ useEffect(() => {
             onRemove={handleRemoveBook}
             shelfName="bookshelf"
             />
+        </div>
     </section>
 
     <div className="mb-9 mr-8 mt-12 text-right">
