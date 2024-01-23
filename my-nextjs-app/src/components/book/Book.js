@@ -1,5 +1,6 @@
 import React from "react";
 import { ShelfContext, useShelfContext } from "@/app/contexts/ShelfContext";
+import EllipsisButton from "./EllipsisButton";
 
 
 export default function Book({ isEllipsisVisible, shelfName }) {
@@ -19,8 +20,7 @@ export default function Book({ isEllipsisVisible, shelfName }) {
 
 
     return (
-        <div>
-            <div className="inline text-center">
+            <div className="inline-flex">
                 {shelfBooks.map((book) => (
                     <div key={book.id} className="mt-4 mr-4 ml-4 text-center w-18 h-72 rounded-lg book--card">
                     <img src="/image-solid.svg" alt="book cover" className="mx-auto h-40"></img>
@@ -32,9 +32,7 @@ export default function Book({ isEllipsisVisible, shelfName }) {
                 </div>
               ))}
                 <br/>
-                
             </div>
-        </div>
     );
 };
 
