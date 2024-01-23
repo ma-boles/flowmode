@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useShelfContext } from "../../app/contexts/ShelfContext";
+import { useShelfContext } from "@/app/contexts/ShelfContext";
 import Book from "../book/Book";
 import EllipsisButton from "../book/EllipsisButton";
 import '@/app/styles/styles.css'
@@ -32,10 +32,9 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
     };
     
     return (
-        <div>
             <div className="bg-transparent">
                 {books.map((book) => (
-                    <div key={book.id} className="text-center">
+                    <div key={book.id} >
                         <Book 
                         key={book.id} 
                         id={book.id}
@@ -55,6 +54,5 @@ export default function BookShelf({ id, book, books, onMoveBook, onRemove, curre
                     </div>
                 ))}
             </div>
-        </div>
     );
 }
