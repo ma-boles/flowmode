@@ -123,7 +123,7 @@ useEffect(() => {
             {shelves.bookshelf && shelves.bookshelf.totalTime ? `${shelves.bookshelf.totalTime.hours}hr ${shelves.bookshelf.totalTime.minutes}min` : '00:00' }</strong>
         </div>
         <h2 className="mt-2 ml-4 font-semibold">Bookshelf</h2>
-        <div className="bookshelf">
+        
             <BookShelf 
             title="Bookshelf"
             id={id}
@@ -132,7 +132,7 @@ useEffect(() => {
             onRemove={handleRemoveBook}
             shelfName="bookshelf"
             />
-        </div>
+
     </section>
 
     <div className="mb-9 mr-8 mt-12 text-right">
