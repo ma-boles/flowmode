@@ -38,7 +38,29 @@ const ShelfProvider = ({ children }) => {
             console.log('Current shelf:', currentShelf);
             console.log('Target shelf:', targetShelf);
 
-            // create copy of shelves object 
+            // create copies of the shelves
+            const updatedShelves = {
+                ...prevShelves,
+                [currentShelf]: [...prevShelves[currentShelf]],
+                [targetShelf]: [...prevShelves[targetShelf]],
+            };
+
+            //find indes of the book in current shelf
+            const currentShelfIndex = updatedShelves[currentShelf].findIndex((b) => b.id === book.id);
+
+            if(currentShelfIndex !== -1) {
+                //remove the book from the current shelf
+                const removedBook = updatedShelves[currentShelf].splice(currentShelfIndex,1)[0];
+                //add the book to the target shelf
+                updatedShelves[targetShelf].push(removedBook);
+            } else {
+                console.log('Book not found in shelf:', currentShelf);
+                
+            }
+                console.log('Update shelves:', updatedShelves);
+                return updatedShelves;
+        });
+           /* // create copy of shelves object 
             const updatedShelves = {...prevShelves};
 
             //log the current state of shelves
@@ -81,7 +103,7 @@ const ShelfProvider = ({ children }) => {
             console.log('Updated shelves:', updatedShelves);
             return updatedShelves;
 
-        });
+        });*/
    
 };
 
