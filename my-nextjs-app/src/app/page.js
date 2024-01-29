@@ -4,10 +4,16 @@ import './styles/styles.css';
 
 export default function HomePage() {
     
-const metadata = {
-    title: 'Home | Spotify Reads',
-    description: 'Keep track of your monthly Spotify audiobooks'
-  }
+    const metadata = {
+        title: 'Home | Spotify Reads',
+        description: 'Keep track of your monthly Spotify audiobooks'
+    }
+
+    const handleLoginClick = () => {
+        // redirect to spotify for login
+        window.location.href = 'api/auth/spotify';
+    };
+
 
     return(
         <div>
@@ -58,14 +64,12 @@ const metadata = {
                     </div>
                 </div>
                 <div>
-                <a><button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
+                <button onClick={handleLoginClick} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
                     Log In
                 </button>
-                </a>
                 </div>
                 
             </section>
-            
         </div>
-    )
-}
+    );
+};
