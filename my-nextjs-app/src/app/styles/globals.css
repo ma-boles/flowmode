@@ -16,6 +16,10 @@
   }
 }
 /* index */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 body {
   margin: 0rem;
   background: linear-gradient(180deg, rgba(29, 185, 84, 1) 46%, rgba(0,0,6,1) 90%);
