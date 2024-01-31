@@ -6,12 +6,13 @@ export default NextAuth ({
         Providers.Spotify({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: '/api/auth/callback/spotify',
         }),
     ],
     callbacks: {
         async redirect(url, baseUrl) {
             // redirect logic
-            return Promise.resolve('/shelf');
+            return Promise.resolve('/api/auth/spotify');
         },
     },
 });
