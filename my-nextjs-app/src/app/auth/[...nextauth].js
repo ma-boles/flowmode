@@ -9,12 +9,9 @@ export default NextAuth ({
         }),
     ],
     callbacks: {
-        async session(session, user) {
-            if(user) {
-                session.id = user.id,
-                session.accessToken = user.accessToken;
-            }
-            return session;
+        async redirect(url, baseUrl) {
+            // redirect logic
+            return Promise.resolve('/shelf');
         },
     },
 });
