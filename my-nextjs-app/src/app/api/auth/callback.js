@@ -8,9 +8,11 @@ export default async function Callback({ query }) {
     const router = useRouter();
     const session = await getSession();
 
+    console.log('Starting authentication callback...')
+
     if(session) {
         // user is authenticated, redirect them to shelf page
-        console.log('User is authenticated. Redirecting to /shelf');
+        console.log('User is authenticated. Redirecting to /shelf/page');
         router.push('/shelf');
         return null;
     }
@@ -19,14 +21,19 @@ export default async function Callback({ query }) {
 
     if(!code) {
         // handle error: authorization code not found in query parameters
+        console.error('Error: Athorization code not found in quey parameters');
         return <>Error: Authorization code not found</>;
     }
 
     // use the imported generatePkePair function 
     const pkcePair = generatePkcePair();
 
+    console.log('Generated PCKE pair:', pkcePair);
+
     // exchange authorization code for access token
     try {
+        console.log('Exhanging authorization code fora access token...');
+
         const response = await axios.post(
             'https://accounts.spotify.com/api/token',
             {
@@ -45,6 +52,8 @@ export default async function Callback({ query }) {
         );
 
         const { access_token, refresh_token, expires_in } = response.data;
+
+        console.log('Authentication seccessful');
 
         // handle the obtained token as needed
 

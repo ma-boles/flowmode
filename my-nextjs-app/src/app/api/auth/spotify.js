@@ -8,7 +8,7 @@ const generatePkcePair = () => {
     return { verifier, challenge };
 };
 
-export default providers.Spotify({
+const spotifyProvider = providers.Spotify({
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     state: true,
@@ -17,6 +17,10 @@ export default providers.Spotify({
     pkceMethod: 'S256',
     getAuthorizationUrl: (params) => {
         const pkcePair = generatePkcePair();
+
+        // log the generated pcke pair
+        console.log('Generated PKCE pair:', pkcePair);
+
         return {
             ...params,
             code_challenge: pkcePair.challenge,
@@ -25,3 +29,5 @@ export default providers.Spotify({
         };
     },
 });
+
+export default spotifyProvider;
