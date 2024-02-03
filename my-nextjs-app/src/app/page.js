@@ -67,9 +67,11 @@ export default function HomePage(){
                     </div>
                 </div>
                 <div>
-                <button onClick={handleLoginClick} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
+                    <form action={handleLoginClick}>
+                <button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
                     Log In
                 </button>
+                </form>
                 </div>
                 
             </section>
