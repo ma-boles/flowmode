@@ -1,7 +1,8 @@
 "use server";
 
-import { signIn } from "@/app/api/auth/[...nextauth]";
+/*import { signIn } from "@/app/api/auth/[...nextauth]";*/
+import signIn from "next-auth/react";
 
-const handleLoginClick = async () => {
+export const handleLoginClick = async () => {
     await signIn("spotify");
 };
