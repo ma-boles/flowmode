@@ -2,19 +2,20 @@
 
 import React from "react";
 import './styles/styles.css';
+import { handleLoginClick } from "@/lib/action";
 
 
-export default function HomePage() {
+export default function HomePage(){
     
     const metadata = {
         title: 'Home | Spotify Reads',
         description: 'Keep track of your monthly Spotify audiobooks'
     }
 
-    const handleLoginClick = () => {
+    /*const handleLoginClick = () => {
         // redirect to spotify for login
         window.location.href = 'api/auth/spotify';
-    };
+    };*/
 
 
     return(
