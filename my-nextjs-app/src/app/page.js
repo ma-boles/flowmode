@@ -1,8 +1,10 @@
 'use client';
 
 import React from "react";
+import { signIn, signOut, useSession, SessionProvider } from "next-auth/react";
 import './styles/styles.css';
-import { handleLoginClick } from "@/lib/action";
+
+/*import { handleLoginClick } from "@/lib/action";*/
 
 
 export default function HomePage(){
@@ -12,6 +14,12 @@ export default function HomePage(){
         description: 'Keep track of your monthly Spotify audiobooks'
     }
 
+    const { data: session } = useSession();
+
+    const handleSignInWithSpotify = async (event) => {
+        event.preventDefault();
+        await signIn('spotify');
+    };
     /*const handleLoginClick = () => {
         // redirect to spotify for login
         window.location.href = 'api/auth/spotify';
@@ -19,6 +27,7 @@ export default function HomePage(){
 
 
     return(
+        <SessionProvider session={session}>
         <div>
         <section className='m-6 text-center'>
             <h2 className="text-right text-lg text-black font-bold">Spotify Reads</h2>
@@ -67,7 +76,7 @@ export default function HomePage(){
                     </div>
                 </div>
                 <div>
-                    <form action={handleLoginClick}>
+                    <form onSubmit={handleSignInWithSpotify}>
                 <button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
                     Log In
                 </button>
@@ -76,5 +85,6 @@ export default function HomePage(){
                 
             </section>
         </div>
+        </SessionProvider>
     );
 };
