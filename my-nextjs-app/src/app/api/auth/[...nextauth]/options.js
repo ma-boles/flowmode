@@ -1,6 +1,6 @@
-import { SpotifyProvider } from "next-auth/providers";
+import SpotifyProvider from "next-auth/providers/spotify";
 
-export default {
+const options = {
     providers: [
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -8,3 +8,5 @@ export default {
         }),
     ],
 };
+
+export default options;
