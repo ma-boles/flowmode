@@ -3,6 +3,7 @@
 import React from "react";
 import { signIn, signOut, useSession, SessionProvider } from "next-auth/react";
 import './styles/styles.css';
+import Link from "next/link";
 
 /*import { handleLoginClick } from "@/lib/action";*/
 
@@ -12,11 +13,11 @@ export default function HomePage(){
     const metadata = {
         title: 'Home | Spotify Reads',
         description: 'Keep track of your monthly Spotify audiobooks'
-    }
+    };
 
-    const { data: session } = useSession();
+    /*const { data: session } = useSession();*/
 
-    const handleSignInWithSpotify = async (event) => {
+    /*const handleSignInWithSpotify = async (event) => {
         event.preventDefault();
         await signIn('spotify');
     };
@@ -27,7 +28,6 @@ export default function HomePage(){
 
 
     return(
-        <SessionProvider session={session}>
         <div>
         <section className='m-6 text-center'>
             <h2 className="text-right text-lg text-black font-bold">Spotify Reads</h2>
@@ -76,15 +76,15 @@ export default function HomePage(){
                     </div>
                 </div>
                 <div>
-                    <form onSubmit={handleSignInWithSpotify}>
-                <button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
-                    Log In
-                </button>
-                </form>
+
+                <Link href="/shelf">
+                    <button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
+                        Log In
+                    </button>
+                </Link>
                 </div>
                 
             </section>
         </div>
-        </SessionProvider>
     );
 };
