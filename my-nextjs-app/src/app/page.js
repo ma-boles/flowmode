@@ -5,8 +5,6 @@ import { signIn, signOut, useSession, SessionProvider } from "next-auth/react";
 import './styles/styles.css';
 import Link from "next/link";
 
-/*import { handleLoginClick } from "@/lib/action";*/
-
 
 export default function HomePage(){
     
@@ -14,18 +12,6 @@ export default function HomePage(){
         title: 'Home | Spotify Reads',
         description: 'Keep track of your monthly Spotify audiobooks'
     };
-
-    /*const { data: session } = useSession();*/
-
-    /*const handleSignInWithSpotify = async (event) => {
-        event.preventDefault();
-        await signIn('spotify');
-    };
-    /*const handleLoginClick = () => {
-        // redirect to spotify for login
-        window.location.href = 'api/auth/spotify';
-    };*/
-
 
     return(
         <div>
