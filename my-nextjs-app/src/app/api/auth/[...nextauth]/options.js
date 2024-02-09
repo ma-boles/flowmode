@@ -1,4 +1,5 @@
 import SpotifyProvider from "next-auth/providers/spotify";
+import { customAuthorizationLogic } from "@/app/lib/auth";
 
 const options = {
     providers: [
@@ -8,6 +9,12 @@ const options = {
             scopes: 'user-read-private playlist-read-private playlist-modify-private playlist-modify-public'
         }),
     ],
+    callbacks: {
+        async jwt(token, user) {
+            // include custom authorization logic
+            return customAuthorizationLogic(token, user);
+        },
+    },
 };
 
 export default options;
