@@ -7,3 +7,8 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 export default spotifyApi;
+
+export const getAccessToken = async(code) => {
+    const data = await spotifyApi.authorizationCodeGrant(code);
+    return data.body['access_token'];
+};
