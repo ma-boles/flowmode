@@ -12,7 +12,30 @@ const options = {
             customAuthorization: customAuthorizationLogic,
         }),
     ],
-    callbacks:/* {
+    callbacks: {
+        async jwt({ token, account }) {
+            if(account) {
+                token.id = account.id;
+                token.expires_at = account.expires_at;
+                token.accessToken = account.access_token;
+            }
+            console.log('Token:', token);
+            console.log('Scope:', token.scope);
+
+            return token;
+        },
+        async session({ session, token }) {
+            session.user = token;
+            return session;
+        },
+    },
+    // pages: {}
+};
+
+export default options;
+
+
+/* {
         async signIn(user, account, profile) {
             // check if the authentication provider is spotify
             if(account.provider === 'spotify') {
@@ -27,21 +50,3 @@ const options = {
             return true;
         },
     },*/
-            {
-        async jwt({ token, account }) {
-            if(account) {
-                token.id = account.id;
-                token.expires_at = account.expires_at;
-                token.accessToken = account.accees_token;
-            }
-            return token;
-        },
-        async session({ session, token }) {
-            session.user = token;
-            return session;
-        },
-    },
-    // pages: {}
-};
-
-export default options;
