@@ -1,15 +1,13 @@
 import SpotifyProvider from "next-auth/providers/spotify";
-import spotifyApi from "@/app/lib/spotify";
-import { customAuthorizationLogic } from "@/app/lib/auth";
+
 
 const options = {
     providers: [
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            scopes: 'user-read-private playlist-read-private playlist-modify-private playlist-modify-public',
-            refreshToken: true, // automatically refreshes token
-            customAuthorization: customAuthorizationLogic,
+            scope: 'user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public',
+            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public",
         }),
     ],
     callbacks: {
@@ -18,9 +16,9 @@ const options = {
                 token.id = account.id;
                 token.expires_at = account.expires_at;
                 token.accessToken = account.access_token;
+                token.scope = account.scope
             }
             console.log('Token:', token);
-            console.log('Scope:', token.scope);
 
             return token;
         },
@@ -34,6 +32,16 @@ const options = {
 
 export default options;
 
+
+
+
+/*import spotifyApi from "@/app/lib/spotify";
+import { customAuthorizationLogic } from "@/app/lib/auth";*/
+
+
+            /*refreshToken: true, // Automatically refreshes token
+
+            /*customAuthorization: customAuthorizationLogic,*/
 
 /* {
         async signIn(user, account, profile) {
