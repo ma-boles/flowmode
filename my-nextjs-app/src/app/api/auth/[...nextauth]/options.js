@@ -39,7 +39,8 @@ const options = {
                 token.id = account.id;
                 token.expires_at = account.expires_at;
                 token.accessToken = account.access_token;
-                token.scope = account.scope
+                token.scope = account.scope;
+                token.refreshToken = account.refresh_token;
             }
             console.log('Token:', token);
 
