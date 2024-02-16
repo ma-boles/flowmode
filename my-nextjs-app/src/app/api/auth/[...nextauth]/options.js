@@ -1,4 +1,5 @@
 import SpotifyProvider from "next-auth/providers/spotify";
+import axios from "axios";
 
 
 const options = {
@@ -8,10 +9,32 @@ const options = {
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             scope: 'user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public',
             authorization: "https://accounts.spotify.com/authorize?scope=user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public",
+            refreshToken: true, // Automatically refreshes token
         }),
     ],
     callbacks: {
         async jwt({ token, account }) {
+            // if the access token is about to expire, refresh it
+            if(account && account.refresh_token && token.exp > Date.now() / 1000 + 60) {
+                try {
+                    const response = await axios.post('https://accounts.spotify.com/api/token', null, {
+                        params: {
+                            grant_type: 'refresh_token',
+                            refresh_token: account.refresh_token,
+                        },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded', 
+                            'Authorization': 'Basic ' + Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString('base64'),
+                        },
+                    });
+
+                    token.accessToken = response.data.access_token;
+                    token.exp = Date.now() / 1000 + response.data.expires_in;
+                } catch (error) {
+                    console.error('Error refreshing token:', error.response?.data || error.message);
+                }
+            }
+            
             if(account) {
                 token.id = account.id;
                 token.expires_at = account.expires_at;
@@ -23,9 +46,16 @@ const options = {
             return token;
         },
         async session({ session, token }) {
+            // send properties to the client, access_token and user id fro provider
+            session.accessToken = token.accessToken;
+            session.user = token;
+
+            return session;
+        }
+        /*async session({ session, token }) {
             session.user = token;
             return session;
-        },
+        },*/
     },
     // pages: {}
 };
