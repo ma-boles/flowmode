@@ -12,6 +12,7 @@ const options = {
             refreshToken: true, // Automatically refreshes token
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, account }) {
             // if the access token is about to expire, refresh it
@@ -48,15 +49,11 @@ const options = {
         },
         async session({ session, token }) {
             // send properties to the client, access_token and user id fro provider
-            session.accessToken = token.accessToken;
             session.user = token;
+            session.accessToken = token.accessToken;
 
             return session;
         }
-        /*async session({ session, token }) {
-            session.user = token;
-            return session;
-        },*/
     },
     // pages: {}
 };
