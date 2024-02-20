@@ -33,13 +33,15 @@ const getTokens = async (account) => {
             scope: account.scope,
             refreshToken: account.refresh_token,
         };
+       
         // If access token is about to expire, refresh it
         if(account && account.refresh_token && tokens.expiresAt > Date.now()/ 1000 + 60) {
             const refreshedTokens = await refreshTokens(account);
             tokens.accessToken = refreshedTokens.accessToken;
             tokens.expiresAt = refreshedTokens.expiresAt;
         }
-        console.log('Toekns;', tokens);
+        console.log('Tokens:', tokens);
+        console.log('Account:', account);
         return tokens;
     } catch(error) {
         console.error('Error getting tokens:', error.message);
@@ -59,6 +61,30 @@ const options = {
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
+        async jwt({ token, account }) {
+            if(account) {
+                const tokens = await getTokens(account);
+                token = {...token, ...token};
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            session.user = token;
+            session.accessToken = token.accessToken;
+            return session;
+        },
+    },
+    
+    // pages: {}
+};
+
+export { getTokens };
+export default options;
+
+
+
+
+/*callbacks: {
         async jwt({ token, account }) {
             // if the access token is about to expire, refresh it
             if(account && account.refresh_token && token.exp > Date.now() / 1000 + 60) {
@@ -99,9 +125,4 @@ const options = {
 
             return session;
         }
-    },
-    // pages: {}
-};
-
-export { getTokens };
-export default options;
+    },*/
