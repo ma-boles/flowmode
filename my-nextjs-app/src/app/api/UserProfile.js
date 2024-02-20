@@ -2,43 +2,37 @@ import { useEffect, useState } from "react";
 import makeApiRequest from "@/app/lib/spotifyApi";
 import { getTokens } from "@/app/api/auth/[...nextauth]/options";
 
-const UserProfile =  () => {
+const UserProfile =  ({ account }) => {
     // Stores user data from Api
     const [userData, setUserData] = useState(null);
 
-    const accessToken =  getTokens(account);
+    //const accessToken =  getTokens(account);
 
     // Fetches user profile data component mounts
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUserProfile = async () => {
             try {
-                const accessToken = await makeApiRequest();
-
                 // Specify endpoint
                 const apiUrl = 'https://api.spotify.com/v1/me';
                 // Make api request using custom function
-                const data = await makeApiRequest(apiUrl, accessToken);
+                const data = await makeApiRequest(apiUrl, account);
                 setUserData(data);
             } catch(error) {
                 console.error('Error fetching user profile:', error);
             }
     };
-
             // Triggers fetchUserProfile function if access token is available
             if(accessToken) {
-                fetchData();
+                fetchUserProfile();
             }
         }, [accessToken]);
-
 
         return (
             <div>
             {userData && (
                 <>
                 <h2> Welcome {userData.display_name}</h2>
-                {userData.images && userData.images.length > 0 && (
                     <img src={userData.images[0].url} alt="Profile" />
-                )}
                 </>
             )}
             </div>
@@ -75,3 +69,5 @@ const fetchDataFromSpotify = async () => {
                 } else {
                     console.error('Failed to fetch user profile');
                 }*/
+                // const accessToken = await makeApiRequest();
+                //const UserProfile = await makeApiRequest('https://api.spotify.com/v1/me', account);
