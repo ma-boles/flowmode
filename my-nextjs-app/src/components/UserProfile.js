@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import makeApiRequest from "@/app/lib/spotifyApi";
 import { getTokens } from "@/app/api/auth/[...nextauth]/options";
@@ -21,11 +22,11 @@ const UserProfile =  ({ account }) => {
                 console.error('Error fetching user profile:', error);
             }
     };
-            // Triggers fetchUserProfile function if access token is available
-            if(accessToken) {
+            // Triggers fetchUserProfile function if account is available
+            if(account) {
                 fetchUserProfile();
             }
-        }, [accessToken]);
+        }, [account]);
 
         return (
             <div>
