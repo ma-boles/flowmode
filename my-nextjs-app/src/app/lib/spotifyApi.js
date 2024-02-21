@@ -30,7 +30,7 @@ const makeApiRequest = async(url, account) => {
         if(response.status === 200) {
             return response.data;
         } else {
-            throw new Error('Error making API request: ${response.statusText}');
+            throw new Error(`Error making API request: ${response.statusText}`);
         }
     } catch (error) {
         console.error('Error making API request:', error.message);
