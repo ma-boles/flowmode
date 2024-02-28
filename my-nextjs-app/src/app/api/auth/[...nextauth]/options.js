@@ -28,9 +28,10 @@ const getTokens = async (account) => {
     try {
         const tokens = {
             id: account.id,
+            name: account.name,
+            scope: account.scope,
             expiresAt: account.expires_at,
             accessToken: account.access_token,
-            scope: account.scope,
             refreshToken: account.refresh_token,
         };
        
@@ -64,15 +65,18 @@ const options = {
         async jwt({ token, account }) {
             if(account) {
                 const tokens = await getTokens(account);
-                token = {...token, ...token};
+                token = {...token, ...tokens};
             }
             return token;
         },
         async session({ session, token }) {
             session.user = token;
             session.accessToken = token.accessToken;
+            
+            console.log('Session:', session);
             return session;
         },
+       
     },
     
     // pages: {}
