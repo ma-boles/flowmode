@@ -1,16 +1,17 @@
-import { useFetchUserData } from "./FetchUserData";
+import React from "react";
+import { useSession } from "next-auth/react";
 
-const UserProfile = ({ account }) => {
-    const userData = useFetchUserData(account);
+const UserProfile = () => {
+    const { data: session } = useSession();
 
-    return (
+    if (!session) {
+        return <p>Please log in</p>;
+    }
+
+    return(
         <div>
-            {userData && (
-                <>
-                    <h2>Welcome {userData.display_name}</h2>
-                    <img src={userData.images[0].url} alt="Profile"></img>
-                </>
-            )}
+            <p>Welcome, {session.user.sub}!</p>
+            <img src={session.user.picture} alt="User"></img>
         </div>
     );
 };
