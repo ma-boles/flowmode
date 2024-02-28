@@ -5,11 +5,11 @@ import '@/app/styles/globals.css';
 import '@/app/styles/styles.css';
 import { Inter } from 'next/font/google';
 import { ShelfProvider } from './contexts/ShelfContext';
-
+import PageWrapper from '@/components/PageWrapper';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout ({ metadata, children }) {
+export default function RootLayout ({ metadata, children, session }) {
 
   return (
     <>
@@ -17,13 +17,14 @@ export default function RootLayout ({ metadata, children }) {
         <HeadComponent metadata={metadata}/>
         <body className={inter.className}>
           <ShelfProvider>
-            {children}
+            <PageWrapper session={session}>
+              {children}
+            </PageWrapper>
           </ShelfProvider>
           <Footer />
         </body> 
       </html>
     </>
-
 
   );
 };
