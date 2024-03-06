@@ -15,6 +15,29 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+/*
+:root {
+   dark theme 
+  --background-rgb: 0, 0, 0;
+  --secondary-rgb: 29, 185, 84;
+  --complimentary-rgb: 245, 245, 245;
+}
+:root {
+   light theme 
+  --background-rgb: 245, 245, 245;
+  --secondary-rgb: 29, 185, 84;
+  --complimentary-rgb: 0, 0, 0;
+}
+:root {
+   default theme 
+  --background-rgb: 39, 41, 43;
+  --secondary-rgb: 29, 185, 84;
+  --complimentary-rgb: 245, 245, 245;
+}
+*/
+
+
 /* index */
 * {
   -ms-overflow-style: none;  /* IE and Edge */
