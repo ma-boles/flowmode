@@ -4,6 +4,7 @@ import UserProfile from "@/components/UserProfile";
 import Link from "next/link";
 import '../styles/styles.css';
 import SearchBar from "@/components/SearchBar";
+import Results from "@/components/shelf/Results";
 import Shelf from "../shelf/page";
 
 
@@ -11,21 +12,33 @@ const Browse = () => {
 
 return(
     <div>
-        {/*<UserProfile />*/}
-        <div className="mt-4 flex justify-around">
-                <Link href="./shelf">
-                    <button className="p-2 px-4 text-white font-semibold  rounded-md hover:bg-blue-700  transition duration-300 ease-in-out">Dashboard</button>
-                </Link>
-                <button className="p-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Music</button>
-                <button className="p-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Podcasts</button>
-                <button className="p-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Books</button>
-            </div>
-        <section className="mx-auto w-full max-w-6xl  min-h-screen h-auto flex items-center justify-center">
-        <div className="p-20 border-solid border-transparent border-2">
-            <h2 className="pb-12 font-semibold text-center text-5xl">What <span className="font-extrabold text-blue-800">would</span> you like <br/>to <span className="font-extrabold text-blue-800">listen </span> to?</h2>
-                <SearchBar />
+        <nav className="mb-16 flex justify-around w-full browse--nav">
+            <UserProfile />
+        </nav>
+
+        <section className="mx-auto max-w-6xl min-h-screen h-auto">
+
+        <div className="flex items-center justify-center">
+            <div className="p-20 border-none ">
+                <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?</h2>
+
+                <div className="pb-12 flex justify-center">
+                    <select className="p-2 px-4 bg-green-600 font-medium text-lg rounded-md">
+                        <option value="artist">Artist</option>
+                        <option value="album">Album</option>
+                        <option value="song">Song</option>
+                        <option value="book">Book</option>
+                        <option value="podcast">Podcast</option>
+                        <option></option>
+                    </select>
                 </div>
+
+                <SearchBar />
+            </div>
+        </div>
         </section>
+           {/* <Results /> */}
+
     </div>
     );
 };
@@ -37,3 +50,9 @@ export default Browse;
 /*<img src="/Browse2.jpg" alt="stack of books" className="w-full h-auto"></img>*/
             
 /*className="p-20 border-solid border-slate-100 border-2"*/
+/*<button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Music</button>
+                <button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Podcasts</button>
+                <button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Books</button>*/
+                /*<Link href="./shelf">
+                    <button className="p-2 px-4 text-white font-semibold rounded-md hover:bg-green-600  transition duration-300 ease-in-out">Dashboard</button>
+</Link>*/
