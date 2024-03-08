@@ -10,20 +10,25 @@ export default function Dashboard() {
                 <UserProfile />
             </nav>
 
-            <div className="flex justify-center">
-                <div className="w-3/4 flex justify-between">
-                    <button className="px-32 py-28 bg-green-600 rounded-md">Music</button>
-                    <button className="px-32 py-28 bg-green-600 rounded-md">Podcasts</button>
-                    <Link href="/shelf">
-                    <button className="px-32 py-28 bg-green-600 rounded-md">Books</button>
-                    </Link>
-                </div>
+            < div className="mx-12 ">
+                
+                    <div className="flex justify-center">
+                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Music</button>
+                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Podcasts</button>
+                        <Link href="/shelf">
+                            <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Books</button>
+                        </Link>
+                    </div>
+                    <div className="flex justify-center">
+                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">My<br/>Playlists</button>
+                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Followed<br/>Playlists</button>
+                        <Link href="/browse">
+                            <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Browse <br/> &rarr;</button>
+                        </Link>
+                    </div>
+                
             </div>
-            <div className="flex justify-center">
-                <div className="flex justify-center m-6 h-80 w-3/4 bg-white rounded-md">
-                    <h2 className="text-black font-semibold">All Playlists:</h2>
-                </div>
-            </div>
+           
         </>
         
     )
