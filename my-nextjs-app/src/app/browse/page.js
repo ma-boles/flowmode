@@ -24,12 +24,13 @@ return(
 
                 <div className="pb-12 flex justify-center">
                     <select className="p-2 px-4 bg-green-600 font-medium text-lg rounded-md">
+                        <option>Select</option>
                         <option value="artist">Artist</option>
                         <option value="album">Album</option>
                         <option value="song">Song</option>
                         <option value="book">Book</option>
                         <option value="podcast">Podcast</option>
-                        <option></option>
+                        
                     </select>
                 </div>
 
