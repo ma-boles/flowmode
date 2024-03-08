@@ -9,13 +9,7 @@ export default function Dashboard() {
             <nav>
                 <UserProfile />
             </nav>
-            <header className="mx-6 flex justify-between">
-                <h2 className="font-semibold">Dashboard</h2>
-                <Link href="/browse" >
-                    <button className="p-2 font-semibold border border-solid rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Browse
-                    </button>
-                </Link>
-            </header>
+
             <div className="flex justify-center">
                 <div className="w-3/4 flex justify-between">
                     <button className="px-32 py-28 bg-green-600 rounded-md">Music</button>
