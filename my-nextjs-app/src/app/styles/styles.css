@@ -7,6 +7,17 @@ li {
   cursor: pointer;
 }
 
+/* drodown */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
   /* landing section */ 
   h1 {
     font-size: 3.7rem;
