@@ -3,7 +3,7 @@ import React from "react";
 import UserProfile from "@/components/UserProfile";
 import Link from "next/link";
 import '../styles/styles.css';
-import SearchBar from "@/components/SearchBar";
+import SearchComponent from "@/components/SearchComponent";
 import Results from "@/components/shelf/Results";
 import Shelf from "../shelf/page";
 
@@ -21,20 +21,7 @@ return(
         <div className="flex items-center justify-center">
             <div className="p-20 border-none ">
                 <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?</h2>
-
-                <div className="pb-12 flex justify-center">
-                    <select className="p-2 px-4 bg-green-600 font-medium text-lg rounded-md">
-                        <option>Select</option>
-                        <option value="artist">Artist</option>
-                        <option value="album">Album</option>
-                        <option value="song">Song</option>
-                        <option value="book">Book</option>
-                        <option value="podcast">Podcast</option>
-                        
-                    </select>
-                </div>
-
-                <SearchBar />
+                <SearchComponent />
             </div>
         </div>
         </section>
