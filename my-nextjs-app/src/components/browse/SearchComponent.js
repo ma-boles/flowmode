@@ -61,9 +61,10 @@ export default function SearchComponent () {
                         <option>Select</option>
                         <option value="artist">Artist</option>
                         <option value="album">Album</option>
-                        <option value="song">Song</option>
-                        <option value="book">Book</option>
-                        <option value="podcast">Podcast</option>
+                        <option value="track">Song</option>
+                        <option value="audiobook">Book</option>
+                        <option value="show">Podcast Show</option>
+                        <option value="episode">Podcast Episode</option>
                         
                     </select>
                 </div>
