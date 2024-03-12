@@ -6,9 +6,12 @@ import '../styles/styles.css';
 import SearchComponent from "@/components/SearchComponent";
 import Results from "@/components/shelf/Results";
 import Shelf from "../shelf/page";
+import { useSession } from "next-auth/react";
 
 
 const Browse = () => {
+    const { data: session } = useSession();
+    const accessToken = session?.accessToken;
 
 return(
     <div>
@@ -21,7 +24,8 @@ return(
         <div className="flex items-center justify-center">
             <div className="p-20 border-none ">
                 <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?</h2>
-                <SearchComponent />
+
+                    <SearchComponent accessToken={accessToken} />
             </div>
         </div>
         </section>
