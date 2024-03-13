@@ -14,7 +14,7 @@ export default function Results({ artists }) {
                 <p className="text-black">test2</p>
                 <ul>
                     {artists.map(artist => (
-                        console.log('Album:', artist),
+                        console.log('Artist:', artist),
                         <li key={artist.id}>
                             <h3>{artist.name}</h3>
                         </li>
