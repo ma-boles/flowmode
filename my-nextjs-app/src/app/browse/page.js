@@ -1,17 +1,29 @@
 'use client'
-import React from "react";
+import React, { useState } from "react";
 import UserProfile from "@/components/UserProfile";
-import Link from "next/link";
 import '../styles/styles.css';
-import SearchComponent from "@/components/SearchComponent";
-import Results from "@/components/shelf/Results";
-import Shelf from "../shelf/page";
+import SearchComponent from "@/components/browse/SearchComponent";
+import Results from "@/components/browse/Results";
 import { useSession } from "next-auth/react";
 
 
 const Browse = () => {
+
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
+
+    // State store search results data
+    const [searchResults, setSearchResults] = useState([]);
+
+
+    // State to store search results for different types
+
+    // Function to handle search results data
+    const handleSearchResults = (results) => {
+        console.log('Search results:', results);
+        setSearchResults(results);
+    };
+
 
 return(
     <div>
@@ -25,11 +37,11 @@ return(
             <div className="p-20 border-none ">
                 <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?</h2>
 
-                    <SearchComponent accessToken={accessToken} />
+                    <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
         </div>
         </section>
-           {/* <Results /> */}
+            <Results artists={searchResults} />
 
     </div>
     );
