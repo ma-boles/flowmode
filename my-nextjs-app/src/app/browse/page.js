@@ -15,7 +15,6 @@ const Browse = () => {
     // State store search results data
     const [searchResults, setSearchResults] = useState([]);
 
-
     // State to store search results for different types
 
     // Function to handle search results data
@@ -40,9 +39,8 @@ return(
                     <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
         </div>
+        <Results searchResults={searchResults} />
         </section>
-            <Results artists={searchResults} />
-
     </div>
     );
 };
@@ -52,11 +50,3 @@ export default Browse;
 /*className="mx-auto w-full max-w-6xl  min-h-screen h-auto flex items-center justify-center"*/
 
 /*<img src="/Browse2.jpg" alt="stack of books" className="w-full h-auto"></img>*/
-            
-/*className="p-20 border-solid border-slate-100 border-2"*/
-/*<button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Music</button>
-                <button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Podcasts</button>
-                <button className="p-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Books</button>*/
-                /*<Link href="./shelf">
-                    <button className="p-2 px-4 text-white font-semibold rounded-md hover:bg-green-600  transition duration-300 ease-in-out">Dashboard</button>
-</Link>*/
