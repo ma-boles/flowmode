@@ -8,7 +8,6 @@ export default function SearchComponent () {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
-    const [searchResults, setSearchResults] = useState([]);
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
 
@@ -47,13 +46,12 @@ export default function SearchComponent () {
         }
 
         console.log('Search results:', results);
-        
+
         setSearchResults(results);
     };
 
     return (
             <div className="bg-transparent ">
-
                 <div className="pb-12 flex justify-center">
                     <select className="p-2 px-4 bg-green-600 font-medium text-lg rounded-md"
                     value={category}
@@ -65,24 +63,37 @@ export default function SearchComponent () {
                         <option value="audiobook">Book</option>
                         <option value="show">Podcast Show</option>
                         <option value="episode">Podcast Episode</option>
-                        
+
                     </select>
                 </div>
 
-               <div className="bg-white rounded-md">   
-                    <input className="outline-none p-2 m-4 text-xl text-slate-800" 
-                    type="text" 
+               <div className="bg-white rounded-md">
+                    <input className="outline-none p-2 m-4 text-xl text-slate-800"
+                    type="text"
                     placeholder="Title, Artist, Name..."
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     />
-                    
+
                     <button className="p-3 mr-4 pl-10 pr-10 bg-green-600 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out"
                     onClick={handleSearch}
                     >Search</button>
                 </div>
+
+                <div className="mx-2 bg-blue-500 ">
+                    <h1 className="mt-0 pt-0 text-slate-900 font-semibold">Results</h1>
+                        {searchResults.map((artist, index) => (
+                            <ul key={index}>
+                                <li>{artist.name}</li>
+                                <li>{artist.genre}</li>
+                            </ul>
+                        ))}
+                </div>
             </div>
+            
+            
+            
     )
 }
-/*flex items-center justify-center rounded-md 
-bg-white flex items-center justify-center rounded-md*/
+
+                
