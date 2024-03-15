@@ -106,6 +106,37 @@ li {
 .browse--nav {
   background-color: rgba(0, 0, 0, 0.125);
 }
+
+.input {
+  width: 29.5rem;
+}
+
+.artistCard {
+  width: 13rem;
+  min-width: 13rem;
+  height: 18rem;
+  min-height: 18rem;
+  background-color: rgba(0, 0, 0, 0.337);
+}
+
+.artistImg {
+  height: 160px;
+  display: block;
+  margin: 0 auto;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.trackImg {
+  height: 160px;
+  display: block;
+  margin: 0 auto;
+}
+
+
  /* footer */
  .footer--hr {
   width: 95%
