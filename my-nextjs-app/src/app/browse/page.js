@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import UserProfile from "@/components/UserProfile";
 import '../styles/styles.css';
 import SearchComponent from "@/components/browse/SearchComponent";
-import Results from "@/components/browse/Results";
 import { useSession } from "next-auth/react";
 
 
@@ -26,20 +25,16 @@ const Browse = () => {
 
 return(
     <div>
-        <nav className="mb-16 flex justify-around w-full browse--nav">
+        <nav className="mb-6 flex justify-around w-full browse--nav">
             <UserProfile />
         </nav>
 
-        <section className="mx-auto max-w-6xl min-h-screen h-auto">
-
-        <div className="flex items-center justify-center">
-            <div className="p-20 border-none ">
-                <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?</h2>
-
-                    <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
+        <section className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto ">
+            <div className="w-full border-none">
+                <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
+                </h2>
+                <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
-        </div>
-        <Results searchResults={searchResults} />
         </section>
     </div>
     );
