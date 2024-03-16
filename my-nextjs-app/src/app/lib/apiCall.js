@@ -37,7 +37,7 @@ const searchAlbums = async (query, accessToken) => {
         return response.data.albums.items;
 
     } catch(error) {
-        console.log('Error searching alum:', error);
+        console.log('Error searching album:', error);
         throw error;
     }
 };
@@ -126,5 +126,27 @@ const searchPodcastEpisode = async (query, accessToken) => {
     }
 };
 
+const searchPlaylist = async (query, accessToken) => {
+        try {
+            const response = await axios.get('https://api.spotify.com/v1/search', {
+                params: {
+                    type: 'playlist',
+                    q: query,
+                },
+                headers:{
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+    
+            console.log('Playlist search response:', response.data);
+            return response.data.playlists.items;
+    
+        } catch (error) {
+            console.log('Error searching playlist:', error);
+            throw error;
+        }
 
-export { searchArtists, searchTrack, searchAlbums, searchAudiobooks, searchPodcastShow, searchPodcastEpisode  };
+};
+
+
+export { searchArtists, searchTrack, searchAlbums, searchAudiobooks, searchPodcastShow, searchPodcastEpisode, searchPlaylist  };
