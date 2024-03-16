@@ -112,6 +112,12 @@ li {
 }
 
 .artistCard {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.375rem;
   width: 13rem;
   min-width: 13rem;
   height: 18rem;
@@ -122,7 +128,8 @@ li {
 .artistImg {
   height: 160px;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto; 
+  padding-bottom: 0.5rem;
 }
 
 .flex-wrap {
@@ -134,8 +141,14 @@ li {
   height: 160px;
   display: block;
   margin: 0 auto;
+  padding-bottom: 0.5rem;
 }
 
+.cardWrapper {
+  margin: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
  /* footer */
  .footer--hr {
