@@ -25,7 +25,7 @@ const Browse = () => {
 
 return(
     <div>
-        <nav className="mb-6 flex justify-around w-full browse--nav">
+        <nav className="flex justify-around w-full browse--nav">
             <UserProfile />
         </nav>
 
