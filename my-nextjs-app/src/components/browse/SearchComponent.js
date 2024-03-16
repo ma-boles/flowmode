@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchAlbums, searchArtists, searchAudiobooks, searchPodcastEpisode, searchPodcastShow, searchTrack } from "@/app/lib/apiCall";
+import { searchAlbums, searchArtists, searchAudiobooks, searchPodcastEpisode, searchPodcastShow, searchTrack, searchPlaylist } from "@/app/lib/apiCall";
 import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css"
 
@@ -55,6 +55,10 @@ export default function SearchComponent () {
                         console.log('Searching for episodes...');
                         results = await searchPodcastEpisode(keyword, accessToken);
                         break;
+                    case 'playlist':
+                        console.log('Searching for playlists...');
+                        results = await searchPlaylist(keyword, accessToken);
+                        break;
                     default:
                         break;
                 }
@@ -80,6 +84,7 @@ export default function SearchComponent () {
                         <option value="album">Album</option>
                         <option value="track">Song</option>
                         <option value="audiobook">Book</option>
+                        <option value="playlist">Playlist</option>
                         <option value="show">Podcast Show</option>
                         <option value="episode">Podcast Episode</option>
                     </select>
@@ -158,6 +163,18 @@ export default function SearchComponent () {
                                 </ul>
                             ))}
                         </div>}
+
+                        {category === 'playlist' &&
+                        <div className="flex flex-wrap justify-center">
+                            {searchResults.map ((playlist, index) => (
+                                <ul key={index} className="artistCard">
+                                    <div className="cardWrapper ">
+                                        <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
+                                        <h2 className="text-center font-medium">{playlist.name}</h2>
+                                    </div>
+                                </ul>
+                            ))}
+                            </div>}
 
                         {category === 'show' &&
                         <div className="flex flex-wrap justify-center">
