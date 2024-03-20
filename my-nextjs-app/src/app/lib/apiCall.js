@@ -170,5 +170,27 @@ const getPlaylists = async (accessToken) => {
     }
 };
 
+const getUserOwnedPlaylists = async (accessToken) => {
+    try {
+        const response = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
 
-export { searchArtists, searchTrack, searchAlbums, searchAudiobooks, searchPodcastShow, searchPodcastEpisode, searchPlaylist, getPlaylists  };
+        // Check for succesful response (status code in range of 200-299)
+        if(response.status >= 200 && response.status < 300) {
+            // Return playlist items
+            return response.data.items;
+        } else {
+            // Throw an error if the response is not successful
+            throw new Error('Failed to fetch playlists');
+        }
+    } catch (error) {
+        // Handle error
+        throw new Error('Error fetching playlists:', error);
+    }
+};
+
+
+export { searchArtists, searchTrack, searchAlbums, searchAudiobooks, searchPodcastShow, searchPodcastEpisode, searchPlaylist, getPlaylists, getUserOwnedPlaylists  };
