@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import UserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/profile/UserProfile";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
 

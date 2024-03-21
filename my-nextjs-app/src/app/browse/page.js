@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import UserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/profile/UserProfile";
 import '../styles/styles.css';
 import SearchComponent from "@/components/browse/SearchComponent";
 import { useSession } from "next-auth/react";
