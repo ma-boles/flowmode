@@ -1,6 +1,6 @@
 import React from "react";
 import { useSession } from "next-auth/react";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "../nav/DropdownMenu";
 import Link from "next/link";
 
 
