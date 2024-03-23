@@ -4,6 +4,7 @@ import UserProfile from "@/components/profile/UserProfile";
 import '../styles/styles.css';
 import SearchComponent from "@/components/browse/SearchComponent";
 import { useSession } from "next-auth/react";
+import Player from "@/components/Player";
 
 
 const Browse = () => {
@@ -36,6 +37,7 @@ return(
                 <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
         </section>
+        <Player />
     </div>
     );
 };
