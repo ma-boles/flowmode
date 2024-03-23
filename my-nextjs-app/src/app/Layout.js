@@ -22,9 +22,8 @@ export default function RootLayout ({ metadata, children, session }) {
             </PageWrapper>
           </ShelfProvider>
           <Footer />
-        </body> 
+        </body>
       </html>
     </>
-
   );
 };
