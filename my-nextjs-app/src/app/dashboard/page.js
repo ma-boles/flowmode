@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import UserProfile from "@/components/profile/UserProfile";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
+import Player from "@/components/Player";
 
 export default function Dashboard() {
 
@@ -29,7 +30,8 @@ export default function Dashboard() {
                             <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Browse <br/> &rarr;</button>
                         </Link>
                     </div>
-                    <Display />
+                    {/*<Display />*/}
+                    <Player />
 
             </div>
         </>
