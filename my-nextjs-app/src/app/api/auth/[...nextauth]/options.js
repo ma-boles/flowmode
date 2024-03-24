@@ -10,7 +10,7 @@ const refreshTokens = async(account) => {
                 refresh_token: account.refresh_token,
             },
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded', 
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Basic ' + Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString('base64'),
             },
         });
@@ -34,7 +34,7 @@ const getTokens = async (account) => {
             accessToken: account.access_token,
             refreshToken: account.refresh_token,
         };
-       
+
         // If access token is about to expire, refresh it
         if(account && account.refresh_token && tokens.expiresAt > Date.now()/ 1000 + 60) {
             const refreshedTokens = await refreshTokens(account);
@@ -55,8 +55,8 @@ const options = {
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            scope: 'user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played',
-            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played",
+            scope: 'user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played streaming',
+            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email user-read-private playlist-read-private playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played streaming",
             refreshToken: true, // Automatically refreshes token
         }),
     ],
@@ -72,13 +72,13 @@ const options = {
         async session({ session, token }) {
             session.user = token;
             session.accessToken = token.accessToken;
-            
+
             console.log('Session:', session);
             return session;
         },
-       
+
     },
-    
+
     // pages: {}
 };
 
