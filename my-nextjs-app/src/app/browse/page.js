@@ -15,12 +15,17 @@ const Browse = () => {
     // State store search results data
     const [searchResults, setSearchResults] = useState([]);
 
-    // State to store search results for different types
 
     // Function to handle search results data
     const handleSearchResults = (results) => {
         console.log('Search results:', results);
         setSearchResults(results);
+    };
+
+    const [isPlayerOpen, setIsPlayerOpen] = useState(false);
+
+    const handleButtonClick = () => {
+        setIsPlayerOpen(true); // Open Player when button is clicked
     };
 
 
@@ -37,7 +42,10 @@ return(
                 <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
         </section>
-        <Player />
+        <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
+        {isPlayerOpen && (
+            <Player accessToken={accessToken}/>
+        )}
     </div>
     );
 };
