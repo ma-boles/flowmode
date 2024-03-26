@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function Player({ accessToken }) {
     const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
+    const [playerState, setPlayerState] = useState(null);
 
     useEffect(() => {
         console.log('useEffect for script loading is triggered');
@@ -12,7 +13,27 @@ export default function Player({ accessToken }) {
         script.async = true;
         document.body.appendChild(script);
 
+        // Error handling for script loading
+        script.onerror = () => {
+            console.error('Failed to load Spotify Web Playback SDK script');
+            retryLoadScript();
+        };
+
+        // Implement retry logic if script loading dfails
+        const retryLoadScript = () => {
+            // Retry after certain interval
+            setTimeout(() => {
+                document.body.appendChild(script);
+            }, 3000); // Retry after 3 seconds
+        };
+
+        script.onload = () => {
+            console.log('Spotify Web Playback SDK script loaded successfully');
+            handleSpotifyReady();
+        };
+
         const handleSpotifyReady = () => {
+            try {
             const newPlayer = new window.Spotify.Player({
                 name: 'Your Music Player',
                 getOAuthToken: cb => { cb(accessToken); }, // Directly pass token
@@ -35,14 +56,17 @@ export default function Player({ accessToken }) {
             newPlayer.addListener('player_state_changed', (state) => {
                 console.log('Player state changed:', state);
                 // Log current playback state, track details, ect
+                setPlayerState(state);
             });
 
             newPlayer.addListener('authentication_error', ({message}) => {
                 console.log('Authentication error', message);
                 // Log authentication errors
             });
-
-        };
+        } catch (error) {
+            console.error('Error initializing Spotify player:', error);
+        }
+    };
 
         // Set up Spotify SDK ready callback only once
         const setupSpotifySDKCallback = () => {
