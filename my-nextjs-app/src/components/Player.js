@@ -4,9 +4,11 @@ export default function Player({ accessToken }) {
     const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
     const [playerState, setPlayerState] = useState(null);
+    const [spotifyReady, setSpotifyReady] = useState(false);
 
     useEffect(() => {
         console.log('useEffect for script loading is triggered');
+        console.log('spotifyReady:', spotifyReady);
         // Load Spotify Web Playback SDK script
         const script = document.createElement('script');
         script.src = 'https://sdk.scdn.co/spotify-player.js';
@@ -19,7 +21,7 @@ export default function Player({ accessToken }) {
             retryLoadScript();
         };
 
-        // Implement retry logic if script loading dfails
+        // Implement retry logic if script loading fails
         const retryLoadScript = () => {
             // Retry after certain interval
             setTimeout(() => {
@@ -30,10 +32,12 @@ export default function Player({ accessToken }) {
         script.onload = () => {
             console.log('Spotify Web Playback SDK script loaded successfully');
             handleSpotifyReady();
+            setSpotifyReady(true);
         };
 
-        const handleSpotifyReady = () => {
-            try {
+    const handleSpotifyReady = () => {
+        console.log('handleSpotifyReady function is executing');
+        try {
             const newPlayer = new window.Spotify.Player({
                 name: 'Your Music Player',
                 getOAuthToken: cb => { cb(accessToken); }, // Directly pass token
@@ -63,6 +67,10 @@ export default function Player({ accessToken }) {
                 console.log('Authentication error', message);
                 // Log authentication errors
             });
+
+            newPlayer.connect();
+            console.log('Player connected.');
+
         } catch (error) {
             console.error('Error initializing Spotify player:', error);
         }
@@ -83,6 +91,8 @@ export default function Player({ accessToken }) {
         return () => {
             if(player) {
                 player.disconnect();
+                // Set the player state to null to inidicate that it's disconnected
+                setPlayer(null);
             }
             document.body.removeChild(script);
             window.onSpotifyWebPlaybackSDKReady = null; // Remove callback when unmounting
@@ -92,11 +102,11 @@ export default function Player({ accessToken }) {
 
     useEffect(() => {
         // Initialize player when access token changes
-        if(accessToken && player) {
+        if(accessToken && player && playerState) {
             player.disconnect(); // Disconnect any existing player
             initializePlayer(accessToken);
         }
-    }, [accessToken, player]);
+    }, [accessToken, playerState]);
 
     const initializePlayer = (accessToken) => {
         console.log('Initializing player...');
