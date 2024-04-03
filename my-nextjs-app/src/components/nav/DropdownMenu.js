@@ -5,9 +5,8 @@ export default function DropdownMenu () {
     return (
         <>
             <div className="dropdown">
-  <button className="dropbtn">Dropdown</button>
-  
-</div>
+                <button className="dropbtn">Dropdown</button>
+            </div>
         </>
     )
-}
+};
