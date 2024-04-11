@@ -1,6 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import "~@fontsource/inter/400.css"; /* Adjust the weight as necessary */
+@import "~@fontsource/inter/700.css"; /* Example for bold */
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
