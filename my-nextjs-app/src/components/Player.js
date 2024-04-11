@@ -1,7 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { PlayerContext } from "@/app/contexts/PlayerContext";
 
-export default function Player({ accessToken }) {
-    const [player, setPlayer] = useState(null);
+export default function Player() {
+
+    const { playerState, initializePlayer } = useContext(PlayerContext);
+
+
+    return (
+        <div className="playerBackground">
+            <h1 className="text-center">Flow Mode</h1>
+            <div className="p-24 bg-transparent rounded-md">
+                <div className="p-16 m-8 bg-blue-600 rounded-full text-center">
+                    Progress Bar
+                </div>
+            <div className="flex justify-center border-black">
+                <div className="flex px-32 justify-between border border-black border-opacity-100 bg-transparent rounded-l-lg">
+                    <button className="m-8 py-1 px-6 bg-blue-600">
+                        Back
+                    </button>
+                    <button className="m-8 py-1 px-6 bg-blue-600">
+                        Play
+                    </button>
+                    <button className="m-8 py-1 px-6 bg-blue-600">
+                        Foward
+                    </button>
+                </div>
+                <div className="border border-black border-opacity-100 bg-transparent rounded-r-lg">
+                    <button className="mt-8 py-1 px-6 bg-blue-600">
+                        Volume
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+
+
+ /*const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
     const [playerState, setPlayerState] = useState(null);
     const [spotifyReady, setSpotifyReady] = useState(false);
@@ -115,35 +154,4 @@ export default function Player({ accessToken }) {
               player.connect();
               console.log('Player connected.');
         }
-    };
-
-
-    return (
-        <div className="playerBackground">
-            <h1 className="text-center">Work Mode</h1>
-            <div className="p-24 bg-transparent rounded-md">
-                <div className="p-16 m-8 bg-blue-600 rounded-full text-center">
-                    Progress Bar
-                </div>
-            <div className="flex justify-center border-black">
-                <div className="flex px-32 justify-between border border-black border-opacity-100 bg-transparent rounded-l-lg">
-                    <button className="m-8 py-1 px-6 bg-blue-600">
-                        Back
-                    </button>
-                    <button className="m-8 py-1 px-6 bg-blue-600">
-                        Play
-                    </button>
-                    <button className="m-8 py-1 px-6 bg-blue-600">
-                        Foward
-                    </button>
-                </div>
-                <div className="border border-black border-opacity-100 bg-transparent rounded-r-lg">
-                    <button className="mt-8 py-1 px-6 bg-blue-600">
-                        Volume
-                    </button>
-                </div>
-            </div>
-            </div>
-        </div>
-    )
-}
+    };*/
