@@ -3,12 +3,11 @@ import HeadComponent from '../components/HeadComponent';
 import Footer from '../components/footer/Footer';
 import '@/app/styles/globals.css';
 import '@/app/styles/styles.css';
-import { Inter } from 'next/font/google';
 import { ShelfProvider } from './contexts/ShelfContext';
 import PageWrapper from '@/components/PageWrapper';
 import { PlayerProvider } from './providers/PlayerProvider';
 
-const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout ({ metadata, children, session }) {
 
@@ -16,8 +15,8 @@ export default function RootLayout ({ metadata, children, session }) {
     <>
       <html lang="en">
         <HeadComponent metadata={metadata}/>
-        <body className={inter.className}>
-            <PlayerProvider>
+        <body /*className={inter.className}*/>
+            <PlayerProvider session={session}>
               <ShelfProvider>
                 <PageWrapper session={session}>
                   {children}
