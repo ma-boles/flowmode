@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { PlayerContext } from "@/app/contexts/PlayerContext";
+import { usePlayer } from "@/app/providers/PlayerProvider";
+
 
 export default function Player() {
-
+    // use the usePlayer hook to access player-related data or functions
+    const { accessToken } = usePlayer();
     const { playerState, initializePlayer } = useContext(PlayerContext);
 
 
