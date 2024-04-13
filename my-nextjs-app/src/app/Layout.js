@@ -5,9 +5,7 @@ import '@/app/styles/globals.css';
 import '@/app/styles/styles.css';
 import { ShelfProvider } from './contexts/ShelfContext';
 import PageWrapper from '@/components/PageWrapper';
-import { PlayerProvider } from './providers/PlayerProvider';
 
-//const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout ({ metadata, children, session }) {
 
@@ -15,14 +13,12 @@ export default function RootLayout ({ metadata, children, session }) {
     <>
       <html lang="en">
         <HeadComponent metadata={metadata}/>
-        <body /*className={inter.className}*/>
-            <PlayerProvider session={session}>
+        <body>
               <ShelfProvider>
                 <PageWrapper session={session}>
                   {children}
                 </PageWrapper>
               </ShelfProvider>
-            </PlayerProvider>
           <Footer />
         </body>
       </html>
