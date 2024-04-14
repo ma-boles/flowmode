@@ -3,8 +3,15 @@ import React, { useState, useEffect, useContext }from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useSession } from "next-auth/react";
 
-window.onSpotifyWebPlaybackSDKReady = () => {
-    console.log('Spotify Web Playback SDK is ready!');
+// Define the onSpotifyWebPlaybackSDKReady function
+/*window.onSpotifyWebPlaybackSDKReady = () => {
+    console.log('Spotify Web Playback is ready!');
+    handleSpotifyReady();
+};*/
+
+const onSpotifyWebPlaybackSDKReady = () => {
+    console.log('Spotify Web Playback is ready!');
+    handleSpotifyReady();
 };
 
 export const PlayerProvider = ({ children }) => {
@@ -16,81 +23,19 @@ export const PlayerProvider = ({ children }) => {
     const [playerState, setPlayerState] = useState(null);
     const [spotifyReady, setSpotifyReady] = useState(false);
 
-  /* useEffect(() => {
-    const loadSpotifySDK = async () => {
-        try {
-            console.log('Loading Spotify Web Playback SDK...');
-            await loadScript('https://sdk.scdn.com/spotify-player.js');
-            console.log('Spotify Web Playback SDK loaded successfully');
-            setSpotifyReady(true);
-        } catch (error) {
-            console.error('Faile to load Spotify Web Playback SDK:', error);
-            // Retry loading script after certain interval
-            setTimeout(loadSpotifySDK, 3000); // Retry after 3 seconds
-        }
-    };
-    loadSpotifySDK();
 
-    return () => {
-        // Cleanup
-        if(player) {
-            player.disconnect();
-            setPlayer(null);
-        }
-    };
-   }, []);
-
-   useEffect(() => {
-    if (!spotifyReady || !accessToken) return;
-
-    const initializePlayer = () => {
-        try {
-            const newPlayer = new window.Spotify.Player({
-                name: 'Your Music Player',
-                getOAuthToken: cb => cb(accessToken),
-            });
-
-            setPlayer(newPlayer);
-
-            newPlayer.addListener('ready', ({ device_id }) => {
-                console.log('Player ready with Device ID:', device_id);
-                setDeviceID(device_id);
-            });
-
-            newPlayer.addListener('player_state_changed', state => {
-                console.log('Player state changed:', state);
-                setPlayerState(state);
-            });
-
-            newPlayer.connect();
-        } catch(error) {
-            console.error('Error initializing Spotify player:', error);
-        }
-    };
-
-    initializePlayer();
-
-    return () => {
-        if(player) {
-            player.disconnect();
-            setPlayer(null);
-        }
-    };
-   }, [spotifyReady]);
-
-   const contextValue = {
-    player,
-    deviceID,
-    playerState,
-    spotifyReady,
-   };*/
-
-    
-
-
-
- useEffect(() => {
+    // Load Spotify Web Playback SDK script
+    useEffect(() => {
         console.log('useEffect for script loading is triggered');
+
+        if (typeof window !== 'undefined') {
+            // Code that accesses the window object
+            window.onSpotifyWebPlaybackSDKReady = () => {
+                console.log('Spotify Web Playback is ready!');
+                handleSpotifyReady();
+            };
+        }
+
         console.log('spotifyReady:', spotifyReady);
         // Load Spotify Web Playback SDK script
         const script = document.createElement('script');
@@ -118,15 +63,21 @@ export const PlayerProvider = ({ children }) => {
             setSpotifyReady(true);
         };
 
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
     const handleSpotifyReady = () => {
         console.log('handleSpotifyReady function is executing');
         try {
             const newPlayer = new window.Spotify.Player({
-                name: 'Your Music Player',
+                name: 'Flow Mode Player',
                 getOAuthToken: cb => { cb(accessToken); }, // Directly pass token
             });
 
             setPlayer(newPlayer);
+            //newPlayer.connect();
 
             newPlayer.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
@@ -159,6 +110,7 @@ export const PlayerProvider = ({ children }) => {
         }
     };
 
+    useEffect(() => {
         // Set up Spotify SDK ready callback only once
         const setupSpotifySDKCallback = () => {
             if(window.Spotify && window.Spotify.Player) {
@@ -168,20 +120,15 @@ export const PlayerProvider = ({ children }) => {
             }
         };
 
-        setupSpotifySDKCallback();
+        if(spotifyReady && accessToken) {
+            setupSpotifySDKCallback();
+        }
 
-        // Clean up
+
         return () => {
-            if(player) {
-                player.disconnect();
-                // Set the player state to null to inidicate that it's disconnected
-                setPlayer(null);
-            }
-            document.body.removeChild(script);
-            window.onSpotifyWebPlaybackSDKReady = null; // Remove callback when unmounting
+            window.onSpotifyWebPlaybackSDKReady = null;
         };
-    }, [accessToken]);
-
+    }, [spotifyReady, accessToken]);
 
     useEffect(() => {
         // Initialize player when access token changes
@@ -207,14 +154,16 @@ export const PlayerProvider = ({ children }) => {
         playerState,
         spotifyReady,
         initializePlayer,
-    }; 
+    };
+
 
     return (
         <PlayerContext.Provider /*value={contextValue}*/
-        value={{ accessToken }}>
+        value={{ contextValue }}>
             {children}
         </PlayerContext.Provider>
     );
 };
+
 
 export const usePlayer = () => useContext(PlayerContext);
