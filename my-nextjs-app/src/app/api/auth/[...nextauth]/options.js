@@ -16,7 +16,7 @@ const refreshTokens = async(account) => {
         });
         return {
             accessToken: response.data.access_token,
-            expiresAt: Date.now()/ 1000 + response.data.expires_in,
+            expiresAt: Date.now()/ 1000 + (response.data.expires_in * 1000),
         };
     } catch(error) {
         console.error('Error refreshing token:', error.response?.data || error.message);
@@ -35,17 +35,38 @@ const getTokens = async (account) => {
             refreshToken: account.refresh_token,
         };
 
-        // If access token is about to expire, refresh it
-        if(account && account.refresh_token && tokens.expiresAt > Date.now()/ 1000 + 60) {
+        // Check if access token is expired or about to expire
+        if(tokens.expiresAt <= Date.now()/ 1000 + 60) {
+            // Token is expired or about to expire, refresh it
             const refreshedTokens = await refreshTokens(account);
+            // Update tokens with refreshed values
             tokens.accessToken = refreshedTokens.accessToken;
             tokens.expiresAt = refreshedTokens.expiresAt;
         }
         console.log('Tokens:', tokens);
         console.log('Account:', account);
         return tokens;
+
     } catch(error) {
         console.error('Error getting tokens:', error.message);
+
+        // Check for 401 Unauthorized error
+        if(error.response && error.response.status === 401) {
+            // Token is invalid or expired, attempt to refresh it
+            console.log('Token is nvalid or expired, attempting refresh...');
+            try {
+                const refreshedTokens = await refreshTokens(account);
+                // Update tokens with refreshed values
+                tokens.accessToken = refreshTokens.accessToken;
+                tokens.expiresAt = refreshTokens.expiresAt;
+                console.log('Tokens refreshed successfully:', refreshedTokens);
+                return refreshedTokens;
+            } catch (refreshError) {
+                console.error('Error refreshing tokens:', refreshError.message);
+                throw refreshError;
+            }
+        }
+        // Rethrow other errors
         throw error;
     }
 };
