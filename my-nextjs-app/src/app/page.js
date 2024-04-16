@@ -7,7 +7,7 @@ import Link from "next/link";
 
 
 export default function HomePage(){
-    
+
     const metadata = {
         title: 'Home | Spotify Reads',
         description: 'Keep track of your monthly Spotify audiobooks'
@@ -15,17 +15,22 @@ export default function HomePage(){
 
     return(
         <div>
-        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center landing'>
+        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center'>
             <div>
                 <h1 className="p-0 text-8xl">
                 <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span></h1>
                 <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+                <div className="mt-8 flex justify-evenly">
+                    <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Dashboard &gt;&gt;</button>
+                    <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Search &gt;&gt;</button>
+                </div>
             </div>
+
         </section>
 
-        <section className="text-center w-full   min-h-screen h-auto items-center justify-center">
+        <section className="text-center w-full   min-h-screen h-auto items-center justify-center landing">
 
-            <h1 className="mb-6 pb-4">How it works</h1>
+            <h1 className="mb-6 pt-10 pb-4">How it works</h1>
 
                 <div className="inline-flex flex-wrap justify-evenly w-full">
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
@@ -61,13 +66,13 @@ export default function HomePage(){
                 </div>
                 <div>
 
-                <Link href="/shelf">
-                    <button className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
+                {/*<Link href="/dashboard">*/}
+                    <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
                         Log In
                     </button>
-                </Link>
+                {/*</Link>*/}
                 </div>
-                
+
             </section>
         </div>
     );
