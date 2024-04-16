@@ -31,7 +31,10 @@ li {
   img {
     height: 38rem;
   }
-  
+  .landing {
+    background-color: rgba(245, 245, 245, 0.025);
+
+  }
   
 /* works */
 .works--card {
