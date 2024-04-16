@@ -15,20 +15,19 @@ export default function HomePage(){
 
     return(
         <div>
-        <section className='m-6 text-center'>
-            <h2 className="text-right text-lg text-black font-bold">Spotify Reads</h2>
-
-            <section className="mx-auto w-full max-w-6xl  min-h-screen h-auto flex items-center justify-center">
-                <img 
-                src="/LandingImg5.jpg" alt="astronaut reading a book" className="w-full h-auto" />
-            </section>
+        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center landing'>
+            <div>
+                <h1 className="p-0 text-8xl">
+                <span className="font-bold  text-green-500">flow</span>mode</h1>
+                <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+            </div>
         </section>
 
-        <section className="text-center">
+        <section className="text-center w-full   min-h-screen h-auto items-center justify-center">
 
             <h1 className="mb-6 pb-4">How it works</h1>
 
-                <div className="inline-flex flex-wrap">
+                <div className="inline-flex flex-wrap justify-evenly w-full">
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             1<br/>
@@ -74,3 +73,5 @@ export default function HomePage(){
         </div>
     );
 };
+
+{/*<img src="/LandingImg5.jpg" alt="astronaut reading a book" className="w-full h-auto" />*/}
