@@ -7,11 +7,15 @@ import Link from "next/link";
 
 
 export default function HomePage(){
+    const { data: session, status } = useSession();
+
+    const isLoggedIn = status === 'authenticated' && session;
 
     const metadata = {
-        title: 'Home | Spotify Reads',
+        title: 'Home | flowmode',
         description: 'Keep track of your monthly Spotify audiobooks'
     };
+
 
     return(
         <div>
@@ -20,14 +24,24 @@ export default function HomePage(){
                 <h1 className="p-0 text-8xl">
                 <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span></h1>
                 <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+
+            {isLoggedIn && (
                 <div className="mt-8 flex justify-evenly">
-                    <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Dashboard &gt;&gt;</button>
-                    <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Search &gt;&gt;</button>
+                    <Link href={'/dashboard'}>
+                        <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Dashboard &gt;&gt;</button>
+                    </Link>
+                    <Link href={'/browse'}>
+                        <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600">
+                    Search &gt;&gt;</button>
+                    </Link>
                 </div>
+                )}
+
             </div>
 
         </section>
 
+    {!isLoggedIn && (
         <section className="text-center w-full   min-h-screen h-auto items-center justify-center landing">
 
             <h1 className="mb-6 pt-10 pb-4">How it works</h1>
@@ -60,22 +74,19 @@ export default function HomePage(){
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             4<br/>
-                        </div> 
+                        </div>
                         <h3 className="m-auto pt-3 font-semibold text-center text-4xl">Listen and get into <span className="text-green-500 font-bold">flow</span><span className="font-light">mode</span>!</h3>
                     </div>
                 </div>
                 <div>
-
-                {/*<Link href="/dashboard">*/}
                     <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
                         Log In
                     </button>
-                {/*</Link>*/}
                 </div>
 
             </section>
+        )}
+
         </div>
     );
 };
-
-{/*<img src="/LandingImg5.jpg" alt="astronaut reading a book" className="w-full h-auto" />*/}
