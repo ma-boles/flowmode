@@ -13,7 +13,7 @@ export default function HomePage(){
 
     const metadata = {
         title: 'Home | flowmode',
-        description: 'Keep track of your monthly Spotify audiobooks'
+        description: 'Promote focus and productivity with Spotify audio'
     };
 
 
