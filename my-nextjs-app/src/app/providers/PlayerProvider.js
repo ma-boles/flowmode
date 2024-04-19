@@ -2,17 +2,8 @@
 import React, { useState, useEffect, useContext }from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useSession } from "next-auth/react";
+import { resolve } from "styled-jsx/css";
 
-// Define the onSpotifyWebPlaybackSDKReady function
-/*window.onSpotifyWebPlaybackSDKReady = () => {
-    console.log('Spotify Web Playback is ready!');
-    handleSpotifyReady();
-};*/
-
-const onSpotifyWebPlaybackSDKReady = () => {
-    console.log('Spotify Web Playback is ready!');
-    handleSpotifyReady();
-};
 
 export const PlayerProvider = ({ children }) => {
     const { data: session } = useSession();
@@ -24,8 +15,89 @@ export const PlayerProvider = ({ children }) => {
     const [spotifyReady, setSpotifyReady] = useState(false);
 
 
-    // Load Spotify Web Playback SDK script
-    useEffect(() => {
+   useEffect(() => {
+    const loadSDKScript = async () => {
+        try {
+            await loadSpotifySDK();
+            setSpotifyReady(true);
+        } catch (error) {
+            console.error('Failed to laod Spotify SDK:', error);
+        }
+    };
+
+    loadSDKScript();
+
+    return () => {
+    };
+   }, []);
+
+   useEffect(() => {
+    if (accessToken && spotifyReady) {
+        initializePlayer(accessToken);
+    }
+   }, [accessToken, spotifyReady]);
+
+   const loadSDKScript = () =>{
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://sdk.scdn.co/spotify-player.js";
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+    });
+   };
+
+   const initializePlayer = (accessToken) => {
+    try {
+        const newPlayer = new window.Spotify.Player({
+            name: 'Flow Mode Player',
+            getOAuthToken: (cb) => cb(accessToken),
+        });
+
+        setPlayer(newPlayer);
+
+        newPlayer.addListener('ready', ({ device_id}) => {
+            setDeviceID(device_id);
+        });
+
+        newPlayer.addListener('player_state_changed', (state) => {
+            setPlayerState(state);
+        });
+
+        newPlayer.connect();
+    } catch (error) {
+        console.error('Error initializing Spotify player:', error)
+    }
+   };
+
+    // Bundle up the context value with state variables and functions
+    const contextValue = {
+        player,
+        deviceID,
+        playerState,
+        spotifyReady,
+        //initializePlayer,
+    };
+
+
+    return (
+        <PlayerContext.Provider
+        value={contextValue}>
+            {children}
+        </PlayerContext.Provider>
+    );
+};
+
+
+export const usePlayer = () => React.useContext(PlayerContext);
+
+
+
+
+
+ // Load Spotify Web Playback SDK script
+    {/*useEffect(() => {
         console.log('useEffect for script loading is triggered');
 
         if (typeof window !== 'undefined') {
@@ -124,7 +196,6 @@ export const PlayerProvider = ({ children }) => {
             setupSpotifySDKCallback();
         }
 
-
         return () => {
             window.onSpotifyWebPlaybackSDKReady = null;
         };
@@ -146,24 +217,4 @@ export const PlayerProvider = ({ children }) => {
               console.log('Player connected.');
         }
     };
-
-    // Bundle up the context value with state variables and functions
-    const contextValue = {
-        player,
-        deviceID,
-        playerState,
-        spotifyReady,
-        initializePlayer,
-    };
-
-
-    return (
-        <PlayerContext.Provider /*value={contextValue}*/
-        value={{ contextValue }}>
-            {children}
-        </PlayerContext.Provider>
-    );
-};
-
-
-export const usePlayer = () => useContext(PlayerContext);
+*/}
