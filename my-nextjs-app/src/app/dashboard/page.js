@@ -4,8 +4,12 @@ import UserProfile from "@/components/profile/UserProfile";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
 import Player from "@/components/Player";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
+
+    const { data: session } = useSession();
+    const accessToken = session?.accessToken;
 
     return (
         <>
@@ -31,7 +35,7 @@ export default function Dashboard() {
                         </Link>
                     </div>
                     {/*<Display />*/}
-                    <Player />
+                    <Player accessToken={accessToken}/>
 
             </div>
         </>
