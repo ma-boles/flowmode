@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { signIn, signOut, useSession, SessionProvider } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import './styles/styles.css';
 import Link from "next/link";
 
@@ -23,7 +23,9 @@ export default function HomePage(){
             <div>
                 <h1 className="p-0 text-8xl">
                 <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span></h1>
-                <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+                {!isLoggedIn && (
+                    <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+                )}
 
             {isLoggedIn && (
                 <div className="mt-8 flex justify-evenly">
