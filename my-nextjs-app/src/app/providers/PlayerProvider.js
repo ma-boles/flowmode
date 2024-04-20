@@ -14,11 +14,14 @@ export const PlayerProvider = ({ children }) => {
     const [playerState, setPlayerState] = useState(null);
     const [spotifyReady, setSpotifyReady] = useState(false);
 
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        console.log('Spotify Web Playback SDK is ready!');
+    };
 
    useEffect(() => {
     const loadSDKScript = async () => {
         try {
-            await loadSpotifySDK();
+            await loadSDK();
             setSpotifyReady(true);
         } catch (error) {
             console.error('Failed to laod Spotify SDK:', error);
@@ -28,6 +31,7 @@ export const PlayerProvider = ({ children }) => {
     loadSDKScript();
 
     return () => {
+        removeSDKScript();
     };
    }, []);
 
@@ -37,7 +41,7 @@ export const PlayerProvider = ({ children }) => {
     }
    }, [accessToken, spotifyReady]);
 
-   const loadSDKScript = () =>{
+   const loadSDK = () =>{
     return new Promise((resolve, reject) => {
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -46,6 +50,13 @@ export const PlayerProvider = ({ children }) => {
         script.onerror = reject;
         document.body.appendChild(script);
     });
+   };
+
+   const removeSDKScript = () => {
+    const script = document.querySelector('script[src="https://sdk.scdn.co/spotify-player.js"]');
+    if(script) {
+        script.remove();
+    }
    };
 
    const initializePlayer = (accessToken) => {
@@ -57,12 +68,30 @@ export const PlayerProvider = ({ children }) => {
 
         setPlayer(newPlayer);
 
+        // Ready
         newPlayer.addListener('ready', ({ device_id}) => {
             setDeviceID(device_id);
         });
 
         newPlayer.addListener('player_state_changed', (state) => {
             setPlayerState(state);
+        });
+
+        // Not ready
+        newPlayer.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id)
+        });
+
+        newPlayer.addListener('initialization_error', ({ message }) => {
+            console.log('Initializtion error:', message);
+        });
+
+        newPlayer.addListener('authentication_error', ({ message}) => {
+            console.log('Authentication error:', message);
+        });
+
+        newPlayer.addListener('account_error', ({ message}) => {
+            console.log('Account error:', message);
         });
 
         newPlayer.connect();
@@ -72,18 +101,17 @@ export const PlayerProvider = ({ children }) => {
    };
 
     // Bundle up the context value with state variables and functions
-    const contextValue = {
+    const contextValue = React.useMemo(() => ({
         player,
         deviceID,
         playerState,
         spotifyReady,
-        //initializePlayer,
-    };
+        initializePlayer,
+    }), [player, deviceID, playerState, spotifyReady]);
 
 
     return (
-        <PlayerContext.Provider
-        value={contextValue}>
+        <PlayerContext.Provider value={contextValue}>
             {children}
         </PlayerContext.Provider>
     );
