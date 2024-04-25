@@ -178,3 +178,39 @@ li {
  .footer--hr {
   width: 95%
  }
+
+ /* player */
+ .playerBtn {
+  border: 2px solid white;
+  background-color: transparent;  
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 180rem;
+ }
+ .playerBtn:hover {
+  background-color: rgb(22 163 74);
+  transition: background-color 0.3s ease-in-out;
+ }
+ .playerBtnSm {
+  border: 1px solid white;
+  background-color: transparent;  
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 180rem;
+ }
+ .playerBtnSm:hover {
+  background-color: rgb(22 163 74);
+  transition: background-color 0.3s ease-in-out;
+ }
+
+ .btnIcon {
+  height: 2rem;
+  width: 2rem;
+  filter: invert(1);
+ }
+ .btnIconSm {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: .5rem;
+  filter: invert(1);
+ }
