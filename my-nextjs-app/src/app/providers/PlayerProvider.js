@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useContext }from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useSession } from "next-auth/react";
-import { resolve } from "styled-jsx/css";
 
 
 export const PlayerProvider = ({ children }) => {
@@ -90,7 +89,7 @@ export const PlayerProvider = ({ children }) => {
         });
 
         newPlayer.addListener('player_state_changed', (state) => {
-            console.og('Player state changed:', state);
+            console.log('Player state changed:', state);
             setPlayerState(state);
         });
 
