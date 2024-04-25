@@ -14,9 +14,22 @@ export const PlayerProvider = ({ children }) => {
     const [playerState, setPlayerState] = useState(null);
     const [spotifyReady, setSpotifyReady] = useState(false);
 
-    window.onSpotifyWebPlaybackSDKReady = () => {
+   useEffect(() => {
+    // Define onSpotifyReady callback
+    const onSpotifyReady = () => {
         console.log('Spotify Web Playback SDK is ready!');
+        initializePlayer(accessToken);
     };
+
+    // Set onSpotifyWebPlaybackSDKReady callback
+    window.onSpotifyWebPlaybackSDKReady = onSpotifyReady;
+
+    // Clean up event listener when component unmounts
+    return () => {
+        delete window.onSpotifyWebPlaybackSDKReady;
+    };
+   }, [accessToken]);
+
 
    useEffect(() => {
     const loadSDKScript = async () => {
@@ -36,9 +49,9 @@ export const PlayerProvider = ({ children }) => {
    }, []);
 
    useEffect(() => {
-    if (accessToken && spotifyReady) {
-        initializePlayer(accessToken);
-    }
+        if (accessToken && spotifyReady) {
+            initializePlayer(accessToken);
+        }
    }, [accessToken, spotifyReady]);
 
    const loadSDK = () =>{
