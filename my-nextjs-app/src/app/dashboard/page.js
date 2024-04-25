@@ -11,6 +11,12 @@ export default function Dashboard() {
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
 
+    const [isPlayerOpen, setIsPlayerOpen] = useState(false);
+
+    const handleButtonClick = () => {
+        setIsPlayerOpen(true); // Open Player when button is clicked
+    };
+
     return (
         <>
             <nav>
@@ -35,8 +41,10 @@ export default function Dashboard() {
                         </Link>
                     </div>
                     {/*<Display />*/}
-                    <Player accessToken={accessToken}/>
-
+                    <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
+                    {isPlayerOpen && (
+                        <Player accessToken={accessToken}/>
+                    )}
             </div>
         </>
     )
