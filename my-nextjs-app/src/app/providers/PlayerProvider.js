@@ -70,10 +70,14 @@ export const PlayerProvider = ({ children }) => {
 
         // Ready
         newPlayer.addListener('ready', ({ device_id}) => {
+            console.log('Spotify player is ready for playback.');
+            console.log('Device ID:', device_id);
             setDeviceID(device_id);
+            // start playback or perform other actions here
         });
 
         newPlayer.addListener('player_state_changed', (state) => {
+            console.og('Player state changed:', state);
             setPlayerState(state);
         });
 
