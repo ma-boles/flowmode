@@ -9,10 +9,10 @@ export default function SearchComponent () {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
+    const { playItem } = usePlayer();
     const [searchResults, setSearchResults] = useState([]);
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
-    const { playTrack } = usePlayer();
 
     useEffect(() => {
         setSearchResults([]);
@@ -129,7 +129,7 @@ export default function SearchComponent () {
                         >Search</button>
                     </div>
                 </div>
-                <div className="mt-8 w-full ">
+                <div /*results*/ className="my-8 w-full ">
 
                 {category === 'artist' &&
                     <div className="flex flex-wrap justify-center">
