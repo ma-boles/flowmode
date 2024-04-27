@@ -116,6 +116,18 @@ export const PlayerProvider = ({ children }) => {
     }
    };
 
+   const playItem = (uri) => {
+    if (player) {
+        player.togglePlay({ uris: [uri]})
+        .then(() => {
+            console.log('Item playback started');
+        })
+        .catch((error) => {
+            console.error('Error playing item:', error);
+        });
+    }
+   };
+
     // Bundle up the context value with state variables and functions
     const contextValue = React.useMemo(() => ({
         player,
@@ -123,6 +135,7 @@ export const PlayerProvider = ({ children }) => {
         playerState,
         spotifyReady,
         initializePlayer,
+        playItem,
     }), [player, deviceID, playerState, spotifyReady]);
 
 
