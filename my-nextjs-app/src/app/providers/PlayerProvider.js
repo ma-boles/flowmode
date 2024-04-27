@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext }from "react";
+import React, { useState, useEffect, useContext, useCallback }from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { useSession } from "next-auth/react";
 
@@ -12,6 +12,12 @@ export const PlayerProvider = ({ children }) => {
     const [deviceID, setDeviceID] = useState(null);
     const [playerState, setPlayerState] = useState(null);
     const [spotifyReady, setSpotifyReady] = useState(false);
+
+
+    const onSpotifyReady = useCallback(() => {
+        console.log('Spotify Web Playback SDk is ready!');
+        initializePlayer(accessToken);
+    }, [accessToken]);
 
    useEffect(() => {
     // Define onSpotifyReady callback
@@ -27,7 +33,7 @@ export const PlayerProvider = ({ children }) => {
     return () => {
         delete window.onSpotifyWebPlaybackSDKReady;
     };
-   }, [accessToken]);
+   }, [/*accessToken*/ onSpotifyReady]);
 
 
    useEffect(() => {
@@ -40,6 +46,11 @@ export const PlayerProvider = ({ children }) => {
         }
     };
 
+    /*if(!window.Spotify) {
+        loadSDKScript();
+    } else {
+        setSpotifyReady(true);
+    } */
     loadSDKScript();
 
     return () => {
@@ -53,7 +64,7 @@ export const PlayerProvider = ({ children }) => {
         }
    }, [accessToken, spotifyReady]);
 
-   const loadSDK = () =>{
+   const loadSDK = useCallback(() => {
     return new Promise((resolve, reject) => {
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -62,16 +73,16 @@ export const PlayerProvider = ({ children }) => {
         script.onerror = reject;
         document.body.appendChild(script);
     });
-   };
+   }, []);
 
-   const removeSDKScript = () => {
+   const removeSDKScript = useCallback(() => {
     const script = document.querySelector('script[src="https://sdk.scdn.co/spotify-player.js"]');
     if(script) {
         script.remove();
     }
-   };
+   }, []);
 
-   const initializePlayer = (accessToken) => {
+   const initializePlayer = useCallback((accessToken) => {
     try {
         const newPlayer = new window.Spotify.Player({
             name: 'Flow Mode Player',
@@ -114,9 +125,9 @@ export const PlayerProvider = ({ children }) => {
     } catch (error) {
         console.error('Error initializing Spotify player:', error)
     }
-   };
+   }, []);
 
-   const playItem = (uri) => {
+   const playItem = useCallback((uri) => {
     if (player) {
         player.togglePlay({ uris: [uri]})
         .then(() => {
@@ -125,8 +136,10 @@ export const PlayerProvider = ({ children }) => {
         .catch((error) => {
             console.error('Error playing item:', error);
         });
+    } else {
+        console.error('Player is not available.');
     }
-   };
+   }, [player]);
 
     // Bundle up the context value with state variables and functions
     const contextValue = React.useMemo(() => ({
@@ -136,7 +149,7 @@ export const PlayerProvider = ({ children }) => {
         spotifyReady,
         initializePlayer,
         playItem,
-    }), [player, deviceID, playerState, spotifyReady]);
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, playItem]);
 
 
     return (
