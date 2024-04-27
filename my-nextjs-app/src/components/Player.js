@@ -4,30 +4,48 @@ import { usePlayer } from "@/app/providers/PlayerProvider";
 
 
 export default function Player() {
-    // use the usePlayer hook to access player-related data or functions
-    //const { accessToken } = usePlayer();
-    //const { playerState, initializePlayer, accessToken } = usePlayer();
     const { player, playerState } = usePlayer();
     // Check if the player is currently playing something
     const isPlaying = playerState && playerState.isPlaying;
 
     const handlePlayPause = () => {
-        if (player) {
-            player.togglePlay();
+        try {
+            if (player && player.togglePlay) {
+                player.togglePlay();
+            } else {
+                console.log('Player or togglePlay method not available.');
+            }
+        } catch (error) {
+            console.error('Error occurred while toggling play/pause:', error);
         }
     };
 
     const handleSkip = () => {
-        if (player) {
-            player.nextTrack();
+        try {
+            if (player) {
+                player.nextTrack();
+            } else {
+                console.error('Player not available.');
+            }
+        } catch (error) {
+            console.error('Error occurred while skipping track:', error);
         }
     };
 
     const handleBack = () => {
-        if (player) {
-            player.previousTrack();
+        try {
+            if (player) {
+                player.previousTrack();
+            } else {
+                console.error('Player not available.');
+            }
+        } catch (error) {
+            console.error('Error occurred while going back to previous track:', error);
         }
     };
+
+    console.log('Player:', player);
+    console.log('Player state:', playerState);
 
 
     return (
