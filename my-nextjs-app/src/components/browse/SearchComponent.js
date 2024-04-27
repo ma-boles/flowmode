@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { searchAlbums, searchArtists, searchAudiobooks, searchPodcastEpisode, searchPodcastShow, searchTrack, searchPlaylist } from "@/app/lib/apiCall";
 import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css"
+import { usePlayer } from "@/app/providers/PlayerProvider";
 
 
 export default function SearchComponent () {
@@ -11,6 +12,7 @@ export default function SearchComponent () {
     const [searchResults, setSearchResults] = useState([]);
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
+    const { playTrack } = usePlayer();
 
     useEffect(() => {
         setSearchResults([]);
@@ -62,7 +64,6 @@ export default function SearchComponent () {
                     default:
                         break;
                 }
-
                 console.log('Search results:', results);
 
                 setSearchResults(results);
@@ -72,6 +73,30 @@ export default function SearchComponent () {
         }
     }
 };
+
+    const handleItemSelect = (selectedItem, itemType) => {
+        console.log('Selected item:', selectedItem);
+
+        if(playItem && selectedItem.uri) {
+            playItem(selectedItem.uri);
+        }
+
+        // Handle different item types
+        switch (itemType) {
+            case 'track':
+                break;
+            case 'album':
+                break;
+            case 'playlist':
+                break;
+            case 'episode':
+                break;
+            case 'audiobook':
+                break;
+            default:
+                break;
+        }
+    };
 
     return (
             <div className="bg-transparent">
@@ -144,7 +169,7 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="px-4">
                                         <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
-                                        <h2 className="text-center font-bold">{track.name}</h2>
+                                        <h2 className="text-center font-bold hover:underline cursor-pointer" onClick={() => handleItemSelect(track)}>{track.name}</h2>
                                         <h2 className="text-center">{track.artists[0].name}</h2>
                                     </div>
                                 </ul>
