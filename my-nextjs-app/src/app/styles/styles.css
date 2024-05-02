@@ -180,9 +180,14 @@ li {
  }
 
  /* player */
+ .playBackground {
+  background-color: rgba(0, 0, 0, 0.111);
+  padding: 6rem;
+  /* postition: */
+ }
  .playerBtn {
   border: 2px solid white;
-  background-color: transparent;  
+  background-color: transparent;
   margin: 1rem;
   padding: 2rem;
   border-radius: 180rem;
@@ -193,7 +198,7 @@ li {
  }
  .playerBtnSm {
   border: 1px solid white;
-  background-color: transparent;  
+  background-color: transparent;
   margin: 2rem;
   padding: 1rem;
   border-radius: 180rem;
@@ -214,3 +219,11 @@ li {
   margin: .5rem;
   filter: invert(1);
  }
+ .btnIconShuffle {
+  height: 1.3rem;
+  width: 1.3rem;
+  margin: 1rem;
+  filter: invert(1);
+  cursor: pointer;
+ }
+
