@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
 import { PlayerContext } from "@/app/contexts/PlayerContext";
 import { usePlayer } from "@/app/providers/PlayerProvider";
+import "@/app/styles/styles.css"
 
 
 export default function Player() {
     const { player, playerState } = usePlayer();
     // Check if the player is currently playing something
-    const isPlaying = playerState && playerState.isPlaying;
+   // const isPlaying = playerState && playerState.isPlaying;
 
     const handlePlayPause = () => {
         try {
@@ -49,14 +50,9 @@ export default function Player() {
 
 
     return (
-        <div /*playerBackground*/ className={`player ${isPlaying ? 'visible' : 'hidden'}`}>
-            <h1 className="text-center">Flow Mode</h1>
-            <div className="p-24 bg-transparent rounded-md">
-                <div className="p-16 m-8 bg-blue-600 rounded-full text-center">
-                    Progress Bar
-                </div>
-            <div className="flex justify-center border-black">
-                <div className="flex px-32 justify-between border border-black border-opacity-100 bg-transparent rounded-l-lg">
+        <div className="playBackground">
+            <div className="flex justify-center  border-black">
+                <div className="flex px-32 justify-between border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg">
                     <button className="playerBtnSm" onClick={handleBack}>
                         <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                     </button>
@@ -73,12 +69,23 @@ export default function Player() {
                         <img src="forward-step-solid.svg" alt="skip" className="btnIconSm"></img>
                     </button>
                 </div>
-                <div className="border border-black border-opacity-100 bg-transparent rounded-r-lg">
-                    <button className="mt-8 py-1 px-6 bg-blue-600">
-                        Volume
-                    </button>
+
+                <div className="border border-white border-opacity-100 bg-transparent rounded-r-lg" style={{display: 'grid', placeItems: 'center'}}>
+
+                <div className="mx-4">
+                    <div className="flex justify-evenly">
+                        <img src="repeat-solid.svg" alt="repeat" className=" btnIconShuffle"></img>
+                        <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
+                        </div>
+                    <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    />
                 </div>
-            </div>
+
+                </div>
             </div>
         </div>
     )
