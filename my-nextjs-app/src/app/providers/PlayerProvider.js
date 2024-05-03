@@ -87,6 +87,7 @@ export const PlayerProvider = ({ children }) => {
         const newPlayer = new window.Spotify.Player({
             name: 'Flow Mode Player',
             getOAuthToken: (cb) => cb(accessToken),
+            volume: 0.5
         });
 
         setPlayer(newPlayer);
