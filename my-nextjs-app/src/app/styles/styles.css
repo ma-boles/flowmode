@@ -110,10 +110,6 @@ li {
   background-color: rgba(0, 0, 0, 0.125);
 }
 
-.input {
-  width: 29.5rem;
-}
-
 .artistCard {
   display: flex;
   justify-content: center;
