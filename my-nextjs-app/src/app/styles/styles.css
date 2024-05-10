@@ -181,6 +181,17 @@ li {
   padding: 6rem;
   /* postition: */
  }
+ .flowDiv {
+  background-color: rgba(255, 255, 255, 0.092) ;
+ }
+ .inputTimer {
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 5px;
+  width: 3.5rem;
+  margin: 1rem;
+  font-size: x-large;
+  padding-left: 1rem;
+ }
  .playerBtn {
   border: 2px solid white;
   background-color: transparent;
