@@ -182,7 +182,13 @@ li {
   /* postition: */
  }
  .flowDiv {
-  background-color: rgba(255, 255, 255, 0.092) ;
+  background-color: rgba(255, 255, 255, 0.092);
+  border-bottom: none;
+ }
+ .flowDiv2 {
+  background-color: rgba(255, 255, 255, 0.082) ;
+  border-top: none;
+  /*border-top-color: rgba(255, 255, 255, 0.22);*/
  }
  .inputTimer {
   background-color: rgba(255, 255, 255, 0.22);
