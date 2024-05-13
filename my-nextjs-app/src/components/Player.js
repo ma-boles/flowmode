@@ -52,31 +52,59 @@ export default function Player() {
     return (
         <div className="playBackground justify-center">
 
-
-            <div className="w-4/5 mb-4 flex justify-center border border-solid border-white rounded-lg mx-auto flowDiv">
-                <div className="w-2/5 my-4 flex flex-col justify-center items-center" /* work */>
+            <div className="w-4/5 flex justify-center border border-solid border-white rounded-t-lg mx-auto flowDiv">
+                <div className="w-1/3 my-4 flex flex-col justify-center items-center" /* work */>
                     <h2 className="text-xl font-bold">Work:</h2>
                     <div className="flex justify-center items-center">
-                    <input type="number" className="inputTimer" placeholder="00"/> <p>HR</p>
-                    <input type="number" className="inputTimer" placeholder="00" />
+                        <input className="inputTimer"
+                        type="number"
+                        placeholder="00"
+                        min="0"
+                        max="10"
+                        />
+                    <p>HR</p>
+                        <input className="inputTimer"
+                        type="number"
+                        placeholder="00"
+                        min="0"
+                        max="59"
+                        />
                     <p>MIN</p>
                     </div>
                 </div>
-                <div className="w-1/5 flex justify-center items-center"/* flow button */>
-                    <button className="py-1 px-6 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">FLOW</button>
-                </div>
-                <div  className="w-2/5 flex flex-col justify-center items-center"/* rest */>
+
+                <div className="w-1/3 flex flex-col justify-center items-center" /* rest */>
                     <h2 className="text-xl font-bold">Rest:</h2>
                     <div className="flex justify-center items-center">
-                    <input type="number" className="inputTimer" placeholder="00"/> <p>HR</p>
-                    <input type="number" className="inputTimer" placeholder="00" />
+                        <input className="inputTimer"
+                        type="number"
+                        placeholder="00"
+                        min="1"
+                        max="59"
+                        />
                     <p>MIN</p>
+                    </div>
+                </div>
+
+                <div className="w-1/3 flex justify-center items-center" /* intervals */>
+                    <div className="flex justify-center items-center">
+                    <h2 className="text-xl">Number of <br /> Intervals:</h2>
+                        <input className="inputTimer"
+                        type="number"
+                        placeholder="1"
+                        min="1"
+                        max="10"/>
                     </div>
                 </div>
             </div>
+            <div className="w-4/5 m-auto mb-4 p-4 flex justify-end items-center border border-solid border-white rounded-b-lg flowDiv2"/* buttons */>
+                <button className="mx-4 py-1 px-6 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">RESET</button>
+                <button className="mx-4 py-1 px-8 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">SET</button>
+            </div>
+
 
             <div className="flex justify-center">
-            
+
                 <div className="p-6 border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
                     <h2 className="text-xl font-bold">Track Name</h2>
                     <h2>Artist Name</h2>
