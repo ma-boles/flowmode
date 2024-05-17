@@ -13,10 +13,16 @@ export default function Dashboard() {
     const accessToken = session?.accessToken;
 
     const [isPlayerOpen, setIsPlayerOpen] = useState(false);
+    const [isDisplayOpen, setIsDisplayOpen] = useState(false);
 
-    const handleButtonClick = () => {
+    /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
+    };*/
+
+    const handleDisplayClick = () => {
+        setIsDisplayOpen(true); // Open Display when button is clicked
     };
+
 
     return (
         <>
@@ -25,8 +31,8 @@ export default function Dashboard() {
             </nav>
 
             <div className="mx-12">
-                <h1 className="p-0 mb-10 text-center">Welcome!</h1>
-                    <div /* top section */ className="flex justify-center">
+                <h1 className="p-0 mb-10 text-center">Welcome, {session.user.sub}!</h1>
+                    <div /* top section */ className="mb-16 flex justify-center">
                         <div className="px-12 py-6 mb-0 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
                             <h2 className="m-2 font-bold text-2xl opacity-90">Minutes of <br /> Focused Work:</h2>
                             <hr />
@@ -42,17 +48,19 @@ export default function Dashboard() {
                             </div>
                         </div>
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Followed<br/>Playlists</button>
+                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={handleDisplayClick}>My<br/>Playlists</button>
+                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={handleDisplayClick}>Followed<br/>Playlists</button>
                         </div>
                     </div>
 
-                    {/*<Display />*/}
+                    {isDisplayOpen && (
+                    <Display />
+                    )}
 
-                    <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
+                   {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
                     {isPlayerOpen && (
                         <Player accessToken={accessToken}/>
-                    )}
+                    )}*/}
             </div>
         </>
     )
