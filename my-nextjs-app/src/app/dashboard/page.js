@@ -30,8 +30,8 @@ export default function Dashboard() {
                 <UserProfile />
             </nav>
 
-            <div className="mx-12">
-                <h1 className="p-0 mb-10 text-center">Welcome, {session.user.sub}!</h1>
+            <div className="m-12">
+                <h1 className="p-0 mb-14 text-center">Welcome, {/*{session.user.sub}*/}!</h1>
                     <div /* top section */ className="mb-16 flex justify-center">
                         <div className="px-12 py-6 mb-0 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
                             <h2 className="m-2 font-bold text-2xl opacity-90">Minutes of <br /> Focused Work:</h2>
