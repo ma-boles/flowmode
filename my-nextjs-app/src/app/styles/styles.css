@@ -7,7 +7,40 @@ li {
   cursor: pointer;
 }
 
-/* drodown */
+.dropdown-btn {
+  border-radius: 180rem;
+  margin-top: 1rem;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 3rem;
+  top: 2rem;
+  background-color: rgba(255, 255, 255, 0.051);
+  border-color: rgba(255, 255, 255, 0.051);
+  cursor: pointer;
+  transition-duration: 5s;
+
+}
+
+.dropdown {
+  display: block;
+  cursor: pointer;
+  transition-duration: 5s;
+}
+
+.dropdown-content a {
+  display: block;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-link {
+  padding: .625rem 2rem;
+}
+
+/* dropdown 
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -15,10 +48,10 @@ li {
   font-size: 16px;
   border: none;
   cursor: pointer;
-}
+}*/
 
 
-  /* landing section */ 
+/* landing section */ 
   h1 {
     font-size: 3.7rem;
     margin: 0rem 1rem;
@@ -69,7 +102,6 @@ li {
    display: none;
    background-color: rgb(70, 70, 70);
   }
-  
 
 /* shelf page landing section */ 
   .shelf--hr {
