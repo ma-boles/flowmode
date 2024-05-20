@@ -5,13 +5,14 @@ import { getPlaylists } from "@/app/lib/apiCall";
 import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
-export default function Display() {
+export default function Display({ viewMode }) {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
     const [playlists, setPlaylists] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [remainingPlaylists, setRemainingPlaylists] = useState([]);
+    const [displayStyle, setDisplayStyle] = useState('grid');
     const pageSize = 10;
 
 
@@ -28,9 +29,9 @@ export default function Display() {
                 console.log('All Playlists:', playlistsData);
 
                 // Filter playlists to include only ones owned by user
-                const userOwnedPlaylists = playlistsData.filter(playlist => {
-                    return playlist.owner.id === session.user.sub;
-                });
+                const userOwnedPlaylists = viewMode === 'userOwnedPlaylists'
+                    ? playlistsData.filter(playlist => playlist.owner.id === session.user.sub)
+                    : playlistsData
 
                 console.log('User Owned Playlists:', userOwnedPlaylists);
 
@@ -47,7 +48,7 @@ export default function Display() {
             }
         }
         fetchPlaylists();
-    }, [accessToken, currentPage, session]); // Re-run on every accessToken or session change
+    }, [accessToken, currentPage, session, viewMode]); // Re-run on every accessToken or session change
 
     const handleNextPage = () => {
         setCurrentPage(prevPage => prevPage + 1);
@@ -56,26 +57,24 @@ export default function Display() {
         setCurrentPage(prevPage => prevPage - 1);
     };
 
+    const handleToggleStyle = (style) => {
+        setDisplayStyle(style);
+    }
 
 
     return (
         <>
-        <div className="flex justify-between">
-        <h1 className="mx-0 my-2 p-0">My Playlists</h1>
+        <div className="px-20 flex justify-between">
+        <h1 className="mx-0 my-2 p-0">
+            {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'Followed Playlists'}
+        </h1>
             <div>
-                <button className="m-1 px-3 py-1  bg-gray-900 rounded-md">Grid</button>
-                <button className="m-1 px-3 py-1  bg-gray-700 rounded-md">List</button>
+                <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('grid')}>Grid</button>
+                <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('list')}>List</button>
             </div>
         </div>
-        {/*<ul >
-            {playlists.map(playlist =>(
-                <li key={playlist.id} className="flex my-1 mx-0 p-4 bg-gray-700 rounded-md">
-                    <h2>{playlist.name} </h2>
-                    <p className="mx-4 font-thin">{playlist.description}</p>
-                </li>
-            ))}
-        </ul>*/}
-        <ul className="flex flex-wrap justify-center">
+
+        <ul /*className="flex flex-wrap justify-center"*/ className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
             {playlists.map(playlist =>(
                 <li key={playlist.id} className=" bg-gray-700 playlistCard">
                     <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} className="playlistImg" />
@@ -85,9 +84,18 @@ export default function Display() {
             ))}
         </ul>
         <div className="flex justify-between">
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
-            <button onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
+            <button className="m-1 px-3 py-1 bg-gray-900 rounded-md" onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
+            <button className="m-1 px-3 py-1 bg-gray-900 rounded-md" onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
         </div>
         </>
     );
 }
+
+{/*<ul >
+            {playlists.map(playlist =>(
+                <li key={playlist.id} className="flex my-1 mx-0 p-4 bg-gray-700 rounded-md">
+                    <h2>{playlist.name} </h2>
+                    <p className="mx-4 font-thin">{playlist.description}</p>
+                </li>
+            ))}
+        </ul>*//*className="m-1 px-3 py-1 bg-gray-700 rounded-md"*/}
