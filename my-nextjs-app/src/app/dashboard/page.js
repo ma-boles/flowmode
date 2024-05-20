@@ -12,15 +12,19 @@ export default function Dashboard() {
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
 
-    const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-    const [isDisplayOpen, setIsDisplayOpen] = useState(false);
+    const [viewMode, setViewMode] = useState('userOwnedPlaylists');
+    {/*const [isPlayerOpen, setIsPlayerOpen] = useState(false);
+    const [isDisplayOpen, setIsDisplayOpen] = useState(false);*/}
 
     /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
     };*/
 
-    const handleDisplayClick = () => {
-        setIsDisplayOpen(true); // Open Display when button is clicked
+    const displayUserOwnedPlaylists = () => {
+        setViewMode('userOwnedPlaylists');
+    };
+    const displayFollowedPlaylists = () => {
+        setViewMode('followedPlaylists');
     };
 
 
@@ -48,14 +52,12 @@ export default function Dashboard() {
                             </div>
                         </div>
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={handleDisplayClick}>My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={handleDisplayClick}>Followed<br/>Playlists</button>
+                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={displayFollowedPlaylists}>Followed<br/>Playlists</button>
                         </div>
                     </div>
 
-                    {isDisplayOpen && (
-                    <Display />
-                    )}
+                    <Display viewMode={viewMode} />
 
                    {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
                     {isPlayerOpen && (
@@ -65,20 +67,3 @@ export default function Dashboard() {
         </>
     )
 }
-
-                        {/*<button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Music</button>
-                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Podcasts</button>
-                        <Link href="/shelf">
-                            <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Books</button>
-                        </Link>*/}
-
-                        
-                    {/*<div className="flex justify-center">
-                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">My<br/>Playlists</button>
-
-                        <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Followed<br/>Playlists</button>
-
-                        <Link href="/browse">
-                            <button className="m-4 h-60 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Browse <br/> &rarr;</button>
-                        </Link>
-                        </div>*/}
