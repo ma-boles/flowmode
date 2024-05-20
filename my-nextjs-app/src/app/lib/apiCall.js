@@ -156,13 +156,13 @@ const getPlaylists = async (accessToken) => {
             },
         });
 
-        // Check for succesful response (status code in range of 200-299)
+        // Check for successful response (status code in range of 200-299)
         if(response.status >= 200 && response.status < 300) {
             // Return playlist items
             return response.data.items;
         } else {
             // Throw an error if the response is not successful
-            throw new Error('Failes to fetch playlists');
+            throw new Error('Failed to fetch playlists');
         }
     } catch (error) {
         // Handle error
