@@ -82,6 +82,7 @@ li {
   color: rgba(245, 245, 245, 0.853);
 }
 
+/* dashboard */ 
 
 /* addlist */
 .book--add {
@@ -200,6 +201,21 @@ li {
   display: block;
   margin: 0;
   padding-bottom: 0.5rem;
+}
+
+.playlistList {
+  display: block;
+  justify-items: center;
+}
+.playlistCardList {
+  display: flex;
+  width: 90%;
+  border-radius: 10px;
+  margin: 1rem auto;
+}
+.playlistImgList {
+  height: 6rem;
+  margin: 1rem;
 }
 
  /* footer */
