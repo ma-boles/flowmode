@@ -13,17 +13,19 @@ export default function Dashboard() {
     const accessToken = session?.accessToken;
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
-    {/*const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-    const [isDisplayOpen, setIsDisplayOpen] = useState(false);*/}
+    {/*const [isPlayerOpen, setIsPlayerOpen] = useState(false);*/}
+    const [isDisplayOpen, setIsDisplayOpen] = useState(false);
 
     /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
     };*/
 
     const displayUserOwnedPlaylists = () => {
+        setIsDisplayOpen(true);
         setViewMode('userOwnedPlaylists');
     };
     const displayFollowedPlaylists = () => {
+        setIsDisplayOpen(true);
         setViewMode('followedPlaylists');
     };
 
@@ -52,12 +54,14 @@ export default function Dashboard() {
                             </div>
                         </div>
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out" onClick={displayFollowedPlaylists}>Followed<br/>Playlists</button>
+                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                         </div>
                     </div>
 
-                    <Display viewMode={viewMode} />
+                    {isDisplayOpen && (
+                        <Display viewMode={viewMode} />
+                    )}
 
                    {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
                     {isPlayerOpen && (
