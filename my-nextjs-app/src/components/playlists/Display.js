@@ -70,16 +70,22 @@ export default function Display({ viewMode }) {
         </h1>
             <div>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('grid')}>Grid</button>
-                <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('list')}>List</button>
+                <button className={`m-1 px-3 py-1 ${displayStyle === 'list' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('list')}>List</button>
             </div>
         </div>
 
         <ul /*className="flex flex-wrap justify-center"*/ className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
             {playlists.map(playlist =>(
-                <li key={playlist.id} className=" bg-gray-700 playlistCard">
-                    <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} className="playlistImg" />
-                    <h2 className="text-center">{playlist.name} </h2>
-                    <p className="mx-4 font-thin text-center">{playlist.description}</p>
+                <li key={playlist.id} /*className=" bg-gray-700 playlistCard"*/className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
+                    <div className={`${displayStyle === 'list' ? 'w-1/4' : 'div'}`}>
+                    <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`} />
+                    </div>
+                    <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
+                    <h2 /*className="text-center"*/ className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
+                    </div>
+                    <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div'}`}>
+                    <p className={`mx-4 ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{playlist.description}</p>
+                    </div>
                 </li>
             ))}
         </ul>
