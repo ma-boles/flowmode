@@ -60,7 +60,7 @@ export default function Dashboard() {
                     </div>
 
                     {isDisplayOpen && (
-                        <Display viewMode={viewMode} />
+                        <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
                     )}
 
                    {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
