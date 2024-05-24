@@ -5,7 +5,7 @@ import { getPlaylists } from "@/app/lib/apiCall";
 import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
-export default function Display({ viewMode }) {
+export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
@@ -59,15 +59,25 @@ export default function Display({ viewMode }) {
 
     const handleToggleStyle = (style) => {
         setDisplayStyle(style);
-    }
+    };
+
+    const handleClose = () => {
+        if(isDisplayOpen === true) {
+            setIsDisplayOpen(false);
+        }
+    };
 
 
     return (
         <>
+        <div className="text-right">
+            <button className="px-2 border border-solid border-white cursor-pointer" onClick={handleClose}>x</button>
+        </div>
+
         <div className="px-20 flex justify-between">
-        <h1 className="mx-0 my-2 p-0">
-            {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'Followed Playlists'}
-        </h1>
+            <h1 className="mx-0 my-2 p-0">
+                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'Followed Playlists'}
+            </h1>
             <div>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('grid')}>Grid</button>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'list' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('list')}>List</button>
@@ -96,12 +106,3 @@ export default function Display({ viewMode }) {
         </>
     );
 }
-
-{/*<ul >
-            {playlists.map(playlist =>(
-                <li key={playlist.id} className="flex my-1 mx-0 p-4 bg-gray-700 rounded-md">
-                    <h2>{playlist.name} </h2>
-                    <p className="mx-4 font-thin">{playlist.description}</p>
-                </li>
-            ))}
-        </ul>*//*className="m-1 px-3 py-1 bg-gray-700 rounded-md"*/}
