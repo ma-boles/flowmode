@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 
@@ -25,7 +25,7 @@ const UserProfile = () => {
 
 
     return(
-        <div className="flex px-2 justify-between w-full bg-neutral-800 items-center">
+        <div className="flex px-8 justify-between w-full bg-neutral-800 items-center">
             <div className="dropdown">
             <button className="bg-gray-400 dropdown-btn">
                 <img src={session.user.picture} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
@@ -35,7 +35,7 @@ const UserProfile = () => {
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
                         <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
-                    <p className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</p>
+                    <button onClick={() => signOut('spotify')} className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
                 </div>
             </div>
 
@@ -45,13 +45,13 @@ const UserProfile = () => {
 
             {currentPath === '/browse' && (
                 <Link href='/dashboard'>
-                    <button className="px-4 py-2 mr-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Dashboard</button>
+                    <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Dashboard</button>
                 </Link>
             )}
 
             {currentPath === '/dashboard' && (
                 <Link href='/browse'>
-                    <button className="px-4 py-2 mr-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
+                    <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
                 </Link>
             )}
         </div>
