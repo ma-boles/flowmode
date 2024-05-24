@@ -25,7 +25,7 @@ const UserProfile = () => {
 
 
     return(
-        <div className="flex px-2 justify-between w-full items-center">
+        <div className="flex px-2 justify-between w-full bg-neutral-800 items-center">
             <div className="dropdown">
             <button className="bg-gray-400 dropdown-btn">
                 <img src={session.user.picture} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
@@ -37,6 +37,10 @@ const UserProfile = () => {
                     </a>
                     <p className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</p>
                 </div>
+            </div>
+
+            <div /* center logo */>
+                <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
             </div>
 
             {currentPath === '/browse' && (
