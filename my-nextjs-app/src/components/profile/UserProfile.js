@@ -27,12 +27,13 @@ const UserProfile = () => {
     return(
         <div className="flex px-2 justify-between w-full items-center">
             <div className="dropdown">
-            <button className="bg-gray-500 dropdown-btn ">
+            <button className="bg-gray-400 dropdown-btn">
                 <img src={session.user.picture} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
             </button>
                 <div className="border border-solid rounded-md dropdown-content">
-                    <a rel="noopener noreferrer" href="https://open.spotify.com/">
-                        <p className="hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
+                    <p className="text-center cursor-default">------</p>
+                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
+                        <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
                     <p className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</p>
                 </div>
