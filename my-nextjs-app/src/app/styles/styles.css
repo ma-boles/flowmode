@@ -13,7 +13,7 @@ li {
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 2.25rem;
+  left: 3rem;
   top: 2.85rem;
   background-color: rgba(255, 255, 255, 0.051);
   border-color: rgba(255, 255, 255, 0.051);
