@@ -34,7 +34,7 @@ return(
             <UserProfile />
         </nav>
 
-        <section className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto ">
+        <section className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto">
             <div className="w-full border-none">
                 <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
                 </h2>
