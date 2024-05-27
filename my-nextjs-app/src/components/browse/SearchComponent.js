@@ -100,7 +100,7 @@ export default function SearchComponent () {
 
     return (
             <div className="bg-transparent">
-                <div className="pb-12 flex justify-center">
+                <div /* search section */ className="pb-12 flex justify-center">
                     <select className="p-2 px-4 bg-green-600 font-medium text-lg rounded-md cursor-pointer hover:bg-gray-700 transition duration-300 ease-in-out"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}>
