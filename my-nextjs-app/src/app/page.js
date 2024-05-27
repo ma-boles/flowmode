@@ -81,7 +81,7 @@ export default function HomePage(){
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full">
+                    <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full hover:bg-green-600 transition duration-300 ease-in-out">
                         Log In
                     </button>
                 </div>
