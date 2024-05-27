@@ -76,7 +76,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
         <div className="px-20 flex justify-between">
             <h1 className="mx-0 my-2 p-0">
-                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'Followed Playlists'}
+                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
             </h1>
             <div>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('grid')}>Grid</button>
