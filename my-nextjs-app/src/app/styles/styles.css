@@ -13,16 +13,14 @@ li {
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 3rem;
+  left: 2rem;
   top: 2.85rem;
-  background-color: rgba(255, 255, 255, 0.051);
-  border-color: rgba(255, 255, 255, 0.051);
   transition-duration: 5s;
+  border-color: rgba(255, 255, 255, 0.051);
 }
 
 .dropdown {
   display: block;
-  transition-duration: 5s;
 }
 
 .dropdown-content a {
