@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import UserProfile from "@/components/profile/UserProfile";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
@@ -15,6 +15,7 @@ export default function Dashboard() {
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     {/*const [isPlayerOpen, setIsPlayerOpen] = useState(false);*/}
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
+    const myDisplayRef = useRef(null);
 
     /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
@@ -23,10 +24,23 @@ export default function Dashboard() {
     const displayUserOwnedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('userOwnedPlaylists');
+
+        setTimeout(() => {
+            if(myDisplayRef.current) {
+                myDisplayRef.current.scrollIntoView({ behavior: 'smooth'});
+            }
+        }, 0)
     };
+
     const displayFollowedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('followedPlaylists');
+
+        setTimeout(() => {
+            if(myDisplayRef.current) {
+                myDisplayRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 0)
     };
 
 
@@ -37,7 +51,7 @@ export default function Dashboard() {
             </nav>
 
             <div className="m-12">
-                <h1 className="p-0 mb-14 text-center">Welcome, {/*{session.user.sub}*/}!</h1>
+                <h1 className="p-0 mb-14 text-center">Welcome{/*{session.user.sub}*/}!</h1>
                     <div /* top section */ className="mb-16 flex justify-center">
                         <div className="px-12 py-6 mb-0 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
                             <h2 className="m-2 font-bold text-2xl opacity-90">Minutes of <br /> Focused Work:</h2>
@@ -60,7 +74,9 @@ export default function Dashboard() {
                     </div>
 
                     {isDisplayOpen && (
-                        <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
+                        <div ref={myDisplayRef} style={{ marginTop: '50px' }}>
+                            <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
+                    </div>
                     )}
 
                    {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
