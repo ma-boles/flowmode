@@ -31,7 +31,10 @@ const UserProfile = () => {
                 <img src={session.user.picture} alt="User" className="m-auto w-14 h-14 object-cover rounded-full z-20"></img>
             </button>
                 <div className="border border-solid rounded-md dropdown-content">
-                    <p className="pb-2 text-center font-extrabold cursor-default bg-transparent">---</p>
+                    <p className="h-8 border-l border-solid border-black bg-transparent"></p>
+                    <Link href='/how'>
+                        <p className="border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">How To</p>
+                    </Link>
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
                         <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
@@ -40,7 +43,9 @@ const UserProfile = () => {
             </div>
 
             <div /* center logo */>
-                <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
+                <button className=" hover:bg-gray-600">
+                    <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
+                </button>
             </div>
 
 
@@ -52,6 +57,12 @@ const UserProfile = () => {
             )}
 
             {currentPath === '/dashboard' && (
+                <Link href='/browse'>
+                    <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
+                </Link>
+            )}
+
+            {currentPath === '/how' && (
                 <Link href='/browse'>
                     <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
                 </Link>
