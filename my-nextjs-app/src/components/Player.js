@@ -9,6 +9,8 @@ export default function Player() {
     // Check if the player is currently playing something
    // const isPlaying = playerState && playerState.isPlaying;
 
+   const [selectedItem, setSelectedItem] = useState(null);
+
     const handlePlayPause = () => {
         try {
             if (player && player.togglePlay) {
@@ -106,6 +108,16 @@ export default function Player() {
             <div className="flex justify-center">
 
                 <div className="p-6 border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
+
+                {selectedItem ? (
+                    <div>
+                        <h2 className="text-xl font-bold">Track Name {selectedItem.name}</h2>
+
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+
                     <h2 className="text-xl font-bold">Track Name</h2>
                     <h2>Artist Name</h2>
                 </div>
