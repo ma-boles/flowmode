@@ -29,6 +29,7 @@ const getTokens = async (account) => {
         const tokens = {
             id: account.id,
             name: account.name,
+            display_name: account.display_name,
             scope: account.scope,
             expiresAt: account.expires_at,
             accessToken: account.access_token,
@@ -87,20 +88,39 @@ const options = {
             if(account) {
                 const tokens = await getTokens(account);
                 token = {...token, ...tokens};
+
+                //Fetch additional user info
+                const response = await axios.get('https://api.spotify.com/v1/me', {
+                    headers: {
+                        Authorization: `Bearer ${tokens.accessToken}`,
+                    },
+                });
+
+                const user = response.data;
+                token.id = user.id;
+                token.display_name = user.display_name;
+                token.email = user.email;
+                token.picture = user.images?.[0]?.url || null;
             }
+            console.log('Token:', token)
             return token;
         },
         async session({ session, token }) {
-            session.user = token;
+            session.user = {
+                ...session.user,
+                id: token.id,
+                name:token.display_name,
+                email: token.email,
+                image: token.picture,
+            };
+                //token;
             session.accessToken = token.accessToken;
 
             console.log('Session:', session);
             return session;
         },
-
     },
-
-    // pages: {}
+    //pages: {}
 };
 
 export { getTokens };
