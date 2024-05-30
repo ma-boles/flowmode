@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
@@ -17,6 +17,9 @@ export default function Dashboard() {
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
     const myDisplayRef = useRef(null);
 
+    if (status === "loading") {
+        return <p>Loading...</p>;
+    }
     /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
     };*/
@@ -51,7 +54,12 @@ export default function Dashboard() {
             </nav>
 
             <div className="m-12">
-                <h1 className="p-0 mb-14 text-center">Welcome{/*{session.user.sub}*/}!</h1>
+                {!session ? (
+                    <h1>Loading...</h1>
+                ): (
+                    <h1 className="p-0 mb-14 text-center">Welcome {session.user.name}!</h1>
+
+                )}
                     <div /* top section */ className="mb-16 flex justify-center">
                         <div className="px-12 py-6 mb-0 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
                             <h2 className="m-2 font-bold text-2xl opacity-90">Minutes of <br /> Focused Work:</h2>
