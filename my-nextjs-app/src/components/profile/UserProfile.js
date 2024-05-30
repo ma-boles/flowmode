@@ -28,7 +28,11 @@ const UserProfile = () => {
         <div className="flex px-8 justify-between w-full bg-neutral-800 items-center">
             <div className="dropdown">
             <button className="bg-gray-400 dropdown-btn">
-                <img src={session.user.picture} alt="User" className="m-auto w-14 h-14 object-cover rounded-full z-20"></img>
+                {session.user.image ? (
+                <img src={session.user.image} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
+                ) : (
+                    <img src="user-regular.svg" alt="User" className="m-auto w-14 h-14 object-cover"></img>
+                )}
             </button>
                 <div className="border border-solid rounded-md dropdown-content">
                     <p className="h-8 border-l border-solid border-black bg-transparent"></p>
