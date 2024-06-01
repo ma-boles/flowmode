@@ -14,6 +14,7 @@ export default function Player() {
     const handlePlayPause = () => {
         try {
             if (player && player.togglePlay) {
+                console.log('Toggle play initiated');
                 player.togglePlay();
             } else {
                 console.log('Player or togglePlay method not available.');
