@@ -30,7 +30,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
                 // Filter playlists to include only ones owned by user
                 const userOwnedPlaylists = viewMode === 'userOwnedPlaylists'
-                    ? playlistsData.filter(playlist => playlist.owner.id === session.user.sub)
+                    ? playlistsData.filter(playlist => playlist.owner.id === session.user.id)
                     : playlistsData
 
                 console.log('User Owned Playlists:', userOwnedPlaylists);
