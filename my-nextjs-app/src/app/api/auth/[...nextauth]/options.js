@@ -45,7 +45,7 @@ const getTokens = async (account) => {
             tokens.expiresAt = refreshedTokens.expiresAt;
         }
         console.log('Tokens:', tokens);
-        console.log('Account:', account);
+        //console.log('Account:', account);
         return tokens;
 
     } catch(error) {
