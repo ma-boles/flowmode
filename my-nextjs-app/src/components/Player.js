@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { PlayerContext } from "@/app/contexts/PlayerContext";
 import { usePlayer } from "@/app/providers/PlayerProvider";
+import { TrackInfo } from "./TrackInfo";
 import "@/app/styles/styles.css"
 
 
@@ -112,6 +113,7 @@ export default function Player() {
 
                 {selectedItem ? (
                     <div>
+                        <TrackInfo />
                         <h2 className="text-xl font-bold">Track Name {selectedItem.name}</h2>
 
                     </div>
