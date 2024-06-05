@@ -4,7 +4,7 @@ import UserProfile from "@/components/profile/UserProfile";
 import '../styles/styles.css';
 import SearchComponent from "@/components/browse/SearchComponent";
 import { useSession } from "next-auth/react";
-import Player from "@/components/Player";
+import Player from "@/components/player/Player";
 
 
 const Browse = () => {

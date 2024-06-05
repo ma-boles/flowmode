@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import UserProfile from "@/components/profile/UserProfile";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
-import Player from "@/components/Player";
+import Player from "@/components/player/Player";
 import { useSession } from "next-auth/react";
 import TotalMinutes from "@/components/userdata/TotalMinutes";
 import LastPlayed from "@/components/userdata/LastPlayed";
