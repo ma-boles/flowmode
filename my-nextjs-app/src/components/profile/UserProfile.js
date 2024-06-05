@@ -27,7 +27,7 @@ const UserProfile = () => {
     return(
         <div className="flex px-8 justify-between w-full bg-neutral-800 items-center">
             <div className="dropdown">
-            <button className="bg-gray-400 dropdown-btn">
+            <button className="p-0.5 bg-gray-400 dropdown-btn">
                 {session.user.image ? (
                 <img src={session.user.image} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
                 ) : (
