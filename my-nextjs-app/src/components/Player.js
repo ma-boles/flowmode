@@ -110,19 +110,7 @@ export default function Player() {
             <div className="flex justify-center">
 
                 <div className="p-6 border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
-
-                {selectedItem ? (
-                    <div>
-                        <TrackInfo />
-                        <h2 className="text-xl font-bold">Track Name {selectedItem.name}</h2>
-
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )}
-
-                    <h2 className="text-xl font-bold">Track Name</h2>
-                    <h2>Artist Name</h2>
+                    <TrackInfo playerState={playerState}/>
                 </div>
 
                 <div className="flex px-32 justify-between border-t border-l border-b border-white border-opacity-100 bg-transparent">
