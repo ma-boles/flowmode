@@ -1,33 +1,28 @@
-import { PlayerContext } from "@/app/contexts/PlayerContext";
-import { useState, useEffect, useContext } from "react";
-import { usePlayer } from "@/app/providers/PlayerProvider";
+import React from "react";
 
-export const TrackInfo = () => {
-    const playerState = usePlayer();
-
-    if(!playerState || !playerState.track_window){
-        return null;
+export const TrackInfo = ({ playerState }) => {
+    // check if playerState is null
+    if(!playerState) {
+        return <div>Loading...</div>;
     }
 
-    const { current_track } = playerState.track_window;
-    const trackName = current_track?.name || 'Unknown Track';
-    const artistName = current_track?.artists?.[0]?.name || 'Unknown Artist';
-    //const { playerState } = useContext(PlayerContext);
-    //const [trackName, setTrackName] = useState('');
-    //const [artistName, setArtistName]= useState('');
-
-    /*useEffect (() => {
-        if (playerState && playerState.track_window && playerState.track_window.current_track) {
-            const currentTrack = playerState.track_window.current_track;
-            setTrackName(currentTrack.name);
-            setArtistName(currentTrack.artists[0].name);
-        }
-    }, [playerState]);*/
-
+    // check if track_window is null
+    if (!playerState.track_window) {
+        return <div>No track playing</div>;
+    }
+    // extract track info from playerState
+    const { track_window } = playerState;
+    const currentTrack = track_window.current_track;
+   
     return (
         <div>
-            <h2>{trackName}</h2>
-            <h2>{artistName}</h2>
+            {currentTrack && (
+                <>
+                    <h2>{currentTrack.name}</h2>
+                    <h2>{currentTrack.artists[0].name}</h2>
+
+                </>
+            )}
         </div>
     );
 };
