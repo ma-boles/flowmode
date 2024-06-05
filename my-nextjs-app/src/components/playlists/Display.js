@@ -84,14 +84,14 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
             </div>
         </div>
 
-        <ul /*className="flex flex-wrap justify-center"*/ className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
+        <ul className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
             {playlists.map(playlist =>(
-                <li key={playlist.id} /*className=" bg-gray-700 playlistCard"*/className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
+                <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
                     <div className={`${displayStyle === 'list' ? 'w-1/4' : 'div'}`}>
                     <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`} />
                     </div>
                     <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
-                    <h2 /*className="text-center"*/ className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
+                    <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
                     </div>
                     <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div'}`}>
                     <p className={`mx-4 ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{playlist.description}</p>
@@ -100,8 +100,8 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
             ))}
         </ul>
         <div className="flex justify-between">
-            <button className="m-1 px-3 py-1 bg-gray-900 rounded-md" onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
-            <button className="m-1 px-3 py-1 bg-gray-900 rounded-md" onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
+            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${currentPage === 1 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
+            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${remainingPlaylists.length === 0 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
         </div>
         </>
     );
