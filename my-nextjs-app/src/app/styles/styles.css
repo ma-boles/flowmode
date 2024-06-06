@@ -35,6 +35,31 @@ li {
   cursor: pointer;
 }
 
+.dropdown-nav {
+  background-color: transparent;
+}
+
+.dropdown-nav-btn {
+  padding: .5rem;
+  width: 6.5rem;
+  border-radius: 5px;
+}
+
+.dropdown-nav-content {
+  display: none;
+  position: absolute;
+  width: 6.5rem;
+  right: 2rem;
+  top: 3.7rem;
+  transition-duration: 5s;
+  border-bottom-right-radius: .3rem;
+  border-bottom-left-radius: .3rem;
+}
+
+.dropdown-nav:hover .dropdown-nav-content {
+  display: block;
+}
+
 /* dropdown 
 .dropbtn {
   background-color: #4CAF50;
