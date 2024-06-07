@@ -7,8 +7,8 @@ export default function HeadComponent({ metadata }) {
     if(!metadata || !metadata.title || !metadata.description) {
         // default values as needed
         metadata = {
-            title: 'Spotify Reads',
-            description: 'Spotify audiobook tracking tool'
+            title: 'flow mode',
+            description: 'Productivity tool utilizing audio from Spotify'
         }
     }
     return (
