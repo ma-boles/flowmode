@@ -133,20 +133,21 @@ export default function Player() {
                 </div>
 
                 <div className="border border-white border-opacity-100 bg-transparent rounded-r-lg" style={{display: 'grid', placeItems: 'center'}}>
+                    <div className="mx-4 w-48">
+                        <div className="flex justify-evenly">
+                            <img src="repeat-solid.svg" alt="repeat" className=" btnIconShuffle"></img>
+                            <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
+                        </div>
 
-                <div className="mx-4">
-                    <div className="flex justify-evenly">
-                        <img src="repeat-solid.svg" alt="repeat" className=" btnIconShuffle"></img>
-                        <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
+                        <div className="flex justify-center items-center">
+                            <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            />
+                        </div>
                     </div>
-                    <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    />
-                </div>
-
                 </div>
             </div>
         </div>
