@@ -109,7 +109,7 @@ export default function Player() {
 
             <div className="flex justify-center">
 
-                <div className="p-6 border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
+                <div className="flex items-center justify-center w-48 p-4 border-t border-l border-b border-white border-opacity-100 bg-transparent rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
                     <TrackInfo playerState={playerState}/>
                 </div>
 
