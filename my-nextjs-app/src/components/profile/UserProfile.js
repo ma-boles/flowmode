@@ -78,10 +78,6 @@ const UserProfile = () => {
                         </a>
                     </div>
                 </div>
-                /*
-                <Link href='/browse'>
-                    <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
-                </Link>*/
             )}
         </div>
     );
