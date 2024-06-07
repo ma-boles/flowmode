@@ -20,7 +20,9 @@ export default function Dashboard() {
     const myDisplayRef = useRef(null);
 
     if (status === "loading") {
-        return <p>Loading...</p>;
+        return  <div className="flex items-center justify-center h-screen">
+                    <div className="p-6 rounded-lg loader"></div>
+                </div>;
     }
     /*const handleButtonClick = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
@@ -57,7 +59,7 @@ export default function Dashboard() {
 
             <div className="m-12">
                 {!session ? (
-                    <h1>Loading...</h1>
+                    <h1 className="text-center">Loading...</h1>
                 ): (
                     <h1 className="p-0 mb-14 text-center">Welcome {session.user.name}!</h1>
 
@@ -65,25 +67,6 @@ export default function Dashboard() {
                     <div /* top section */ className="mb-16 flex justify-center">
                         <TotalMinutes />
                         <LastPlayed />
-                        {/*<div className="px-12 py-6 mb-0 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
-                            <div className="text-center">
-                                <h2>Today</h2>
-                               {/* <h2>This Week</h2>
-                                <h2>This Month</h2>
-                            </div>
-                            <h2 className="m-2 font-bold text-2xl opacity-90">Minutes of <br /> Focused Work:</h2>
-                            <hr />
-                            <h2 className="mx-2 mt-8 font-bold text-2xl opacity-90"><span className="text-4xl">00 </span>HR <br /> <span className="text-4xl">00</span> MIN</h2>
-                        </div>
-                        <div className="py-6 px-12 mx-8 border-8 border-solid border-white rounded-lg opacity-50">
-                            <h2 className="m-2 font-bold text-2xl opacity-90">Most Recently <br /> Played:</h2>
-                            <hr />
-                            <div className="flex flex-col">
-                                <h2 className="m-2 text-xl font-semibold">Title #1</h2>
-                                <h2 className="m-2 text-xl font-semibold">Title #2</h2>
-                                <h2 className="m-2 text-xl font-semibold">Title #3</h2>
-                            </div>
-                        </div>*/}
                         <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                             <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
