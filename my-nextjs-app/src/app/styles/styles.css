@@ -17,6 +17,7 @@ li {
   top: 2.85rem;
   transition-duration: 5s;
   border-color: rgba(255, 255, 255, 0.051);
+  z-index: 2000;
 }
 
 .dropdown {
@@ -244,9 +245,17 @@ li {
  }
 
  /* player */
+ .player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(20, 20, 20);
+  text-align: center;
+  z-index: 1000;
+ }
  .playBackground {
   background-color: rgba(0, 0, 0, 0.111);
-  padding: 6rem;
+  padding: .5rem 6rem;
   /* postition: */
  }
  .flowDiv {
@@ -269,8 +278,8 @@ li {
  .playerBtn {
   border: 2px solid white;
   background-color: transparent;
-  margin: 1rem;
-  padding: 2rem;
+  margin: .5rem;
+  padding: 1rem;
   border-radius: 180rem;
  }
  .playerBtn:hover {
@@ -280,8 +289,8 @@ li {
  .playerBtnSm {
   border: 1px solid white;
   background-color: transparent;
-  margin: 2rem;
-  padding: 1rem;
+  margin: 1rem;
+  padding: .5rem;
   border-radius: 180rem;
  }
  .playerBtnSm:hover {
