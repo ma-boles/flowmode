@@ -140,8 +140,10 @@ export default function SearchComponent () {
                                         {artist.images[2] && (
                                             <img src={artist.images[2].url} alt={`Image of ${artist.name}`} className="artistImg"/>
                                           )}
-                                            <h2 className="font-bold">{artist.name}</h2>
-                                            <p>{artist.genres.join(', ')}</p>
+                                            <div className="h-12">
+                                                <h2 className="font-bold">{artist.name}</h2>
+                                                <p>{artist.genres.join(', ')}</p>
+                                            </div>
                                     </div>
                                 </li>
                             </ul>
@@ -155,9 +157,11 @@ export default function SearchComponent () {
                                     <div className="px-4">
                                         {album.images[2] && (
                                             <img src={album.images[0].url} alt={`Album cover of ${album.name}`} className="artistImg"></img>
-                                    )}
-                                            <h2 className="font-semibold text-center">{album.name}</h2>
-                                            <h2 className="text-center">{album.artists[0].name}</h2>
+                                        )}
+                                            <div className="h-12">
+                                                <h2 className="font-semibold text-center">{album.name}</h2>
+                                                <h2 className="text-center">{album.artists[0].name}</h2>
+                                            </div>
                                     </div>
                                 </ul>
                             ))}
@@ -169,8 +173,10 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="px-4">
                                         <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
-                                        <h2 className="text-center font-bold hover:underline cursor-pointer" onClick={() => handleItemSelect(track)}>{track.name}</h2>
-                                        <h2 className="text-center">{track.artists[0].name}</h2>
+                                        <div className="h-12">
+                                            <h2 className="text-center font-bold hover:underline cursor-pointer" onClick={() => handleItemSelect(track)}>{track.name}</h2>
+                                            <h2 className="text-center">{track.artists[0].name}</h2>
+                                        </div>
                                     </div>
                                 </ul>
                             ))}
@@ -182,8 +188,10 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="px-4">
                                         <img src={audiobook.images[0].url} alt={`Book cover of ${audiobook.name}`} className="trackImg" />
-                                        <h2 className="text-center font-bold">{audiobook.name}</h2>
-                                        <h2 className="text-center">{audiobook.authors[0].name}</h2>
+                                        <div className="h-12">
+                                            <h2 className="text-center font-bold">{audiobook.name}</h2>
+                                            <h2 className="text-center">{audiobook.authors[0].name}</h2>
+                                        </div>
                                     </div>
                                 </ul>
                             ))}
@@ -195,7 +203,9 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="cardWrapper ">
                                         <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
-                                        <h2 className="text-center font-medium">{playlist.name}</h2>
+                                        <div className="h-12">
+                                            <h2 className="text-center font-medium">{playlist.name}</h2>
+                                        </div>
                                     </div>
                                 </ul>
                             ))}
@@ -207,7 +217,9 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="px-4">
                                         <img src={show.images[0].url} alt={`Image of ${show.name}`} className="trackImg" />
-                                        <h2 className="text-center font-bold">{show.name}</h2>
+                                        <div className="h-12">
+                                            <h2 className="text-center font-bold">{show.name}</h2>
+                                        </div>
                                     </div>
                                 </ul>
                             ))}
@@ -219,7 +231,9 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <div className="cardWrapper ">
                                         <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
-                                        <h2 className="text-center font-medium">{episode.name}</h2>
+                                        <div className="h-12">
+                                            <h2 className="text-center font-medium">{episode.name}</h2>
+                                        </div>
                                     </div>
                                 </ul>
                             ))}
