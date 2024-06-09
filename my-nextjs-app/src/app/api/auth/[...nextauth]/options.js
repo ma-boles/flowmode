@@ -112,9 +112,13 @@ const options = {
                 name:token.display_name,
                 email: token.email,
                 image: token.picture,
+                //accessToken: token.accessToken,
+                //refreshToken: token.refreshToken,
             };
-                //token;
+
+            //token;
             session.accessToken = token.accessToken;
+            session.refreshToken = token.refreshToken;
 
             console.log('Session:', session);
             return session;
