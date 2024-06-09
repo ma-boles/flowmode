@@ -13,6 +13,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [remainingPlaylists, setRemainingPlaylists] = useState([]);
     const [displayStyle, setDisplayStyle] = useState('grid');
+    const [loading, setLoading] = useState(true);
     const pageSize = 10;
 
 
@@ -20,6 +21,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         async function fetchPlaylists() {
             try {
                 if(!accessToken) {
+                    setLoading(false);
                     return; // Exit if access token is not available
                 }
 
@@ -43,12 +45,17 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
                 setPlaylists(currentPlaylists);
                 setRemainingPlaylists(remaining);
+                setLoading(false);
             } catch(error) {
                 console.error('Error fetching playlists:', error);
             }
         }
         fetchPlaylists();
     }, [accessToken, currentPage, session, viewMode]); // Re-run on every accessToken or session change
+
+    if(loading) {
+        return <div>Loading...</div>;
+    }
 
     const handleNextPage = () => {
         setCurrentPage(prevPage => prevPage + 1);
@@ -88,17 +95,27 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
             {playlists.map(playlist =>(
                 <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
                     <div className={`${displayStyle === 'list' ? 'w-1/4' : 'div'}`}>
-                    <img src={playlist.images[0].url} alt={`Cover of ${playlist.name}`} className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`} />
-                    </div>
-                    <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
-                    <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
-                    </div>
-                    <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div'}`}>
-                    <p className={`mx-4 ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{playlist.description}</p>
+                    {playlist.images && playlist.images[0] ? (
+                        <img src={playlist.images[0].url}
+                        alt={`Cover of ${playlist.name}`}
+                        className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`}
+                        />
+                        ) : (
+                        <div className={`flex justify-center items-center ${displayStyle === 'list' ? 'fallBackImgList' : 'fallBackImg'}`}>
+                            <p className="fallBackText">No Image <br />Available</p>
+                        </div>
+                     )}
+                        </div>
+                            <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
+                            <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
+                            </div>
+                            <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div'}`}>
+                            <p className={`mx-4 ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{playlist.description}</p>
                     </div>
                 </li>
             ))}
         </ul>
+
         <div className="flex justify-between">
             <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${currentPage === 1 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
             <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${remainingPlaylists.length === 0 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
