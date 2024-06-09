@@ -15,7 +15,6 @@ export default function Dashboard() {
     const accessToken = session?.accessToken;
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
-    {/*const [isPlayerOpen, setIsPlayerOpen] = useState(false);*/}
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
     const myDisplayRef = useRef(null);
 
@@ -24,9 +23,6 @@ export default function Dashboard() {
                     <div className="p-6 rounded-lg loader"></div>
                 </div>;
     }
-    /*const handleButtonClick = () => {
-        setIsPlayerOpen(true); // Open Player when button is clicked
-    };*/
 
     const displayUserOwnedPlaylists = () => {
         setIsDisplayOpen(true);
@@ -78,11 +74,6 @@ export default function Dashboard() {
                             <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
                     </div>
                     )}
-
-                   {/* <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
-                    {isPlayerOpen && (
-                        <Player accessToken={accessToken}/>
-                    )}*/}
             </div>
         </>
     )
