@@ -346,3 +346,22 @@ li {
     background-position: 0 50%, 50% 50%, 100% 50%;
   }
 }
+
+/* display */
+.fallBackImg {
+  background-color: rgba(0, 0, 0, 0.794);
+  height: 150px;
+  width: 150px;
+  display: block;
+  margin: 0.5rem;
+}
+.fallBackImgList {
+  background-color: rgba(0, 0, 0, 0.794);
+  width: 6rem;
+  height: 6rem;
+  margin: 1rem;
+}
+.fallBackText {
+  color: white;
+  text-align: center;
+}
