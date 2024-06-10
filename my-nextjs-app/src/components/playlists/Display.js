@@ -79,12 +79,24 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         <>
         <div className="text-right">
             <button className="px-2 border border-solid border-white cursor-pointer" onClick={handleClose}>x</button>
+                
         </div>
 
         <div className="px-20 flex justify-between">
-            <h1 className="mx-0 my-2 p-0">
+            {/*<h1 className="mx-0 my-2 p-0">
                 {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
-            </h1>
+            </h1>*/}
+            <div className="flex justify-around w-1/3 my-6 mx-2 border border-solid border-gray-700 rounded-md displaySearchInput">
+                        <input className="outline-none p-2 m-2 text-xl displaySearchInput" /*text-slate-800 */
+                        type="text"
+                        placeholder="Title..."
+                        //value={keyword}
+                        //onChange={(e) => setKeyword(e.target.value)}
+                        //onKeyDown={handleKeyDown}
+                        />
+                        <button className="py-0 px-7 m-2 bg-green-600 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out"
+                        /*onClick={executeSearch} */>Search</button>
+                </div>
             <div>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'grid' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('grid')}>Grid</button>
                 <button className={`m-1 px-3 py-1 ${displayStyle === 'list' ? 'bg-blue-500' : 'bg-gray-900'} rounded-md`} onClick={() => handleToggleStyle('list')}>List</button>
@@ -123,3 +135,5 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         </>
     );
 }
+
+// playlist display: playerState.context.metadata.uri => re-render when uri updates
