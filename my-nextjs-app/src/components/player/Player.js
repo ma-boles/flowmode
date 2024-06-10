@@ -55,12 +55,12 @@ export default function Player() {
     };
 
     //console.log('Player:', player);
-    //console.log('Player state:', playerState);
+    console.log('Player state:', playerState);
 
 
     return (
         <div className="player">
-            <div className="playBackground justify-center">
+            <div className="playBackground" /*justify-center*/>
                 {isFlowVisible && 
 
                 <div /* flow div */ className="pt-18 pb-12 mb-8 mt-8">
@@ -118,7 +118,7 @@ export default function Player() {
 }
 
 
-                <div className="flex justify-center">
+                <div className="flex justify-between">
 
                     <div className="flex items-center justify-center w-48 p-4 bg-transparent 0 rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
                         <TrackInfo playerState={playerState}/>
