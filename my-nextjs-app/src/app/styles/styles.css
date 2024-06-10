@@ -243,6 +243,10 @@ li {
  .footer--hr {
   width: 95%
  }
+ .displaySearchInput {
+  background-color:  rgb(39, 41, 43);
+  
+ }
 
  /* player */
  .player {
@@ -255,7 +259,7 @@ li {
  }
  .playBackground {
   background-color: rgba(0, 0, 0, 0.111);
-  padding: .5rem 6rem;
+  padding: .5rem 2rem;
   /* postition: */
  }
  .flowDiv {
@@ -315,6 +319,12 @@ li {
   margin: 1rem;
   filter: invert(1);
   cursor: pointer;
+ }
+
+ .truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
  }
 
 /* HTML: <div class="loader"></div> */
