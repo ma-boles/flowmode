@@ -14,8 +14,20 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
     const [remainingPlaylists, setRemainingPlaylists] = useState([]);
     const [displayStyle, setDisplayStyle] = useState('grid');
     const [loading, setLoading] = useState(true);
+    const [displayedPlaylists, setDisplayedPlaylists] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredPlaylists, setFilteredPlaylists] = useState([]);
+    const [hoveredDescription, setHoveredDescription] = useState(null);
     const pageSize = 10;
 
+    const cleanDescription = (description) => {
+        // Create a new div element
+        const divDescription = document.createElement('div');
+        // Set the HTML content with the provided description
+        divDescription.innerHTML = description;
+        // Retrieve the tect content which will decode the HTML entittie
+        return divDescription.textContent || divDescription.innerText || "";
+    };
 
     useEffect(() => {
         async function fetchPlaylists() {
@@ -37,6 +49,13 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
                 console.log('User Owned Playlists:', userOwnedPlaylists);
 
+                // Set displayed playlists based on view mode
+                const sourcePlaylists = viewMode === 'userOwnedPlaylists' ? userOwnedPlaylists : playlistsData;
+                setDisplayedPlaylists(sourcePlaylists);
+
+                // Initialize filtered playlists with current playlists
+                setFilteredPlaylists(sourcePlaylists);
+
                 // Calculate the current page's playlists and remaining playlists
                 const startIndex = (currentPage - 1) * pageSize;
                 const endIndex = startIndex + pageSize;
@@ -52,6 +71,21 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         }
         fetchPlaylists();
     }, [accessToken, currentPage, session, viewMode]); // Re-run on every accessToken or session change
+
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilteredPlaylists(displayedPlaylists);
+        } else {
+            const lowercaseQuery = searchQuery.toLowerCase();
+            const filtered = displayedPlaylists.filter(playlist =>
+                playlist.name.toLowerCase().includes(lowercaseQuery)
+            );
+            setFilteredPlaylists(filtered);
+        }
+        console.log('Search Query:', searchQuery)
+        console.log('Results:', filteredPlaylists)
+
+    }, [searchQuery, displayedPlaylists]);
 
     if(loading) {
         return <div>Loading...</div>;
@@ -74,25 +108,29 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         }
     };
 
+    const handleDescriptionHover = (description) => {
+        setHoveredDescription(description);
+    };
+
+    const handleDescriptionLeave = () => {
+        setHoveredDescription(null);
+    };
+
 
     return (
         <>
         <div className="text-right">
             <button className="px-2 border border-solid border-white cursor-pointer" onClick={handleClose}>x</button>
-                
         </div>
 
         <div className="px-20 flex justify-between">
-            {/*<h1 className="mx-0 my-2 p-0">
-                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
-            </h1>*/}
+
             <div className="flex justify-around w-1/3 my-6 mx-2 border border-solid border-gray-700 rounded-md displaySearchInput">
                         <input className="outline-none p-2 m-2 text-xl displaySearchInput" /*text-slate-800 */
                         type="text"
                         placeholder="Title..."
-                        //value={keyword}
-                        //onChange={(e) => setKeyword(e.target.value)}
-                        //onKeyDown={handleKeyDown}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <button className="py-0 px-7 m-2 bg-green-600 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out"
                         /*onClick={executeSearch} */>Search</button>
@@ -104,7 +142,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         </div>
 
         <ul className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
-            {playlists.map(playlist =>(
+            {filteredPlaylists.map(playlist =>(
                 <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
                     <div className={`${displayStyle === 'list' ? 'w-1/4' : 'div'}`}>
                     {playlist.images && playlist.images[0] ? (
@@ -117,13 +155,15 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
                             <p className="fallBackText">No Image <br />Available</p>
                         </div>
                      )}
-                        </div>
-                            <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
-                            <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{playlist.name} </h2>
-                            </div>
-                            <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div'}`}>
-                            <p className={`mx-4 ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{playlist.description}</p>
                     </div>
+                        <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
+                            <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{cleanDescription(playlist.name)} </h2>
+                        </div>
+                        <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div w-5/6'}`}
+                        onMouseEnter={() => handleDescriptionHover(playlist.description)}
+                        onMouseLeave={() => handleDescriptionLeave}>
+                            <p className={`mx-4 truncate-text ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{cleanDescription(playlist.description)}</p>
+                        </div>
                 </li>
             ))}
         </ul>
@@ -135,5 +175,9 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         </>
     );
 }
+
+{/*<h1 className="mx-0 my-2 p-0">
+                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
+            </h1>*/}
 
 // playlist display: playerState.context.metadata.uri => re-render when uri updates
