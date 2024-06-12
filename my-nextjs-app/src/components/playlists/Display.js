@@ -18,7 +18,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
     const [hoveredDescription, setHoveredDescription] = useState(null);
-    const pageSize = 10;
+    const pageSize = 50;
 
     const cleanDescription = (description) => {
         // Create a new div element
@@ -108,13 +108,13 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         }
     };
 
-    const handleDescriptionHover = (description) => {
+    /*const handleDescriptionHover = (description) => {
         setHoveredDescription(description);
     };
 
     const handleDescriptionLeave = () => {
         setHoveredDescription(null);
-    };
+    };*/
 
 
     return (
@@ -159,10 +159,8 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
                         <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
                             <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{cleanDescription(playlist.name)} </h2>
                         </div>
-                        <div className={`${displayStyle === 'list' ? 'm-auto w-2/4' : 'div w-5/6'}`}
-                        onMouseEnter={() => handleDescriptionHover(playlist.description)}
-                        onMouseLeave={() => handleDescriptionLeave}>
-                            <p className={`mx-4 truncate-text ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{cleanDescription(playlist.description)}</p>
+                        <div className={`mx-4 ${displayStyle === 'list' ? 'm-auto w-2/4' : 'div w-5/6'}`}>
+                            <p className={`w-full truncate-text ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{cleanDescription(playlist.description)}</p>
                         </div>
                 </li>
             ))}
