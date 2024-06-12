@@ -18,7 +18,7 @@ export const TrackInfo = ({ playerState }) => {
         <div>
             {currentTrack && (
                 <>
-                    <div className="h-18 w-64">
+                    <div className="h-18 text-left">
                         <h2 className="font-bold truncate-text">{currentTrack.name}</h2>
                         <h2 className="truncate-text">{currentTrack.artists[0].name}</h2>
                     </div>
