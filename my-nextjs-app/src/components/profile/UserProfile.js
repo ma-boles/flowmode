@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import Modal from "../Modal";
 
 
 const UserProfile = () => {
     const { data: session } = useSession();
     const [isClient, setIsClient] = useState(false);
     const [currentPath, setCurrentPath] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
@@ -39,11 +41,17 @@ const UserProfile = () => {
                     <Link href='/how'>
                         <p className="border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">How To</p>
                     </Link>
+                    <button className="w-full border-t border-solid border-gray-600 hover:bg-purple-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Opt-In</button>
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
                         <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
                     <button onClick={() => signOut('spotify')} className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
                 </div>
+            </div>
+
+            {/* Opt In modal */}
+            <div className="centered">
+            {isOpen && <Modal setIsOpen={setIsOpen} />}
             </div>
 
             <div /* center logo */>
