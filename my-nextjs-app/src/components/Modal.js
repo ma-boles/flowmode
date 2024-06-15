@@ -1,13 +1,30 @@
+import { useSession } from "next-auth/react";
 import React from "react";
 
 export default function Modal ({ setIsOpen }) {
+    const { data: session } = useSession();
 
-    const handleTrack = () => {
-        alert('tracking')
+    const handleTrack = async () => {
+        if(!session) {
+            alert('Log in required');
+            return;
+        }
+
+        try {
+            const response = await axios.post('/api/create-account');
+            if(response.status === 201) {
+                alert('User account created successfully');
+            } else if (response.status === 200) {
+                alert('User account already exists');
+            }
+        } catch(error) {
+            console.error('Error creating user account', error);
+            alert('Failed to create user account');
+        }
     };
 
     const handleDontTrack = () => {
-        alert('no tracking')
+        alert('not tracking')
     };
 
     return (
