@@ -1,4 +1,4 @@
-// mongoose
+import mongoose from 'mongoose';
 
 
 const userSchema = new mongoose.Schema({
@@ -27,12 +27,18 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-});
+    mostRecentlyPlayed: [{
+        title: {
+            type: String,
+            required: true,
+        }
+    }]
+}, { timestamps: true });
 
 let User;
-try {
+if(mongoose.models.User) {
     User = mongoose.model('User');
-} catch(error) {
+} else {
     User = mongoose.model('User', userSchema);
 }
 
