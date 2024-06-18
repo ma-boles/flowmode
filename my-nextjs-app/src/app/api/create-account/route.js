@@ -1,10 +1,9 @@
-import { getSession } from "next-auth/react";
 import User from "../../lib/models/User";
 import dbConnect from "@/app/lib/utils/dbConnect";
 import { NextResponse } from "next/server";
 
 
-export async function POST(req, res) {
+export async function POST(req) {
     await dbConnect();
 
 
@@ -36,3 +35,23 @@ export async function POST(req, res) {
             return NextResponse.json({ message: 'Failed to create user account'}, { status: 500 });
         }
 };
+
+export async function DELETE(req) {
+    await dbConnect();
+
+
+        try {
+            const { email } = await req.json();
+
+            // find and delete user by email
+            const user = await User.findOneAndDelete({ email });
+            if(!user) {
+                return NextResponse.json({ message: 'User not found'}, { status: 404 });
+            }
+
+            return NextResponse.json({ message: 'User account deleted successfully' }, { status: 200 });
+        } catch(error) {
+            console.error('Error deleting user account:', error);
+            return NextResponse.json({ message: 'Failed to delete user account', error: error.message}, { status: 500 });
+        }
+}
