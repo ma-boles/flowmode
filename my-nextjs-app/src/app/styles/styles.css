@@ -74,6 +74,17 @@ li {
   width: 24rem;
 }
 
+.checkmark-container {
+  display: inline-block;
+  padding: .25rem;
+  border-radius: 50%;
+}
+.checkmark-img {
+  width: 5rem;
+  height: 5rem;
+  filter: invert(1);
+}
+
 /* dropdown 
 .dropbtn {
   background-color: #4CAF50;

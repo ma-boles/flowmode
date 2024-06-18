@@ -19,7 +19,7 @@ export default function Modal ({ setIsOpen }) {
                 spotifyName: user.name,
                 email: user.email
             });
-            
+
             if(response.status === 201) {
                 alert('User account created successfully');
             } else if (response.status === 200) {
@@ -30,28 +30,29 @@ export default function Modal ({ setIsOpen }) {
             alert('Failed to create user account');
         }
     };
-/*
-    const handleTrack = async () => {
+
+    const handleDontTrack = async () => {
         if(!session) {
             alert('Log in required');
             return;
         }
 
-        try {
-            const response = await axios.post('/api/create-account');
-            if(response.status === 201) {
-                alert('User account created successfully');
-            } else if (response.status === 200) {
-                alert('User account already exists');
-            }
-        } catch(error) {
-            console.error('Error creating user account', error);
-            alert('Failed to create user account');
-        }
-    };*/
+        const { user } = session;
 
-    const handleDontTrack = () => {
-        alert('not tracking')
+        try {
+            const response = await axios.delete('/api/create-account', {
+                data: { email: user.email } // sending email in the reuest body
+            });
+
+            if ( response.status === 200) {
+                alert('User account deleted successfully');
+            } else if (response.status === 404) {
+                alert('User account not found');
+            }
+        } catch (error) {
+            console.error('Error deleting user account', error);
+            alert('Failed to delete user account');
+        }
     };
 
     return (
@@ -63,6 +64,18 @@ export default function Modal ({ setIsOpen }) {
             <div className="mb-8 text-center">
                 <h1 className="px-8 py-4 text-6xl"><span className="text-green-600 font-bold">flow</span><span className="font-thin">mode</span></h1>
             </div>
+
+            <div /* success message */>
+                <div className=" flex justify-center items-center">
+                    <div className="bg-green-600 checkmark-container">
+                        <img src="circle-check-regular.svg" alt="checkmark" className="checkmark-img"></img>
+                    </div>
+                </div>
+                <div className="mt-4">
+                    <h2 className="text-center text-2xl font-semibold"> Successfully created account! </h2>
+                </div>
+            </div>
+
             <div className="pt-4 bg-white border border-solid border-slate-800 text-center rounded-md">
                 <h2 className="m-6 text-black text-xl font-semibold">Keep track of your total time in flow per day/week/month?</h2>
                 <div className="m-8 pt-2 flex justify-around">
