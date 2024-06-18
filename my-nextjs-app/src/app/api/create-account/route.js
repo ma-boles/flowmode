@@ -2,12 +2,28 @@ import { getSession } from "next-auth/react";
 import User from "../../lib/models/User";
 import dbConnect from "@/app/lib/utils/dbConnect";
 
-export default async function handler(req, res) {
-    await dbConnect();
+/*export async function handler(req, res) {
+    console.log('Request method:', req.method);
 
     if(req.method === 'POST') {
+        await handlePost(req, res);
+    } else {
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${req.method} not allowed`);
+    }
+}*/
+
+export async function POST(req, res) {
+    await dbConnect();
+
+
+    if(req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
+        return res.status(405).end(`Method ${req.method} not allowed`);
+    }
+
         try {
-            const {spotifyId, spotifyName, email } = req.body
+            const {spotifyId, spotifyName, email } = req.body;
 
             // check if user already exists
             let existingUser = await User.findOne({ email });
@@ -29,12 +45,7 @@ export default async function handler(req, res) {
             console.error('Error creating user account:', error);
             return res.status(500).json({ message: 'Failed to create user account', error: error.message});
         }
-    } else {
-        // handle other HTTP methods
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${res.method} Not Allowed`);
-    }
-}
+};
 /*
 export default async (req, res) => {
     await connectToDB();
