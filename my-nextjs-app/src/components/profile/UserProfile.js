@@ -36,12 +36,11 @@ const UserProfile = () => {
                     <img src="user-regular.svg" alt="User" className="m-auto w-14 h-14 object-cover"></img>
                 )}
             </button>
-                <div className="border border-solid rounded-md dropdown-content">
-                    <p className="h-8 border-l border-solid border-black bg-transparent"></p>
+                <div className="border border-solid rounded-sm dropdown-content">
                     <Link href='/how'>
-                        <p className="border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">How To</p>
+                        <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">How To</p>
                     </Link>
-                    <button className="w-full border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Opt-In</button>
+                    <button className="w-full border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
                         <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>

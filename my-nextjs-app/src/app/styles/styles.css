@@ -13,8 +13,8 @@ li {
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 2rem;
-  top: 2.85rem;
+  left: 0rem;
+  top: 4.8rem;
   transition-duration: 5s;
   border-color: rgba(255, 255, 255, 0.051);
   z-index: 2000;
