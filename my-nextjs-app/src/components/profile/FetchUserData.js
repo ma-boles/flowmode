@@ -1,8 +1,8 @@
 import makeApiRequest from "@/app/lib/spotifyApi";
 import { useEffect, useState } from "react";
 
-export const useFetchUserData = (account) => {
-    console.log('Account in useFetchUserData:', account);
+export const useFetchUserData = (token) => {
+    console.log('Account in useFetchUserData:', token);
 
     const [userData, setUserData] = useState(null);
 
@@ -12,16 +12,16 @@ export const useFetchUserData = (account) => {
         const fetchUserProfile = async() => {
             try {
                 const apiUrl = 'https://api.spotify.com/v1/me';
-                const data = await makeApiRequest(apiUrl, account);
+                const data = await makeApiRequest(apiUrl, token);
                 setUserData(data);
             } catch(error) {
                 console.error('Error fetching user profile:', error);
             }
         };
-        if(account) {
+        if(token) {
             fetchUserProfile();
         }
-    }, [account]);
+    }, [token]);
 
     return userData;
 };
