@@ -60,12 +60,13 @@ export default function Dashboard() {
                     <h1 className="p-0 mb-14 text-center">Welcome {session.user.name}!</h1>
 
                 )}
+
                     <div /* top section */ className="mb-16 flex justify-center">
                         <TotalMinutes />
                         <LastPlayed />
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-green-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out active:bg-blue-700 focus:bg-blue-700" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
+                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                         </div>
                     </div>
 
