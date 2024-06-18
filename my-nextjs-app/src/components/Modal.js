@@ -1,9 +1,36 @@
 import { useSession } from "next-auth/react";
 import React from "react";
+import axios from "axios";
 
 export default function Modal ({ setIsOpen }) {
     const { data: session } = useSession();
 
+    const handleTrack = async () => {
+        if(!session) {
+            alert('Log in required');
+            return;
+        }
+
+        const { user } = session;
+
+        try {
+            const response = await axios.post('/api/create-account', {
+                spotifyId: user.id,
+                spotifyName: user.name,
+                email: user.email
+            });
+            
+            if(response.status === 201) {
+                alert('User account created successfully');
+            } else if (response.status === 200) {
+                alert('User account already exists');
+            }
+        } catch(error) {
+            console.error('Error creating user account', error);
+            alert('Failed to create user account');
+        }
+    };
+/*
     const handleTrack = async () => {
         if(!session) {
             alert('Log in required');
@@ -21,7 +48,7 @@ export default function Modal ({ setIsOpen }) {
             console.error('Error creating user account', error);
             alert('Failed to create user account');
         }
-    };
+    };*/
 
     const handleDontTrack = () => {
         alert('not tracking')
