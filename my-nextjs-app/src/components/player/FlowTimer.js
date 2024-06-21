@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function FlowTimer({ intervalChange, setIntervalChange }) {
+export default function FlowTimer() {
     const [flowTime, setFlowTime] = useState('');
     const [refreshTime, setRefreshTime] = useState('');
     const [isActive, setIsActive] = useState(false);
@@ -79,46 +79,48 @@ export default function FlowTimer({ intervalChange, setIntervalChange }) {
 
     return(
         <>
-        <div /* time div */ className="flex justify-evenly">
-            <div className="p-16 mt-6">
-                <h2 className="font-bold text-2xl text-gray-200">FLOW</h2>
-                {isActive ? (
-                    <div /* flow time */ className="mt-6 mx-6 mb-2 bg-transparent font-bold text-7xl text-center">
-                         {formatTime(flowTime)}
-                    </div>
-                ) : (
-                    <input className="mt-6 mx-6 bg-transparent text-6xl text-center"
-                        type="number"
-                        value={flowTime / 60}
-                        onChange={handleFlowTimeChange}
-                        min="1"
-                        max="60"
-                        placeholder="25"
-                        />
-                )}
+        <div /* flow div */ className={`mx-32 mt-16 mb-10 border border-solid border-gray-800 rounded-md transition-bg ${activeInterval === 'refresh' ? 'bg-blue-500' : 'bg-transparent'}`}>
+            <div /* time div */ className="flex justify-evenly">
+                <div className="p-16 mt-6">
+                    <h2 className="font-bold text-2xl text-gray-200">FLOW</h2>
+                    {isActive ? (
+                        <div /* flow time */ className="mt-6 mx-6 mb-2 bg-transparent font-bold text-7xl text-center">
+                            {formatTime(flowTime)}
+                        </div>
+                    ) : (
+                        <input className="mt-6 mx-6 bg-transparent text-6xl text-center"
+                            type="number"
+                            value={flowTime / 60}
+                            onChange={handleFlowTimeChange}
+                            min="1"
+                            max="60"
+                            placeholder="25"
+                            />
+                    )}
 
+                </div>
+                <div className="p-16 mt-6">
+                    <h2 className="font-bold text-2xl text-gray-200">REFRESH</h2>
+                    {isActive ? (
+                        <div /* refresh time */ className="mt-6 mx-6 mb-2 font-bold text-7xl text-center">
+                            {formatTime(refreshTime)}
+                        </div>
+                    ) : (
+                        <input className="mt-6 mx-6 bg-transparent text-6xl text-center"
+                            type="number"
+                            value={refreshTime / 60}
+                            onChange={handleRefreshTimeChange}
+                            min="1"
+                            max="60"
+                            placeholder="5"
+                            />
+                    )}
+                </div>
             </div>
-            <div className="p-16 mt-6">
-                <h2 className="font-bold text-2xl text-gray-200">REFRESH</h2>
-                {isActive ? (
-                    <div /* refresh time */ className="mt-6 mx-6 mb-2 font-bold text-7xl text-center">
-                        {formatTime(refreshTime)}
-                    </div>
-                ) : (
-                    <input className="mt-6 mx-6 bg-transparent text-6xl text-center"
-                        type="number"
-                        value={refreshTime / 60}
-                        onChange={handleRefreshTimeChange}
-                        min="1"
-                        max="60"
-                        placeholder="5"
-                        />
-                )}
+            <div /* buttons div */ className="flex justify-end mb-2 pr-6">
+                <button className="px-8 py-2 m-2 bg-blue-600"onClick={ToggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
+                <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
             </div>
-        </div>
-        <div /* buttons div */ className="flex justify-end mb-2 pr-6">
-            <button className="px-8 py-2 m-2 bg-blue-600"onClick={ToggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
-            <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
         </div>
         </>
     );
