@@ -27,7 +27,7 @@ const UserProfile = () => {
 
 
     return(
-        <div className="flex px-8 justify-between w-full bg-neutral-800 items-center">
+        <div className="flex px-8 justify-between w-full items-center navbar">
             <div className="dropdown">
             <button className="p-0.5 bg-gray-400 dropdown-btn">
                 {session.user.image ? (
