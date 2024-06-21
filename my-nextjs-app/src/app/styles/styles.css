@@ -1,4 +1,9 @@
 /* nav */
+
+.navbar {
+  background-color: rgba(20, 20, 20, 0.509);
+}
+
 li {
   display: inline-block;
   margin: 1rem;
@@ -350,6 +355,10 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
  }
+
+.transition-bg {
+  transition: background-color 0.3s ease-in-out;
+}
 
 /* HTML: <div class="loader"></div> */
 .loader {
