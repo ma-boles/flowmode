@@ -13,7 +13,7 @@ export const PlayerProvider = ({ children }) => {
     /*const playerRef = useRef(null);*/
     const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
-    const [playerState, setPlayerState] = useState(null);
+    const [playerState, setPlayerState] = useState({});
     const [spotifyReady, setSpotifyReady] = useState(false);
     const [devices, setDevices] = useState([]);
 
@@ -206,6 +206,26 @@ export const PlayerProvider = ({ children }) => {
         }
        }, [player]);
 
+       const play = async () => {
+        if(!player || !deviceID) return;
+        await player.resume().catch(error => console.error('Failed to resume playback', error));
+       };
+
+       const pause = async() => {
+        if(!player) return;
+        await player.pause().catch(error => console.error('Failed to pause playback', error));
+       };
+
+       const next = async () => {
+        if(!player) return;
+        await player.nextTrack().catch(error => console.error('Failed to skip to next track', error));
+       };
+
+       const previous = async () => {
+        if(!player) return;
+        await player.previousTrack().catch(error => console.error('Failed to skip to previous track', error));
+       };
+
 
 
     // Bundle up the context value with state variables and functions
@@ -215,10 +235,14 @@ export const PlayerProvider = ({ children }) => {
         playerState,
         spotifyReady,
         initializePlayer,
+        play,
+        pause,
+        next,
+        previous,
         playItem,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, playItem, setPlayerState, onDeviceIdChange
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, playItem, setPlayerState, onDeviceIdChange, play, pause, next, previous
     ]);
 
 
