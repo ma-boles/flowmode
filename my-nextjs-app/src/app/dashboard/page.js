@@ -21,7 +21,7 @@ export default function Dashboard() {
     if (status === "loading") {
         return  <div className="flex items-center justify-center h-screen">
                     <div className="p-6 rounded-lg loader"></div>
-                </div>;
+                </div>
     }
 
     const displayUserOwnedPlaylists = () => {
@@ -55,7 +55,7 @@ export default function Dashboard() {
 
             <div className="m-12">
                 {!session ? (
-                    <h1 className="text-center">Loading...</h1>
+                        <h1 className="text-center">Loading...</h1>
                 ): (
                     <h1 className="p-0 mb-14 text-center">Welcome {session.user.name}!</h1>
 
