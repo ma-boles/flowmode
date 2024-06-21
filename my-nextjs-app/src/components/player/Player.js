@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 import { PlayerContext } from "@/app/contexts/PlayerContext";
 import { usePlayer } from "@/app/providers/PlayerProvider";
 import { TrackInfo } from "./TrackInfo";
+import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
 
 
@@ -11,7 +12,15 @@ export default function Player() {
     // Check if the player is currently playing something
    // const isPlaying = playerState && playerState.isPlaying;
     const [isFlowVisible, setIsFlowVisible] = useState(false);
+    const [activeInterval, setActiveInterval] = useState('flow');
+    const [intervalChange, setIntervalChange] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleIntervalChange = (interval) => {
+        setIntervalChange(interval);
+    };
+
+    console.log('activeInterval:', activeInterval); // Log to check state changes
 
     const handlePlayPause = () => {
         try {
@@ -61,63 +70,11 @@ export default function Player() {
     return (
         <div className="player">
             <div className="playBackground" /*justify-center*/>
-                {isFlowVisible && 
-
-                <div /* flow div */ className="pt-18 pb-12 mb-8 mt-8">
-                    <h2 className="pt-16 pb-8 text-4xl"><span className="font-bold text-green-600">flow</span> Settings</h2>
-                    <div className="w-4/5 flex justify-center border border-solid border-white rounded-t-lg mx-auto flowDiv">
-                        <div className="w-1/3 my-4 flex flex-col justify-center items-center" /* work */>
-                            <h2 className="text-xl font-bold">Work:</h2>
-                            <div className="flex justify-center items-center">
-                                <input className="inputTimer"
-                                type="number"
-                                placeholder="00"
-                                min="0"
-                                max="10"
-                                />
-                            <p>HR</p>
-                                <input className="inputTimer"
-                                type="number"
-                                placeholder="00"
-                                min="0"
-                                max="59"
-                                />
-                            <p>MIN</p>
-                            </div>
-                        </div>
-
-                        <div className="w-1/3 flex flex-col justify-center items-center" /* rest */>
-                            <h2 className="text-xl font-bold">Rest:</h2>
-                            <div className="flex justify-center items-center">
-                                <input className="inputTimer"
-                                type="number"
-                                placeholder="00"
-                                min="1"
-                                max="59"
-                                />
-                            <p>MIN</p>
-                            </div>
-                        </div>
-
-                        <div className="w-1/3 flex justify-center items-center" /* intervals */>
-                            <div className="flex justify-center items-center">
-                            <h2 className="text-xl">Number of <br /> Intervals:</h2>
-                                <input className="inputTimer"
-                                type="number"
-                                placeholder="1"
-                                min="1"
-                                max="10"/>
-                            </div>
-                        </div>
-                </div>
-                <div className="w-4/5 m-auto mb-4 p-4 flex justify-end items-center border border-solid border-white rounded-b-lg flowDiv2"/* buttons */>
-                    <button className="mx-4 py-1 px-6 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">RESET</button>
-                    <button className="mx-4 py-1 px-8 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">SET</button>
-                </div>
-                </div>
-}
-
-
+                {isFlowVisible &&
+                    <div /* flow div */ className={`mx-32 mt-16 mb-10 border border-solid border-gray-800 rounded-md ${activeInterval === 'refresh' ? 'bg-blue-500' : 'bg-transparent'}`}>
+                    <FlowTimer intervalChange={intervalChange} setIntervalChange={handleIntervalChange} />
+            </div>
+            }
                 <div className="flex justify-between">
 
                     <div className="flex items-center justify-center w-48 p-4 bg-transparent 0 rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
@@ -166,3 +123,58 @@ export default function Player() {
         </div>
     )
 }
+                /*<div /* flow div  className="pt-18 pb-12 mb-8 mt-8">*/
+
+
+                    {/*<h2 className="pt-16 pb-8 text-4xl"><span className="font-bold text-green-600">flow</span> Settings</h2>
+                    <div className="w-4/5 flex justify-center border border-solid border-white rounded-t-lg mx-auto flowDiv">
+                        <div className="w-1/3 my-4 flex flex-col justify-center items-center" /* work *//*>
+                            <h2 className="text-xl font-bold">Work:</h2>
+                            <div className="flex justify-center items-center">
+                                <input className="inputTimer"
+                                type="number"
+                                placeholder="00"
+                                min="0"
+                                max="10"
+                                />
+                            <p>HR</p>
+                                <input className="inputTimer"
+                                type="number"
+                                placeholder="00"
+                                min="0"
+                                max="59"
+                                />
+                            <p>MIN</p>
+                            </div>
+                        </div>
+
+                        <div className="w-1/3 flex flex-col justify-center items-center" /* rest *//*>
+                            <h2 className="text-xl font-bold">Rest:</h2>
+                            <div className="flex justify-center items-center">
+                                <input className="inputTimer"
+                                type="number"
+                                placeholder="00"
+                                min="1"
+                                max="59"
+                                />
+                            <p>MIN</p>
+                            </div>
+                        </div>
+
+                        <div className="w-1/3 flex justify-center items-center" /* intervals *//*>
+                            <div className="flex justify-center items-center">
+                            <h2 className="text-xl">Number of <br /> Intervals:</h2>
+                                <input className="inputTimer"
+                                type="number"
+                                placeholder="1"
+                                min="1"
+                                max="10"/>
+                            </div>
+                        </div>
+                </div>
+
+
+                <div className="w-4/5 m-auto mb-4 p-4 flex justify-end items-center border border-solid border-white rounded-b-lg flowDiv2"/* buttons *//*>
+                    <button className="mx-4 py-1 px-6 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">RESET</button>
+                    <button className="mx-4 py-1 px-8 text-gray font-bold bg-blue-500 border border-solid border-blue-300 hover:bg-blue-700">SET</button>
+                </div>*/}
