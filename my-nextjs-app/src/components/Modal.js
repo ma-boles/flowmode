@@ -5,8 +5,14 @@ import axios from "axios";
 export default function Modal ({ setIsOpen }) {
     const { data: session } = useSession();
     const [accountStatus, setAccountStatus] = useState('');
+    const [warningStatus, setWarningStatus] = useState('');
+    const [failStatus, setFailStatus] = useState('');
+
     const [showHeading, setShowHeading] = useState(true);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showFail, setShowFail] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
+
 
     const handleTrack = async () => {
         if(!session) {
@@ -28,12 +34,15 @@ export default function Modal ({ setIsOpen }) {
                 setShowHeading(false);
                 setShowSuccess(true);
             } else if (response.status === 200) {
-                setAccountStatus('');
-                alert('User account already exists');
+                setWarningStatus('already exists');
+                setShowHeading(false);
+                setShowWarning(true);
             }
         } catch(error) {
             console.error('Error creating user account', error);
-            alert('Failed to create user account');
+            setFailStatus('not created')
+            setShowHeading(false);
+            setShowFail(true);
         }
     };
 
@@ -47,7 +56,7 @@ export default function Modal ({ setIsOpen }) {
 
         try {
             const response = await axios.delete('/api/create-account', {
-                data: { email: user.email } // sending email in the reuest body
+                data: { email: user.email } // sending email in the request body
             });
 
             if (response.status === 200) {
@@ -55,18 +64,34 @@ export default function Modal ({ setIsOpen }) {
                 setShowHeading(false);
                 setShowSuccess(true);
             } else if (response.status === 404) {
-                setAccountStatus('');
+                setWarningStatus('not found');
+                setShowHeading(false);
                 alert('User account not found');
             }
         } catch (error) {
             console.error('Error deleting user account', error);
-            alert('Failed to delete user account');
+            setFailStatus('not deleted');
+            setShowHeading(false);
+            setShowFail(true);
         }
+    };
+
+    const getBackgroundColor = () => {
+        if(accountStatus === 'created') {
+            return 'bg-green-600';
+        }
+        if(accountStatus === 'deleted' || failStatus === 'not created' || failStatus === 'not deleted') {
+            return 'bg-red-600';
+        }
+        if(warningStatus === 'not found' || warningStatus === 'already exitst') {
+            return 'bg-yellow-500'
+        }
+        return 'bg-transparent';
     };
 
     return (
         <div className="border border-solid border-white rounded-sm modal" /*onClick={() => setIsOpen(false)}*/>
-            <div className={`flex justify-end ${accountStatus === 'created' ? 'bg-green-600' : accountStatus === 'deleted' ? 'bg-red-600' : 'bg-transparent'}`}>
+            <div className={`flex justify-end ${getBackgroundColor()}`}>
                 <span className="px-2 py-1 m-2 cursor-pointer text-xs rounded-sm hover:bg-red-600" onClick={() => setIsOpen(false)}>X</span>
             </div>
 
@@ -87,6 +112,35 @@ export default function Modal ({ setIsOpen }) {
                     <h2 className="text-center text-2xl font-semibold"> Success! </h2>
                     {accountStatus === 'created' && <p className="my-4 px-6 text-center font-medium text-xl">You have successfully created a user account!</p>}
                     {accountStatus === 'deleted' && <p className="my-4 px-6 text-center font-medium text-xl">You have successfully deleted your user account!</p>}
+                </div>
+            </div>
+        )}
+
+        {showWarning && (
+            <div /* warning div */ >
+             <div /* warning img*/ className="flex justify-center items-center">
+                 <div className='checkmark-container bg-orange-500'>
+                     <img src="circle-exclamation-solid.svg" alt="checkmark" className="checkmark-img"></img>
+                 </div>
+             </div>
+             <div /* warning text */ className="mt-4">
+                {warningStatus === 'already exists' && <h2 className="my-4 px-6 text-center font-bold text-xl">User account already exists!</h2>}
+                {warningStatus === 'not found' && <h2 className="my-4 px-6 text-center font-bold text-xl">User account not found!</h2>}
+             </div>
+         </div>
+        )}
+
+        {showFail && (
+            <div /* fail div */ className={`${accountStatus === 'created' ? 'bg-green-600' : 'bg-red-600'}`}>
+                <div /* fail img*/ className="flex justify-center items-center">
+                    <div className='bg-red-600 checkmark-container'>
+                        <img src="circle-xmark-regular.svg" alt="checkmark" className="checkmark-img"></img>
+                    </div>
+                </div>
+                <div /* fail text */ className="mt-4">
+                    <h2 className="text-center text-2xl font-semibold"> Warning! </h2>
+                    {failStatus === 'not created' && <p className="my-4 px-6 text-center font-medium text-xl">Failed to create account.</p>}
+                    {failStatus === 'not deleted' && <p className="my-4 px-6 text-center font-medium text-xl">Failed to delete account.</p>}
                 </div>
             </div>
         )}
