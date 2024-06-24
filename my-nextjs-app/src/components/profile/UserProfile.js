@@ -37,10 +37,13 @@ const UserProfile = () => {
                 )}
             </button>
                 <div className="border border-solid rounded-sm dropdown-content">
-                    <Link href='/how'>
-                        <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
+                    <Link href='/get-started'>
+                        <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Get Started</p>
                     </Link>
                     <button className="w-full border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>
+                    <Link href='/about'>
+                        <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
+                    </Link>
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
                         <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
