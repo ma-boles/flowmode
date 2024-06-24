@@ -17,7 +17,9 @@ export default function getStarted() {
                 <li>Listen and get into flow!</li>
             </ol>
             <h1>Account</h1>
-                <p>Set up an account to keep personal metrics on how many minutes per day, week, and month of focused minutes in flow you have. Also keep track of most recently listened to items.</p>
+                <p>Set up an account to keep metrics on how many minutes per day, week, and month are spent in flow and rest. Also, keep track of most recently listened to items.</p><br />
+                <p>Account can be created by navigating to the <span className="font-bold">Account</span> link in the top left pulldown menu. Spotify ID, name, and email address registered with Spotify will be used to create user account.</p><br />
+                <p>Account can be deleted by navigating to the <span className="font-bold">Account</span> tab and clicking on the delete button in the prompt.</p>
         </div>
         <div /* features */>
             <h1>Key Features:</h1>
