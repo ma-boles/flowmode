@@ -5,13 +5,13 @@ import { PlayerProvider } from "@/app/providers/PlayerProvider";
 
 const PageWrapper = ({ children, session }) => {
     // Check if window is defined (running in the browser)
-    const isBrowser = typeof window !== 'undefined';
+    const isSearch = typeof window !== 'undefined';
 
     // Determine if the current page is the Browse or Dashboard
-    const isBrowseOrDashboardPage = isBrowser && ['/search', '/dashboard', '/about' ].includes(window.location.pathname);
+    const isSearchOrDashboardPage = isSearch && ['/search', '/dashboard', '/about' ].includes(window.location.pathname);
 
     // Conditionally wrap children with PlayerProvider based on the current page
-    const wrappedChildren = isBrowseOrDashboardPage ? <PlayerProvider>{children}</PlayerProvider> : children;
+    const wrappedChildren = isSearchOrDashboardPage ? <PlayerProvider>{children}</PlayerProvider> : children;
 
     return (
     <SessionProvider session={session}>
