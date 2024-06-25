@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TotalMinutes () {
+export default function TotalMinutesFlow () {
     const [minutesCard, setMinutesCard] = useState('today');
 
     const showMinutesDay = () => {
