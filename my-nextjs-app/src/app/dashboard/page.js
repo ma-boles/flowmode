@@ -17,6 +17,7 @@ export default function Dashboard() {
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
+    const [showCard, setShowCard] = useState('flow');
     const myDisplayRef = useRef(null);
 
     if (status === "loading") {
@@ -47,6 +48,14 @@ export default function Dashboard() {
         }, 0)
     };
 
+    const handleFlowCard = () => {
+        setShowCard('flow')
+    };
+
+    const handleRestCard = () => {
+        setShowCard('rest')
+    };
+
 
     return (
         <>
@@ -63,10 +72,20 @@ export default function Dashboard() {
                 )}
 
                     <div /* top section */ className="mb-16 flex justify-center">
+                    
 
                         <div /* minute totals div */>
-                            <TotalMinutesFlow />
-                            <TotalMinutesRest />
+                            <div /* buttons div */ className="flex">
+                                <button className={`px-16 py-1 mb-2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
+                                <button className={`px-16 mb-2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
+                            </div>
+
+                            {showCard === 'flow' && 
+                                <TotalMinutesFlow />
+                            }
+                            {showCard === 'rest' && 
+                                <TotalMinutesRest />
+                            }
                         </div>
 
                         <LastPlayed />
