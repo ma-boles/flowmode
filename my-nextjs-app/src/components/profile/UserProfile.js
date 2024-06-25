@@ -40,14 +40,14 @@ const UserProfile = () => {
                     <Link href='/get-started'>
                         <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Get Started</p>
                     </Link>
-                    <button className="w-full border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>
+                    <button className="w-full text-left border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>
                     <Link href='/about'>
-                        <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
+                        <p className="border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
                     </Link>
                     <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
-                        <p className="border-t border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
+                        <p className="border-t border-b border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
                     </a>
-                    <button onClick={() => signOut('spotify')} className="border-t border-solid border-gray-600 hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
+                    <button onClick={() => signOut('spotify')} className="w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
                 </div>
             </div>
 
@@ -76,7 +76,21 @@ const UserProfile = () => {
                 </Link>
             )}
 
-            {currentPath === '/how' && (
+            {currentPath === '/about' && (
+                <div className="text-center rounded-md dropdown-nav">
+                    <button className="border border-solid border-green-600 font-semibold dropdown-nav-btn">Nav</button>
+                    <div className="border border-solid border-green-600 dropdown-nav-content">
+                        <Link href='/browse'>
+                            <p className="p-2 border-b border-solid border-gray-400 font-semibold  hover:bg-green-600 transition duration-300 ease-in-out">Search</p>
+                        </Link>
+                        <a href="/dashboard">
+                            <p className="p-2 border-t border-solid border-gray-400 font-semibold hover:bg-green-600 transition duration-300 ease-in-out">Dashboard</p>
+                        </a>
+                    </div>
+                </div>
+            )}
+
+            {currentPath === '/get-started' && (
                 <div className="text-center rounded-md dropdown-nav">
                     <button className="border border-solid border-green-600 font-semibold dropdown-nav-btn">Nav</button>
                     <div className="border border-solid border-green-600 dropdown-nav-content">
