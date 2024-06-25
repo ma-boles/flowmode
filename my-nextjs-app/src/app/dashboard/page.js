@@ -5,8 +5,9 @@ import Display from "@/components/playlists/Display";
 import Link from "next/link";
 import Player from "@/components/player/Player";
 import { useSession } from "next-auth/react";
-import TotalMinutes from "@/components/userdata/TotalMinutes";
 import LastPlayed from "@/components/userdata/LastPlayed";
+import TotalMinutesFlow from "@/components/userdata/TotalMinutesFlow";
+import TotalMinutesRest from "@/components/userdata/TotalMinutesRest";
 
 
 export default function Dashboard() {
@@ -62,8 +63,14 @@ export default function Dashboard() {
                 )}
 
                     <div /* top section */ className="mb-16 flex justify-center">
-                        <TotalMinutes />
+
+                        <div /* minute totals div */>
+                            <TotalMinutesFlow />
+                            <TotalMinutesRest />
+                        </div>
+
                         <LastPlayed />
+
                         <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                             <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
