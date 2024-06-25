@@ -32,7 +32,7 @@ export default function HomePage(){
                     <Link href={'/dashboard'}>
                         <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Dashboard </button>
                     </Link>
-                    <Link href={'/browse'}>
+                    <Link href={'/search'}>
                         <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600">
                     Search &gt;&gt;</button>
                     </Link>
