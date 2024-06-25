@@ -8,7 +8,7 @@ const PageWrapper = ({ children, session }) => {
     const isBrowser = typeof window !== 'undefined';
 
     // Determine if the current page is the Browse or Dashboard
-    const isBrowseOrDashboardPage = isBrowser && ['/browse', '/dashboard', '/how' ].includes(window.location.pathname);
+    const isBrowseOrDashboardPage = isBrowser && ['/search', '/dashboard', '/about' ].includes(window.location.pathname);
 
     // Conditionally wrap children with PlayerProvider based on the current page
     const wrappedChildren = isBrowseOrDashboardPage ? <PlayerProvider>{children}</PlayerProvider> : children;
