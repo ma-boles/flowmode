@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitFor, getByTestId } from '@testing-library/react';
-import SearchComponent from "@/components/browse/SearchComponent";
+import SearchComponent from "@/components/search/SearchComponent";
 import { searchAlbums, searchPlaylist, searchTrack } from "@/app/lib/apiCall";
 
 // Mock API calls
