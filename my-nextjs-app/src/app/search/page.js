@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import UserProfile from "@/components/profile/UserProfile";
 import '../styles/styles.css';
-import SearchComponent from "@/components/browse/SearchComponent";
+import SearchComponent from "@/components/search/SearchComponent";
 import { useSession } from "next-auth/react";
 import Player from "@/components/player/Player";
 
 
-const Browse = () => {
+const Search = () => {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
@@ -51,4 +51,4 @@ return(
     );
 };
 
-export default Browse;
+export default Search;
