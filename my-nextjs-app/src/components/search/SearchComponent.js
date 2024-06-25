@@ -9,7 +9,7 @@ export default function SearchComponent () {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
-    const { playItem } = usePlayer();
+    //const { playItem } = usePlayer();
     const [searchResults, setSearchResults] = useState([]);
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
@@ -116,7 +116,7 @@ export default function SearchComponent () {
                 </div>
 
                 <div className="flex justify-center">
-                <div className="bg-white rounded-md input">
+                    <div className="bg-white rounded-md input">
                         <input className="outline-none p-2 m-4 text-xl text-slate-800"
                         type="text"
                         placeholder="Title, Artist, Name..."
