@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 export default function FlowTimer() {
     const [flowTime, setFlowTime] = useState('');
-    const [refreshTime, setRefreshTime] = useState('');
+    const [restTime, setRestTime] = useState('');
     const [isActive, setIsActive] = useState(false);
     const [activeInterval, setActiveInterval] = useState('flow');
     const [countdown, setCountdown] = useState(null);
     const [initialFlowTime, setInitialFlowTime] = useState('');
-    const [initialRefreshTime, setInitialRefreshTime] = useState('');
+    const [initialRestTime, setInitialRestTime] = useState('');
 
     useEffect(() => {
         let intervalId = null;
@@ -25,13 +25,13 @@ export default function FlowTimer() {
                         setFlowTime((prevTime) => prevTime - 1);
                     } else {
                         // Flow interval is over, switch to refresh interval
-                        setActiveInterval('refresh');
+                        setActiveInterval('rest');
                         //setFlowTime(initialFlowTime);
                         //clearInterval(intervalId);
                 }
-            } else if (activeInterval === 'refresh') {
-                if(refreshTime > 0) {
-                    setRefreshTime((prevTime) => prevTime - 1);
+            } else if (activeInterval === 'rest') {
+                if(restTime > 0) {
+                    setRestTime((prevTime) => prevTime - 1);
                 } else {
                     // Refesh interval is over, switch to flow interval
                     //setActiveInterval('flow');
@@ -46,7 +46,7 @@ export default function FlowTimer() {
     }
 
     return () => clearInterval(/*countdown*/ intervalId);
-    }, [isActive, activeInterval, flowTime, refreshTime, initialFlowTime, initialRefreshTime]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
@@ -61,7 +61,7 @@ export default function FlowTimer() {
         setIsActive(false);
         setActiveInterval('flow');
         setFlowTime(initialFlowTime); // resets to default time
-        setRefreshTime(initialRefreshTime); // resets to default time
+        setRestTime(initialRestTime); // resets to default time
     };
 
     const handleFlowTimeChange = (event) => {
@@ -70,10 +70,10 @@ export default function FlowTimer() {
         setInitialFlowTime(newValue);
     };
 
-    const handleRefreshTimeChange = (event) => {
+    const handleRestTimeChange = (event) => {
         const newValue = Math.min(parseInt(event.target.value), 60) * 60; // converts minutes to seconds
-        setRefreshTime(newValue);
-        setInitialRefreshTime(newValue);
+        setRestTime(newValue);
+        setInitialRestTime(newValue);
     }
 
 
@@ -100,16 +100,16 @@ export default function FlowTimer() {
 
                 </div>
                 <div className="p-16 mt-6">
-                    <h2 className="font-bold text-2xl text-gray-200">REFRESH</h2>
+                    <h2 className="font-bold text-2xl text-gray-200">REST</h2>
                     {isActive ? (
                         <div /* refresh time */ className="mt-6 mx-6 mb-2 font-bold text-7xl text-center">
-                            {formatTime(refreshTime)}
+                            {formatTime(restTime)}
                         </div>
                     ) : (
                         <input className="mt-6 mx-6 bg-transparent text-6xl text-center"
                             type="number"
-                            value={refreshTime / 60}
-                            onChange={handleRefreshTimeChange}
+                            value={restTime / 60}
+                            onChange={handleRestTimeChange}
                             min="1"
                             max="60"
                             placeholder="5"
