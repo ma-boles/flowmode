@@ -15,14 +15,14 @@ export default function Player() {
     const [selectedItem, setSelectedItem] = useState(null);
 
     if(!player || !playerState) {
-        return <div>Loading...</div>;
+        return <h2 className="mb-4 text-center text-2xl font-semibold">Player loading...</h2>;
     }
 
     const handleFlow = () => {
         setIsFlowVisible(!isFlowVisible);
     };
 
-    //console.log('Player:', player);
+    console.log('Player:', player);
     //console.log('Player state:', playerState);
 
 
