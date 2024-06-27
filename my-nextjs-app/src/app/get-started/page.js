@@ -1,12 +1,12 @@
 'use client'
 import React from "react";
-import UserProfile from "@/components/profile/UserProfile";
+import NavBar from "@/components/nav/NavBar";
 
 export default function getStarted() {
     return (
         <div>
         <div>
-            <UserProfile />
+            <NavBar />
         </div>
 
         <div /* get started */ className="m-20">

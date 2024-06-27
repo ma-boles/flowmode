@@ -1,13 +1,13 @@
 'use client'
 import React from "react";
-import UserProfile from "@/components/profile/UserProfile";
+import NavBar from "@/components/nav/NavBar";
 
 
 export default function About () {
     return (
         <>
         <div>
-            <UserProfile />
+            <NavBar />
         </div>
 
         <div className="min-h-screen">
