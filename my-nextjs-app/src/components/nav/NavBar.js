@@ -24,7 +24,7 @@ const NavBar = () => {
     if (!session) {
         return <h2 className="m-4 text-center text-2xl font-semibold">Please{' '}
             <Link href="/">
-                <span className="cursor-pointer underline hover:text-blue-500"> log in</span>
+                <span className="cursor-pointer underline hover:text-green-500">log in</span>
             </Link></h2>
     }
 
