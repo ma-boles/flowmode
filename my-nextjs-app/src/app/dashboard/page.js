@@ -80,10 +80,10 @@ export default function Dashboard() {
                                 <button className={`px-16 mb-2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
                             </div>
 
-                            {showCard === 'flow' && 
+                            {showCard === 'flow' &&
                                 <TotalMinutesFlow />
                             }
-                            {showCard === 'rest' && 
+                            {showCard === 'rest' &&
                                 <TotalMinutesRest />
                             }
                         </div>
@@ -101,7 +101,11 @@ export default function Dashboard() {
                             <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
                     </div>
                     )}
+
             </div>
+            
+            <Player accessToken={accessToken}/>
+
         </>
     )
 }
