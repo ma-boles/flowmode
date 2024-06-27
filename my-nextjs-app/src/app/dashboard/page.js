@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState, useRef } from "react";
-import UserProfile from "@/components/profile/UserProfile";
+import NavBar from "@/components/nav/NavBar";
 import Display from "@/components/playlists/Display";
 import Link from "next/link";
 import Player from "@/components/player/Player";
@@ -60,7 +60,7 @@ export default function Dashboard() {
     return (
         <>
             <nav>
-                <UserProfile />
+                <NavBar />
             </nav>
 
             <div className="m-12">

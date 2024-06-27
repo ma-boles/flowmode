@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import UserProfile from "@/components/profile/UserProfile";
+import NavBar from "@/components/nav/NavBar";
 import '../styles/styles.css';
 import SearchComponent from "@/components/search/SearchComponent";
 import { useSession } from "next-auth/react";
@@ -31,7 +31,7 @@ const Search = () => {
 return(
     <div>
         <nav className="flex justify-around w-full browse--nav">
-            <UserProfile />
+            <NavBar />
         </nav>
 
         <section className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto">
@@ -41,12 +41,9 @@ return(
                 <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
             </div>
         </section>
+        
         <Player accessToken={accessToken}/>
-{/*
-        <button className="m-8 p-8 bg-green-600" onClick={handleButtonClick}>Open Player</button>
-        {isPlayerOpen && (
-            <Player accessToken={accessToken}/>
-        )}*/}
+
     </div>
     );
 };
