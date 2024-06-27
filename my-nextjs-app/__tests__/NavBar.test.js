@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import NavBar from "@/components/nav/NavBar";
+import NavBar from '@/components/nav/NavBar';
 
 describe('NavBar', () => {
-    it('renders Spotify Reads', () => {
+    it('displays the user image from the session', () => {
         render(<NavBar />)
-        const myElem = screen.getByText('Spotify Reads')
-        expect(myElem).toBeInTheDocument()
-    });
+        expect(screen.getByRole('img', { src: 'https://example.com/johndoe.jpg'})).toBeInTheDocument();
+     });
 
 });
