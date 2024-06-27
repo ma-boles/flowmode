@@ -63,11 +63,11 @@ export default function Dashboard() {
                 <NavBar />
             </nav>
 
-            <div className="mx-12 my-8">
+            <div className="mx-12 mb-8 mt-12">
                 {!session ? (
                         <h1 className="text-center">Loading...</h1>
                 ): (
-                    <h1 className="p-0 mb-12 text-5xl text-center">Welcome {session.user.name}!</h1>
+                    <h1 className="p-0 mb-12 mt-2 text-5xl text-center">Welcome {session.user.name}!</h1>
 
                 )}
 
