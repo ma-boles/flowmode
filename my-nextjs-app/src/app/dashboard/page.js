@@ -5,6 +5,7 @@ import Display from "@/components/playlists/Display";
 import Link from "next/link";
 import Player from "@/components/player/Player";
 import { useSession } from "next-auth/react";
+import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContext";
 import LastPlayed from "@/components/userdata/LastPlayed";
 import TotalMinutesFlow from "@/components/userdata/TotalMinutesFlow";
 import TotalMinutesRest from "@/components/userdata/TotalMinutesRest";
@@ -14,6 +15,7 @@ export default function Dashboard() {
 
     const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
+    //const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
@@ -56,6 +58,20 @@ export default function Dashboard() {
         setShowCard('rest')
     };
 
+    const handleSelectFlow = (playlistId) => {
+        console.log('Flow playlist selected:', playlistId)
+
+    };
+
+    const handleSelectRest = (playlistId) => {
+        console.log('Rest playlist selected:', playlistId)
+
+    };
+
+    const handleSelectPreview = (playlistId) => {
+        console.log('Preview playlist selected:', playlistId)
+
+    };
 
     return (
         <>
@@ -65,14 +81,14 @@ export default function Dashboard() {
 
             <div className="mx-12 mb-8 mt-12">
                 {!session ? (
-                        <h1 className="text-center">Loading...</h1>
+                        <h2 className="text-center">Loading...</h2>
                 ): (
                     <h1 className="p-0 mb-12 mt-2 text-5xl text-center">Welcome {session.user.name}!</h1>
 
                 )}
 
                     <div /* top section */ className="mb-16 mt-8 flex justify-center">
-                    
+
 
                         <div /* minute totals div */>
                             <div /* buttons div */ className="flex">
@@ -96,16 +112,20 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    {isDisplayOpen && (
-                        <div ref={myDisplayRef} style={{ marginTop: '50px' }}>
-                            <Display viewMode={viewMode} isDisplayOpen={isDisplayOpen} setIsDisplayOpen={setIsDisplayOpen}/>
-                    </div>
-                    )}
-
+                        {isDisplayOpen && (
+                            <PlaylistProvider>
+                                <div ref={myDisplayRef} style={{ marginTop: '50px' }}>
+                                    <Display
+                                    viewMode={viewMode}
+                                    isDisplayOpen={isDisplayOpen}
+                                    setIsDisplayOpen={setIsDisplayOpen}
+                                    />
+                                </div>
+                            </PlaylistProvider>
+                        )}
             </div>
-            
-            <Player accessToken={accessToken}/>
 
+            <Player accessToken={accessToken}/>
         </>
     )
 }

@@ -1,6 +1,8 @@
 import React from "react";
+import { usePlaylistContext  } from "@/app/contexts/PlaylistContext";
 
-export default function PlaylistItem ({ playlist, onSelectFlow, onSelectPreview, onSelectRest, displayStyle, cleanDescription }) {
+export default function PlaylistItem ({ playlist, displayStyle, cleanDescription }) {
+    const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
 
     return (
         <>

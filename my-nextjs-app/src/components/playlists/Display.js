@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css"
 import { getPlaylists } from "@/app/lib/apiCall";
+import PlaylistItem from "../PlaylistItem";
+import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
-export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
+export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, displayStyle, cleanDescription, filteredPlaylists }) {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
+    const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
+
     const [playlists, setPlaylists] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [remainingPlaylists, setRemainingPlaylists] = useState([]);
@@ -17,7 +21,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
     const [displayedPlaylists, setDisplayedPlaylists] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
-    const [hoveredDescription, setHoveredDescription] = useState(null);
+    //const [hoveredDescription, setHoveredDescription] = useState(null);
     const pageSize = 50;
 
     const cleanDescription = (description) => {
@@ -28,6 +32,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
         // Retrieve the tect content which will decode the HTML entittie
         return divDescription.textContent || divDescription.innerText || "";
     };
+
 
     useEffect(() => {
         async function fetchPlaylists() {
@@ -143,8 +148,41 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
 
         <ul className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
             {filteredPlaylists.map(playlist =>(
+                <PlaylistItem
+                key={playlist.id}
+                playlist={playlist}
+                displayStyle={displayStyle}
+                cleanDescription={cleanDescription}
+                /*onSelectFlow={onSelectFlow}
+                onSelectRest={onSelectRest}
+                onSelectPreview={onSelectPreview}*/
+                />
+                    ))}
+        </ul>
+
+        <div className="flex justify-between">
+            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${currentPage === 1 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
+            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${remainingPlaylists.length === 0 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
+        </div>
+        </>
+    );
+}
+
+{/*<h1 className="mx-0 my-2 p-0">
+                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
+            </h1>*/}
+
+// playlist display: playerState.context.metadata.uri => re-render when uri updates
+
+
+
+ {/*<ul className={`flex ${displayStyle === 'grid' ? 'flex-wrap justify-center' : 'playlistList'}`}>
+            {filteredPlaylists.map(playlist =>(
                 <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
                     <div className={`${displayStyle === 'list' ? 'w-1/4' : 'div'}`}>
+                    <button className={`absolute ${displayStyle === 'grid' ? 'top-0 right-0 mt-2 mr-2' : 'left-9 mt-2 ml-2'} ellipsisButton`}>
+                        <span>&#8230;</span>
+                    </button>
                     {playlist.images && playlist.images[0] ? (
                         <img src={playlist.images[0].url}
                         alt={`Cover of ${playlist.name}`}
@@ -164,18 +202,17 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen }) {
                         </div>
                 </li>
             ))}
-        </ul>
+        </ul>*/}
 
-        <div className="flex justify-between">
-            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${currentPage === 1 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
-            <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${remainingPlaylists.length === 0 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
-        </div>
-        </>
-    );
-}
 
-{/*<h1 className="mx-0 my-2 p-0">
-                {viewMode === 'userOwnedPlaylists'? 'My Playlists': 'All Playlists'}
-            </h1>*/}
-
-// playlist display: playerState.context.metadata.uri => re-render when uri updates
+        const onSelectFlow = () => {
+            return alert('flow');
+        };
+    
+        const onSelectRest = () => {
+            return alert('rest');
+        };
+    
+        const onSelectPreview = () => {
+            return alert('preview');
+        };
