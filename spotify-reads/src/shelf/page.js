@@ -1,8 +1,9 @@
 "use client"
+
 import React, { useEffect, useRef } from "react";
 import { ShelfProvider } from "../contexts/ShelfContext";
 import { useShelfContext } from "../contexts/ShelfContext";
-import Nav from "@/components/navbar/Nav";
+import Nav from "@/components/nav/NavBar";
 import BookShelf from "@/components/book/Book";
 import Queue from "@/components/shelf/Queue";
 import ReadingList from "@/components/shelf/ReadingList";
@@ -18,6 +19,7 @@ export default function Shelf () {
 
     const { shelves, handleMoveBook, handleRemoveBook, setShelves: setShelvesContext } = useShelfContext();
 
+
     useEffect(() => {
         console.log('Shelves updated:', shelves);
     }, [shelves]);
@@ -25,7 +27,7 @@ export default function Shelf () {
     return(
         <ShelfProvider>
             <div>
-                <ShelfPageContent setShelvesContext={setShelvesContext}/>
+                <ShelfPageContent setShelvesContext={setShelvesContext} />
             </div>
         </ShelfProvider>
     )
@@ -38,7 +40,6 @@ function ShelfPageContent ({ setShelvesContext, id }) {
         title: 'Shelf | Spotify Reads',
         description: 'Organize and place books on to different shelves for easier access while keeping track of monthly listening minutes'
     }
-
     
 //function to calculate total time for shelf
 const calculateTotalTime = (books) => {
@@ -107,7 +108,7 @@ useEffect(() => {
 
     return (
         <>
-        <Nav scrollToRef={scrollToRef}/>
+        <Nav scrollToRef={scrollToRef} />
 
     <div className="shelf">
         <section className="mx-auto w-full max-w-5xl  min-h-screen h-auto pb-8 flex items-center justify-center">
