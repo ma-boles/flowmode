@@ -1,5 +1,5 @@
 import React from "react";
-import { ShelfContext, useShelfContext } from "@/app/contexts/ShelfContext";
+import { ShelfContext, useShelfContext } from "../../../../spotify-reads/src/components/ShelfContext";
 
 
 export default function Book({ isEllipsisVisible, shelfName }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useShelfContext } from "../../../../spotify-reads/src/components/ShelfContext";
+import { useShelfContext } from "../ShelfContext";
 
 
 export default function MoveBookButton({ book, shelfName
