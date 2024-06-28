@@ -15,6 +15,10 @@ export const PlayerProvider = ({ children }) => {
     const [deviceID, setDeviceID] = useState(null);
     const [playerState, setPlayerState] = useState({});
     const [spotifyReady, setSpotifyReady] = useState(false);
+    const [flowPlaylistId, setFlowPlaylistId] = useState('');
+    const [restPlaylistId, setRestPlaylistId] = useState('');
+    const [flowTracks, setFlowTracks] = useState([]);
+    const [restTracks, setRestTracks] = useState([]);
     const [devices, setDevices] = useState([]);
 
     const onDeviceIdChange = (newDeviceId) => {
@@ -46,7 +50,7 @@ export const PlayerProvider = ({ children }) => {
     }, []);
 
     const initializePlayer = useCallback((accessToken) => {
-        console.log('Initializing player with access token:', accessToken);
+        //console.log('Initializing player with access token:', accessToken);
         if(!window.Spotify) {
             console.error('Spotify SDK is not loaded');
             return;
@@ -136,7 +140,6 @@ export const PlayerProvider = ({ children }) => {
                 console.error('Access token is missing');
             }
         };
-    
         // Set onSpotifyWebPlaybackSDKReady callback
         window.onSpotifyWebPlaybackSDKReady = onSpotifyReady;
     
@@ -189,23 +192,45 @@ export const PlayerProvider = ({ children }) => {
         fetchDevices();
     }, [accessToken]);
 
-    const playItem = useCallback((uri) => {
-        console.log('Attempting to play item with URI:', uri);
-        console.log(player);
-
-        if (player) {
-            player.togglePlay({ uris: [uri]})
-            .then(() => {
-                console.log('Item playback started:', uri);
-            })
-            .catch((error) => {
-                console.error('Error playing item:', error);
+    useEffect(() => {
+        const fetchTracks = async (playlistId, setTracks) => {
+            const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
             });
-        } else {
-            console.error('Player is not available.');
-        }
-       }, [player]);
+            const data = await response.json();
+            const trackUris = data.items.map(item => item.track.uri);
+            setTracks(trackUris);
+        };
 
+        if(flowPlaylistId) {
+            fetchTracks(flowPlaylistId, setFlowTracks);
+        }
+        if(restPlaylistId) {
+            fetchTracks(restPlaylistId, setRestTracks);
+        }
+    }, [accessToken, flowPlaylistId, restPlaylistId]);
+
+    const playTracks = (tracks) => {
+        fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: 'PUT',
+            body: JSON.stringify({ uris: tracks }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        }).catch(error => console.error('Error playing tracks:', error));
+    };
+
+    const stopPlayback = () => {
+        fetch(`https://api.spotify.com/v1/me/player/pause`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        }).catch(error => console.error('Error stopping playback:', error));
+    };
+    
        const play = async () => {
         if(!player || !deviceID) return;
         await player.resume().catch(error => console.error('Failed to resume playback', error));
@@ -239,10 +264,16 @@ export const PlayerProvider = ({ children }) => {
         pause,
         next,
         previous,
-        playItem,
+        playTracks,
+        stopPlayback,
+        flowTracks,
+        restTracks,
+        setFlowPlaylistId,
+        setRestPlaylistId,
+        //playItem,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, playItem, setPlayerState, onDeviceIdChange, play, pause, next, previous
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, /*playItem,*/ setPlayerState, onDeviceIdChange, play, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId
     ]);
 
 
@@ -255,3 +286,20 @@ export const PlayerProvider = ({ children }) => {
 
 
 export const usePlayer = () => React.useContext(PlayerContext);
+
+/*const playItem = useCallback((uri) => {
+        console.log('Attempting to play item with URI:', uri);
+        console.log(player);
+
+        if (player) {
+            player.togglePlay({ uris: [uri]})
+            .then(() => {
+                console.log('Item playback started:', uri);
+            })
+            .catch((error) => {
+                console.error('Error playing item:', error);
+            });
+        } else {
+            console.error('Player is not available.');
+        }
+       }, [player]);*/
