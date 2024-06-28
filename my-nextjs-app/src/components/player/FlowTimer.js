@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function FlowTimer() {
+export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const [flowTime, setFlowTime] = useState('');
     const [restTime, setRestTime] = useState('');
     const [isActive, setIsActive] = useState(false);
@@ -12,9 +12,9 @@ export default function FlowTimer() {
     useEffect(() => {
         let intervalId = null;
         // Clear existing countdwon when timers
-        if(countdown) {
+        /*if(countdown) {
             clearInterval(countdown);
-        }
+        }*/
 
         // Set up new countdown
         if(isActive) {
@@ -26,6 +26,7 @@ export default function FlowTimer() {
                     } else {
                         // Flow interval is over, switch to refresh interval
                         setActiveInterval('rest');
+                        onFlowEnd();
                         //setFlowTime(initialFlowTime);
                         //clearInterval(intervalId);
                 }
@@ -33,6 +34,7 @@ export default function FlowTimer() {
                 if(restTime > 0) {
                     setRestTime((prevTime) => prevTime - 1);
                 } else {
+                    onRestEnd();
                     // Refesh interval is over, switch to flow interval
                     //setActiveInterval('flow');
                     //setRefreshTime(initialRefreshTime);
@@ -46,11 +48,12 @@ export default function FlowTimer() {
     }
 
     return () => clearInterval(/*countdown*/ intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
-        return `${minutes}`
+        const seconds = time % 60;
+        return `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
     };
 
     const ToggleTimer = () => {
