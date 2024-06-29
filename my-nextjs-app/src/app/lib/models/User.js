@@ -15,7 +15,48 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    timePerDay: {
+    timeInFlow : [{
+        perDay: {
+            type: Number,
+            default: 0,
+        },
+        perWeek: {
+            type: Number,
+            default: 0,
+        },
+        perMonth: {
+            type: Number,
+            default: 0,
+        }
+    }],
+    timeInRest : [{
+        perDay: {
+            type: Number,
+            default: 0,
+        },
+        perWeek: {
+            type: Number,
+            default: 0,
+        },
+        perMonth: {
+            type: Number,
+            default: 0,
+        }
+    }],
+    mostRecentlyPlayed: [{
+        title: {
+            type: String,
+            required: true,
+        }
+    }]
+}, { timestamps: true });
+
+
+export default mongoose.models.User || mongoose.model('User', userSchema);
+
+
+
+/* timePerDay: {
         type: Number,
         default: 0,
     },
@@ -27,23 +68,16 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    mostRecentlyPlayed: [{
-        title: {
-            type: String,
-            required: true,
-        }
-    }]
-}, { timestamps: true });
+    restPerDay: {
+        type: Number,
+        default: 0,
+    },
+    restPerWeek: {
+        type: Number,
+        default: 0,
+    },
+    restPerMonth: {
+        type: Number,
+        default: 0,
+    },*/
 
-/*
-let User;
-if(mongoose.models.User) {
-    User = mongoose.model('User');
-} else {
-    User = mongoose.model('User', userSchema);
-}
-
-
-export default User;*/
-
-export default mongoose.models.User || mongoose.model('User', userSchema);
