@@ -4,13 +4,6 @@
   background-color: rgba(20, 20, 20, 0.509);
 }
 
-/*li {
-  display: inline-block;
-  margin: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-}*/
-
 .dropdown-btn {
   border-radius: 180rem;
   margin-top: 1rem;
@@ -92,17 +85,6 @@
   filter: invert(1);
 }
 
-/* dropdown 
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}*/
-
-
 /* landing section */ 
   h1 {
     font-size: 3.7rem;
@@ -126,70 +108,7 @@
   background-color: rgba(255, 255, 255, 0.171);
 }
 
-/* book card */
-.book--card {
-    background-color: rgba(50, 50, 50, 0.751);
-}
-.book--p--time {
-  color: rgba(245, 245, 245, 0.853);
-}
-
-/* dashboard */ 
-
-/* addlist */
-.book--add {
-    background-color: rgb(67, 67, 67);
-  }  
-  .book--icon {
-    filter: invert(1);
-  }
- .addlist--add {
-    margin: 0;
-    width: 100%;
-  }
-  .visible {
-    display: block;
-}
-
- .addlist--add--options {
-   display: none;
-   background-color: rgb(70, 70, 70);
-  }
-
-/* shelf page landing section */ 
-  .shelf--hr {
-    width: 95%;
-  }
-  .img--arrow {
-    filter: invert(.75);
-  }
-
-
-/* bookshelf */ 
-.bookshelf {
-  display: inline-flex;
-}
-.bookshelf--section::-webkit-scrollbar {
-  display: none;
-}
-
-/* queue */
-.queue {
-  display: flex;
-}
-.queue--section::-webkit-scrollbar {
-  display: none;
-}
-    
-/* reading list */
-.readinglist--section {
-  display: flex;
-}
-.readinglist--section::-webkit-scrollbar{
-  display: none;
-}
-
-/* browse */
+/* search */
 
 .browse--nav {
   background-color: rgba(0, 0, 0, 0.125);
@@ -276,7 +195,6 @@
  }
  .displaySearchInput {
   background-color:  rgb(39, 41, 43);
-  
  }
 
  /* player */
@@ -423,3 +341,97 @@ list-style: circle;
 .getStarted--ul .getStarted--li {
   display: block
 }
+
+.ellipsis--content {
+  /*display: absolute;*/
+  margin: auto 0;
+  cursor: pointer;
+}
+
+.ellipsisButtonList {
+  background-color: transparent;
+  width: 3rem;
+}
+.ellipsisButtonList:hover + .ellipsis--content,
+.ellipsis--content:hover {
+  display: block;
+}
+
+/*/* book card 
+.book--card {
+    background-color: rgba(50, 50, 50, 0.751);
+}
+.book--p--time {
+  color: rgba(245, 245, 245, 0.853);
+}
+
+/* dashboard */ 
+
+/* addlist 
+.book--add {
+    background-color: rgb(67, 67, 67);
+  }  
+  .book--icon {
+    filter: invert(1);
+  }
+ .addlist--add {
+    margin: 0;
+    width: 100%;
+  }
+  .visible {
+    display: block;
+}
+
+ .addlist--add--options {
+   display: none;
+   background-color: rgb(70, 70, 70);
+  }
+
+/* shelf page landing section  
+  .shelf--hr {
+    width: 95%;
+  }
+  .img--arrow {
+    filter: invert(.75);
+  }
+
+
+/* bookshelf 
+.bookshelf {
+  display: inline-flex;
+}
+.bookshelf--section::-webkit-scrollbar {
+  display: none;
+}
+
+/* queue 
+.queue {
+  display: flex;
+}
+.queue--section::-webkit-scrollbar {
+  display: none;
+}
+    
+/* reading list 
+.readinglist--section {
+  display: flex;
+}
+.readinglist--section::-webkit-scrollbar{
+  display: none;
+}*/
+/* dropdown 
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}*/
+
+/*li {
+  display: inline-block;
+  margin: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}*/

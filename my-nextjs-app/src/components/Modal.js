@@ -101,7 +101,9 @@ export default function Modal ({ setIsOpen }) {
 
     {showHeading && (
         <div className="mb-8 text-center">
-                <h1 className="px-8 py-4 text-6xl"><span className="text-green-600 font-bold">flow</span><span className="font-thin">mode</span></h1>
+                <h1 className="px-8 py-4 text-6xl">
+                <span className="text-green-600 font-bold">flow</span><span className="font-thin">mode</span>
+                </h1>
             </div>
     )}
 

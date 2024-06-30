@@ -7,7 +7,7 @@ import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
-export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, displayStyle, cleanDescription, filteredPlaylists }) {
+export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* cleanDescription,*/  }) {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
