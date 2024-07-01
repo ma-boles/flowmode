@@ -15,7 +15,7 @@ export default function Modal ({ setIsOpen }) {
     const [showWarning, setShowWarning] = useState(false);
 
 
-    const handleTrack = async () => {
+    const handleCreate = async () => {
         if(!session) {
             alert('Log in required');
             return;
@@ -47,7 +47,7 @@ export default function Modal ({ setIsOpen }) {
         }
     };
 
-    const handleDontTrack = async () => {
+    const handleCancel = async () => {
         if(!session) {
             alert('Log in required');
             return;
@@ -156,8 +156,8 @@ export default function Modal ({ setIsOpen }) {
                 <h2 className=" text-black text-xl font-semibold">Create an <Link href='/get-started'className="text-xl font-bold underline text-green-700">Account</Link>?</h2>
                     <h2 className="mx-6 mt-2 text-black text-xl">Keep track of your total time in flow + rest per day/week/month?</h2>
                 <div className="m-8 pt-2 flex justify-around">
-                    <button className="p-2 w-32 bg-red-600 rounded-md hover:bg-gray-800 transition duration-300 ease-in-out" onClick={handleDontTrack}>Cancel</button>
-                    <button className="p-2 w-32 bg-green-600 rounded-md hover:bg-gray-800 transition duration-300 ease-in-out" onClick={handleTrack}>Create</button>
+                    <button className="p-2 w-32 bg-red-600 rounded-md hover:bg-gray-800 transition duration-300 ease-in-out" onClick={handleCancel}>Cancel</button>
+                    <button className="p-2 w-32 bg-green-600 rounded-md hover:bg-gray-800 transition duration-300 ease-in-out" onClick={handleCreate}>Create</button>
                 </div>
             </div>
             )}
