@@ -342,20 +342,49 @@ list-style: circle;
   display: block
 }
 
-.ellipsis--content {
-  /*display: absolute;*/
-  margin: auto 0;
+.dropdown--ellipsis {
+  background-color: yellow;
+  justify-content: center;
+}
+.ellipsis--grid--div {
+  display: block;
   cursor: pointer;
+  z-index: 20;
 }
 
+.ellipsis--grid--button {
+  background-color: transparent;
+  width: 8rem;
+  padding: 0;
+  transform: rotate(180deg);
+}
+.ellipsis--grid--button:hover {
+  background-color: rgba(20, 20, 20, 0.899);
+
+}
+.ellipsis--grid--content {
+  z-index: 10;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  width: 8rem;
+  transition-duration: 5s;
+  border-bottom-right-radius: .3rem;
+  border-bottom-left-radius: .3rem;
+  background-color: rgba(20, 20, 20, 0.899);
+}
+.ellipsis--grid--button:hover + .ellipsis--grid--content  {
+  display: block;
+
+}
+.ellipsis--grid--content:hover {
+  display: block;
+}
 .ellipsisButtonList {
   background-color: transparent;
   width: 3rem;
 }
-.ellipsisButtonList:hover + .ellipsis--content,
-.ellipsis--content:hover {
-  display: block;
-}
+
 
 /*/* book card 
 .book--card {
