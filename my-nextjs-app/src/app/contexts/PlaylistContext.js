@@ -24,14 +24,14 @@ export const PlaylistProvider = ({ children }) => {
 
     return (
         <PlaylistContext.Provider
-            value={(
+            value={{
                 flowPlaylistId,
                 restPlaylistId,
                 previewId,
                 onSelectFlow,
                 onSelectRest,
                 onSelectPreview
-            )}
+            }}
         >
             {children}
         </PlaylistContext.Provider>
