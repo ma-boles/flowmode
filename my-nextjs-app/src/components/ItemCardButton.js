@@ -16,7 +16,7 @@ export default function ItemCardButton ({ category, playlist, onSelectFlow, onSe
                             </>
                          )}
                         {(category === 'song' || 'album' || 'audiobook' || 'episode') && (
-                            <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview()}>Preview</li>
+                            <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview(playlist.id)}>Preview</li>
                         )}
                     </ul>
                 </div>
