@@ -1,8 +1,7 @@
+'use client'
 import React, { createContext, useContext, useState } from "react";
 
 const PlaylistContext = createContext();
-
-export const usePlaylistContext = () => useContext(PlaylistContext);
 
 export const PlaylistProvider = ({ children }) => {
     const [flowPlaylistId, setFlowPlaylistId] = useState(null);
@@ -12,7 +11,7 @@ export const PlaylistProvider = ({ children }) => {
     const [restPlaylistName, setRestPlaylistName] = useState('');
     const [previewName, setPreviewName] = useState('');
 
-    const handleSetFlowPLaylist = (id, name) => {
+    const handleSetFlowPlaylist = (id, name) => {
         setFlowPlaylistId(id);
         setFlowPlaylistName(name);
         console.log('Flow playlist name:', name);
@@ -39,7 +38,7 @@ export const PlaylistProvider = ({ children }) => {
                 flowPlaylistName,
                 restPlaylistName,
                 previewName,
-                handleSetFlowPLaylist,
+                handleSetFlowPlaylist,
                 handleSetRestPlaylist,
                 handleSetPreview
             }}
@@ -49,4 +48,10 @@ export const PlaylistProvider = ({ children }) => {
     )
 };
 
-export default PlaylistContext;
+export const usePlaylistContext = () => {
+    const context = useContext(PlaylistContext);
+    if(!context) {
+        throw new Error('usePlaylistContext must be used within a PlaylistProvider');
+    }   
+    return context; 
+};
