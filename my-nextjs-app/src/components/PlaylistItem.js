@@ -14,9 +14,9 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                         <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
                         <div className="ellipsis--grid--content text-center">
                             <ul>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id)}>Flow</li>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id)}>Rest</li>
-                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => console.log('Preview')}>Preview</li>
+                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id, playlist.name)}>Flow</li>
+                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id, playlist.name)}>Rest</li>
+                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview(playlist.id, playlist.name)}>Preview</li>
                             </ul>
                         </div>
                     </div>
@@ -45,9 +45,9 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                     <div className="flex w-60">
                         <div className="cursor-pointer m-auto w-full">
                             <ul className="text-center w-100 border border-solid border-gray-500 rounded-sm ">
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id)}>Flow</li>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id)}>Rest</li>
-                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => console.log('Preview')}>Preview</li>
+                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id, playlist.name)}>Flow</li>
+                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id, playlist.name)}>Rest</li>
+                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview(playlist.id, playlist.name)}>Preview</li>
                             </ul>
                         </div>
                         <button className=" ml-2 w-12 text-3xl font-bold cursor-pointer transform rotate-90">&#8230;</button>
