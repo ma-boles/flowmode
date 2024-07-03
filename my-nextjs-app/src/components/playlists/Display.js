@@ -8,10 +8,21 @@ import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
 export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* cleanDescription,*/  }) {
+    const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
+        //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
+        const onSelectFlow = (id, name) => {
+            handleSetFlowPlaylist(id, name);
+        };
+        const onSelectRest = (id, name) => {
+            handleSetRestPlaylist(id, name);
+        };
+        const onSelectPreview = (id, name) => {
+            handleSetPreview(id, name);
+        };
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
-    const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
+    //const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
 
     const [playlists, setPlaylists] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -153,11 +164,11 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* c
                 playlist={playlist}
                 displayStyle={displayStyle}
                 cleanDescription={cleanDescription}
-                /*onSelectFlow={onSelectFlow}
+                onSelectFlow={onSelectFlow}
                 onSelectRest={onSelectRest}
-                onSelectPreview={onSelectPreview}*/
+                onSelectPreview={onSelectPreview}
                 />
-                    ))}
+                ))}
         </ul>
 
         <div className="flex justify-between">
@@ -203,16 +214,3 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* c
                 </li>
             ))}
         </ul>*/}
-
-
-        const onSelectFlow = () => {
-            return alert('flow');
-        };
-    
-        const onSelectRest = () => {
-            return alert('rest');
-        };
-    
-        const onSelectPreview = () => {
-            return alert('preview');
-        };
