@@ -7,20 +7,11 @@ import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistCon
 import { usePlayer } from "@/app/providers/PlayerProvider";
 
 
-export default function SearchComponent ({ searchResults}) {
-    const CategoryBlock = () => {
-        const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
-        //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
-        const onSelectFlow = (id, name) => {
-            handleSetFlowPlaylist(id, name);
-        };
-        const onSelectRest = (id, name) => {
-            handleSetRestPlaylist(id, name);
-        };
-        const onSelectPreview = (id, name) => {
-            handleSetPreview(id, name);
-        };
+export default function SearchComponent () {
 
+    //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
+
+    const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
     //const { playItem } = usePlayer();
@@ -116,7 +107,15 @@ export default function SearchComponent ({ searchResults}) {
         }
     };
 
- 
+    const onSelectFlow = (id, name) => {
+        handleSetFlowPlaylist(id, name);
+    };
+    const onSelectRest = (id, name) => {
+        handleSetRestPlaylist(id, name);
+    };
+    const onSelectPreview = (id, name) => {
+        handleSetPreview(id, name);
+    };
 
     return (
             <div className="bg-transparent">
@@ -225,7 +224,7 @@ export default function SearchComponent ({ searchResults}) {
                             {searchResults.map ((playlist, index) => (
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
-                                    <div className="cardWrapper ">
+                                    <div className="px-4">{/* cardWrapper */}
                                         <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
                                         <div className="h-12">
                                             <h2 className="text-center font-medium">{playlist.name}</h2>
@@ -253,8 +252,8 @@ export default function SearchComponent ({ searchResults}) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((episode, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectFlow}/>
-                                    <div className="cardWrapper ">
+                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
+                                    <div className="px-4">{/* cardWrapper */}
                                         <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
                                         <div className="h-12">
                                             <h2 className="text-center font-medium">{episode.name}</h2>
@@ -266,11 +265,12 @@ export default function SearchComponent ({ searchResults}) {
                 </div>
             </div>
         )
-    };
 
+{/*
     return (
         <PlaylistProvider>
-            <CategoryBlock searchResults={searchResults}/>
+            <CategoryBlock category={category} searchResults={searchResults}/>
         </PlaylistProvider>
     )
+        */}
 };
