@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
+
 
 export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const [flowTime, setFlowTime] = useState('');
@@ -8,6 +10,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const [countdown, setCountdown] = useState(null);
     const [initialFlowTime, setInitialFlowTime] = useState('');
     const [initialRestTime, setInitialRestTime] = useState('');
+    const { flowPlaylistName, restPlaylistName, previewPlaylistName } = usePlaylistContext();
 
     useEffect(() => {
         let intervalId = null;
@@ -86,6 +89,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
             <div /* time div */ className="flex justify-evenly">
                 <div className="p-16 mt-6">
                     <h2 className="font-bold text-2xl text-gray-200">FLOW</h2>
+                    <h2 className="font-bold text-xl text-gray-400">{flowPlaylistName || '' }</h2>
                     {isActive ? (
                         <div /* flow time */ className="mt-6 mx-6 mb-2 bg-transparent font-bold text-7xl text-center">
                             {formatTime(flowTime)}
@@ -104,6 +108,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                 </div>
                 <div className="p-16 mt-6">
                     <h2 className="font-bold text-2xl text-gray-200">REST</h2>
+                    <h2 className="font-bold text-xl text-gray-400">{restPlaylistName || ''}</h2>
                     {isActive ? (
                         <div /* refresh time */ className="mt-6 mx-6 mb-2 font-bold text-7xl text-center">
                             {formatTime(restTime)}
