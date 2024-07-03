@@ -8,18 +8,26 @@ export const PlaylistProvider = ({ children }) => {
     const [flowPlaylistId, setFlowPlaylistId] = useState(null);
     const [restPlaylistId, setRestPlaylistId] = useState(null);
     const [previewId, setPreviewId] = useState(null);
+    const [flowPlaylistName, setFlowPlaylistName] = useState('');
+    const [restPlaylistName, setRestPlaylistName] = useState('');
+    const [previewName, setPreviewName] = useState('');
 
-    const onSelectFlow = (playlistId) => {
-        setFlowPlaylistId(playlistId);
+    const handleSetFlowPLaylist = (id, name) => {
+        setFlowPlaylistId(id);
+        setFlowPlaylistName(name);
+        console.log('Flow playlist name:', name);
     };
 
-    const onSelectRest = (playlistId) => {
-        setRestPlaylistId(playlistId);
+    const handleSetRestPlaylist = (id, name) => {
+        setRestPlaylistId(id);
+        setRestPlaylistName(name);
+        console.log('Rest playlist name:', name);
     };
 
-    const onSelectPreview = (playlistId) => {
-        setPreviewId(playlistId)
-        console.log('Preview selected:', playlistId);
+    const handleSetPreview = (id, name) => {
+        setPreviewId(id);
+        setPreviewName(name);
+        console.log('Preview name:', name);
     };
 
     return (
@@ -28,9 +36,12 @@ export const PlaylistProvider = ({ children }) => {
                 flowPlaylistId,
                 restPlaylistId,
                 previewId,
-                onSelectFlow,
-                onSelectRest,
-                onSelectPreview
+                flowPlaylistName,
+                restPlaylistName,
+                previewName,
+                handleSetFlowPLaylist,
+                handleSetRestPlaylist,
+                handleSetPreview
             }}
         >
             {children}
