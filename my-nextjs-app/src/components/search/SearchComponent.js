@@ -9,7 +9,17 @@ import { usePlayer } from "@/app/providers/PlayerProvider";
 
 export default function SearchComponent ({ searchResults}) {
     const CategoryBlock = () => {
-        const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
+        const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
+        //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
+        const onSelectFlow = (id, name) => {
+            handleSetFlowPlaylist(id, name);
+        };
+        const onSelectRest = (id, name) => {
+            handleSetRestPlaylist(id, name);
+        };
+        const onSelectPreview = (id, name) => {
+            handleSetPreview(id, name);
+        };
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
