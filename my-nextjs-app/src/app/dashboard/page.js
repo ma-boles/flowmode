@@ -58,20 +58,6 @@ export default function Dashboard() {
         setShowCard('rest')
     };
 
-    const handleSelectFlow = (playlistId) => {
-        console.log('Flow playlist selected:', playlistId)
-
-    };
-
-    const handleSelectRest = (playlistId) => {
-        console.log('Rest playlist selected:', playlistId)
-
-    };
-
-    const handleSelectPreview = (playlistId) => {
-        console.log('Preview playlist selected:', playlistId)
-
-    };
 
     return (
         <>
@@ -83,12 +69,11 @@ export default function Dashboard() {
                 {!session ? (
                         <h2 className="text-center">Loading...</h2>
                 ): (
-                    <h1 className="p-0 mb-12 mt-2 text-5xl text-center">Welcome {session.user.name}!</h1>
+                    <h1 className="pb-12 pt-0 text-5xl text-center">Welcome {session.user.name}!</h1>
 
                 )}
 
                     <div /* top section */ className="mb-16 mt-8 flex justify-center">
-
 
                         <div /* minute totals div */>
                             <div /* buttons div */ className="flex">
@@ -129,3 +114,19 @@ export default function Dashboard() {
         </>
     )
 }
+
+
+   {/* const handleSelectFlow = (playlistId) => {
+        console.log('Flow playlist selected:', playlistId)
+
+    };
+
+    const handleSelectRest = (playlistId) => {
+        console.log('Rest playlist selected:', playlistId)
+
+    };
+
+    const handleSelectPreview = (playlistId) => {
+        console.log('Preview playlist selected:', playlistId)
+
+    };*/}
