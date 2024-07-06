@@ -188,7 +188,6 @@ export const PlayerProvider = ({ children }) => {
                 console.error('Error fetching devices:', error.message);
             }
         };
-    
         fetchDevices();
     }, [accessToken]);
 
@@ -229,28 +228,41 @@ export const PlayerProvider = ({ children }) => {
                 'Authorization': `Bearer ${accessToken}`
             }
         }).catch(error => console.error('Error stopping playback:', error));
-    };
-    
-       const play = async () => {
+    }
+
+    // player controls
+    const play = async () => {
         if(!player || !deviceID) return;
         await player.resume().catch(error => console.error('Failed to resume playback', error));
-       };
+    };
 
-       const pause = async() => {
+    const pause = async() => {
         if(!player) return;
         await player.pause().catch(error => console.error('Failed to pause playback', error));
-       };
+    };
 
-       const next = async () => {
+    const next = async () => {
         if(!player) return;
         await player.nextTrack().catch(error => console.error('Failed to skip to next track', error));
-       };
+    };
 
-       const previous = async () => {
+    const previous = async () => {
         if(!player) return;
         await player.previousTrack().catch(error => console.error('Failed to skip to previous track', error));
-       };
+    };
 
+    // flow mode controls
+    const playPlaylist = (playlistId) => {
+        if(playlistId) {
+            fetchTracks(playlistId, (tracks) => playTracks(tracks));
+        } else {
+            console.error('No playlist ID provided');
+        }
+    };
+
+    const pausePlaylist = () => {
+        stopPlayback();
+    };
 
 
     // Bundle up the context value with state variables and functions
@@ -270,6 +282,8 @@ export const PlayerProvider = ({ children }) => {
         restTracks,
         setFlowPlaylistId,
         setRestPlaylistId,
+        playPlaylist,
+        pausePlaylist,
         //playItem,
         setPlayerState,
         onDeviceIdChange
@@ -285,7 +299,14 @@ export const PlayerProvider = ({ children }) => {
 };
 
 
-export const usePlayer = () => React.useContext(PlayerContext);
+export const usePlayer = () => {
+    const context = useContext(PlayerContext);
+    if(!context) {
+        throw new Error('usePlayer must be used within PlayerProvider');
+    }
+    return context;
+};/*React.useContext(PlayerContext);*/
+
 
 /*const playItem = useCallback((uri) => {
         console.log('Attempting to play item with URI:', uri);
