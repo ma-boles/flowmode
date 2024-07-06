@@ -10,7 +10,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const [countdown, setCountdown] = useState(null);
     const [initialFlowTime, setInitialFlowTime] = useState('');
     const [initialRestTime, setInitialRestTime] = useState('');
-    const { flowPlaylistName, restPlaylistName, previewPlaylistName } = usePlaylistContext();
+    const { flowPlaylistName, restPlaylistName, previewPlaylistName, playPlaylist, pausePlaylist } = usePlaylistContext();
 
     useEffect(() => {
         let intervalId = null;
@@ -30,6 +30,8 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                         // Flow interval is over, switch to refresh interval
                         setActiveInterval('rest');
                         onFlowEnd();
+                        pausePlaylist();
+                        playPlaylist(restPlaylistId);
                         //setFlowTime(initialFlowTime);
                         //clearInterval(intervalId);
                 }
@@ -38,6 +40,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                     setRestTime((prevTime) => prevTime - 1);
                 } else {
                     onRestEnd();
+                    pausePlaylist();
                     // Refesh interval is over, switch to flow interval
                     //setActiveInterval('flow');
                     //setRefreshTime(initialRefreshTime);
@@ -51,7 +54,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     }
 
     return () => clearInterval(/*countdown*/ intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd, playPlaylist, pausePlaylist]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
@@ -68,6 +71,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         setActiveInterval('flow');
         setFlowTime(initialFlowTime); // resets to default time
         setRestTime(initialRestTime); // resets to default time
+        pausePlaylist();
     };
 
     const handleFlowTimeChange = (event) => {
@@ -80,7 +84,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         const newValue = Math.min(parseInt(event.target.value), 60) * 60; // converts minutes to seconds
         setRestTime(newValue);
         setInitialRestTime(newValue);
-    }
+    };
 
 
     return(
