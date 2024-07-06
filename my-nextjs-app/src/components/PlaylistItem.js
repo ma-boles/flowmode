@@ -1,6 +1,59 @@
-import React from "react";
+import React, {useState} from "react";
 
-export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview }) {
+export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
+
+    const [addedType, setAddedType] = useState(null);
+    
+    const handleFlowClick = () => {
+        if (playlist.id === flowPlaylistId) {
+            setAddedType(null);
+        } else {
+            onSelectFlow(playlist.id, playlist.name);
+            setAddedType('flow');
+        }
+
+    };
+
+    const handleRestClick = () => {
+        if (playlist.id === restPlaylistId) {
+            setAddedType(null);
+        } else {
+            onSelectRest(playlist.id, playlist.name);
+            setAddedType('rest');
+        }
+    };
+    /*
+    const handleFlowClick = () => {
+        if (playlist.id === flowPlaylistId) {
+            onSelectFlow(null, null);
+        } else {
+            onSelectFlow(playlist.id, playlist.name);
+        }
+
+    };
+
+    const handleRestClick = () => {
+        if (playlist.id === restPlaylistId) {
+            onSelectRest(null, null);
+            setAddedType(null);
+        } else {
+            onSelectRest(playlist.id, playlist.name);
+            setAddedType('rest');
+        }
+    };*/
+
+    const handlePreviewClick = () => {
+        onSelectPreview(playlist.id, playlist.name);
+        setAddedType('preview');
+    };
+
+    const isFlowAdded = playlist.id === flowPlaylistId;
+    const isRestAdded = playlist.id === restPlaylistId;
+    const isPreviewAdded = playlist.id === previewId;
+
+    const getButtonClass = (isAdded) => {
+        return isAdded ? 'bg-green-600' : 'hover:bg-blue-500'
+    };
 
     return (
         <>
@@ -11,9 +64,23 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                         <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
                         <div className="ellipsis--grid--content text-center">
                             <ul>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id, playlist.name)}>Flow</li>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id, playlist.name)}>Rest</li>
-                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview(playlist.id, playlist.name)}>Preview</li>
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(addedType === 'flow')}`}
+                                onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
+                                {/*onClick={handleFlowClick}*/}
+                                {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
+                                </li>
+
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')}`}
+                                onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
+                                {/*onClick={isRestAdded || addedType === 'rest' ? handleRestClick : handleRestClick}*/}
+                                {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
+                                </li>
+
+                                <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -42,9 +109,18 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                     <div className="flex w-60">
                         <div className="cursor-pointer m-auto w-full">
                             <ul className="text-center w-100 border border-solid border-gray-500 rounded-sm ">
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectFlow(playlist.id, playlist.name)}>Flow</li>
-                                <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => onSelectRest(playlist.id, playlist.name)}>Rest</li>
-                                <li className="py-1 font-semibold hover:bg-blue-500" onClick={() => onSelectPreview(playlist.id, playlist.name)}>Preview</li>
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500 ${getButtonClass(isFlowAdded || addedType === 'flow')}`}
+                                onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
+                                {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
+                                </li>
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')}`}
+                                onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
+                                {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
+                                </li>
+                                <li className={`py-1 font-semibold hover:bg-blue-500 ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                                </li>
                             </ul>
                         </div>
                         <button className=" ml-2 w-12 text-3xl font-bold cursor-pointer transform rotate-90">&#8230;</button>
