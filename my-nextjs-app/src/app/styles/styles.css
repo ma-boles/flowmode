@@ -329,21 +329,24 @@
   text-align: center;
 }
 
-.getStarted--ul {
-list-style: circle;
+/* get started */
+.start--content {
+  background-color: rgba(255, 255, 255, 0.095);
 }
-.getStarted--li {
+.start--ul {
+  list-style: disc;
+}
+.start--li {
   font-size: 20px;
   line-height: 1.5;
   margin-bottom: 1rem;
 }
 
-.getStarted--ul .getStarted--li {
+.start--ul .start--li {
   display: block
 }
 
 .dropdown--ellipsis {
-  background-color: yellow;
   justify-content: center;
 }
 .ellipsis--grid--div {
@@ -385,82 +388,7 @@ list-style: circle;
   width: 3rem;
 }
 
-
-/*/* book card 
-.book--card {
-    background-color: rgba(50, 50, 50, 0.751);
+/* about */
+.about--content {
+  background-color: rgba(255, 255, 255, 0.095);
 }
-.book--p--time {
-  color: rgba(245, 245, 245, 0.853);
-}
-
-/* dashboard */ 
-
-/* addlist 
-.book--add {
-    background-color: rgb(67, 67, 67);
-  }  
-  .book--icon {
-    filter: invert(1);
-  }
- .addlist--add {
-    margin: 0;
-    width: 100%;
-  }
-  .visible {
-    display: block;
-}
-
- .addlist--add--options {
-   display: none;
-   background-color: rgb(70, 70, 70);
-  }
-
-/* shelf page landing section  
-  .shelf--hr {
-    width: 95%;
-  }
-  .img--arrow {
-    filter: invert(.75);
-  }
-
-
-/* bookshelf 
-.bookshelf {
-  display: inline-flex;
-}
-.bookshelf--section::-webkit-scrollbar {
-  display: none;
-}
-
-/* queue 
-.queue {
-  display: flex;
-}
-.queue--section::-webkit-scrollbar {
-  display: none;
-}
-    
-/* reading list 
-.readinglist--section {
-  display: flex;
-}
-.readinglist--section::-webkit-scrollbar{
-  display: none;
-}*/
-/* dropdown 
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}*/
-
-/*li {
-  display: inline-block;
-  margin: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-}*/
