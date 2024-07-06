@@ -52,6 +52,6 @@ export const usePlaylistContext = () => {
     const context = useContext(PlaylistContext);
     if(!context) {
         throw new Error('usePlaylistContext must be used within a PlaylistProvider');
-    }   
-    return context; 
+    }
+    return context;
 };
