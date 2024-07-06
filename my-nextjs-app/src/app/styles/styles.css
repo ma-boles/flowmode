@@ -346,6 +346,13 @@
   display: block
 }
 
+/* about */
+.about--content {
+  background-color: rgba(255, 255, 255, 0.095);
+}
+
+/* item card buttons + playlist item */
+
 .dropdown--ellipsis {
   justify-content: center;
 }
@@ -388,7 +395,12 @@
   width: 3rem;
 }
 
-/* about */
-.about--content {
-  background-color: rgba(255, 255, 255, 0.095);
+.checkmark {
+  display: inline-block;
+  transform: rotate(45deg);
+  height: 1rem;
+  width: .65rem;
+  border-bottom: .3rem solid white;
+  border-right: .3rem solid white;
+  margin-left: .75rem;
 }
