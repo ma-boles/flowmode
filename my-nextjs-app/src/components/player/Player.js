@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState } from "react";
-import { PlayerContext } from "@/app/contexts/PlayerContext";
-import { usePlayer } from "@/app/providers/PlayerProvider";
+import { PlayerContext } from "@/app/providers/PlayerProvider";
+import usePlayer from "@/app/hooks/usePlayer";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
