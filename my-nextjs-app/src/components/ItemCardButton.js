@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+//import { usePlayer } from "@/app/providers/PlayerProvider";
+import usePlayer from "@/app/hooks/usePlayer";
 
 export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
 
     const [addedType, setAddedType] = useState(null);
+    const { playSong } = usePlayer();
 
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
@@ -11,7 +14,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             onSelectFlow(playlist.id, playlist.name);
             setAddedType('flow');
         }
-
+        // add code to unselect on second click
     };
 
     const handleRestClick = () => {
@@ -21,11 +24,15 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             onSelectRest(playlist.id, playlist.name);
             setAddedType('rest');
         }
+        // add code to unselect on second click
     };
 
     const handlePreviewClick = () => {
         onSelectPreview(playlist.id, playlist.name);
+        playSong(playlist.uri);
+        console.log('Previewing:', playlist.name, playlist.uri);
         setAddedType('preview');
+        // add code to pause play on second click
     };
 
     const isFlowAdded = playlist.id === flowPlaylistId;
@@ -55,23 +62,10 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 
                         <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
                             onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
-                            {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                            {isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' } {isPreviewAdded || addedType === 'preview' && <span className="button pause"></span>}
                             </li>
-
                     </ul>
                 </div>
             </div>
     )
 };
-/*
-    <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => handleFlowClick(playlist.id, playlist.name)}>Rest</li>
-
-                        {isAdded === 'rest' && isRestAdded ? (
-                            <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500">Added <span className="checkmark"></span></li>
-                        ) : (
-                            <li className="py-1 font-semibold border-b border-solid border-gray-500 hover:bg-blue-500" onClick={() => handleRestClick(playlist.id, playlist.name)}>Rest</li>
-                        )}
-                        <li className="py-1 font-semibold hover:bg-blue-500" 
-                        onClick={() => handlePreviewClick(playlist.id, playlist.name)}>Preview</li>
-                        
-*/
