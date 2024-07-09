@@ -1,11 +1,22 @@
 'use client'
-import React, { useState, useEffect, useContext, useCallback, useRef }from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import React, { useState, useEffect, useContext, useCallback, useRef, createContext }from "react";
 import { useSession } from "next-auth/react";
 import SpotifyWebApi from "spotify-web-api-node";
 import makeApiRequest from "../lib/spotifyApi";
 
+// create the context
+export const PlayerContext = createContext();
 
+/* custom hook to use the PlayerContext
+export const usePlayer = () => {
+    const context = useContext(PlayerContext);
+    if (!context) {
+        throw new Error('usePlayer must be used within a PlayerProvider');
+    }
+    return context;
+};*/
+
+// PlayerProvider component
 export const PlayerProvider = ({ children }) => {
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
@@ -191,6 +202,8 @@ export const PlayerProvider = ({ children }) => {
         fetchDevices();
     }, [accessToken]);
 
+
+    // flow mode code
     useEffect(() => {
         const fetchTracks = async (playlistId, setTracks) => {
             const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
@@ -264,6 +277,24 @@ export const PlayerProvider = ({ children }) => {
         stopPlayback();
     };
 
+    // Preview listen
+    const playSong = async (uri) => {
+        const response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`, {
+            method: 'PUT',
+            body: JSON.stringify({ uris: [uri]}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+        });
+
+        if(response.ok) {
+            console.log('Playback started');
+        } else {
+            const data = await response.json();
+            console.error('Playback failed', data);
+        }
+    };
 
     // Bundle up the context value with state variables and functions
     const contextValue = React.useMemo(() => ({
@@ -284,10 +315,11 @@ export const PlayerProvider = ({ children }) => {
         setRestPlaylistId,
         playPlaylist,
         pausePlaylist,
+        playSong,
         //playItem,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, /*playItem,*/ setPlayerState, onDeviceIdChange, play, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, /*playItem,*/ setPlayerState, onDeviceIdChange, play, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playSong
     ]);
 
 
@@ -299,13 +331,7 @@ export const PlayerProvider = ({ children }) => {
 };
 
 
-export const usePlayer = () => {
-    const context = useContext(PlayerContext);
-    if(!context) {
-        throw new Error('usePlayer must be used within PlayerProvider');
-    }
-    return context;
-};/*React.useContext(PlayerContext);*/
+ /*React.useContext(PlayerContext);*/
 
 
 /*const playItem = useCallback((uri) => {
@@ -324,3 +350,11 @@ export const usePlayer = () => {
             console.error('Player is not available.');
         }
        }, [player]);*/
+
+       /*export const usePlayer = () => {
+    const context = useContext(PlayerContext);
+    if(!context) {
+        throw new Error('usePlayer must be used within PlayerProvider');
+    }
+    return context;
+};*/
