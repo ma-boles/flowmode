@@ -27,11 +27,11 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         // add code to unselect on second click
     };
 
-    const handlePreviewClick = () => {
+    const handlePreviewClick = async(uri) => {
         onSelectPreview(playlist.id, playlist.name);
-        playSong(playlist.uri);
         console.log('Previewing:', playlist.name, playlist.uri);
         setAddedType('preview');
+        await playSong(playlist.uri);
         // add code to pause play on second click
     };
 
@@ -61,7 +61,13 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
                             </li>
 
                         <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
-                            onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+                            onClick={() => {
+                                if(isPreviewAdded && addedType === 'preview') {
+                                    handlePreviewClick(playlist.uri);
+                                }
+                            }
+                        }
+                            >
                             {isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' } {isPreviewAdded || addedType === 'preview' && <span className="button pause"></span>}
                             </li>
                     </ul>
@@ -69,3 +75,5 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             </div>
     )
 };
+
+// onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
