@@ -12,14 +12,18 @@ export const PlaylistProvider = ({ children }) => {
     const [previewName, setPreviewName] = useState('');
 
     const handleSetFlowPlaylist = (id, name) => {
-        setFlowPlaylistId(id);
-        setFlowPlaylistName(name);
+        //setFlowPlaylistId(id);
+        //setFlowPlaylistName(name);
+        setFlowPlaylistId(prevId => (prevId === id ? null : id));
+        setFlowPlaylistName(prevName => (prevName === name ? null : name));
         console.log('Flow playlist name:', name);
     };
 
     const handleSetRestPlaylist = (id, name) => {
-        setRestPlaylistId(id);
-        setRestPlaylistName(name);
+        //setRestPlaylistId(id);
+        //setRestPlaylistName(name);
+        setRestPlaylistId(prevId => (prevId === id ? null : id));
+        setRestPlaylistName(prevName => (prevName === name ? null : name));
         console.log('Rest playlist name:', name);
     };
 
