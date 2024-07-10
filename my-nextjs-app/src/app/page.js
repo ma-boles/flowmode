@@ -19,9 +19,9 @@ export default function HomePage(){
 
     return(
         <div>
-        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center'>
+        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center landing--header'>
             <div>
-                <h1 className="p-0 text-8xl">
+                <h1 className="p-0 m-0 text-8xl">
                 <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span></h1>
                 {!isLoggedIn && (
                     <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
