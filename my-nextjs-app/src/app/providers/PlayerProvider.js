@@ -244,24 +244,53 @@ export const PlayerProvider = ({ children }) => {
     }
 
     // player controls
-    const play = async () => {
-        if(!player || !deviceID) return;
-        await player.resume().catch(error => console.error('Failed to resume playback', error));
+    const togglePlay = async () => {
+        if(!player || !deviceID) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.resume();
+        } catch(error) {
+            console.error('Failed to play track.');
+        }
     };
 
     const pause = async() => {
-        if(!player) return;
-        await player.pause().catch(error => console.error('Failed to pause playback', error));
+        if(!player) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.pause();
+        } catch(error) {
+            console.error('Failed to pause track.');
+        }
     };
 
     const next = async () => {
-        if(!player) return;
-        await player.nextTrack().catch(error => console.error('Failed to skip to next track', error));
+        if(!player) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.nextTrack();
+            console.log('Skipped to the next track.');
+        } catch (error) {
+            console.error('Failed to skip to the net track:', error);
+        }
     };
 
     const previous = async () => {
-        if(!player) return;
-        await player.previousTrack().catch(error => console.error('Failed to skip to previous track', error));
+        if(!player) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.previousTrack();
+        } catch (error) {
+            console.error('Failed to go to the previous track.');
+        }
     };
 
     // flow mode controls
@@ -278,7 +307,12 @@ export const PlayerProvider = ({ children }) => {
     };
 
     // Preview listen
-    const playSong = async (uri) => {
+    const playSong = useCallback(async (uri) => {
+        if(!deviceID) {
+            console.error('Device ID is not available.');
+            return;
+        }
+
         const response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`, {
             method: 'PUT',
             body: JSON.stringify({ uris: [uri]}),
@@ -294,7 +328,7 @@ export const PlayerProvider = ({ children }) => {
             const data = await response.json();
             console.error('Playback failed', data);
         }
-    };
+    }, [deviceID]);
 
     // Bundle up the context value with state variables and functions
     const contextValue = React.useMemo(() => ({
@@ -303,7 +337,7 @@ export const PlayerProvider = ({ children }) => {
         playerState,
         spotifyReady,
         initializePlayer,
-        play,
+        togglePlay,
         pause,
         next,
         previous,
@@ -316,10 +350,9 @@ export const PlayerProvider = ({ children }) => {
         playPlaylist,
         pausePlaylist,
         playSong,
-        //playItem,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, /*playItem,*/ setPlayerState, onDeviceIdChange, play, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playSong
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, togglePlay, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playSong
     ]);
 
 
@@ -331,7 +364,7 @@ export const PlayerProvider = ({ children }) => {
 };
 
 
- /*React.useContext(PlayerContext);*/
+ /*React.useContext(PlayerContext);*/ /*playItem,*/ //playItem,
 
 
 /*const playItem = useCallback((uri) => {
