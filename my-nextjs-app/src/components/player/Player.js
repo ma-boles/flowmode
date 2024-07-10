@@ -8,7 +8,7 @@ import "@/app/styles/styles.css"
 
 
 export default function Player() {
-    const { player, playerState, play, pause, next, previous } = usePlayer();
+    const { player, playerState, togglePlay, pause, next, previous } = usePlayer();
     // Check if the player is currently playing something
     //const isPlaying = playerState && playerState.isPlaying;
     const [isFlowVisible, setIsFlowVisible] = useState(false);
@@ -46,7 +46,7 @@ export default function Player() {
                             <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                         </button>
 
-                        <button className="playerBtn" onClick={play}>
+                        <button className="playerBtn" onClick={togglePlay}>
                             {playerState === 'playing' ? (
                                 <img src="/pause-solid.svg" alt="pause" className="btnIcon"></img>
                             ) : (
