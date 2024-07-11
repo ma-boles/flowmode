@@ -4,7 +4,8 @@ import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css";
 import ItemCardButton from "../ItemCardButton";
 import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistContext";
-import { usePlayer } from "@/app/providers/PlayerProvider";
+//import { usePlayer } from "@/app/providers/PlayerProvider";
+import usePlayer from "@/app/hooks/usePlayer";
 
 
 export default function SearchComponent () {
@@ -173,7 +174,7 @@ export default function SearchComponent () {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((album, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={album} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
+                                    <ItemCardButton playlist={album} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">
                                         {album.images[2] && (
                                             <img src={album.images[0].url} alt={`Album cover of ${album.name}`} className="artistImg"></img>
@@ -191,7 +192,7 @@ export default function SearchComponent () {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((track, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
+                                    <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">
                                         <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
                                         <div className="h-12">
@@ -207,7 +208,7 @@ export default function SearchComponent () {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((audiobook, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={audiobook} onSelectPreview={onSelectPreview} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest}/>
+                                    <ItemCardButton playlist={audiobook} onSelectPreview={onSelectPreview} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
                                         <img src={audiobook.images[0].url} alt={`Book cover of ${audiobook.name}`} className="trackImg" />
                                         <div className="h-12">
@@ -223,7 +224,7 @@ export default function SearchComponent () {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((playlist, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
+                                    <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
                                         <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
                                         <div className="h-12">
@@ -252,7 +253,7 @@ export default function SearchComponent () {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((episode, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview}/>
+                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
                                         <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
                                         <div className="h-12">
