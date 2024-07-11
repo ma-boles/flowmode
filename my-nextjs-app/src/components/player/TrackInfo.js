@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PlayerContext } from "@/app/providers/PlayerProvider";
 
-export const TrackInfo = ({ playerState }) => {
+export const TrackInfo = () => {
+    const {playerState} = useContext(PlayerContext);
+
     // check if playerState is null
     if(!playerState) {
         return <div>Empty</div>;
@@ -13,6 +16,10 @@ export const TrackInfo = ({ playerState }) => {
     // extract track info from playerState
     const { track_window } = playerState;
     const currentTrack = track_window.current_track;
+
+    if(!currentTrack) {
+        return <div>Empty</div>;
+    }
    
     return (
         <div>
