@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 //import { usePlayer } from "@/app/providers/PlayerProvider";
 import usePlayer from "@/app/hooks/usePlayer";
+import { playSong } from "@/app/lib/playerApi";
 
-export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
+export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId, accessToken }) {
 
     const [addedType, setAddedType] = useState(null);
-    const { playSong } = usePlayer();
+   // const { playSong } = usePlayer();
 
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
@@ -28,10 +29,11 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
     };
 
     const handlePreviewClick = async(uri) => {
+        console.log('Access token:', accessToken);
         onSelectPreview(playlist.id, playlist.name);
         console.log('Previewing:', playlist.name, playlist.uri);
         setAddedType('preview');
-        await playSong(playlist.uri);
+        await playSong(playlist.uri, accessToken);
         // add code to pause play on second click
     };
 
@@ -61,13 +63,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
                             </li>
 
                         <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
-                            onClick={() => {
-                                if(isPreviewAdded && addedType === 'preview') {
-                                    handlePreviewClick(playlist.uri);
-                                }
-                            }
-                        }
-                            >
+                            onClick={() => {handlePreviewClick(playlist.uri)}}>
                             {isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' } {isPreviewAdded || addedType === 'preview' && <span className="button pause"></span>}
                             </li>
                     </ul>
