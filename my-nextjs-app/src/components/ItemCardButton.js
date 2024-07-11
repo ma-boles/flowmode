@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-//import { usePlayer } from "@/app/providers/PlayerProvider";
-import usePlayer from "@/app/hooks/usePlayer";
 import { playSong } from "@/app/lib/playerApi";
 
 export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId, accessToken }) {
 
     const [addedType, setAddedType] = useState(null);
-   // const { playSong } = usePlayer();
 
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
