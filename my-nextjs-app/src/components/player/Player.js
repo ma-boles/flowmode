@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import usePlayer from "@/app/hooks/usePlayer";
+import { resumePlayback, pausePlayback, skipTrack, previousTrack } from "@/app/lib/playerApi";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
@@ -42,7 +43,7 @@ export default function Player() {
 
                     <div className="flex px-32 justify-between bg-transparent">
 
-                        <button className="playerBtnSm" onClick={previous}>
+                        <button className="playerBtnSm" onClick={previousTrack}>
                             <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                         </button>
 
@@ -54,7 +55,7 @@ export default function Player() {
                             )}
                         </button>
 
-                        <button className="playerBtnSm" onClick={next}>
+                        <button className="playerBtnSm" onClick={skipTrack}>
                             <img src="forward-step-solid.svg" alt="skip" className="btnIconSm"></img>
                         </button>
                     </div>
