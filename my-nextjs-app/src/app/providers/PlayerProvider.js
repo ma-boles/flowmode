@@ -1,20 +1,11 @@
 'use client'
-import React, { useState, useEffect, useContext, useCallback, useRef, createContext }from "react";
+import React, { useState, useEffect, useContext, useCallback, createContext }from "react";
 import { useSession } from "next-auth/react";
 import SpotifyWebApi from "spotify-web-api-node";
 import makeApiRequest from "../lib/spotifyApi";
 
 // create the context
 export const PlayerContext = createContext();
-
-/* custom hook to use the PlayerContext
-export const usePlayer = () => {
-    const context = useContext(PlayerContext);
-    if (!context) {
-        throw new Error('usePlayer must be used within a PlayerProvider');
-    }
-    return context;
-};*/
 
 // PlayerProvider component
 export const PlayerProvider = ({ children }) => {
@@ -25,6 +16,8 @@ export const PlayerProvider = ({ children }) => {
     const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
     const [playerState, setPlayerState] = useState({});
+    const [active, setActive] = useState(false);
+    const [paused, setPaused] = useState(false);
     const [spotifyReady, setSpotifyReady] = useState(false);
     const [flowPlaylistId, setFlowPlaylistId] = useState('');
     const [restPlaylistId, setRestPlaylistId] = useState('');
@@ -76,7 +69,7 @@ export const PlayerProvider = ({ children }) => {
                 volume: 0.5
             });
     
-            setPlayer(newPlayer);
+            //setPlayer(newPlayer);
     
             // Ready
             newPlayer.addListener('ready', ({ device_id }) => {
@@ -87,10 +80,19 @@ export const PlayerProvider = ({ children }) => {
             });
     
             newPlayer.addListener('player_state_changed', (state) => {
-                if(state && state.device_id) {
-                    console.log('Player state changed:', state);
+                if(!state) {
+                    setActive(false);
+                    return;
                 }
                 setPlayerState(state);
+                setPaused(state.paused);
+
+                newPlayer.getCurrentState().then(currentState => {
+                    setActive(!!currentState);
+                    //(!state) ? setActive(false) : setActive(true)
+                }).catch(error => {
+                    console.error('Error getting current state:', error);
+                });
             });
     
             // Not ready
@@ -110,9 +112,24 @@ export const PlayerProvider = ({ children }) => {
                 console.log('Account error:', message);
             });
     
-            newPlayer.connect();
+            newPlayer.connect().then(success => {
+                if(success) {
+                    console.log('The Web Playback SDK successfully connected to Spotify!');
+                } else {
+                    console.error('Player connection failed.');
+                }
+            });
+
+            setPlayer(newPlayer);
             
             return () => {
+                newPlayer.removeListener('Player_state_changed');
+                newPlayer.removeListener('ready');
+                newPlayer.removeListener('not_ready');
+                newPlayer.removeListener('initialization_error');
+                newPlayer.removeListener('authentication_error');
+                newPlayer.removeListener('account_error');
+
                 newPlayer.disconnect();
             };
     }, []);
@@ -222,26 +239,7 @@ export const PlayerProvider = ({ children }) => {
         }
     }, [accessToken, flowPlaylistId, restPlaylistId]);
 
-    const playTracks = (tracks) => {
-        fetch(`https://api.spotify.com/v1/me/player/play`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: tracks }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
-        }).catch(error => console.error('Error playing tracks:', error));
-    };
-
-    const stopPlayback = () => {
-        fetch(`https://api.spotify.com/v1/me/player/pause`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
-        }).catch(error => console.error('Error stopping playback:', error));
-    }
+    
 
     // player controls
     const togglePlay = async () => {
@@ -250,7 +248,7 @@ export const PlayerProvider = ({ children }) => {
             return;
         }
         try {
-            await player.resume();
+            await player.togglePlay(); /*resume*/
         } catch(error) {
             console.error('Failed to play track.');
         }
@@ -268,31 +266,6 @@ export const PlayerProvider = ({ children }) => {
         }
     };
 
-    const next = async () => {
-        if(!player) {
-            console.error('Player is not initialized.');
-            return;
-        }
-        try {
-            await player.nextTrack();
-            console.log('Skipped to the next track.');
-        } catch (error) {
-            console.error('Failed to skip to the net track:', error);
-        }
-    };
-
-    const previous = async () => {
-        if(!player) {
-            console.error('Player is not initialized.');
-            return;
-        }
-        try {
-            await player.previousTrack();
-        } catch (error) {
-            console.error('Failed to go to the previous track.');
-        }
-    };
-
     // flow mode controls
     const playPlaylist = (playlistId) => {
         if(playlistId) {
@@ -306,29 +279,6 @@ export const PlayerProvider = ({ children }) => {
         stopPlayback();
     };
 
-    // Preview listen
-    const playSong = useCallback(async (uri) => {
-        if(!deviceID) {
-            console.error('Device ID is not available.');
-            return;
-        }
-
-        const response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [uri]}),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            },
-        });
-
-        if(response.ok) {
-            console.log('Playback started');
-        } else {
-            const data = await response.json();
-            console.error('Playback failed', data);
-        }
-    }, [deviceID]);
 
     // Bundle up the context value with state variables and functions
     const contextValue = React.useMemo(() => ({
@@ -337,22 +287,19 @@ export const PlayerProvider = ({ children }) => {
         playerState,
         spotifyReady,
         initializePlayer,
+        paused,
+        active,
         togglePlay,
         pause,
-        next,
-        previous,
-        playTracks,
-        stopPlayback,
         flowTracks,
         restTracks,
         setFlowPlaylistId,
         setRestPlaylistId,
         playPlaylist,
         pausePlaylist,
-        playSong,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, togglePlay, pause, next, previous, playTracks, stopPlayback, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playSong
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, togglePlay, pause, active, paused, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playPlaylist, pausePlaylist
     ]);
 
 
@@ -391,3 +338,90 @@ export const PlayerProvider = ({ children }) => {
     }
     return context;
 };*/
+
+            /*newPlayer.addListener('player_state_changed', (state) => {
+                if(state && state.device_id) {
+                    console.log('Player state changed:', state);
+                }
+                setPlayerState(state);
+            });*/
+
+            /* custom hook to use the PlayerContext
+export const usePlayer = () => {
+    const context = useContext(PlayerContext);
+    if (!context) {
+        throw new Error('usePlayer must be used within a PlayerProvider');
+    }
+    return context;
+};*/
+
+ /*const next = async () => {
+        if(!player) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.nextTrack();
+            console.log('Skipped to the next track.');
+        } catch (error) {
+            console.error('Failed to skip to the net track:', error);
+        }
+    };
+
+    const previous = async () => {
+        if(!player) {
+            console.error('Player is not initialized.');
+            return;
+        }
+        try {
+            await player.previousTrack();
+        } catch (error) {
+            console.error('Failed to go to the previous track.');
+        }*/
+
+            /*const playTracks = (tracks) => {
+        fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: 'PUT',
+            body: JSON.stringify({ uris: tracks }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        }).catch(error => console.error('Error playing tracks:', error));
+    };
+
+    const stopPlayback = () => {
+        fetch(`https://api.spotify.com/v1/me/player/pause`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        }).catch(error => console.error('Error stopping playback:', error));
+    }*/
+
+
+        
+    // Preview listen
+   /* const playSong = useCallback(async (uri) => {
+        if(!deviceID) {
+            console.error('Device ID is not available.');
+            return;
+        }
+
+        const response = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`, {
+            method: 'PUT',
+            body: JSON.stringify({ uris: [uri]}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+        });
+
+        if(response.ok) {
+            console.log('Playback started');
+        } else {
+            const data = await response.json();
+            console.error('Playback failed', data);
+        }
+    }, [deviceID]);*/
