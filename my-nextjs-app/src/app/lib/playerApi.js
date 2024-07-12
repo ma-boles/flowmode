@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState, useSession } from "react";
+import { PlayerContext } from "../providers/PlayerProvider";
+
+const { playerState } = useContext(PlayerContext);
 
 // controls for flow, rest, preview
 const playTracks = (tracks, accessToken) => {
@@ -23,6 +26,27 @@ const stopPlayback = (accessToken) => {
     }).catch(error => console.error('Error stopping playback:', error));
 };
 
+const togglePlay = async (accessToken, playerState) => {
+    if(playerState.is_playing) {
+        // if currently playing, pause the playback
+        await fetch('https://api.spotify.com/v1/me/player/pause', {
+            method:'PUT',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+    } else {
+        // if currently paused, resume the playback
+        await fetch('https://api.spotify.com/v1/me/player/play', {
+            method: 'PUT',
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+    }
+};
+
 const playSong = async (uri, accessToken) => {
     await fetch(`https://api.spotify.com/v1/me/player/play`, {
         method: 'PUT',
@@ -30,7 +54,7 @@ const playSong = async (uri, accessToken) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
             uris: [uri],
         }),
     });
@@ -73,4 +97,4 @@ const previousTrack = async (accessToken) => {
     });
 };
 
-export { playTracks, stopPlayback, playSong, pausePlayback, resumePlayback, skipTrack, previousTrack }
+export { playTracks, stopPlayback, playSong, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay }
