@@ -239,32 +239,6 @@ export const PlayerProvider = ({ children }) => {
         }
     }, [accessToken, flowPlaylistId, restPlaylistId]);
 
-    
-
-    // player controls
-    const togglePlay = async () => {
-        if(!player || !deviceID) {
-            console.error('Player is not initialized.');
-            return;
-        }
-        try {
-            await player.togglePlay(); /*resume*/
-        } catch(error) {
-            console.error('Failed to play track.');
-        }
-    };
-
-    const pause = async() => {
-        if(!player) {
-            console.error('Player is not initialized.');
-            return;
-        }
-        try {
-            await player.pause();
-        } catch(error) {
-            console.error('Failed to pause track.');
-        }
-    };
 
     // flow mode controls
     const playPlaylist = (playlistId) => {
@@ -289,8 +263,6 @@ export const PlayerProvider = ({ children }) => {
         initializePlayer,
         paused,
         active,
-        togglePlay,
-        pause,
         flowTracks,
         restTracks,
         setFlowPlaylistId,
@@ -299,7 +271,7 @@ export const PlayerProvider = ({ children }) => {
         pausePlaylist,
         setPlayerState,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, togglePlay, pause, active, paused, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playPlaylist, pausePlaylist
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, active, paused, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playPlaylist, pausePlaylist
     ]);
 
 
@@ -425,3 +397,28 @@ export const usePlayer = () => {
             console.error('Playback failed', data);
         }
     }, [deviceID]);*/
+
+        // player controls
+     /*   const togglePlay = async () => {
+            if(!player || !deviceID) {
+                console.error('Player is not initialized.');
+                return;
+            }
+            try {
+                await player.togglePlay(); /*resume
+            } catch(error) {
+                console.error('Failed to play track.');
+            }
+        };
+    
+        const pause = async() => {
+            if(!player) {
+                console.error('Player is not initialized.');
+                return;
+            }
+            try {
+                await player.pause();
+            } catch(error) {
+                console.error('Failed to pause track.');
+            }
+        };*/
