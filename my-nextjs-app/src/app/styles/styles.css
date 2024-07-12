@@ -1,3 +1,5 @@
+
+
 /* nav */
 
 .navbar {
@@ -405,29 +407,12 @@
   margin-left: .75rem;
 }
 
-.button.pause {
+.button.play {
   width: 1rem;
   height: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-items: center;
-  position: relative;
-  margin: auto 0.3rem;
-}
-.button.pause::before,
-.button.pause::after {
-  content: "";
-  position: absolute;
-  width: 0.3rem;       /* Width of each bar */
-  height: 1rem;      /* Adjusted height to be same as button */
-  background-color: white;
-  border-radius: 0;
-}
-
-.button.pause::before {
-  left: 0;            /* Position the first bar on the left */
-}
-
-.button.pause::after {
-  left: 0.5rem;       /* Space between the two bars */
+  box-sizing: border-box;
+  border-style: solid;
+  border-radius: 1rem;
+  border-color: transparent transparent transparent white;
+  border-width: 1rem 0rem 1rem 1rem;
 }
