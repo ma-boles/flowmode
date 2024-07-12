@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { playSong } from "@/app/lib/playerApi";
+import { useSession } from "next-auth/react";
 
-export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId, accessToken }) {
+export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
 
+    const { accessToken } = useSession();
     const [addedType, setAddedType] = useState(null);
 
     const handleFlowClick = () => {
@@ -31,7 +33,6 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         console.log('Previewing:', playlist.name, playlist.uri);
         setAddedType('preview');
         await playSong(playlist.uri, accessToken);
-        // add code to pause play on second click
     };
 
     const isFlowAdded = playlist.id === flowPlaylistId;
@@ -61,7 +62,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 
                         <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
                             onClick={() => {handlePreviewClick(playlist.uri)}}>
-                            {isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' } {isPreviewAdded || addedType === 'preview' && <span className="button pause"></span>}
+                             {isPreviewAdded || addedType === 'preview' && <span className="button play"></span>}
                             </li>
                     </ul>
                 </div>
@@ -70,3 +71,4 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 };
 
 // onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+/*{isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' }*/
