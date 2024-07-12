@@ -2,14 +2,17 @@
 import React, { createContext, useContext, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import usePlayer from "@/app/hooks/usePlayer";
-import { resumePlayback, pausePlayback, skipTrack, previousTrack } from "@/app/lib/playerApi";
+import { skipTrack, previousTrack, togglePlay } from "@/app/lib/playerApi";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
+import { useSession } from "next-auth/react";
 
 
 export default function Player() {
-    const { player, playerState, togglePlay, pause, next, previous } = usePlayer();
+    const { accessToken } = useSession();
+    const { player, playerState } = usePlayer();
+
     // Check if the player is currently playing something
     //const isPlaying = playerState && playerState.isPlaying;
     const [isFlowVisible, setIsFlowVisible] = useState(false);
@@ -23,8 +26,48 @@ export default function Player() {
         setIsFlowVisible(!isFlowVisible);
     };
 
-    console.log('Player:', player);
-    //console.log('Player state:', playerState);
+
+    // player controls
+    const handleTogglePlay = async() => {
+        if(accessToken) {
+            await togglePlay(accessToken, playerState);
+        } else {
+            console.error('No access token available.');
+        }
+    };
+
+    const handleSkip = async() => {
+        if(accessToken) {
+            await skipTrack(accessToken);
+        } else {
+            console.error('No access token available.');
+        }
+    };
+
+    const handlePrevious = async() => {
+        if(accessToken) {
+            await previousTrack(accessToken);
+        } else {
+            console.error('No access token available.');
+        }
+    };
+
+
+    // extract playing status from playerState
+    const { device } = playerState;
+    const isPlaying = device.is_active;
+
+    // determine is player is active
+    const buttonActive = isPlaying ? 'invert-0' : 'invert';
+
+    // extract media type from playerState
+    const context = playerState.context;
+
+    // determine if media type is playlist
+    const playlistStyles = context === 'playlist' ? 'invert-0' : 'invert';
+
+    //console.log('Player:', player);
+    console.log('Player state:', playerState);
 
 
     return (
@@ -43,19 +86,15 @@ export default function Player() {
 
                     <div className="flex px-32 justify-between bg-transparent">
 
-                        <button className="playerBtnSm" onClick={previousTrack}>
+                        <button onClick={handlePrevious} className={`playerBtnSm ${playlistStyles}`}>
                             <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                         </button>
 
-                        <button className="playerBtn" onClick={togglePlay}>
-                            {playerState === 'playing' ? (
+                        <button onClick={handleTogglePlay} className={`playerBtn ${buttonActive}`}>
                                 <img src="/pause-solid.svg" alt="pause" className="btnIcon"></img>
-                            ) : (
-                                <img src="/play-solid.svg" alt="play" className="btnIcon"></img>
-                            )}
                         </button>
 
-                        <button className="playerBtnSm" onClick={skipTrack}>
+                        <button onClick={handleSkip} className={`playerBtnSm ${playlistStyles}`}>
                             <img src="forward-step-solid.svg" alt="skip" className="btnIconSm"></img>
                         </button>
                     </div>
