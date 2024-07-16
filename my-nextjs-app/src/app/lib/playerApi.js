@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useEffect, useState, useSession } from "react";
+import { useEffect, useState, useSession, useContext } from "react";
 import { PlayerContext } from "../providers/PlayerProvider";
 
-const { playerState } = useContext(PlayerContext);
 
 // controls for flow, rest, preview
 const playTracks = (tracks, accessToken) => {
@@ -27,23 +26,32 @@ const stopPlayback = (accessToken) => {
 };
 
 const togglePlay = async (accessToken, playerState) => {
-    if(playerState.is_playing) {
-        // if currently playing, pause the playback
-        await fetch('https://api.spotify.com/v1/me/player/pause', {
-            method:'PUT',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            }
-        });
-    } else {
-        // if currently paused, resume the playback
-        await fetch('https://api.spotify.com/v1/me/player/play', {
-            method: 'PUT',
-            headers : {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
-        });
+    try {
+        const { paused } = playerState || {};
+
+        if(paused === undefined) {
+            console.error('playerState does not have the paused property');
+            return;
+        }
+        if(paused) {
+            await fetch('https://api.spotify.com/v1/me/player/pause', {
+                method:'PUT',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+        } else {
+            // if currently paused, resume the playback
+            await fetch('https://api.spotify.com/v1/me/player/play', {
+                method: 'PUT',
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error toggling play:', error);
     }
 };
 
