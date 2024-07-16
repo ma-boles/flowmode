@@ -3,8 +3,8 @@ import { playSong } from "@/app/lib/playerApi";
 import { useSession } from "next-auth/react";
 
 export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
-
-    const { accessToken } = useSession();
+    const { data: session } = useSession();
+    const accessToken = session.accessToken;
     const [addedType, setAddedType] = useState(null);
 
     const handleFlowClick = () => {
@@ -27,8 +27,8 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         // add code to unselect on second click
     };
 
-    const handlePreviewClick = async(uri) => {
-        console.log('Access token:', accessToken);
+    const handlePreviewClick = async() => {
+        //console.log('Access token:', accessToken);
         onSelectPreview(playlist.id, playlist.name);
         console.log('Previewing:', playlist.name, playlist.uri);
         setAddedType('preview');
@@ -62,7 +62,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 
                         <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
                             onClick={() => {handlePreviewClick(playlist.uri)}}>
-                             {isPreviewAdded || addedType === 'preview' && <span className="button play"></span>}
+                            <span className="button play"></span>
                             </li>
                     </ul>
                 </div>
