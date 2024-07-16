@@ -4,15 +4,11 @@ import { PlayerContext } from "@/app/providers/PlayerProvider";
 export const TrackInfo = () => {
     const {playerState} = useContext(PlayerContext);
 
-    // check if playerState is null
-    if(!playerState) {
+    // check if playerState or track_window is null
+    if(!playerState || !playerState.track_window) {
         return <div>Empty</div>;
     }
 
-    // check if track_window is null
-    if (!playerState.track_window) {
-        return <div>Empty</div>;
-    }
     // extract track info from playerState
     const { track_window } = playerState;
     const currentTrack = track_window.current_track;
