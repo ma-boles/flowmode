@@ -68,6 +68,52 @@ const playSong = async (uri, accessToken) => {
     });
 };
 
+const playMedia = async (type, id, accessToken) => {
+    let url = `https://api.spotify.com/v1/me/player/play`;
+    let body;
+
+    switch(type) {
+        case 'track':
+            body = JSON.stringify({ uris: [`spotify:track:${id}`] });
+            break;
+        case 'album':
+            body = JSON.stringify({ context_uri: `spotify:album:${id}`});
+            break;
+        case 'playlist':
+            body = JSON.stringify({ context_uri: `spotify:playlist:${id}` });
+            break;
+        case 'podcast':
+            body = JSON.stringify({ context_uri: `spotify:episode:${id}` });
+            break;
+        case 'audiobook':
+            body = JSON.stringify({ context_uri: `spotify:audiobook:${id}` });
+            break;
+        default:
+            console.error('Unsupported media type');
+            return;
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: body,
+        });
+
+        if(response.ok) {
+            console.log(`${type.charAt(0).toUpperCase() + type.slice(1)} is playing`);
+        } else {
+            const errorData = await response.json();
+            console.error('Failes to play media:', response.status, response,statesText, errorData);
+        }
+    } catch (error) {
+        console.error('Error playing media:', error);
+    }
+};
+
 // controls for player
 const pausePlayback = async(accessToken) => {
     await fetch(`https://api.spotify.com/v1/me/player/pause`, {
@@ -105,4 +151,4 @@ const previousTrack = async (accessToken) => {
     });
 };
 
-export { playTracks, stopPlayback, playSong, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay }
+export { playTracks, stopPlayback, playSong, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay, playMedia }
