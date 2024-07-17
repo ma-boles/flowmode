@@ -6,7 +6,7 @@ export const TrackInfo = () => {
 
     // check if playerState or track_window is null
     if(!playerState || !playerState.track_window) {
-        return <div>Empty</div>;
+        return <div>Loading...</div>;
     }
 
     // extract track info from playerState
@@ -14,7 +14,7 @@ export const TrackInfo = () => {
     const currentTrack = track_window.current_track;
 
     if(!currentTrack) {
-        return <div>Empty</div>;
+        return <div>Ready</div>;
     }
    
     return (
