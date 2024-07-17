@@ -27,16 +27,17 @@ export default function Player() {
 
     // player controls
     const handleTogglePlay = async() => {
-        console.log('Access Token:', accessToken);
-        console.log('Player State:', playerState);
+        //console.log('Access Token:', accessToken);
+        //console.log('Player State:', playerState);
 
-        if(!player) {
+       /* if(!player) {
             console.error('Spotify player is not initialized');
             return;
-        }
+        }*/
         
         if(accessToken) {
             await togglePlay(accessToken, playerState);
+            console.log('TogglePlay engaged');
         } else {
             console.error('No access token available.');
         }
