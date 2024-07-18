@@ -4,21 +4,26 @@ import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css";
 import ItemCardButton from "../ItemCardButton";
 import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistContext";
-//import { usePlayer } from "@/app/providers/PlayerProvider";
 import usePlayer from "@/app/hooks/usePlayer";
+import { playSong } from "@/app/lib/playerApi";
+import { onSelectPreview  } from "@/app/lib/utils/buttonControls";
+import { PlayerProvider } from "@/app/providers/PlayerProvider";
 
 
-export default function SearchComponent () {
+export default function SearchComponent ({ previewId, playlist }) {
 
     //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
 
     const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
-    //const { playItem } = usePlayer();
+
     const [searchResults, setSearchResults] = useState([]);
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
+    const [addedType, setAddedType] = useState(null);
+
+
 
     useEffect(() => {
         setSearchResults([]);
@@ -83,9 +88,9 @@ export default function SearchComponent () {
     const handleItemSelect = (selectedItem, itemType) => {
         console.log('Selected item:', selectedItem);
 
-        if(playItem && selectedItem.uri) {
-            playItem(selectedItem.uri);
-        }
+        if(playSong && selectedItem.uri) {
+            playSong(selectedItem.uri);
+        }; 
 
         // Handle different item types
         switch (itemType) {
@@ -113,10 +118,19 @@ export default function SearchComponent () {
     };
     const onSelectRest = (id, name) => {
         handleSetRestPlaylist(id, name);
+        console.log('Select rest:', id, name);
     };
-    const onSelectPreview = (id, name) => {
-        handleSetPreview(id, name);
+
+    const handlePreviewClick = async() => {
+        if(playlist.id === previewId) {
+            setAddedType(null);
+        } else {
+            onSelectPreview(playlist.id, playlist.name);
+            setAddedType('preview');
+        }
+        await playSong(playlist.uri, accessToken);
     };
+
 
     return (
             <div className="bg-transparent">
@@ -194,7 +208,9 @@ export default function SearchComponent () {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">
-                                        <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
+                                        <button onClick={() => handlePreviewClick(playlist.uri)}>
+                                            <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
+                                        </button>
                                         <div className="h-12">
                                             <h2 className="text-center font-bold hover:underline cursor-pointer" onClick={() => handleItemSelect(track)}>{track.name}</h2>
                                             <h2 className="text-center">{track.artists[0].name}</h2>
