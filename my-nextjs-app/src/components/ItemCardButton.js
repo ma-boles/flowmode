@@ -4,6 +4,7 @@ import { playMedia } from "@/app/lib/playerApi";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
 import { fetchDevices } from "@/app/providers/PlayerProvider";
+
 export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
     const { data: session } = useSession();
     const accessToken = session.accessToken;
@@ -31,13 +32,14 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         // add code to unselect on second click
     };
 
-    const handlePreviewClick = () => {
+   const handlePreviewClick = async() => {
         if(playlist.id === previewId) {
             setAddedType(null);
         } else {
             onSelectPreview(playlist.id, playlist.name);
             setAddedType('preview');
         }
+        await playSong(playlist.uri, accessToken);
     };
 
     const isFlowAdded = playlist.id === flowPlaylistId;
