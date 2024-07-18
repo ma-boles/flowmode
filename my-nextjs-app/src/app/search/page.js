@@ -5,12 +5,16 @@ import '../styles/styles.css';
 import SearchComponent from "@/components/search/SearchComponent";
 import { useSession } from "next-auth/react";
 import Player from "@/components/player/Player";
+import { playSong } from "../lib/playerApi";
+import { onSelectPreview } from "../lib/utils/buttonControls";
 
 
 const Search = () => {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
+    const [previewId, setPreviewId] = useState(null);
+    const [addedType, setAddedType] = useState(null);
 
     // State store search results data
     const [searchResults, setSearchResults] = useState([]);
@@ -27,6 +31,17 @@ const Search = () => {
         setIsPlayerOpen(true); // Open Player when button is clicked
     };
 
+    const handleSetPreview = (id, name) => {
+        setPreviewId(id);
+        console.log('On Select Preview:', id, name);
+    };
+
+    /*const onSelectPreview = (id, name) => {
+        handleSetPreview(id, name);
+        console.log('On select preview:', id, name);
+    };*/
+
+    let playlist;
 
 return(
     <div>
@@ -38,7 +53,16 @@ return(
             <div className="w-full border-none">
                 <h2 className="pb-4 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
                 </h2>
-                <SearchComponent accessToken={accessToken} onSearchResults={handleSearchResults} />
+                <SearchComponent 
+                    accessToken={accessToken} 
+                    onSearchResults={handleSearchResults} 
+                    playlist={playlist}
+                    playSong={playSong}
+                    onSelectPreview={handleSetPreview}
+                    setAddedType={setAddedType}
+                    previewId={previewId}
+                    handleSetPreview={handleSetPreview}
+                />
             </div>
         </section>
         
