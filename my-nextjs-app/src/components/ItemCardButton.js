@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { playSong } from "@/app/lib/playerApi";
-import { playMedia } from "@/app/lib/playerApi";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
-import { fetchDevices } from "@/app/providers/PlayerProvider";
 
 export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
     const { data: session } = useSession();
     const accessToken = session.accessToken;
     const [addedType, setAddedType] = useState(null);
-
-    //const { fetchDevices } = usePlayer();
 
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
@@ -76,35 +72,3 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             </div>
     )
 };
-
-// onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
-/*{isPreviewAdded || addedType === 'preview' ? 'Pause' : 'Play' }*/
-
-
-
- /*const handlePreviewClick = async(playlist, accessToken) => {
-        //const mediaType = validMediaTypes.includes(item.type) ? item.type : 'playlist';
-        console.log('Previewing:', playlist.type, playlist.name, playlist.uri);
-
-        try {
-            if(!playlist || !playlist.id || !playlist.type) {
-                console.error('Invalid playlist data:', playlist);
-                return;
-            }
-
-            await fetchDevices(accessToken);
-
-            const validMediaTypes = ['track', 'album', 'playlist', 'podcast', 'audiobook'];
-            const mediaType = validMediaTypes.includes(playlist) ? playlist.type : 'playlist';
-
-            onSelectPreview(playlist.id, playlist.name);
-            setAddedType('preview');
-
-            await playMedia(mediaType, playlist.id, accessToken)
-
-        } catch (error) {
-            console.error('Error in handlePreviewClick:', error)
-        }
-        //console.log('Access token:', accessToken);
-        //await playSong(playlist.uri, accessToken);
-    };*/
