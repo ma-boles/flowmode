@@ -13,6 +13,7 @@ export const PlayerProvider = ({ children }) => {
     /*const playerRef = useRef(null);*/
     const [player, setPlayer] = useState(null);
     const [deviceID, setDeviceID] = useState(null);
+    const [trackInfo, setTrackInfo] = useState(null);
     const [playerState, setPlayerState] = useState({});
     const [active, setActive] = useState(false);
     const [paused, setPaused] = useState(false);
@@ -77,7 +78,6 @@ export const PlayerProvider = ({ children }) => {
                     setPlayerState(state);
                     setPaused(state.paused);
                     setActive(!state.paused);
-                    return;
                 } else {
                     console.error('Player state is null or undefined');
                     setActive(false);
@@ -184,67 +184,6 @@ export const PlayerProvider = ({ children }) => {
         }
     }, [accessToken]);
 
-     // Fetch tracks for playlists
-     const fetchTracks = useCallback(async (playlistId, setTracks) => {
-        try {
-            const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-                headers: { 'Authorization': `Bearer ${accessToken}` }
-            });
-            if(!response.ok) {
-                throw new Error('Failed to fetch tracks');
-            }
-            const data = await response.json();
-            const trackUris = data.items.map(item => item.track.uri);
-            setTracks(trackUris);
-        } catch (error) {
-            console.error('Error fetching tracks:', error.message);
-        }
-    }, [accessToken]);
-
-
-    // Play track from a playlist
-    const playPlaylist = useCallback((playlistId) => {
-        if(playlistId && player) {
-            fetchTracks(playlistId, (tracks) => {
-                if(tracks.length > 0) {
-                    playTracks(tracks);
-                } else {
-                    console.error('No tracks found in the playlist');
-                }
-            });
-        } else {
-            console.error('No playlist ID provided');
-        }
-    }, [fetchTracks]);
-
-    // Pause current playlist
-    const pausePlaylist = useCallback(() => {
-        if(player) {
-            stopPlayback();
-        } else {
-            console.error('Player is not initialized');
-        }
-    }, [player]);
-
-    const playTracks = useCallback((tracks) => {
-        if(player) {
-            player.queue(tracks[0])
-            .then(() => player.play())
-            .catch(error => console.error('Error playing tracks:', error));
-        } else {
-            console.error('Player is not initialized');
-        }
-    }, [player]);
-
-    const stopPlayback = useCallback(() => {
-        if(player) {
-            player.pause()
-            .catch(error => console.error('Error pausing playback:', error));
-        } else {
-            console.error('Player is not initialized');
-        }
-    }, [player]);
-
     // initialize SDK and set up the player
     useEffect(() => {
         if(accessToken) {
@@ -276,16 +215,6 @@ export const PlayerProvider = ({ children }) => {
         fetchDevices();
     }, [accessToken, fetchDevices]);
 
-    // Fetch tracks for flow and rest playlists
-    useEffect(() => {
-        if(flowPlaylistId) {
-            fetchTracks(flowPlaylistId, setFlowTracks);
-        }
-        if(restPlaylistId) {
-            fetchTracks(restPlaylistId, setRestTracks);
-        }
-    }, [flowPlaylistId, restPlaylistId, fetchTracks]);
-
     const onDeviceIdChange = useCallback((newDeviceId) => {
         setDeviceID(newDeviceId);
     }, []);
@@ -303,12 +232,14 @@ export const PlayerProvider = ({ children }) => {
         restTracks,
         setFlowPlaylistId,
         setRestPlaylistId,
-        playPlaylist,
-        pausePlaylist,
+        flowPlaylistId,
+        restPlaylistId,
         setPlayerState,
+        trackInfo,
+        setTrackInfo,
         fetchDevices,
         onDeviceIdChange
-    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, fetchDevices, active, paused, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, playPlaylist, pausePlaylist
+    }), [player, deviceID, playerState, spotifyReady, initializePlayer, setPlayerState, onDeviceIdChange, fetchDevices, active, paused, flowTracks, restTracks, setFlowPlaylistId, setRestPlaylistId, trackInfo, flowPlaylistId, restPlaylistId
     ]);
 
 
