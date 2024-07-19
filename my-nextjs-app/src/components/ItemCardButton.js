@@ -28,16 +28,6 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         // add code to unselect on second click
     };
 
-   /*const handlePreviewClick = async() => {
-        if(playlist.id === previewId) {
-            setAddedType(null);
-        } else {
-            onSelectPreview(playlist.id, playlist.name);
-            setAddedType('preview');
-        }
-        await playSong(playlist.uri, accessToken);
-    };*/
-
     const isFlowAdded = playlist.id === flowPlaylistId;
     const isRestAdded = playlist.id === restPlaylistId;
     const isPreviewAdded = playlist.id === previewId;
@@ -55,18 +45,13 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
                             onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
                             {/*onClick={isFlowAdded || addedType === 'flow' ? handleFlowClick : handleFlowClick}>*/}
                             {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
-                            </li>
+                        </li>
 
                         <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')} `}
                             onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
                             {/*onClick={isRestAdded || addedType === 'rest' ? handleRestClick : handleRestClick}>*/}
                             {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
-                            </li>
-
-                        {/*<li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
-                            onClick={() => {handlePreviewClick(playlist.uri)}}>
-                            <span className="button play"></span>
-                            </li>*/}
+                        </li>
                     </ul>
                 </div>
             </div>
