@@ -6,13 +6,10 @@ import ItemCardButton from "../ItemCardButton";
 import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import usePlayer from "@/app/hooks/usePlayer";
 import { playSong } from "@/app/lib/playerApi";
-import { onSelectPreview  } from "@/app/lib/utils/buttonControls";
 import { PlayerProvider } from "@/app/providers/PlayerProvider";
 
 
-export default function SearchComponent ({ previewId, playlist }) {
-
-    //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
+export default function SearchComponent ({ playlist, previewId }) {
 
     const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
     const { data: session } = useSession();
@@ -85,12 +82,16 @@ export default function SearchComponent ({ previewId, playlist }) {
     }
 };
 
-    const handleItemSelect = (selectedItem, itemType) => {
-        console.log('Selected item:', selectedItem);
+    const handleItemSelect = async (selectedItem, itemType) => {
+        console.log('Selected item:', selectedItem.name);
 
-        if(playSong && selectedItem.uri) {
-            playSong(selectedItem.uri);
-        }; 
+        if(itemType === 'track' && playSong && selectedItem.uri) {
+            try {
+                await playSong(selectedItem.uri, accessToken)
+            } catch(error) {
+                console.error('Error playing song:', error)
+            }
+        } else {
 
         // Handle different item types
         switch (itemType) {
@@ -111,17 +112,32 @@ export default function SearchComponent ({ previewId, playlist }) {
             default:
                 break;
         }
+    }
+};
+
+
+
+    const onSelectPreview = (id, name) => {
+        handleSetPreview(id, name);
+        console.log('On select preview:', id, name);
     };
 
     const onSelectFlow = (id, name) => {
         handleSetFlowPlaylist(id, name);
+        console.log('Select flow:', id, name);
     };
+    
     const onSelectRest = (id, name) => {
         handleSetRestPlaylist(id, name);
         console.log('Select rest:', id, name);
     };
 
     const handlePreviewClick = async() => {
+        if (!playlist) {
+            console.error('No playlist provided.');
+            return;
+        }
+
         if(playlist.id === previewId) {
             setAddedType(null);
         } else {
@@ -131,6 +147,7 @@ export default function SearchComponent ({ previewId, playlist }) {
         await playSong(playlist.uri, accessToken);
     };
 
+    //const isPreviewAdded = playlist.id === previewId;
 
     return (
             <div className="bg-transparent">
@@ -208,7 +225,7 @@ export default function SearchComponent ({ previewId, playlist }) {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">
-                                        <button onClick={() => handlePreviewClick(playlist.uri)}>
+                                        <button onClick={() => handleItemSelect(track, 'track')}>
                                             <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
                                         </button>
                                         <div className="h-12">
