@@ -6,10 +6,9 @@ import SearchComponent from "@/components/search/SearchComponent";
 import { useSession } from "next-auth/react";
 import Player from "@/components/player/Player";
 import { playSong } from "../lib/playerApi";
-import { onSelectPreview } from "../lib/utils/buttonControls";
 
 
-const Search = () => {
+const Search = ({ playlist }) => {
 
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
@@ -25,23 +24,18 @@ const Search = () => {
         setSearchResults(results);
     };
 
-    const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsPlayerOpen(true); // Open Player when button is clicked
-    };
+    //const [isPlayerOpen, setIsPlayerOpen] = useState(false);
 
     const handleSetPreview = (id, name) => {
         setPreviewId(id);
         console.log('On Select Preview:', id, name);
     };
 
-    /*const onSelectPreview = (id, name) => {
+    const onSelectPreview = (id, name) => {
         handleSetPreview(id, name);
         console.log('On select preview:', id, name);
-    };*/
+    };
 
-    let playlist;
 
 return(
     <div>
@@ -58,7 +52,7 @@ return(
                     onSearchResults={handleSearchResults} 
                     playlist={playlist}
                     playSong={playSong}
-                    onSelectPreview={handleSetPreview}
+                    onSelectPreview={onSelectPreview}
                     setAddedType={setAddedType}
                     previewId={previewId}
                     handleSetPreview={handleSetPreview}
