@@ -3,13 +3,13 @@ import { searchAlbums, searchArtists, searchAudiobooks, searchPodcastEpisode, se
 import { useSession } from "next-auth/react";
 import "@/app/styles/styles.css";
 import ItemCardButton from "../ItemCardButton";
-import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistContext";
+import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import usePlayer from "@/app/hooks/usePlayer";
 import { playSong, playAlbum, playAudiobook, playEpisode, playPlaylist } from "@/app/lib/playerApi";
 import { PlayerProvider } from "@/app/providers/PlayerProvider";
 
 
-export default function SearchComponent ({ playlist, previewId }) {
+export default function SearchComponent ({ playlist/*, previewId*/ }) {
 
     const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
     const { data: session } = useSession();
@@ -32,7 +32,7 @@ export default function SearchComponent ({ playlist, previewId }) {
         }
     };
 
-
+    // Search functions
     const executeSearch = async () => {
         console.log('Search initiated with category:', category, 'and keyword:', keyword );
 
@@ -82,9 +82,8 @@ export default function SearchComponent ({ playlist, previewId }) {
     }
 };
 
+    // Play function for previewing items
     const handleItemSelect = (selectedItem, itemType) => {
-
-        // Handle different item types
         switch (itemType) {
             case 'track':
                 playSong(selectedItem.uri, accessToken);
@@ -114,42 +113,19 @@ export default function SearchComponent ({ playlist, previewId }) {
                 console.warn('Unknown item type:', itemType);
                 break;
         }
-    }
-//};
-
-
-
-    const onSelectPreview = (id, name) => {
-        handleSetPreview(id, name);
-        console.log('On select preview:', id, name);
     };
 
+    // Selecting items for flow and rest
     const onSelectFlow = (id, name) => {
         handleSetFlowPlaylist(id, name);
         console.log('Select flow:', id, name);
     };
-    
+
     const onSelectRest = (id, name) => {
         handleSetRestPlaylist(id, name);
         console.log('Select rest:', id, name);
     };
 
-    const handlePreviewClick = async() => {
-        if (!playlist) {
-            console.error('No playlist provided.');
-            return;
-        }
-
-        if(playlist.id === previewId) {
-            setAddedType(null);
-        } else {
-            onSelectPreview(playlist.id, playlist.name);
-            setAddedType('preview');
-        }
-        await playSong(playlist.uri, accessToken);
-    };
-
-    //const isPreviewAdded = playlist.id === previewId;
 
     return (
             <div className="bg-transparent">
@@ -207,7 +183,7 @@ export default function SearchComponent ({ playlist, previewId }) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((album, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={album} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
+                                    <ItemCardButton playlist={album} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
                                         <button onClick={() => handleItemSelect(album, 'album')} className="playImgButton">
                                             {album.images[2] && (
@@ -251,7 +227,7 @@ export default function SearchComponent ({ playlist, previewId }) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((audiobook, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={audiobook} onSelectPreview={onSelectPreview} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
+                                    <ItemCardButton playlist={audiobook} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
                                         <button onClick={() => handleItemSelect(audiobook, 'audiobook')} className="playImgButton">
                                             <img src={audiobook.images[0].url} alt={`Book cover of ${audiobook.name}`} className="trackImg" />
@@ -272,7 +248,7 @@ export default function SearchComponent ({ playlist, previewId }) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((playlist, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
+                                    <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
                                         <button onClick={() => handleItemSelect(playlist, 'playlist')} className="playImgButton">
                                             <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
@@ -306,7 +282,7 @@ export default function SearchComponent ({ playlist, previewId }) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((episode, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
+                                    <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
                                         <button onClick={() => handleItemSelect(episode, 'episode')} className="playImgButton">
                                             <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
@@ -333,3 +309,26 @@ export default function SearchComponent ({ playlist, previewId }) {
                 console.error('Error playing song:', error)
             }
         } else {*/
+
+    /*const handlePreviewClick = async() => {
+        if (!playlist) {
+            console.error('No playlist provided.');
+            return;
+        }
+
+        if(playlist.id === previewId) {
+            setAddedType(null);
+        } else {
+            onSelectPreview(playlist.id, playlist.name);
+            setAddedType('preview');
+        }
+        await playSong(playlist.uri, accessToken);
+    };*/
+
+        //const isPreviewAdded = playlist.id === previewId;
+
+
+    /*const onSelectPreview = (id, name) => {
+        handleSetPreview(id, name);
+        console.log('On select preview:', id, name);
+    };*/
