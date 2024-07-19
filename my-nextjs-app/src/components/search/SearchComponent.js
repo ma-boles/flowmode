@@ -5,7 +5,7 @@ import "@/app/styles/styles.css";
 import ItemCardButton from "../ItemCardButton";
 import { PlaylistProvider, usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import usePlayer from "@/app/hooks/usePlayer";
-import { playSong } from "@/app/lib/playerApi";
+import { playSong, playAlbum, playAudiobook, playEpisode, playPlaylist } from "@/app/lib/playerApi";
 import { PlayerProvider } from "@/app/providers/PlayerProvider";
 
 
@@ -82,38 +82,40 @@ export default function SearchComponent ({ playlist, previewId }) {
     }
 };
 
-    const handleItemSelect = async (selectedItem, itemType) => {
-        console.log('Selected item:', selectedItem.name);
-
-        if(itemType === 'track' && playSong && selectedItem.uri) {
-            try {
-                await playSong(selectedItem.uri, accessToken)
-            } catch(error) {
-                console.error('Error playing song:', error)
-            }
-        } else {
+    const handleItemSelect = (selectedItem, itemType) => {
 
         // Handle different item types
         switch (itemType) {
             case 'track':
+                playSong(selectedItem.uri, accessToken);
+                console.log('Selected track:', selectedItem.name);
                 break;
             case 'album':
+                playAlbum(selectedItem.uri, accessToken);
+                console.log('Selected album:', selectedItem.name);
                 break;
             case 'playlist':
+                playPlaylist(selectedItem.uri, accessToken);
+                console.log('Selected playlist:', selectedItem.name);
                 break;
             case 'episode':
+                playEpisode(selectedItem.uri, accessToken);
+                console.log('Selected episode:', selectedItem.name);
                 break;
             case 'audiobook':
+                playAudiobook(selectedItem.uri, accessToken);
+                console.log('Selected audiobook:', selectedItem.name);
                 break;
             case 'show':
                 break;
             case 'artist':
                 break;
             default:
+                console.warn('Unknown item type:', itemType);
                 break;
         }
     }
-};
+//};
 
 
 
@@ -207,9 +209,14 @@ export default function SearchComponent ({ playlist, previewId }) {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={album} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">
-                                        {album.images[2] && (
-                                            <img src={album.images[0].url} alt={`Album cover of ${album.name}`} className="artistImg"></img>
-                                        )}
+                                        <button onClick={() => handleItemSelect(album, 'album')} className="playImgButton">
+                                            {album.images[2] && (
+                                                <img src={album.images[0].url} alt={`Album cover of ${album.name}`} className="artistImg"></img>
+                                            )}
+                                            <div className="overlay">
+                                                <span className="playIcon"></span>
+                                            </div>
+                                        </button>
                                             <div className="h-12">
                                                 <h2 className="font-semibold text-center">{album.name}</h2>
                                                 <h2 className="text-center">{album.artists[0].name}</h2>
@@ -223,13 +230,16 @@ export default function SearchComponent ({ playlist, previewId }) {
                         <div className="flex flex-wrap justify-center">
                             {searchResults.map ((track, index) => (
                                 <ul key={index} className="artistCard">
-                                    <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
+                                    <ItemCardButton playlist={track} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
-                                        <button onClick={() => handleItemSelect(track, 'track')}>
+                                        <button onClick={() => handleItemSelect(track, 'track')} className="playImgButton">
                                             <img src={track.album.images[0].url} alt={`Album cover of ${track.album.name}`} className="trackImg" />
+                                            <div className="overlay">
+                                                <span className="playIcon"></span>
+                                            </div>
                                         </button>
                                         <div className="h-12">
-                                            <h2 className="text-center font-bold hover:underline cursor-pointer" onClick={() => handleItemSelect(track)}>{track.name}</h2>
+                                            <h2 className="text-center font-bold hover:underline cursor-pointer">{track.name}</h2>
                                             <h2 className="text-center">{track.artists[0].name}</h2>
                                         </div>
                                     </div>
@@ -243,7 +253,12 @@ export default function SearchComponent ({ playlist, previewId }) {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={audiobook} onSelectPreview={onSelectPreview} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
-                                        <img src={audiobook.images[0].url} alt={`Book cover of ${audiobook.name}`} className="trackImg" />
+                                        <button onClick={() => handleItemSelect(audiobook, 'audiobook')} className="playImgButton">
+                                            <img src={audiobook.images[0].url} alt={`Book cover of ${audiobook.name}`} className="trackImg" />
+                                            <div className="overlay">
+                                                <span className="playIcon"></span>
+                                            </div>
+                                        </button>
                                         <div className="h-12">
                                             <h2 className="text-center font-bold">{audiobook.name}</h2>
                                             <h2 className="text-center">{audiobook.authors[0].name}</h2>
@@ -259,7 +274,12 @@ export default function SearchComponent ({ playlist, previewId }) {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
-                                        <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
+                                        <button onClick={() => handleItemSelect(playlist, 'playlist')} className="playImgButton">
+                                            <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
+                                            <div className="overlay">
+                                                <span className="playIcon"></span>
+                                            </div>
+                                        </button>
                                         <div className="h-12">
                                             <h2 className="text-center font-medium">{playlist.name}</h2>
                                         </div>
@@ -288,7 +308,12 @@ export default function SearchComponent ({ playlist, previewId }) {
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} onSelectPreview={onSelectPreview} accessToken={accessToken}/>
                                     <div className="px-4">{/* cardWrapper */}
-                                        <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
+                                        <button onClick={() => handleItemSelect(episode, 'episode')} className="playImgButton">
+                                            <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
+                                            <div className="overlay">
+                                                <span className="playIcon"></span>
+                                            </div>
+                                        </button>
                                         <div className="h-12">
                                             <h2 className="text-center font-medium">{episode.name}</h2>
                                         </div>
@@ -299,12 +324,12 @@ export default function SearchComponent ({ playlist, previewId }) {
                 </div>
             </div>
         )
-
-{/*
-    return (
-        <PlaylistProvider>
-            <CategoryBlock category={category} searchResults={searchResults}/>
-        </PlaylistProvider>
-    )
-        */}
 };
+
+/*if(itemType === 'track' && playSong && selectedItem.uri) {
+            try {
+                await playSong(selectedItem.uri, accessToken)
+            } catch(error) {
+                console.error('Error playing song:', error)
+            }
+        } else {*/
