@@ -77,7 +77,7 @@ export const PlayerProvider = ({ children }) => {
                     setPlayerState(state);
                     setPaused(state.paused);
                     setActive(!state.paused);
-                   // return;
+                    return;
                 } else {
                     console.error('Player state is null or undefined');
                     setActive(false);
