@@ -28,7 +28,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         // add code to unselect on second click
     };
 
-   const handlePreviewClick = async() => {
+   /*const handlePreviewClick = async() => {
         if(playlist.id === previewId) {
             setAddedType(null);
         } else {
@@ -36,7 +36,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             setAddedType('preview');
         }
         await playSong(playlist.uri, accessToken);
-    };
+    };*/
 
     const isFlowAdded = playlist.id === flowPlaylistId;
     const isRestAdded = playlist.id === restPlaylistId;
@@ -63,10 +63,10 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
                             {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
                             </li>
 
-                        <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
+                        {/*<li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')} `}
                             onClick={() => {handlePreviewClick(playlist.uri)}}>
                             <span className="button play"></span>
-                            </li>
+                            </li>*/}
                     </ul>
                 </div>
             </div>
