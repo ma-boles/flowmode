@@ -12,19 +12,19 @@ export const PlaylistProvider = ({ children }) => {
     const [previewName, setPreviewName] = useState('');
 
     const handleSetFlowPlaylist = (id, name) => {
-        //setFlowPlaylistId(id);
-        //setFlowPlaylistName(name);
-        setFlowPlaylistId(prevId => (prevId === id ? null : id));
-        setFlowPlaylistName(prevName => (prevName === name ? null : name));
-        console.log('Flow playlist name:', name);
+        setFlowPlaylistId(id);
+        setFlowPlaylistName(name);
+        //setFlowPlaylistId(prevId => (prevId === id ? null : id));
+        //setFlowPlaylistName(prevName => (prevName === name ? null : name));
+        console.log('Flow playlist name:', id, name);
     };
 
     const handleSetRestPlaylist = (id, name) => {
-        //setRestPlaylistId(id);
-        //setRestPlaylistName(name);
-        setRestPlaylistId(prevId => (prevId === id ? null : id));
-        setRestPlaylistName(prevName => (prevName === name ? null : name));
-        console.log('Rest playlist name:', name);
+        setRestPlaylistId(id);
+        setRestPlaylistName(name);
+        //setRestPlaylistId(prevId => (prevId === id ? null : id));
+        //setRestPlaylistName(prevName => (prevName === name ? null : name));
+        console.log('Rest playlist name:', id, name);
     };
 
     const handleSetPreview = (id, name) => {
@@ -32,6 +32,7 @@ export const PlaylistProvider = ({ children }) => {
         setPreviewName(name);
         console.log('Preview name:', name);
     };
+
 
     return (
         <PlaylistContext.Provider
