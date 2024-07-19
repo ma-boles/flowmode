@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
+//import { playerState } from "@/app/providers/PlayerProvider";
 
 export const TrackInfo = () => {
     const {playerState} = useContext(PlayerContext);
+
+    console.log('Player state in Track Info:', playerState);
 
     // check if playerState or track_window is null
     if(!playerState || !playerState.track_window) {
