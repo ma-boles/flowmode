@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
@@ -12,7 +12,7 @@ import "@/app/styles/styles.css"
 export default function Player() {
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
-    const { player, playerState } = usePlayer();
+    const { player, playerState, setTrackInfo } = usePlayer();
 
     const { paused, context } = playerState || {};
 
@@ -25,22 +25,16 @@ export default function Player() {
     };
 
 
-    // player controls
+    // handle player controls
     const handleTogglePlay = async() => {
-        //console.log('Access Token:', accessToken);
-        //console.log('Player State:', playerState);
+        const playerState = await player.getCurrentState();
 
-       /* if(!player) {
-            console.error('Spotify player is not initialized');
+        if(!playerState) {
+            console.error('No player state available')
             return;
-        }*/
-        
-        if(accessToken) {
-            await togglePlay(accessToken, playerState);
-            console.log('TogglePlay engaged');
-        } else {
-            console.error('No access token available.');
         }
+
+        togglePlay(player, playerState);
     };
 
     const handleSkip = async() => {
@@ -58,8 +52,6 @@ export default function Player() {
             console.error('No access token available.');
         }
     };
-
-
 
     // conditional styling
 
@@ -87,7 +79,7 @@ export default function Player() {
                 <div className="flex justify-between">
 
                     <div className="flex items-center justify-center w-48 p-4 bg-transparent 0 rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
-                        <TrackInfo playerState={playerState}/>
+                       <TrackInfo playerState={playerState}/>
                     </div>
 
                     <div className="flex px-32 justify-between bg-transparent">
