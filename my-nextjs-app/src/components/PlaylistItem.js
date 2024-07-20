@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import usePlayer from "@/app/hooks/usePlayer";
+import { useSession } from "next-auth/react";
 
 export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
 
     const [addedType, setAddedType] = useState(null);
+    const { data: session } = useSession();
+    const accessToken = session.accessToken;
     
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
@@ -12,7 +15,6 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
             onSelectFlow(playlist.id, playlist.name);
             setAddedType('flow');
         }
-
     };
 
     const handleRestClick = () => {
@@ -22,30 +24,6 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
             onSelectRest(playlist.id, playlist.name);
             setAddedType('rest');
         }
-    };
-    /*
-    const handleFlowClick = () => {
-        if (playlist.id === flowPlaylistId) {
-            onSelectFlow(null, null);
-        } else {
-            onSelectFlow(playlist.id, playlist.name);
-        }
-
-    };
-
-    const handleRestClick = () => {
-        if (playlist.id === restPlaylistId) {
-            onSelectRest(null, null);
-            setAddedType(null);
-        } else {
-            onSelectRest(playlist.id, playlist.name);
-            setAddedType('rest');
-        }
-    };*/
-
-    const handlePreviewClick = () => {
-        onSelectPreview(playlist.id, playlist.name);
-        setAddedType('preview');
     };
 
     const isFlowAdded = playlist.id === flowPlaylistId;
@@ -65,7 +43,7 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                         <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
                         <div className="ellipsis--grid--content text-center">
                             <ul>
-                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(addedType === 'flow')}`}
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isFlowAdded || addedType === 'flow')}`}
                                 onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
                                 {/*onClick={handleFlowClick}*/}
                                 {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
@@ -77,10 +55,10 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                                 {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
                                 </li>
 
-                                <li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                {/*<li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
                                 onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
                                 {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
-                                </li>
+                                </li>*/}
 
                             </ul>
                         </div>
