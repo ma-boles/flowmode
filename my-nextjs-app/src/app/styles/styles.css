@@ -439,3 +439,13 @@
   border-width: 1rem 0 1rem 2rem;
   transform: translateY(2px);
 }
+
+.playIconSm {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+  border-width: 0.5rem 0 0.5rem 1rem;
+  transform: translateY(2px);
+}
