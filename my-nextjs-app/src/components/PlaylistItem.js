@@ -1,13 +1,17 @@
 import React, {useState} from "react";
 import usePlayer from "@/app/hooks/usePlayer";
 import { useSession } from "next-auth/react";
+import ItemCardButton from "./ItemCardButton";
+import { playPlaylist } from "@/app/lib/playerApi";
+import "@/app/styles/styles.css";
+
 
 export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
 
     const [addedType, setAddedType] = useState(null);
     const { data: session } = useSession();
     const accessToken = session.accessToken;
-    
+
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
             setAddedType(null);
@@ -26,6 +30,16 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
         }
     };
 
+    const handlePreview = () => {
+        if(playlist.id === previewId) {
+            setAddedType(null);
+        } else {
+            playPlaylist(playlist.uri, accessToken);
+            onSelectPreview(playlist.id, playlist.name);
+            setAddedType('preview');
+        }
+    };
+
     const isFlowAdded = playlist.id === flowPlaylistId;
     const isRestAdded = playlist.id === restPlaylistId;
     const isPreviewAdded = playlist.id === previewId;
@@ -39,38 +53,20 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
             <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
 
                     {displayStyle === 'grid' && (
-                    <div className="ellipsis--grid--div">
-                        <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
-                        <div className="ellipsis--grid--content text-center">
-                            <ul>
-                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isFlowAdded || addedType === 'flow')}`}
-                                onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
-                                {/*onClick={handleFlowClick}*/}
-                                {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
-                                </li>
-
-                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')}`}
-                                onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
-                                {/*onClick={isRestAdded || addedType === 'rest' ? handleRestClick : handleRestClick}*/}
-                                {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
-                                </li>
-
-                                {/*<li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
-                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
-                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
-                                </li>*/}
-
-                            </ul>
-                        </div>
-                    </div>
+                        <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                     )}
 
-                <div className={` ${displayStyle === 'list' ? 'flex w-1/4' : 'div'}`}>
+                <div /* image */className={` ${displayStyle === 'list' ? 'flex w-1/4' : 'div'}`}>
                     {playlist.images && playlist.images[0] ? (
-                        <img src={playlist.images[0].url}
-                        alt={`Cover of ${playlist.name}`}
-                        className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`}
-                        />
+                        <button onClick={() => handlePreview(playlist, 'playlist')} className="playImgButton">
+                            <img src={playlist.images[0].url}
+                            alt={`Cover of ${playlist.name}`}
+                            className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`}
+                            />
+                            <div className="overlay">
+                                <span className="playIcon"></span>
+                            </div>
+                        </button>
                         ) : (
                         <div className={`flex justify-center items-center ${displayStyle === 'list' ? 'fallBackImgList' : 'fallBackImg'}`}>
                             <p className="fallBackText">No Image <br />Available</p>
@@ -96,9 +92,9 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
                                 onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
                                 {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
                                 </li>
-                                <li className={`py-1 font-semibold hover:bg-blue-500 ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
-                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
-                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                                <li onClick={() => handlePreview(playlist, 'playlist')} className={`py-1 font-semibold hover:bg-blue-500 ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                >
+                                <span className="playIconSm"></span>
                                 </li>
                             </ul>
                         </div>
@@ -109,3 +105,36 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
         </>
     )
 }
+
+
+
+ {/* <div className="ellipsis--grid--div">
+                        <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
+                        <div className="ellipsis--grid--content text-center">
+                            <ul>
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isFlowAdded || addedType === 'flow')}`}
+                                onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
+                                {/*onClick={handleFlowClick}*/}
+                               /* {/*isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {/*isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>}
+                                </li>
+
+                                <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')}`}
+                                onClick={/*isRestAdded || addedType === 'rest' ? null : handleRestClick}>
+                                {/*onClick={isRestAdded || addedType === 'rest' ? handleRestClick : handleRestClick}*/
+                                {/*isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {isRestAdded || addedType === 'rest' && <span className="checkmark"></span>}
+                                </li>
+
+                                {/*<li className={`py-1 font-semibold ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                                </li>*/}
+
+                           /*</li> </ul>
+                        </div>
+                    </div>*/
+                
+
+                    {/* <li className={`py-1 font-semibold hover:bg-blue-500 ${getButtonClass(isPreviewAdded || addedType === 'preview')}`}
+                                onClick={isPreviewAdded || addedType === 'preview' ? null : handlePreviewClick}>
+                                {isPreviewAdded || addedType === 'preview' ? 'Added' : 'Preview'} {isPreviewAdded || addedType === 'preview' && <span className="checkmark"></span>}
+                                </li>*/}
