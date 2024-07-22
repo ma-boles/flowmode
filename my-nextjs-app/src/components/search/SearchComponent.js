@@ -249,7 +249,7 @@ export default function SearchComponent ({ playlist/*, previewId*/ }) {
                             {searchResults.map ((playlist, index) => (
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
-                                    <div className="px-4">{/* cardWrapper */}
+                                    <div className="px-4">
                                         <button onClick={() => handleItemSelect(playlist, 'playlist')} className="playImgButton">
                                             <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
                                             <div className="overlay">
@@ -283,7 +283,7 @@ export default function SearchComponent ({ playlist/*, previewId*/ }) {
                             {searchResults.map ((episode, index) => (
                                 <ul key={index} className="artistCard">
                                     <ItemCardButton playlist={episode} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
-                                    <div className="px-4">{/* cardWrapper */}
+                                    <div className="px-4">
                                         <button onClick={() => handleItemSelect(episode, 'episode')} className="playImgButton">
                                             <img src={episode.images[0].url} alt={`Image of ${episode.name}`} className="trackImg" />
                                             <div className="overlay">
