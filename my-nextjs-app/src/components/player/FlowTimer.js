@@ -3,8 +3,7 @@ import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import usePlayer from "@/app/hooks/usePlayer";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
-import { playAlbum, playAudiobook, playEpisode, playSong } from "@/app/lib/playerApi";
-
+import { playAlbum, playAudiobook, playEpisode, playSong, playPlaylist, playTracks, stopPlayback } from "@/app/lib/playerApi";
 
 export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const { data: session } = useSession();
@@ -106,7 +105,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     }, [player]);
 
     // Play track from a playlist
-    const playPlaylist = useCallback((playlistId) => {
+    const playFlowRest = useCallback((playlistId) => {
         if(playlistId && player) {
             console.log('Playing playlist:', playlistId);
             fetchTracks(playlistId, (tracks) => {
@@ -176,7 +175,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     }
 
     return () => clearInterval(/*countdown*/ intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd, playPlaylist, pausePlaylist]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd, playFlowRest, pausePlaylist]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
@@ -192,10 +191,10 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                 console.log('Starting timer with interval:', activeInterval);
                 if(activeInterval === 'flow') {
                     console.log('Flow playlist ID:', flowPlaylistId);
-                    playPlaylist(flowPlaylistId);
+                    playFlowRest(flowPlaylistId);
                 } else if (activeInterval === 'rest') {
                     console.log('Rest playlist ID:', restPlaylistId);
-                    playPlaylist(restPlaylistId);
+                    playFlowRest(restPlaylistId);
                 }
             } else {
                 // Timer is pausing
