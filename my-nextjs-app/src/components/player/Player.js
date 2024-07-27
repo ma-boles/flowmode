@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
-import { skipTrack, previousTrack, togglePlay } from "@/app/lib/playerApi";
+import { skipTrack, previousTrack, togglePlay, toggleShuffle } from "@/app/lib/playerApi";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
@@ -18,6 +18,7 @@ export default function Player() {
 
     const [isFlowVisible, setIsFlowVisible] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [isShuffled, setIsShuffled] = useState(false);
 
     // open flow component
     const handleFlow = () => {
@@ -51,6 +52,12 @@ export default function Player() {
         } else {
             console.error('No access token available.');
         }
+    };
+
+    const handleToggleShuffle = async () => {
+        const newShuffleState = !isShuffled;
+        await toggleShuffle(accessToken, newShuffleState);
+        setIsShuffled(newShuffleState);
     };
 
     // conditional styling
@@ -101,7 +108,10 @@ export default function Player() {
                         <div className="mx-4 w-48">
                             <div className="flex justify-evenly">
                                 <img src="repeat-solid.svg" alt="repeat" className=" btnIconShuffle"></img>
-                                <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
+                                <button onClick={handleToggleShuffle}>
+                                    {/* render styles conditionally {isShuffled ? 'Disable Shuffle' : 'Enable Shuffle'}*/}
+                                    <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
+                                </button>
                                 <button className="px-2 py-0 text-3xl rounded-sm hover:bg-gray-700" onClick={handleFlow}><span className="text-green-600 font-bold">f</span><span>m</span></button>
                             </div>
 
