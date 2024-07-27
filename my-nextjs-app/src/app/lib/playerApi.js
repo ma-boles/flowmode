@@ -96,6 +96,19 @@ const previousTrack = async (accessToken) => {
     });
 };
 
+const toggleShuffle = async (accessToken, shouldShuffle) => {
+    try {
+        await fetch(`https://api.spotify.com/v1/me/player/shuffle`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+        });
+        console.log(`Shuffle is now ${shouldShuffle ? 'enabled' : 'disabled'}`);
+    } catch (error) {
+        console.error('Error toggling shuffle:', error);
+    }
+};
 
 // Triggering playback in preview mode
 const playSong = async (uri, accessToken) => {
@@ -168,4 +181,5 @@ const playEpisode = async (episodeUri, accessToken) => {
 
 
 
-export { playTracks, stopPlayback, playSong, playAudiobook, playAlbum, playEpisode, playPlaylist, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay }
+
+export { playTracks, stopPlayback, playSong, playAudiobook, playAlbum, playEpisode, playPlaylist, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay, toggleShuffle }
