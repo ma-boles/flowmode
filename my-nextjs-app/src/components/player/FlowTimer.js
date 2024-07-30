@@ -5,7 +5,8 @@ import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import { playAlbum, playAudiobook, playEpisode, playSong, playPlaylist, playTracks, stopPlayback } from "@/app/lib/playerApi";
 
-export default function FlowTimer({ onRestEnd, onFlowEnd }) {
+
+export default function FlowTimer() {
     const { data: session } = useSession();
     const accessToken = session?.accessToken;
     
@@ -29,23 +30,23 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         try {
         switch (itemType) {
             case 'playlist':
-                playPlaylist(uri);
+                playPlaylist(uri, accessToken);
                 console.log('Playing playlist:', uri);
                 break;
             case 'track':
-                playSong(uri);
+                playSong(uri, accessToken);
                 console.log('Playing track:', uri);
                 break;
             case 'audiobook':
-                playAudiobook(uri);
+                playAudiobook(uri, accessToken);
                 console.log('Playing audiobook:', uri);
                 break;
             case 'episode':
-                playEpisode(uri);
+                playEpisode(uri, accessToken);
                 console.log('Playing episode:', uri)
                 break;
             case 'album':
-                playAlbum(uri);
+                playAlbum(uri, accessToken);
                 console.log('Playing album:', uri)
                 break;
             default:
@@ -89,30 +90,33 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         }
     }, [flowPlaylistId, restPlaylistId, fetchTracks]);
 
-    const playTracks = useCallback((tracks) => {
-        if(player) {
-            console.log('Playing tracks:', tracks);
-            player.play(tracks[0])
-            .then(() => player.play())
-            .catch(error => console.error('Error playing tracks:', error));
+    const playTracks = useCallback(async (tracks) => {
+        if(player && accessToken) {
+            try {
+                console.log('Playing tracks:', tracks);
+                // Use spotify API to start playback with given track Uris
+                await fetch('https://api.spotify.com/v1/me/player/play', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify({
+                        uris: tracks,
+                    }),
+                });
+                console.log('Playback started successfully');
+            } catch (error) {
+                console.error('Error playing tracks:', error);
+            }
         } else {
-            console.error('Player is not initialized');
+            console.error('Player is not initialized or no access token provided.');
         }
-    }, [player]);
+    }, [player, accessToken]);
 
-    const stopPlayback = useCallback(() => {
-        if(player) {
-            console.log('Pausing playback');
-            player.pause()
-            .catch(error => console.error('Error pausing playback:', error));
-        } else {
-            console.error('Player is not initialized');
-        }
-    }, [player]);
-
-    // Play track from a playlist
+    // Play tracks from playlist
     const playFlowRest = useCallback((playlistId) => {
-        if(playlistId && player) {
+        if(playlistId /*&& player*/) {
             console.log('Playing playlist:', playlistId);
             fetchTracks(playlistId, (tracks) => {
                 if(tracks.length > 0) {
@@ -124,16 +128,18 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         } else {
             console.error('No playlist ID provided');
         }
-    }, [fetchTracks, playTracks, player]);
+    }, [fetchTracks, playTracks/*, player*/]);
 
     // Pause current playlist
     const pausePlaylist = useCallback(() => {
         if(player) {
-            stopPlayback();
+            console.log('Pausing playback');
+            player.pause()
+            .catch(error => console.error('Error pausing playback:', error));
         } else {
             console.error('Player is not initialized');
         }
-    }, [stopPlayback]);
+    }, [player]);
 
 
     useEffect(() => {
@@ -146,9 +152,9 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
         // Set up new countdown
         if(isActive) {
             if(activeInterval === 'flow') {
-                handlePlayback('playlist:', flowPlaylistId);
+                handlePlayback('playlist', flowPlaylistId);
             } else if (activeInterval === 'rest') {
-                handlePlayback('playlist:', restPlaylistId);
+                handlePlayback('playlist', restPlaylistId);
             }
             /*setCountdown(*/
                 intervalId = setInterval(() => {
@@ -159,7 +165,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                         // Flow interval is over, switch to rest interval
                         console.log('Switching to rest interval');
                         setActiveInterval('rest');
-                        onFlowEnd();
+                        //onFlowEnd();
                         pausePlaylist();
                         handlePlayback('playlist', restPlaylistId);
                         setFlowTime(initialFlowTime);
@@ -169,12 +175,12 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                 if(restTime > 0) {
                     setRestTime((prevTime) => prevTime - 1);
                 } else {
+                    // Rest interval is over, switch to flow interval, playback does not trigger on reset
                     console.log('Switching to flow interval');
                     setActiveInterval('flow');
-                    handlePlayback('playlist', flowPlaylistId);
-                    onRestEnd();
+                    //onRestEnd();
                     pausePlaylist();
-                    // Rest interval is over, switch to flow interval, playback does not trigger on reset
+                    handlePlayback('playlist', flowPlaylistId);
                     setRestTime(initialRestTime);
                     //clearInterval(intervalId);
                 }
@@ -182,11 +188,10 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
 
             }, 1000)
         //);
-
     }
 
     return () => clearInterval(/*countdown*/ intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, onRestEnd, onFlowEnd, playFlowRest, pausePlaylist]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime,/* onRestEnd, onFlowEnd, */playFlowRest, pausePlaylist]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
@@ -215,6 +220,14 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
             return !prevIsActive;
         })
     };
+
+    const restPlaylistBtn = async () => {
+            const testUri = 'spotify:playlist:2rCpVZk56FHhp4ccQ1xVwZ'; // Replace with your rest playlist URI
+            const testToken = accessToken; // Replace with your valid access token
+        
+            await playPlaylist(testUri, testToken);
+       
+    }
 
     const resetTimer = () => {
         setIsActive(false);
@@ -282,8 +295,29 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
             <div /* buttons div */ className="flex justify-end mb-2 pr-6">
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
+                <button className="px-8 py-2 m-2 bg-blue-600"onClick={restPlaylistBtn}>Rest Playlist</button>
             </div>
         </div>
         </>
     );
 };
+
+/*
+const pausePlaylist = useCallback(() => {
+        if(player) {
+            stopPlayback();
+        } else {
+            console.error('Player is not initialized');
+        }
+    }, [stopPlayback]); */
+
+/*
+const stopPlayback = useCallback(() => {
+        if(player) {
+            console.log('Pausing playback');
+            player.pause()
+            .catch(error => console.error('Error pausing playback:', error));
+        } else {
+            console.error('Player is not initialized');
+        }
+    }, [player]); */
