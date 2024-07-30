@@ -26,6 +26,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
 
 
     const handlePlayback = (itemType, uri) => {
+        try {
         switch (itemType) {
             case 'playlist':
                 playPlaylist(uri);
@@ -40,15 +41,20 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                 console.log('Playing audiobook:', uri);
                 break;
             case 'episode':
-                playEpisode('Playing episode:', uri);
+                playEpisode(uri);
+                console.log('Playing episode:', uri)
                 break;
             case 'album':
-                playAlbum('Playing album:', uri);
+                playAlbum(uri);
+                console.log('Playing album:', uri)
                 break;
             default:
                 console.warn('Unknown item type for playback', itemType);
                 break;
         }
+    } catch (error) {
+        console.error(`Error playing ${itemType} with uri ${uri}`, error);
+    }
     };
 
          // Fetch tracks for playlists
@@ -72,8 +78,8 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
 
     // Fetch tracks for flow and rest playlists
     useEffect(() => {
-        console.log('Flow playlist ID:', flowPlaylistId);
-        console.log('Rest playlist ID:', restPlaylistId);
+        //console.log('Flow playlist ID:', flowPlaylistId);
+        //console.log('Rest playlist ID:', restPlaylistId);
 
         if(flowPlaylistId) {
             fetchTracks(flowPlaylistId, setFlowTracks);
@@ -86,7 +92,7 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
     const playTracks = useCallback((tracks) => {
         if(player) {
             console.log('Playing tracks:', tracks);
-            player.queue(tracks[0])
+            player.play(tracks[0])
             .then(() => player.play())
             .catch(error => console.error('Error playing tracks:', error));
         } else {
@@ -139,6 +145,11 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
 
         // Set up new countdown
         if(isActive) {
+            if(activeInterval === 'flow') {
+                handlePlayback('playlist:', flowPlaylistId);
+            } else if (activeInterval === 'rest') {
+                handlePlayback('playlist:', restPlaylistId);
+            }
             /*setCountdown(*/
                 intervalId = setInterval(() => {
                 if(activeInterval === 'flow') {
@@ -190,10 +201,10 @@ export default function FlowTimer({ onRestEnd, onFlowEnd }) {
                 // Timer starting
                 console.log('Starting timer with interval:', activeInterval);
                 if(activeInterval === 'flow') {
-                    console.log('Flow playlist ID:', flowPlaylistId);
+                    //console.log('Flow playlist ID:', flowPlaylistId);
                     playFlowRest(flowPlaylistId);
                 } else if (activeInterval === 'rest') {
-                    console.log('Rest playlist ID:', restPlaylistId);
+                    //console.log('Rest playlist ID:', restPlaylistId);
                     playFlowRest(restPlaylistId);
                 }
             } else {
