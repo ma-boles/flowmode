@@ -138,16 +138,24 @@ const playAlbum = async (albumUri, accessToken) => {
 };
 
 const playPlaylist = async (playlistUri, accessToken) => {
-    await fetch(`https://api.spotify.com/v1/me/player/play`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify({
-            context_uri: playlistUri,
-        }),
-    });
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({
+                context_uri: playlistUri,
+            }),
+        });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        console.log('Playback started successfully for playlist:', playlistUri)
+    } catch(error) {
+        console.error('Error in playPlaylist:', error);
+    }
 };
 
 const playAudiobook = async (audiobookUri, accessToken) => {
