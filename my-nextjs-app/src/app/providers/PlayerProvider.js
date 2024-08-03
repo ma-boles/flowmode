@@ -48,6 +48,9 @@ export const PlayerProvider = ({ children }) => {
         }
     }, []);
 
+    // new block of code
+    //const handlePlayerStateChanged
+    // end of new code block 
     // Initialize the Spotify player
     const initializePlayer = useCallback(async (accessToken) => {
         if(!window.Spotify) {
@@ -105,7 +108,7 @@ export const PlayerProvider = ({ children }) => {
                 console.error('Playbck error:', message);
             });
     
-            newPlayer.connect().then(success => {
+            await newPlayer.connect().then(success => {
                 if(success) {
                     console.log('The Web Playback SDK successfully connected to Spotify!');
                 } else {
@@ -116,17 +119,16 @@ export const PlayerProvider = ({ children }) => {
             setPlayer(newPlayer);
 
             return () => {
-                newPlayer.removeListener('Player_state_changed');
+                newPlayer.removeListener('player_state_changed');
                 newPlayer.removeListener('ready');
                 newPlayer.removeListener('not_ready');
                 newPlayer.removeListener('initialization_error');
                 newPlayer.removeListener('authentication_error');
                 newPlayer.removeListener('account_error');
                 newPlayer.removeListener('playback_error');
-
                 newPlayer.disconnect();
             };
-    }, []);
+    }, [transferPlayback]);
 
     // Transfer playback to the Web Playback SDK
     const transferPlayback = useCallback(async (device_id, accessToken) => {
