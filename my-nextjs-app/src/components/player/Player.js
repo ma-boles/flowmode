@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
-import { skipTrack, previousTrack, togglePlay, toggleShuffle } from "@/app/lib/playerApi";
+import { skipTrack, previousTrack, togglePlay, toggleShuffle, pausePlayback, stopPlayback } from "@/app/lib/playerApi";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
@@ -36,6 +36,14 @@ export default function Player() {
         }
 
         togglePlay(player, playerState);
+    };
+
+    const handlePause = async() => {
+        if(accessToken) {
+             stopPlayback(accessToken);
+        } else {
+            console.erro('No access token available.');
+        }
     };
 
     const handleSkip = async() => {
@@ -95,7 +103,7 @@ export default function Player() {
                             <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                         </button>
 
-                        <button onClick={handleTogglePlay} className={`playerBtn ${buttonActive}`}>
+                        <button onClick={handlePause} className={`playerBtn ${buttonActive}`}>
                             <img src="/pause-solid.svg" alt="pause" className="btnIcon"></img>
                         </button>
 
