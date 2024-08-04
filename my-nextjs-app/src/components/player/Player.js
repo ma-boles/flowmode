@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import usePlayer from "@/app/hooks/usePlayer";
-import { skipTrack, previousTrack, togglePlay, toggleShuffle, pausePlayback, stopPlayback } from "@/app/lib/playerApi";
+import { skipTrack, previousTrack, toggleShuffle, stopPlayback, resumePlayback } from "@/app/lib/playerApi";
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
@@ -16,6 +16,7 @@ export default function Player() {
 
     const { paused, context } = playerState || {};
 
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [isFlowVisible, setIsFlowVisible] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [isShuffled, setIsShuffled] = useState(false);
@@ -28,22 +29,12 @@ export default function Player() {
 
     // handle player controls
     const handleTogglePlay = async() => {
-        const playerState = await player.getCurrentState();
-
-        if(!playerState) {
-            console.error('No player state available')
-            return;
-        }
-
-        togglePlay(player, playerState);
-    };
-
-    const handlePause = async() => {
-        if(accessToken) {
-             stopPlayback(accessToken);
+        if(isAudioPlaying) {
+            await stopPlayback(accessToken);
         } else {
-            console.erro('No access token available.');
+            await resumePlayback(accessToken);
         }
+        setIsAudioPlaying(!isAudioPlaying);
     };
 
     const handleSkip = async() => {
@@ -103,7 +94,7 @@ export default function Player() {
                             <img src="backward-step-solid.svg" alt="back" className="btnIconSm"></img>
                         </button>
 
-                        <button onClick={handlePause} className={`playerBtn ${buttonActive}`}>
+                        <button onClick={handleTogglePlay} className={`playerBtn ${buttonActive}`}>
                             <img src="/pause-solid.svg" alt="pause" className="btnIcon"></img>
                         </button>
 
