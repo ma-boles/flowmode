@@ -184,10 +184,4 @@ const playEpisode = async (episodeUri, accessToken) => {
     });
 };
 
-
-
-
-
-
-
 export { playTracks, stopPlayback, playSong, playAudiobook, playAlbum, playEpisode, playPlaylist, pausePlayback, resumePlayback, skipTrack, previousTrack, togglePlay, toggleShuffle }
