@@ -3,7 +3,7 @@ import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import usePlayer from "@/app/hooks/usePlayer";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
-import { playAlbum, playAudiobook, playEpisode, playSong, playPlaylist, stopPlayback } from "@/app/lib/playerApi";
+import { playAlbum, playAudiobook, playEpisode, playSong, playPlaylist, stopPlayback, resumePlayback } from "@/app/lib/playerApi";
 
 
 export default function FlowTimer() {
@@ -13,8 +13,6 @@ export default function FlowTimer() {
     const { player } = useContext(PlayerContext);
     const { flowPlaylistName, restPlaylistName, flowPlaylistId, restPlaylistId } = usePlaylistContext();
 
-    //const [flowPlaylistId, setFlowPlaylistId] = useState('');
-    //const [restPlaylistId, setRestPlaylistId] = useState('');
     const [flowTracks, setFlowTracks] = useState([]);
     const [restTracks, setRestTracks] = useState([]);
     const [flowTime, setFlowTime] = useState('');
@@ -27,7 +25,7 @@ export default function FlowTimer() {
     const [tracks, setTracks] = useState([]);
 
 
-    const handlePlayback = async (itemType, uri) => {
+    const handlePlayback = async (itemType, uri, accessToken) => {
         try {
         switch (itemType) {
             case 'playlist':
@@ -64,8 +62,8 @@ export default function FlowTimer() {
             try {
                 console.log('Fetching tracks for playlist:', playlistId);
                 const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-                    headers: { 
-                        'Authorization': `Bearer ${accessToken}` 
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
                     }
                 });
                 if(!response.ok) {
@@ -112,7 +110,7 @@ export default function FlowTimer() {
         } else {
             console.error('Player is not initialized or no access token provided.');
         }
-    }, [player/*, accessToken*/]);
+    }, [player]);
 
     // Play tracks from playlist
     const playFlowRest = useCallback(async (playlistId) => {
@@ -121,28 +119,28 @@ export default function FlowTimer() {
             console.log('Playing playlist:', playlistId);
             try {
                 await playPlaylist(playlistUri, accessToken);
-                /*const tracks = await fetchTracks(playlistId);
-                if (tracks.length > 0) {
-                    console.log('Tracks fetched:', tracks);
-                    await handlePlayback('playlist', playlistId);
-                    //playTracks(tracks);
-                } else {
-                    console.error('No tracks found in the playlist');
-                }*/
             } catch (error) {
                 console.error('Error fetching or playing tracks:', error);
             }
         } else {
             console.error('No playlist ID provided');
         }
-    }, [/*fetchTracks/*, playTracks, handlePlayback*/ playPlaylist/*, accessToken*/]);
+    }, [fetchTracks, playTracks, playPlaylist, accessToken]);
 
     // Pause current playlist
     const pausePlaylist = useCallback(() => {
         if(player) {
             console.log('Pausing playback');
             stopPlayback(accessToken);
-            //.catch(error => console.error('Error pausing playback:', error));
+        } else {
+            console.error('Player is not initialized');
+        }
+    }, [player]);
+
+    const resumePlaylist = useCallback(() => {
+        if(player) {
+            console.log('Resuming playback');
+            resumePlayback(accessToken);
         } else {
             console.error('Player is not initialized');
         }
@@ -152,7 +150,7 @@ export default function FlowTimer() {
     useEffect(() => {
         let intervalId = null;
 
-        if (isActive) {
+        if (isActive)  {
             intervalId = setInterval(() => {
                 if (activeInterval === 'flow') {
                     if (flowTime > 0) {
@@ -160,9 +158,10 @@ export default function FlowTimer() {
                     } else {
                         // Flow interval is over, switch to rest interval
                         console.log('Switching to rest interval');
+                        pausePlaylist();
                         setActiveInterval('rest');
+                        playFlowRest(restPlaylistId, accessToken); // Start rest playlist
                         setFlowTime(initialFlowTime);
-                        playPlaylist(restPlaylistId, accessToken); // Start rest playlist
                     }
                 } else if (activeInterval === 'rest') {
                     if (restTime > 0) {
@@ -170,14 +169,14 @@ export default function FlowTimer() {
                     } else {
                         // Rest interval is over, switch to flow interval
                         console.log('Switching to flow interval');
+                        pausePlaylist();
                         setActiveInterval('flow');
+                        playFlowRest(flowPlaylistId, accessToken); // Start flow playlist
                         setRestTime(initialRestTime);
-                        playPlaylist(flowPlaylistId, accessToken); // Start flow playlist
                     }
                 }
             }, 1000);
         }
-
         return () => clearInterval(intervalId);
     }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, playPlaylist, accessToken, flowPlaylistId, restPlaylistId]);
 
@@ -187,12 +186,29 @@ export default function FlowTimer() {
         return `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
     };
 
+    /*const togglePlay = async(accessToken, isActive) => {
+        if(isActive) {
+            try {
+                await pausePlaylist(accessToken);
+                console.log('Playback paused');
+            } catch (error) {
+                console.error('Error pausing playback:', error);
+            }
+        } else {
+            try {
+                await resumePlaylist(accessToken);
+            } catch (error) {
+                console.error('Error resuming playback:', error);
+            }
+        }
+    };*/
+
     // Toggles timer and starts/stops and triggers playback based on activeinterval
     const toggleTimer = () => {
         setIsActive(prevIsActive => {
             if(!prevIsActive) {
                 console.log('Starting timer with interval:', activeInterval);
-                playPlaylist(activeInterval === 'flow' ? flowPlaylistId : restPlaylistId, accessToken); // Start playlist based on active interval
+                playFlowRest(activeInterval === 'flow' ? flowPlaylistId : restPlaylistId, accessToken); // Start playlist based on active interval
             } else {
                 console.log('Pausing timer');
                 pausePlaylist();
@@ -200,12 +216,6 @@ export default function FlowTimer() {
             return !prevIsActive;
         })
     };
-
-    const restPlaylistBtn = async () => {
-            const testUri = 'spotify:playlist:2rCpVZk56FHhp4ccQ1xVwZ'; // Replace with your rest playlist URI
-            const testToken = accessToken; // Replace with your valid access token
-            await playPlaylist(testUri, testToken);
-    }
 
     const resetTimer = () => {
         setIsActive(false);
@@ -273,7 +283,6 @@ export default function FlowTimer() {
             <div /* buttons div */ className="flex justify-end mb-2 pr-6">
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
-                <button className="px-8 py-2 m-2 bg-blue-600"onClick={restPlaylistBtn}>Rest Playlist</button>
             </div>
         </div>
         </>
@@ -365,3 +374,8 @@ const stopPlayback = useCallback(() => {
     }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime,onRestEnd, onFlowEnd, playFlowRest, pausePlaylist, handlePlayback]);
 
     */
+   /*const restPlaylistBtn = async () => {
+            const testUri = 'spotify:playlist:2rCpVZk56FHhp4ccQ1xVwZ'; // Replace with your rest playlist URI
+            const testToken = accessToken; // Replace with your valid access token
+            await playPlaylist(testUri, testToken);
+    }*/                /*<button className="px-8 py-2 m-2 bg-blue-600"onClick={restPlaylistBtn}>Rest Playlist</button>*/
