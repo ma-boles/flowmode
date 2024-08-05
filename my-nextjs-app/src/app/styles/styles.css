@@ -4,6 +4,7 @@
 
 .navbar {
   background-color: rgba(20, 20, 20, 0.509);
+  z-index: 10;
 }
 
 .dropdown-btn {
@@ -205,12 +206,12 @@
   bottom: 0;
   width: 100%;
   background-color: rgb(20, 20, 20);
+  background-color: transparent;
   text-align: center;
   z-index: 1000;
  }
  .playBackground {
-  background-color: rgba(0, 0, 0, 0.111);
-  padding: .5rem 2rem;
+  background-color: rgba(0, 0, 0, 0.899);
   /* postition: */
  }
  .flowDiv {
@@ -256,13 +257,13 @@
  .btnIcon {
   height: 2rem;
   width: 2rem;
-  filter: invert(1);
+  filter: invert(.75);
  }
  .btnIconSm {
   height: 1.2rem;
   width: 1.2rem;
   margin: .5rem;
-  filter: invert(1);
+  filter: invert(.75);
  }
  .btnIconShuffle {
   height: 1.3rem;
@@ -448,4 +449,11 @@
   border-color: transparent transparent transparent white;
   border-width: 0.5rem 0 0.5rem 1rem;
   transform: translateY(2px);
+}
+
+/* flow mode */
+.flow--hr {
+  width: 10rem;
+  background-color:white;
+  transform:rotate(90deg);
 }
