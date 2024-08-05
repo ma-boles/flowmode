@@ -240,13 +240,13 @@ export default function FlowTimer() {
 
     return(
         <>
-        <div /* flow div */ className={`mx-32 mt-24 mb-10 border border-solid border-gray-800 rounded-md transition-bg ${activeInterval === 'refresh' ? 'bg-blue-500' : 'bg-black'}`}>
-            <div /* time div */ className="flex justify-evenly">
-                <div className="p-16 ">
+        <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ${activeInterval === 'refresh' ? 'bg-blue-500' : 'bg-black'}`}>
+            <div /* time div */ className="flex mt-6">
+                <div className="p-16 w-1/2 border-r ">
                     <h2 className="mt-6 font-bold text-2xl text-gray-200">FLOW</h2>
                     <h2 className="font-bold text-xl text-gray-400">{flowPlaylistName || 'Select a playlist, album, podcast, audiobook or track' }</h2>
                     {isActive ? (
-                        <div /* flow time */ className="mt-6 mx-6 mb-2 bg-transparent font-bold text-7xl text-center">
+                        <div /* flow time */ className="mt-6 mx-6 bg-transparent font-bold text-7xl text-center">
                             {formatTime(flowTime)}
                         </div>
                     ) : (
@@ -261,13 +261,11 @@ export default function FlowTimer() {
                     )}
                 </div>
 
-                <hr className="flow--hr"/>
-
-                <div className="p-16">
+                <div className="p-16 w-1/2 ">
                     <h2 className="mt-6 font-bold text-2xl text-gray-200">REST</h2>
                     <h2 className="font-bold text-xl text-gray-400">{restPlaylistName || 'Select a playlist, album, podcast, audiobook or track'}</h2>
                     {isActive ? (
-                        <div /* rest time */ className="mt-6 mx-6 mb-2 font-bold text-7xl text-center">
+                        <div /* rest time */ className="mt-6 mx-6 font-bold text-7xl text-center">
                             {formatTime(restTime)}
                         </div>
                     ) : (
