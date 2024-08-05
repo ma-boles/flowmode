@@ -212,6 +212,7 @@
  }
  .playBackground {
   background-color: rgba(0, 0, 0, 0.899);
+  padding: .5rem 1rem;
   /* postition: */
  }
  .flowDiv {
@@ -224,7 +225,7 @@
   /*border-top-color: rgba(255, 255, 255, 0.22);*/
  }
  .inputTimer {
-  background-color: rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.082) ;
   border-radius: 5px;
   width: 3.5rem;
   margin: 1rem;
@@ -258,7 +259,8 @@
   height: 2rem;
   width: 2rem;
   filter: invert(.75);
- }
+}
+
  .btnIconSm {
   height: 1.2rem;
   width: 1.2rem;
@@ -449,11 +451,4 @@
   border-color: transparent transparent transparent white;
   border-width: 0.5rem 0 0.5rem 1rem;
   transform: translateY(2px);
-}
-
-/* flow mode */
-.flow--hr {
-  width: 10rem;
-  background-color:white;
-  transform:rotate(90deg);
 }
