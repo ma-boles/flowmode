@@ -95,7 +95,7 @@ export default function Player() {
                         </button>
 
                         <button onClick={handleTogglePlay} className={`playerBtn ${buttonActive}`}>
-                            <img src="/pause-solid.svg" alt="pause" className="btnIcon"></img>
+                           <img src={`${isPlaying ? '/pause-solid.svg': '/play-solid.svg'}`} alt={`${isPlaying ? 'pause' : 'play'}`} className="btnIcon"></img>
                         </button>
 
                         <button onClick={handleSkip} className={`playerBtnSm ${isPlayingPlaylist ? 'invert-0' : 'invert'}`}>
