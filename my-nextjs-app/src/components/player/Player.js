@@ -78,11 +78,11 @@ export default function Player() {
         <div className="player">
             <div className="playBackground" /*justify-center*/>
                 {isFlowVisible &&
-                    <div /* flow div */ >
+                    <div /* flow div */>
                         <FlowTimer />
                     </div>
             }
-                <div className="flex justify-between">
+                <div className="flex justify-between bg-black">
 
                     <div className="flex items-center justify-center w-48 p-4 bg-transparent 0 rounded-l-lg" style={{display: 'grid', placeItems: 'left'}}>
                        <TrackInfo playerState={playerState}/>
