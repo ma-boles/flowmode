@@ -23,6 +23,9 @@ export default function FlowTimer() {
     const [initialFlowTime, setInitialFlowTime] = useState('');
     const [initialRestTime, setInitialRestTime] = useState('');
     const [tracks, setTracks] = useState([]);
+    const [initialIntervalCount, setInitialIntervalCount] = useState(1);
+    const [intervalCount, setIntervalCount] = useState(1);
+    const [currentIntervalCount, setCurrentIntervalCount] = useState(0);
 
 
     const handlePlayback = async (itemType, uri, accessToken) => {
@@ -167,41 +170,33 @@ export default function FlowTimer() {
                     if (restTime > 0) {
                         setRestTime(prevTime => prevTime - 1);
                     } else {
-                        // Rest interval is over, switch to flow interval
-                        console.log('Switching to flow interval');
-                        pausePlaylist();
-                        setActiveInterval('flow');
-                        playFlowRest(flowPlaylistId, accessToken); // Start flow playlist
-                        setRestTime(initialRestTime);
+                        // Rest interval is over, check if over should switch to flow
+                        if(currentIntervalCount + 1 < intervalCount){
+                            // Rest interval is over, switch to flow interval
+                            console.log('Switching to flow interval');
+                            pausePlaylist();
+                            setActiveInterval('flow');
+                            playFlowRest(flowPlaylistId, accessToken); // Start flow playlist
+                            setCurrentIntervalCount(prevCount => prevCount + 1);
+                            setRestTime(initialRestTime);
+                        } else {
+                            // All intervals complete, stop playback
+                            console.log('All intervals complete');
+                            pausePlaylist();
+                            setIsActive(false); // Stop timer
+                        }
                     }
                 }
             }, 1000);
         }
         return () => clearInterval(intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, playPlaylist, accessToken, flowPlaylistId, restPlaylistId]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, playPlaylist, accessToken, flowPlaylistId, restPlaylistId, intervalCount, currentIntervalCount]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
         const seconds = time % 60;
         return `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
     };
-
-    /*const togglePlay = async(accessToken, isActive) => {
-        if(isActive) {
-            try {
-                await pausePlaylist(accessToken);
-                console.log('Playback paused');
-            } catch (error) {
-                console.error('Error pausing playback:', error);
-            }
-        } else {
-            try {
-                await resumePlaylist(accessToken);
-            } catch (error) {
-                console.error('Error resuming playback:', error);
-            }
-        }
-    };*/
 
     // Toggles timer and starts/stops and triggers playback based on activeinterval
     const toggleTimer = () => {
@@ -237,12 +232,18 @@ export default function FlowTimer() {
         setInitialRestTime(newValue);
     };
 
+    const handleIntervalCountChange = (event) => {
+        const newValue = Math.max(1, Math.min(parseInt(event.target.value), 10)); // Ensure the value falls in range
+        setIntervalCount(newValue);
+        setInitialIntervalCount(newValue);
+    };
+
 
     return(
         <>
         <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ${activeInterval === 'refresh' ? 'bg-blue-500' : 'bg-black'}`}>
             <div /* time div */ className="flex mt-6">
-                <div className="p-16 w-1/2 border-r ">
+                <div className="p-16 w-2/5 border-r ">
                     <h2 className="mt-6 font-bold text-2xl text-gray-200">FLOW</h2>
                     <h2 className="font-bold text-xl text-gray-400">{flowPlaylistName || 'Select a playlist, album, podcast, audiobook or track' }</h2>
                     {isActive ? (
@@ -261,7 +262,7 @@ export default function FlowTimer() {
                     )}
                 </div>
 
-                <div className="p-16 w-1/2 ">
+                <div className="p-16 w-2/5 ">
                     <h2 className="mt-6 font-bold text-2xl text-gray-200">REST</h2>
                     <h2 className="font-bold text-xl text-gray-400">{restPlaylistName || 'Select a playlist, album, podcast, audiobook or track'}</h2>
                     {isActive ? (
@@ -277,6 +278,24 @@ export default function FlowTimer() {
                             max="60"
                             placeholder="5"
                             />
+                    )}
+                </div>
+
+                <div className="my-auto mr-8 py-4 w-1/5 h-1/4 border-2 border-blue-600 rounded-md">
+                    <h2 className="py-2 font-bold text-2xl"># of Intervals:</h2>
+                    {isActive ? (
+                        <div /* interval count */ className="mt-6 mx-6 font-bold text-6xl text-center">
+                            {intervalCount}
+                        </div>
+                    ) : (
+                        <input className="bg-transparent text-6xl text-center"
+                        type="number"
+                        value={intervalCount}
+                        onChange={handleIntervalCountChange}
+                        min="1"
+                        max="10"
+                        placeholder="1"
+                        />
                     )}
                 </div>
             </div>
@@ -379,3 +398,19 @@ const stopPlayback = useCallback(() => {
             const testToken = accessToken; // Replace with your valid access token
             await playPlaylist(testUri, testToken);
     }*/                /*<button className="px-8 py-2 m-2 bg-blue-600"onClick={restPlaylistBtn}>Rest Playlist</button>*/
+/*const togglePlay = async(accessToken, isActive) => {
+        if(isActive) {
+            try {
+                await pausePlaylist(accessToken);
+                console.log('Playback paused');
+            } catch (error) {
+                console.error('Error pausing playback:', error);
+            }
+        } else {
+            try {
+                await resumePlaylist(accessToken);
+            } catch (error) {
+                console.error('Error resuming playback:', error);
+            }
+        }
+    };*/
