@@ -23,10 +23,9 @@ export default function FlowTimer() {
     const [initialFlowTime, setInitialFlowTime] = useState('');
     const [initialRestTime, setInitialRestTime] = useState('');
     const [tracks, setTracks] = useState([]);
-    const [initialIntervalCount, setInitialIntervalCount] = useState(1);
-    const [intervalCount, setIntervalCount] = useState(1);
-    const [currentIntervalCount, setCurrentIntervalCount] = useState(0);
-
+    const [initialCycleCount, setInitialCycleCount] = useState(1);
+    const [cycleCount, setCycleCount] = useState(initialCycleCount);
+    const [currentCycleCount, setCurrentCycleCount] = useState(0);
 
     const handlePlayback = async (itemType, uri, accessToken) => {
         try {
@@ -170,27 +169,26 @@ export default function FlowTimer() {
                     if (restTime > 0) {
                         setRestTime(prevTime => prevTime - 1);
                     } else {
-                        // Rest interval is over, check if over should switch to flow
-                        if(currentIntervalCount + 1 < intervalCount){
+                        if(currentCycleCount + 1 < cycleCount){
                             // Rest interval is over, switch to flow interval
                             console.log('Switching to flow interval');
                             pausePlaylist();
                             setActiveInterval('flow');
                             playFlowRest(flowPlaylistId, accessToken); // Start flow playlist
-                            setCurrentIntervalCount(prevCount => prevCount + 1);
+                            setCurrentCycleCount(prevCount => prevCount + 1);
                             setRestTime(initialRestTime);
                         } else {
-                            // All intervals complete, stop playback
-                            console.log('All intervals complete');
-                            pausePlaylist();
-                            setIsActive(false); // Stop timer
+                                // All intervals complete, stop playback
+                                console.log('All intervals complete');
+                                pausePlaylist();
+                                setIsActive(false); // Stop timer
                         }
                     }
                 }
             }, 1000);
         }
         return () => clearInterval(intervalId);
-    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, playPlaylist, accessToken, flowPlaylistId, restPlaylistId, intervalCount, currentIntervalCount]);
+    }, [isActive, activeInterval, flowTime, restTime, initialFlowTime, initialRestTime, playPlaylist, accessToken, flowPlaylistId, restPlaylistId, currentCycleCount, cycleCount]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time /60);
@@ -232,10 +230,10 @@ export default function FlowTimer() {
         setInitialRestTime(newValue);
     };
 
-    const handleIntervalCountChange = (event) => {
+    const handleCycleCountChange = (event) => {
         const newValue = Math.max(1, Math.min(parseInt(event.target.value), 10)); // Ensure the value falls in range
-        setIntervalCount(newValue);
-        setInitialIntervalCount(newValue);
+        setCycleCount(newValue);
+        setInitialCycleCount(newValue);
     };
 
 
@@ -282,16 +280,16 @@ export default function FlowTimer() {
                 </div>
 
                 <div className="my-auto mr-8 py-4 w-1/5 h-1/4 border-2 border-blue-600 rounded-md">
-                    <h2 className="py-2 font-bold text-2xl"># of Intervals:</h2>
+                    <h2 className="py-2 font-bold text-2xl"># of Cycles:</h2>
                     {isActive ? (
                         <div /* interval count */ className="mt-6 mx-6 font-bold text-6xl text-center">
-                            {intervalCount}
+                            {cycleCount - currentCycleCount}
                         </div>
                     ) : (
                         <input className="bg-transparent text-6xl text-center"
                         type="number"
-                        value={intervalCount}
-                        onChange={handleIntervalCountChange}
+                        value={cycleCount}
+                        onChange={handleCycleCountChange}
                         min="1"
                         max="10"
                         placeholder="1"
@@ -414,3 +412,20 @@ const stopPlayback = useCallback(() => {
             }
         }
     };*/
+
+    /*
+     // Toggles timer and starts/stops and triggers playback based on activeinterval
+    const toggleTimer = () => {
+        setIsActive(prevIsActive => {
+            if(!prevIsActive) {
+                console.log('Starting timer with interval:', activeInterval);
+                playFlowRest(activeInterval === 'flow' ? flowPlaylistId : restPlaylistId, accessToken); // Start playlist based on active interval
+                setRemainingCycles(cycleCount);
+            } else {
+                console.log('Pausing timer');
+                pausePlaylist();
+            }
+            return !prevIsActive;
+        })
+    };
+    */
