@@ -31,25 +31,51 @@ const NavBar = () => {
 
     return(
         <div className="flex px-8 justify-between w-full items-center navbar">
-            <div className="dropdown">
-            <button className="p-0.5 my-2 bg-gray-400 dropdown-btn">
+            {/*<div className="dropdown">*/}
+            <button className="p-0.5 my-2 bg-gray-400 profile-img">
                 {session.user.image ? (
-                <img src={session.user.image} alt="User" className="m-auto w-14 h-14 object-cover rounded-full"></img>
+                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
+                        <img src={session.user.image} alt="Spotify Profile" className="m-auto w-14 h-14 object-cover rounded-full"></img>
+                    </a>
                 ) : (
-                    <img src="user-regular.svg" alt="User" className="m-auto w-14 h-14 object-cover"></img>
+                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
+                        <img src="user-regular.svg" alt="Spotify Profile" className="m-auto w-14 h-14 object-cover"></img>
+                    </a>
                 )}
             </button>
+
+            <div /* center logo */>
+                <button className=" hover:bg-gray-600">
+                    <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
+                </button>
+            </div>
+
+            {/* dropdown nav icon */}
+            <div className="dropdown">
+                <button className="dropdown-btn">
+                    <div className="bar1"></div>
+                    <div className="bar2"></div>
+                    <div className="bar3"></div>
+                </button>
+
                 <div className="border border-solid rounded-sm dropdown-content">
-                    <Link href='/get-started'>
+                   {/* <Link href='/get-started'>
                         <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Get Started</p>
                     </Link>
-                    <button className="w-full text-left border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>
+                    <button className="w-full text-left border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>*/}
+                    {currentPath === '/search' && (
+                        <Link href='/dashboard'>
+                            <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Profile</p>
+                        </Link>
+                        )}
+                    {currentPath === '/dashboard' && (
+                        <Link href='/search'>
+                            <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Search</p>
+                        </Link>
+                    )}
                     <Link href='/about'>
-                        <p className="border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
+                        <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
                     </Link>
-                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
-                        <p className="border-t border-b border-solid border-gray-600 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">Spotify</p>
-                    </a>
                     <button onClick={() => signOut('spotify')} className="w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
                 </div>
             </div>
@@ -59,14 +85,9 @@ const NavBar = () => {
             {isOpen && <Modal setIsOpen={setIsOpen} />}
             </div>
 
-            <div /* center logo */>
-                <button className=" hover:bg-gray-600">
-                    <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
-                </button>
-            </div>
-
 
             {/* navigation buttons */}
+            {/*
             {currentPath === '/search' && (
                 <Link href='/dashboard'>
                     <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Dashboard</button>
@@ -78,7 +99,7 @@ const NavBar = () => {
                     <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
                 </Link>
             )}
-
+            */}
             {currentPath === '/about' && (
                 <div className="text-center rounded-md dropdown-nav">
                     <button className="border border-solid border-green-600 font-semibold dropdown-nav-btn">Nav</button>
