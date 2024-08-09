@@ -218,6 +218,13 @@ export default function FlowTimer() {
         pausePlaylist();
     };
 
+    const clearAll = () => {
+        setIsActive(false);
+        setFlowTime(0);
+        setRestTime(0);
+        setCycleCount(0);
+    };
+
     const handleFlowTimeChange = (event) => {
         const newValue = Math.min(parseInt(event.target.value),60) * 60; // converts minutes to seconds
         setFlowTime(newValue);
@@ -279,7 +286,7 @@ export default function FlowTimer() {
                     )}
                 </div>
 
-                <div className="my-auto mr-8 py-4 w-1/5 h-1/4 border-2 border-blue-600 rounded-md">
+                <div className="my-auto mr-8 py-4 w-1/5 h-1/4 rounded-md cyclesDiv">
                     <h2 className="py-2 font-bold text-2xl"># of Cycles:</h2>
                     {isActive ? (
                         <div /* interval count */ className="mt-6 mx-6 font-bold text-6xl text-center">
@@ -300,6 +307,7 @@ export default function FlowTimer() {
             <div /* buttons div */ className="flex justify-end mb-2 pr-6">
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
+                <button className="px-8 py-2 m-2 bg-red-600"onClick={clearAll}>Clear</button>
             </div>
         </div>
         </>
