@@ -7,14 +7,19 @@
   z-index: 10;
 }
 
-.dropdown-btn {
+.profile-img {
   border-radius: 180rem;
   margin-top: 1rem;
+}
+
+.dropdown-btn {
+  margin-top: 1rem;
+  padding: .8rem;
 }
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 0rem;
+  right: 0rem;
   top: 5.3rem;
   transition-duration: 5s;
   border-color: rgba(255, 255, 255, 0.051);
@@ -64,6 +69,23 @@
   display: block;
 }
 
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+}
+.change .bar2 {
+  opacity: 0;
+}
+.change .bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+}
 .centered {
   position: fixed;
   top: 50%;
