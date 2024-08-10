@@ -39,7 +39,7 @@
 }
 
 .dropdown-link {
-  padding: .625rem 2rem;
+  padding: .625rem 2rem .625rem 1rem;
   cursor: pointer;
 }
 
