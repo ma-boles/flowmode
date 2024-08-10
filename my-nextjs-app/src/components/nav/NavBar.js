@@ -50,8 +50,10 @@ const NavBar = () => {
                 </button>
             </div>
 
-            {/* dropdown nav icon */}
+
             <div className="dropdown">
+
+                {/* dropdown nav icon */}
                 <button className="dropdown-btn">
                     <div className="bar1"></div>
                     <div className="bar2"></div>
@@ -61,28 +63,75 @@ const NavBar = () => {
                 <div className="border border-solid rounded-sm dropdown-content">
                    {/* <Link href='/get-started'>
                         <p className="hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Get Started</p>
-                    </Link>
-                    <button className="w-full text-left border-t border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>Account</button>*/}
+                    </Link>*/}
+                    <button className="flex w-full text-left border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>
+                        <div className="transparent">
+                            <img src="caret-left-solid.svg" className="m-auto mr-2 w-5 h-5 invert"></img>
+                        </div>
+                        Account
+                    </button>
                     {currentPath === '/search' && (
                         <Link href='/dashboard'>
-                            <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Profile</p>
+                            <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                <div className="transparent">
+                                    <img src="user-regular.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
+                                </div>
+                                Profile
+                            </p>
                         </Link>
                         )}
                     {currentPath === '/dashboard' && (
                         <Link href='/search'>
-                            <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">Search</p>
+                            <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                <div className="transparent">
+                                    <img src="magnifying-glass-solid.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
+                                </div>
+                                Search
+                            </p>
                         </Link>
                     )}
+
+                    {currentPath === '/about' && (
+                        <>
+                            <Link href="/dashboard">
+                                <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                    <div className="transparent">
+                                        <img src="user-regular.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
+                                    </div>
+                                    Profile
+                                </p>
+                            </Link>
+                            <Link href='/search'>
+                                <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                    <div className="transparent">
+                                        <img src="magnifying-glass-solid.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
+                                    </div>
+                                    Search
+                                </p>
+                            </Link>
+                        </>
+                    )}
+
                     <Link href='/about'>
-                        <p className="border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">About</p>
+                        <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            <div className="transparent">
+                                <img src="caret-left-solid.svg" className="m-auto mr-4 w-5 h-5 invert"></img>
+                            </div>
+                            About
+                        </p>
                     </Link>
-                    <button onClick={() => signOut('spotify')} className="w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">Log Out</button>
+                    <button onClick={() => signOut('spotify')} className="flex w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className="transparent">
+                            <img src="right-from-bracket-solid.svg" className="m-auto mr-2 w-6 h-6 invert"></img>
+                        </div>
+                        Log Out
+                    </button>
                 </div>
             </div>
 
             {/* Opt In modal */}
             <div className="centered">
-            {isOpen && <Modal setIsOpen={setIsOpen} />}
+                {isOpen && <Modal setIsOpen={setIsOpen} />}
             </div>
 
 
@@ -99,7 +148,7 @@ const NavBar = () => {
                     <button className="px-4 py-2 w-28 border border-solid border-white rounded-md hover:bg-green-600 transition duration-300 ease-in-out">Search</button>
                 </Link>
             )}
-            */}
+            
             {currentPath === '/about' && (
                 <div className="text-center rounded-md dropdown-nav">
                     <button className="border border-solid border-green-600 font-semibold dropdown-nav-btn">Nav</button>
@@ -112,7 +161,7 @@ const NavBar = () => {
                         </a>
                     </div>
                 </div>
-            )}
+            )}*/}
 
             {currentPath === '/get-started' && (
                 <div className="text-center rounded-md dropdown-nav">
