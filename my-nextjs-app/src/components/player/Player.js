@@ -7,6 +7,7 @@ import { skipTrack, previousTrack, toggleShuffle, stopPlayback, resumePlayback }
 import { TrackInfo } from "./TrackInfo";
 import FlowTimer from "./FlowTimer";
 import "@/app/styles/styles.css"
+import VolumeSlider from "./VolumeSlider";
 
 
 export default function Player() {
@@ -53,11 +54,11 @@ export default function Player() {
         }
     };
 
-    const handleToggleShuffle = async () => {
-        const newShuffleState = !isShuffled;
-        await toggleShuffle(accessToken, newShuffleState);
-        setIsShuffled(newShuffleState);
+    const handleToggleShuffle = async() => {
+        await toggleShuffle(accessToken);
+        console.log('Shuffle enabled.');
     };
+
 
     // conditional styling
 
@@ -115,12 +116,16 @@ export default function Player() {
                             </div>
 
                             <div className="flex justify-center items-center">
-                                <input
+                                <VolumeSlider />
+
+                               {/* <input
                                 type="range"
                                 min="0"
                                 max="1"
                                 step="0.01"
-                                />
+                                value={volume}
+                                onChange={handleVolumeChange}
+                                />*/}
                             </div>
                         </div>
                     </div>
