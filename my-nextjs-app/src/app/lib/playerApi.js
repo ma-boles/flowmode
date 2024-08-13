@@ -25,6 +25,8 @@ const stopPlayback = (accessToken) => {
     }).catch(error => console.error('Error stopping playback:', error));
 };
 
+
+// Controls for player
 const togglePlay = async (accessToken, playerState) => {
     try {
         if(!playerState) {
@@ -59,7 +61,6 @@ const togglePlay = async (accessToken, playerState) => {
     }
 };
 
-// controls for player
 const pausePlayback = async(accessToken) => {
     await fetch(`https://api.spotify.com/v1/me/player/pause`, {
         method: 'PUT',
@@ -96,19 +97,44 @@ const previousTrack = async (accessToken) => {
     });
 };
 
-const toggleShuffle = async (accessToken, shouldShuffle) => {
+const toggleShuffle = async (accessToken, playerState) => {
     try {
+        if(!playerState) {
+            console.error('Player is state is undefined.');
+            return;
+        }
+
+        // Fetch the current shuffle state
+        const response = await fetch('https://api.spotify.com/v1/me/player', {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        });
+        const data = await response.json();
+        const currentShuffleState = data.shuffle_state;
+
+        if(typeof currentShuffleState === 'undefined') {
+            console.error('playerState does not have the shuffle_state property');
+            return;
+        }
+
+        // Toggle shuffle state
+        const newShuffleState = !currentShuffleState;
+
         await fetch(`https://api.spotify.com/v1/me/player/shuffle`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
             },
+            body: JSON.stringify({ state: newShuffleState })
         });
-        console.log(`Shuffle is now ${shouldShuffle ? 'enabled' : 'disabled'}`);
-    } catch (error) {
+        console.log(`Shuffle mode ${newShuffleState ? 'enabled': 'disabled'}`);
+        } catch (error) {
         console.error('Error toggling shuffle:', error);
     }
 };
+
 
 // Triggering playback in preview mode
 const playSong = async (uri, accessToken) => {
