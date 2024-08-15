@@ -12,6 +12,8 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
         if (playlist.id === flowPlaylistId) {
             setAddedType(null);
         } else {
+            console.log('Selecting the playlist');
+
             onSelectFlow(playlist.id, playlist.name);
             setAddedType('flow');
         }
@@ -33,7 +35,7 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
     const isPreviewAdded = playlist.id === previewId;
 
     const getButtonClass = (isAdded) => {
-        return isAdded ? 'bg-green-600' : 'hover:bg-blue-500'
+        return isAdded ? 'bg-green-500' : 'hover:border border-white'
     };
 
     return(
