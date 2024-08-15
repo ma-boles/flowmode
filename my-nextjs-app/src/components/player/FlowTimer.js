@@ -246,7 +246,7 @@ export default function FlowTimer() {
 
     return(
         <>
-        <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ${activeInterval === 'rest' ? 'bg-blue-500' : 'bg-black'}`}>
+        <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ease-in-out delay-150 ${activeInterval === 'rest' ? 'bg-blue-500' : 'bg-black'}`}>
             <div /* time div */ className="flex mt-6">
                 <div className="p-16 w-2/5 border-r ">
                     <h2 className="mt-6 font-bold text-2xl text-gray-200">FLOW</h2>
