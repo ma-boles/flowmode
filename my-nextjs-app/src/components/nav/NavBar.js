@@ -72,53 +72,53 @@ const NavBar = () => {
                     </button>
                     {currentPath === '/search' && (
                         <Link href='/profile'>
-                            <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                 <div className="transparent">
                                     <img src="user-regular.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
                                 </div>
                                 Profile
-                            </p>
+                            </div>
                         </Link>
                         )}
                     {currentPath === '/profile' && (
                         <Link href='/search'>
-                            <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                 <div className="transparent">
                                     <img src="magnifying-glass-solid.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
                                 </div>
                                 Search
-                            </p>
+                            </div>
                         </Link>
                     )}
 
                     {currentPath === '/about' && (
                         <>
                             <Link href="/profile">
-                                <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                     <div className="transparent">
                                         <img src="user-regular.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
                                     </div>
                                     Profile
-                                </p>
+                                </div>
                             </Link>
                             <Link href='/search'>
-                                <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                     <div className="transparent">
                                         <img src="magnifying-glass-solid.svg" className="m-auto mr-4 w-4 h-4 invert"></img>
                                     </div>
                                     Search
-                                </p>
+                                </div>
                             </Link>
                         </>
                     )}
 
                     <Link href='/about'>
-                        <p className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                             <div className="transparent">
                                 <img src="caret-left-solid.svg" className="m-auto mr-4 w-5 h-5 invert"></img>
                             </div>
                             About
-                        </p>
+                        </div>
                     </Link>
                     <button onClick={() => signOut('spotify')} className="flex w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">
                         <div className="transparent">
