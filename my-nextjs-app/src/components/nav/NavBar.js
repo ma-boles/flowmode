@@ -71,6 +71,7 @@ const NavBar = () => {
                         Account
                     </button>
                     {currentPath === '/search' && (
+                        <>
                         <Link href='/profile'>
                             <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                 <div className="transparent">
@@ -79,8 +80,11 @@ const NavBar = () => {
                                 Profile
                             </div>
                         </Link>
+                    </>
                         )}
+
                     {currentPath === '/profile' && (
+                        <>
                         <Link href='/search'>
                             <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                                 <div className="transparent">
@@ -89,6 +93,7 @@ const NavBar = () => {
                                 Search
                             </div>
                         </Link>
+                        </>
                     )}
 
                     {currentPath === '/about' && (
@@ -112,6 +117,7 @@ const NavBar = () => {
                         </>
                     )}
 
+                            
                     <Link href='/about'>
                         <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
                             <div className="transparent">
@@ -120,6 +126,7 @@ const NavBar = () => {
                             About
                         </div>
                     </Link>
+                    
                     <button onClick={() => signOut('spotify')} className="flex w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">
                         <div className="transparent">
                             <img src="right-from-bracket-solid.svg" className="m-auto mr-2 w-6 h-6 invert"></img>
@@ -128,6 +135,40 @@ const NavBar = () => {
                     </button>
                 </div>
             </div>
+
+            {/* mini about menus conditionally rendered */}
+            {currentPath ===  '/profile' && (
+                <div /* mini menu about/start */ className="aboutMenu">
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Mission・Story
+                    </div>
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Get Started
+                    </div>
+                </div>
+            )}
+            {currentPath === '/search' && (
+                <div /* mini menu about/start */ className="aboutMenu">
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Mission・Story
+                    </div>
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Get Started
+                    </div>
+                </div>
+            )}
+
+            {currentPath === '/about' && (
+                <div /* mini menu about/start */ className="aboutMenu2">
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Mission・Story
+                    </div>
+                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        Get Started
+                    </div>
+                </div>
+            )}
+
 
             {/* Opt In modal */}
             <div className="centered">
@@ -147,7 +188,9 @@ const NavBar = () => {
                             <p className="p-2 border-t border-solid border-gray-400 font-semibold hover:bg-green-600 transition duration-300 ease-in-out">Profile</p>
                         </a>
                     </div>
+                   
                 </div>
+                
             )}
         </div>
     );
