@@ -17,7 +17,7 @@
   padding: .8rem;
 }
 .dropdown-content {
-  display: none;
+  display: block;
   position: absolute;
   right: 0rem;
   top: 5.3rem;
@@ -54,7 +54,7 @@
 }
 
 .dropdown-nav-content {
-  display: none;
+  display: block;
   position: absolute;
   width: 6.5rem;
   right: 2rem;
@@ -67,6 +67,38 @@
 
 .dropdown-nav:hover .dropdown-nav-content {
   display: block;
+}
+
+.aboutMenu {
+  display: none;
+  position: absolute;
+  right: 8.7rem;
+  top: 11rem;
+  transition-duration: 5s;
+  background-color: rgb(50, 50, 50);
+  z-index: 2000;
+}
+.aboutMenu-content {
+  display: none;
+  position: absolute;
+  right: 8.7rem;
+  top: 11rem;
+  transition-duration: 5s;
+  background-color: rgb(50, 50, 50);
+  z-index: 2000;
+}
+
+.aboutMenu:hover .aboutMenu-content{
+  display: block;
+}
+.aboutMenu2 {
+  display: block;
+  position: absolute;
+  right: 8.7rem;
+  top: 13.8rem;
+  transition-duration: 5s;
+  background-color: rgb(50, 50, 50);
+  z-index: 2000;
 }
 
 .bar1, .bar2, .bar3 {
