@@ -448,11 +448,11 @@
   background-color: rgba(20, 20, 20, 0.899);
 }
 .ellipsis--grid--button:hover + .ellipsis--grid--content  {
-  display: block;
+  display: flex;
 
 }
 .ellipsis--grid--content:hover {
-  display: block;
+  display: flex;
 }
 .ellipsisButtonList {
   background-color: transparent;
