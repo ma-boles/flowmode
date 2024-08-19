@@ -76,6 +76,24 @@ export const PlayerProvider = ({ children }) => {
             });
     
             newPlayer.addListener('player_state_changed', (state) => {
+                if(!state) {
+                    setActive(false);
+                    return;
+                }
+                setPlayerState(state);
+                setPaused(state.paused);
+
+                newPlayer.getCurrentState().then(currentState => {
+                    if(currentState) {
+                        setActive(true);
+                    } else {
+                        setActive(false);
+                    }
+                }).catch(error => {
+                    console.error('Error getting current state:', error);
+                });
+            });
+            /*newPlayer.addListener('player_state_changed', (state) => {
                 console.log('Player state changed:', state);
                 if(state) {
                     setPlayerState(state);
@@ -85,7 +103,7 @@ export const PlayerProvider = ({ children }) => {
                     console.error('Player state is null or undefined');
                     setActive(false);
                 }
-            });
+            });*/
     
             // Not ready
             newPlayer.addListener('not_ready', ({ device_id }) => {
@@ -128,7 +146,7 @@ export const PlayerProvider = ({ children }) => {
                 newPlayer.removeListener('playback_error');
                 newPlayer.disconnect();
             };
-    }, [transferPlayback]);
+    }, [accessToken]);
 
     // Transfer playback to the Web Playback SDK
     const transferPlayback = useCallback(async (device_id, accessToken) => {
