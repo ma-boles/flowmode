@@ -10,15 +10,6 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 
     const [addedType, setAddedType] = useState(null);
 
-    /*const handleFlowClick = () => {
-        if (isFlowAdded) {
-          // Unselect flow playlist if it's already selected
-          onSelectFlow(null, null);
-        } else {
-          onSelectFlow(playlist.id, playlist.name);
-        }
-      };*/
-
     const handleFlowClick = () => {
         if (playlist.id === flowPlaylistId) {
             setAddedType(null);
@@ -43,26 +34,51 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
     const isRestAdded = playlist.id === restPlaylistId && playlist.name === restPlaylistName;
     const isPreviewAdded = playlist.id === previewId;
 
-    const getButtonClass = (isAdded) => {
-        return isAdded ? 'bg-green-500' : 'hover:border border-white'
-    };
 
     return(
             <div className="ellipsis--grid--div">
                 <button className={`text-2xl font-bold ellipsis--grid--button`}>&#8230;</button>
-                <div className="ellipsis--grid--content text-center">
-                    <ul>
-                        <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isFlowAdded || addedType === 'flow' )} `}
+                <div className="flex flex-col ellipsis--grid--content">
+                        <button className={`py-1 font-semibold border-b border-solid border-gray-500 active:bg-green-500 focus:bg-green-500 transition duration-150 ease-in-out `}
                             onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
-                            {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {/*isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>*/}
-                        </li>
+                            Flow
+                        </button>
 
-                        <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')} `}
+                        <button className={`py-1 font-semibold border-b border-solid border-gray-500  active:bg-blue-600 focus:bg-blue-600 transition duration-150 ease-in-out `}
                             onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
-                            {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {/*isRestAdded || addedType === 'rest' && <span className="checkmark"></span>*/}
-                        </li>
-                    </ul>
+                            Rest
+                        </button>
                 </div>
             </div>
     )
 };
+
+
+                    /*<ul>
+                        <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isFlowAdded || addedType === 'flow' )} `}
+                            onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
+                            {isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'} {/*isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>*/
+                       // </li>
+
+                       // <li className={`py-1 font-semibold border-b border-solid border-gray-500 ${getButtonClass(isRestAdded || addedType === 'rest')} `}
+                         //   onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
+                           // {isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'} {/*isRestAdded || addedType === 'rest' && <span className="checkmark"></span>*/}
+                        //</li>
+                //    </ul>*/
+
+                                            {/*isRestAdded || addedType === 'rest' ? 'Added' : 'Rest'*/} {/*isRestAdded || addedType === 'rest' && <span className="checkmark"></span>*/}
+                            {/*isFlowAdded || addedType === 'flow' ? 'Added' : 'Flow'*/} {/*isFlowAdded || addedType === 'flow' && <span className="checkmark"></span>*/}
+
+                            /* const getButtonClass = (isAdded) => {
+        return isAdded ? 'bg-transparent' : 'hover:border border-white'
+    };*/
+
+
+     /*const handleFlowClick = () => {
+        if (isFlowAdded) {
+          // Unselect flow playlist if it's already selected
+          onSelectFlow(null, null);
+        } else {
+          onSelectFlow(playlist.id, playlist.name);
+        }
+      };*/
