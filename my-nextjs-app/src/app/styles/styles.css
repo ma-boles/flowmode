@@ -12,6 +12,22 @@
   margin-top: 1rem;
 }
 
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 5rem;
+  left: 2.2rem;
+  border-radius: 5px;
+  padding: .25rem;
+  font-size: 14px;
+  font-weight: bolder;
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+}
+.profile-img:hover + .tooltip {
+  display: block;
+}
+
 .dropdown-btn {
   margin-top: 1rem;
   padding: .8rem;
