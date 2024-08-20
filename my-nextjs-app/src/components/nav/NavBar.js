@@ -32,17 +32,20 @@ const NavBar = () => {
     return(
         <div className="flex px-8 justify-between w-full items-center navbar">
             {/*<div className="dropdown">*/}
-            <button className="p-0.5 my-2 bg-gray-400 profile-img">
-                {session.user.image ? (
-                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
-                        <img src={session.user.image} alt="Spotify Profile" className="m-auto w-14 h-14 object-cover rounded-full"></img>
-                    </a>
-                ) : (
-                    <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
-                        <img src="user-regular.svg" alt="Spotify Profile" className="m-auto w-14 h-14 object-cover"></img>
-                    </a>
-                )}
-            </button>
+                <button className="p-0.5 my-2 bg-gray-400 cursor-pointer profile-img">
+                    {session.user.image ? (
+                        <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
+                            <img src={session.user.image} alt="Spotify Profile" className="m-auto w-14 h-14 object-cover rounded-full"></img>
+                        </a>
+                    ) : (
+                        <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
+                            <img src="user-regular.svg" alt="Spotify Profile" className="m-auto w-14 h-14 object-cover"></img>
+                        </a>
+                    )}
+                </button>
+                <span className="bg-green-600 tooltip">
+                    Spotify
+                </span>
 
             <div /* center logo */>
                 <button className=" hover:bg-gray-600">
