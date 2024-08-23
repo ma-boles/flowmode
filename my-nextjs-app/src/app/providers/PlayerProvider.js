@@ -11,10 +11,10 @@ export const PlayerProvider = ({ children }) => {
     const accessToken = session?.accessToken;
 
     /*const playerRef = useRef(null);*/
-    const [player, setPlayer] = useState(null);
+    const [player, setPlayer] = useState(null); // Stores the player object
+    const [playerState, setPlayerState] = useState({}); // Stores the playback state
     const [deviceID, setDeviceID] = useState(null);
     const [trackInfo, setTrackInfo] = useState(null);
-    const [playerState, setPlayerState] = useState({});
     const [active, setActive] = useState(false);
     const [paused, setPaused] = useState(false);
     const [spotifyReady, setSpotifyReady] = useState(false);
@@ -27,6 +27,37 @@ export const PlayerProvider = ({ children }) => {
     // Load the Spotify SDK script
     const loadSDK = useCallback(() => {
         return new Promise((resolve, reject) => {
+            // Check if the script is already present
+            if(window.Spotify) {
+                resolve();
+            } 
+            // Create and append the script tag
+            const script = document.createElement("script");
+            script.src = "https://sdk.scdn.co/spotify-player.js";
+            script.async = true;
+
+            script.onload = () => {
+                // Ensure the SDK is fully loaded
+                if(window.Spotify) {
+                    resolve();
+                } else {
+                    reject(new Error('Spotify SDK failed to load.'));
+                }
+            };
+
+            script.onerror = () => {
+                reject(new Error('Failed to load Spotify SDK script.'));
+            };
+
+            document.body.appendChild(script);
+        });
+       }, []);
+
+       /*
+       // Load the Spotify SDK script
+    const loadSDK = useCallback(() => {
+        return new Promise((resolve, reject) => {
+            // Check if the script is already present
             if(window.Spotify) {
                 resolve();
             } else {
@@ -38,7 +69,7 @@ export const PlayerProvider = ({ children }) => {
                 document.body.appendChild(script);
             }
         });
-       }, []);
+       }, []); */
 
     // Remove the Spotify SDK script
     const removeSDKScript = useCallback(() => {
@@ -48,9 +79,6 @@ export const PlayerProvider = ({ children }) => {
         }
     }, []);
 
-    // new block of code
-    //const handlePlayerStateChanged
-    // end of new code block 
     // Initialize the Spotify player
     const initializePlayer = useCallback(async (accessToken) => {
         if(!window.Spotify) {
@@ -66,8 +94,24 @@ export const PlayerProvider = ({ children }) => {
                 },
                 volume: 0.5
             });
-        
+
+            // new code below
+            const connectPlayer = () => {
+                return new Promise((resolve, reject) => {
+                    newPlayer.connect().then(success => {
+                        if(success) {
+                            console.log('The Web Playback SDK successfully connete to Spotify!');
+                            resolve();
+                        } else {
+                            reject('Player connetion failed.');
+                        }
+                    });
+                });
+            };
+            //
+
             // Ready
+            const setUpEventListeners = () => {
             newPlayer.addListener('ready', ({ device_id }) => {
                 console.log('Spotify player is ready for playback.');
                 //console.log('Device ID:', device_id);
@@ -82,8 +126,10 @@ export const PlayerProvider = ({ children }) => {
                 }
                 setPlayerState(state);
                 setPaused(state.paused);
+                //
+                setActive(!state.paused);
 
-                newPlayer.getCurrentState().then(currentState => {
+                /*newPlayer.getCurrentState().then(currentState => {
                     if(currentState) {
                         setActive(true);
                     } else {
@@ -91,19 +137,8 @@ export const PlayerProvider = ({ children }) => {
                     }
                 }).catch(error => {
                     console.error('Error getting current state:', error);
-                });
+                });*/
             });
-            /*newPlayer.addListener('player_state_changed', (state) => {
-                console.log('Player state changed:', state);
-                if(state) {
-                    setPlayerState(state);
-                    setPaused(state.paused);
-                    setActive(!state.paused);
-                } else {
-                    console.error('Player state is null or undefined');
-                    setActive(false);
-                }
-            });*/
     
             // Not ready
             newPlayer.addListener('not_ready', ({ device_id }) => {
@@ -125,16 +160,26 @@ export const PlayerProvider = ({ children }) => {
             newPlayer.addListener('playback_error', ({ message }) => {
                 console.error('Playbck error:', message);
             });
+        };
     
-            await newPlayer.connect().then(success => {
+          /*  await newPlayer.connect().then(success => {
                 if(success) {
                     console.log('The Web Playback SDK successfully connected to Spotify!');
                 } else {
                     console.error('Player connection failed.');
                 }
-            });
+            });*/
 
-            setPlayer(newPlayer);
+            //setPlayer(newPlayer);
+            // new code below
+            try {
+                setUpEventListeners();
+                await connectPlayer();
+                setPlayer(newPlayer);
+            } catch(error) {
+                console.error('Error during player initialization:', error);
+            }
+            //
 
             return () => {
                 newPlayer.removeListener('player_state_changed');
@@ -206,14 +251,18 @@ export const PlayerProvider = ({ children }) => {
 
     // initialize SDK and set up the player
     useEffect(() => {
-        if(accessToken) {
+        /*if(accessToken) {
             const onSpotifyReady = () => {
                 if(accessToken) {
                     initializePlayer(accessToken);
                 } else {
                     console.error('Access token is missing');
                 }
-            };
+            };*/
+        if (accessToken) {
+            const onSpotifyReady = () => {
+                initializePlayer(accessToken);
+           };
 
             window.onSpotifyWebPlaybackSDKReady = onSpotifyReady;
 
