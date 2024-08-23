@@ -1,28 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import usePlayer from "@/app/hooks/usePlayer";
 
 export const TrackInfo = () => {
-    //const { trackInfo } = useContext(PlayerContext);
     const { playerState } = useContext(PlayerContext);
 
-    if(!playerState) {
-        return <div>Loading...</div>;
+
+    if (!playerState || !playerState.track_window) {
+        return <div>Loading track info...</div>;
     }
 
-    // check if playerState or track_window is null
-    if(!playerState || !playerState.track_window) {
-        return <div>Loading...</div>;
-    }
-
-    // extract track info from playerState
     const { track_window } = playerState;
     const currentTrack = track_window.current_track;
 
-    if(!currentTrack) {
-        return <div>Ready</div>;
+    if (!currentTrack) {
+        return <div>No track playing</div>;
     }
-   
+
+
     return (
         <div>
             {currentTrack && (
@@ -36,3 +31,42 @@ export const TrackInfo = () => {
         </div>
     );
 };
+
+    //const [currentTrack, setCurrentTrack] = useState(null);
+
+    //console.log('Current playerState:', playerState);
+
+    /*useEffect(() => {
+        if (playerState && playerState.track_window) {
+            setCurrentTrack(playerState.track_window.current_track);
+        }
+    }, [playerState]);*/
+
+/*if(!playerState) {
+        return <div>Loading...</div>;
+    }
+
+    if(!playerState.track_window) {
+        return <div>Loading track info...</div>;
+    }
+
+    if(!currentTrack) {
+        return <div>No track playing</div>;
+    }
+
+   /* if(!playerState) {
+        return <div>Loading...</div>;
+    }
+
+    // check if playerState or track_window is null
+    if(!playerState.track_window) {
+        return <div>Loading track info...</div>;
+    }
+
+    // extract track info from playerState
+    const { track_window } = playerState;
+    const currentTrack = track_window.current_track;
+
+    if(!currentTrack) {
+        return <div>No track playing</div>;
+    }*/
