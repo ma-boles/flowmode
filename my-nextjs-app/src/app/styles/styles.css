@@ -33,7 +33,7 @@
   padding: .8rem;
 }
 .dropdown-content {
-  display: block;
+  display: none;
   position: absolute;
   right: 0rem;
   top: 5.3rem;
@@ -70,7 +70,7 @@
 }
 
 .dropdown-nav-content {
-  display: block;
+  display: none;
   position: absolute;
   width: 6.5rem;
   right: 2rem;
