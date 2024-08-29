@@ -345,7 +345,7 @@
  .btnIconShuffle {
   height: 1.3rem;
   width: 1.3rem;
-  margin: 1rem;
+  margin: 0.5rem 0rem;
   filter: invert(1);
   cursor: pointer;
  }
