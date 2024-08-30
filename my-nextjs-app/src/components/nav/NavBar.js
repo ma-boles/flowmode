@@ -43,8 +43,8 @@ const NavBar = () => {
                         </a>
                     )}
                 </button>
-                <span className="bg-green-600 tooltip">
-                    Spotify
+                <span className="bg-white text-black tooltip">
+                    Open Spotify
                 </span>
 
             <div /* center logo */>
@@ -120,15 +120,24 @@ const NavBar = () => {
                         </>
                     )}
 
-                            
-                    <Link href='/about'>
-                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out aboutBtn">
                             <div className="transparent">
                                 <img src="caret-left-solid.svg" className="m-auto mr-4 w-5 h-5 invert"></img>
                             </div>
                             About
+                            <div /* mini menu about/start */ className="aboutMenu">
+                                <Link href="/get-started">
+                                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                        Get Started
+                                    </div>
+                                </Link>
+                                <Link href="/about">
+                                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                                        Mission・Story
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
-                    </Link>
                     
                     <button onClick={() => signOut('spotify')} className="flex w-full text-left hover:bg-red-600 transition duration-300 ease-in-out dropdown-link">
                         <div className="transparent">
@@ -142,33 +151,45 @@ const NavBar = () => {
             {/* mini about menus conditionally rendered */}
             {currentPath ===  '/profile' && (
                 <div /* mini menu about/start */ className="aboutMenu">
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Mission・Story
-                    </div>
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Get Started
-                    </div>
+                    <Link href="/get-started">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Get Started
+                        </div>
+                    </Link>
+                    <Link href="/about">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Mission・Story
+                        </div>
+                    </Link>
                 </div>
             )}
             {currentPath === '/search' && (
                 <div /* mini menu about/start */ className="aboutMenu">
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Mission・Story
-                    </div>
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Get Started
-                    </div>
+                    <Link href="/get-started">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Get Started
+                        </div>
+                    </Link>
+                    <Link href="/about">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Mission・Story
+                        </div>
+                    </Link>
                 </div>
             )}
 
             {currentPath === '/about' && (
                 <div /* mini menu about/start */ className="aboutMenu2">
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Mission・Story
-                    </div>
-                    <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
-                        Get Started
-                    </div>
+                    <Link href="/get-started">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Get Started
+                        </div>
+                    </Link>
+                    <Link href="/about">
+                        <div className="flex border-b border-solid border-gray-600 hover:bg-blue-600 transition duration-300 ease-in-out dropdown-link">
+                            Mission・Story
+                        </div>
+                    </Link>
                 </div>
             )}
 
