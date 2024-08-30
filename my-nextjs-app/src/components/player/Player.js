@@ -106,26 +106,19 @@ export default function Player() {
 
                     <div style={{display: 'grid', placeItems: 'center'}}>
                         <div className="mx-4 w-48">
-                            <div className="flex justify-evenly">
-                                <img src="repeat-solid.svg" alt="repeat" className=" btnIconShuffle"></img>
-                                <button onClick={handleToggleShuffle}>
+                            <div className="mb-2 flex justify-evenly">
+                                <button className="px-2 py-0 text-3xl rounded-sm hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700 transition duration-150 ease-in-out">
+                                    <img src="repeat-solid.svg" alt="repeat" className="btnIconShuffle"></img>
+                                </button>
+                                <button onClick={handleToggleShuffle} className="px-2 py-0 text-3xl rounded-sm hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700 transition duration-150 ease-in-out">
                                     {/* render styles conditionally {isShuffled ? 'Disable Shuffle' : 'Enable Shuffle'}*/}
                                     <img src="shuffle-solid.svg" alt="shuffle" className=" btnIconShuffle"></img>
                                 </button>
-                                <button className="px-2 py-0 text-3xl rounded-sm hover:bg-gray-700" onClick={handleFlow}><span className="text-green-600 font-bold">f</span><span>m</span></button>
+                                <button className="px-2 py-0 text-3xl rounded-sm hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700 transition duration-150 ease-in-out" onClick={handleFlow}><span className="text-green-600 font-bold">f</span><span>m</span></button>
                             </div>
-
+                            {/*py-1 font-semibold border-b border-solid border-gray-500  */}
                             <div className="flex justify-center items-center">
                                 <VolumeSlider />
-
-                               {/* <input
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                value={volume}
-                                onChange={handleVolumeChange}
-                                />*/}
                             </div>
                         </div>
                     </div>
