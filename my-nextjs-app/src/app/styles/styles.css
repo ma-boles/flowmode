@@ -16,12 +16,10 @@
   display: none;
   position: absolute;
   top: 5rem;
-  left: 2.2rem;
-  border-radius: 5px;
-  padding: .25rem;
+  /*left: 2.2rem;*/
+  padding: .35rem;
   font-size: 14px;
-  font-weight: bolder;
-  opacity: 0.9;
+  font-weight: 600;
   transition: opacity 0.5s ease;
 }
 .profile-img:hover + .tooltip {
@@ -85,6 +83,10 @@
   display: block;
 }
 
+.aboutBtn {
+  padding: .625rem 2rem .625rem 1rem;
+  cursor: pointer;
+}
 .aboutMenu {
   display: none;
   position: absolute;
@@ -94,27 +96,21 @@
   background-color: rgb(50, 50, 50);
   z-index: 2000;
 }
-.aboutMenu-content {
-  display: none;
-  position: absolute;
-  right: 8.7rem;
-  top: 11rem;
-  transition-duration: 5s;
-  background-color: rgb(50, 50, 50);
-  z-index: 2000;
+.aboutBtn:hover .aboutMenu {
+  display: block;
 }
 
-.aboutMenu:hover .aboutMenu-content{
-  display: block;
-}
 .aboutMenu2 {
-  display: block;
+  display: none;
   position: absolute;
   right: 8.7rem;
   top: 13.8rem;
   transition-duration: 5s;
   background-color: rgb(50, 50, 50);
   z-index: 2000;
+}
+.aboutBtn:hover .aboutMenu2 {
+  display: block;
 }
 
 .bar1, .bar2, .bar3 {
