@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '@/app/styles/styles.css';
 import Link from "next/link";
 import Modal from "../Modal";
+import { signOut } from "next-auth/react";
 
 const DropdownMenu = () => {
 
