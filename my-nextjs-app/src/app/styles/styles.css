@@ -1,5 +1,3 @@
-
-
 /* nav */
 
 .navbar {
@@ -26,93 +24,30 @@
   display: block;
 }
 
+/* left drop down nav menu*/
+.dropdown {
+  display: absolute;
+}
 .dropdown-btn {
   margin-top: 1rem;
   padding: .8rem;
 }
 .dropdown-content {
+  background-color: rgb(27, 27, 27);
   display: none;
-  position: absolute;
-  right: 0rem;
-  top: 5.3rem;
-  transition-duration: 5s;
-  border-color: rgba(255, 255, 255, 0.051);
-  background-color: rgb(39, 41, 43);
   z-index: 2000;
 }
 
-.dropdown {
-  display: block;
-}
-
-.dropdown-content a {
-  display: block;
-}
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: flex;
 }
 
 .dropdown-link {
   padding: .625rem 2rem .625rem 1rem;
   cursor: pointer;
+  border: rgba(255, 255, 255, 0.101) 1px solid;
 }
-
-.dropdown-nav {
-  background-color: transparent;
-}
-
-.dropdown-nav-btn {
-  padding: .5rem;
-  width: 6.5rem;
-  border-radius: 5px;
-}
-
-.dropdown-nav-content {
-  display: none;
-  position: absolute;
-  width: 6.5rem;
-  right: 2rem;
-  top: 3.8rem;
-  transition-duration: 5s;
-  border-bottom-right-radius: .3rem;
-  border-bottom-left-radius: .3rem;
-  background-color: rgb(20, 20, 20)
-}
-
-.dropdown-nav:hover .dropdown-nav-content {
-  display: block;
-}
-
-.aboutBtn {
-  padding: .625rem 2rem .625rem 1rem;
-  cursor: pointer;
-}
-.aboutMenu {
-  display: none;
-  position: absolute;
-  right: 8.7rem;
-  top: 11rem;
-  transition-duration: 5s;
-  background-color: rgb(50, 50, 50);
-  z-index: 2000;
-}
-.aboutBtn:hover .aboutMenu {
-  display: block;
-}
-
-.aboutMenu2 {
-  display: none;
-  position: absolute;
-  right: 8.7rem;
-  top: 13.8rem;
-  transition-duration: 5s;
-  background-color: rgb(50, 50, 50);
-  z-index: 2000;
-}
-.aboutBtn:hover .aboutMenu2 {
-  display: block;
-}
-
+/* dropdown button styles */
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
@@ -130,6 +65,8 @@
 .change .bar3 {
   transform: translate(0, -11px) rotate(45deg);
 }
+
+/* create account modal styles */
 .centered {
   position: fixed;
   top: 50%;
