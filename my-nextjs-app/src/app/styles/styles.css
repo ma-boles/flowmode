@@ -45,7 +45,7 @@
 .dropdown-link {
   padding: .625rem 2rem .625rem 1rem;
   cursor: pointer;
-  border: rgba(255, 255, 255, 0.101) 1px solid;
+  /*border: rgba(255, 255, 255, 0.101) 1px solid;*/
 }
 /* dropdown button styles */
 .bar1, .bar2, .bar3 {
