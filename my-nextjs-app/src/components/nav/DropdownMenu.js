@@ -12,7 +12,7 @@ const DropdownMenu = () => {
       <>
         <div /*dropdown content */ className="flex absolute right-0 dropdown-content">
             <div /* submenu left */ className="flex flex-col ">
-                <ul classname="flex flex-col">
+                <ul className="flex flex-col">
                     <button className="flex w-full text-left border-t border-l border-white hover:bg-green-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>
                         <div className="transparent">
                             <img src="caret-left-solid.svg" className="m-auto mr-2 w-5 h-5 invert"></img>
