@@ -100,7 +100,7 @@ const previousTrack = async (accessToken) => {
 const toggleShuffle = async (accessToken, playerState) => {
     try {
         if(!playerState) {
-            console.error('Player is state is undefined.');
+            console.error('Player state is undefined.');
             return;
         }
 
