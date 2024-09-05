@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '@/app/styles/styles.css';
 import Link from "next/link";
-import Modal from "../Modal";
+import Account from "../modals/AccountModal";
 import { signOut } from "next-auth/react";
 
 const DropdownMenu = () => {
@@ -61,9 +61,9 @@ const DropdownMenu = () => {
                 </ul>
             </div>
         </div>
-             {/* Opt In modal */}
+             {/* Account modal */}
                 <div className="centered">
-                    {isOpen && <Modal setIsOpen={setIsOpen} />}
+                    {isOpen && <Account setIsOpen={setIsOpen} />}
                 </div>
       </>
     )
