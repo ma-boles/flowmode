@@ -22,9 +22,10 @@ const NavBar = () => {
 
     if (!session) {
         return <h2 className="m-4 text-center text-2xl font-semibold">Please{' '}
-            <Link href="/">
+            <Link href="/login">
                 <span className="cursor-pointer underline hover:text-green-500">log in</span>
-            </Link></h2>
+            </Link>
+            </h2>
     }
 
 
@@ -61,6 +62,7 @@ const NavBar = () => {
                 </button>
 
                 <DropdownMenu />
+
             </div>
         </div>
     );
