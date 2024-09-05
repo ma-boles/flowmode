@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 
-export default function Modal ({ setIsOpen }) {
+export default function Account ({ setIsOpen }) {
     const { data: session } = useSession();
     const [accountStatus, setAccountStatus] = useState('');
     const [warningStatus, setWarningStatus] = useState('');
