@@ -61,10 +61,10 @@ const DropdownMenu = () => {
                 </ul>
             </div>
         </div>
-             {/* Account modal */}
-                <div className="centered">
-                    {isOpen && <Account setIsOpen={setIsOpen} />}
-                </div>
+            {/* Account modal */}
+            <div className="centered">
+                {isOpen && <Account setIsOpen={setIsOpen} />}
+            </div>
       </>
     )
   }
