@@ -44,40 +44,20 @@ const userSchema = new mongoose.Schema({
         }
     }],
     mostRecentlyPlayed: [{
-        title: {
-            type: String,
-            required: true,
+        flow: {
+            title: {
+                type: String,
+                required: true,
+            }
+        },
+        rest: {
+            title: {
+                type: String,
+                required: true,
+            }
         }
     }]
 }, { timestamps: true });
 
 
 export default mongoose.models.User || mongoose.model('User', userSchema);
-
-
-
-/* timePerDay: {
-        type: Number,
-        default: 0,
-    },
-    timePerWeek: {
-        type: Number,
-        default: 0,
-    },
-    timePerMonth: {
-        type: Number,
-        default: 0,
-    },
-    restPerDay: {
-        type: Number,
-        default: 0,
-    },
-    restPerWeek: {
-        type: Number,
-        default: 0,
-    },
-    restPerMonth: {
-        type: Number,
-        default: 0,
-    },*/
-
