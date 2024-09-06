@@ -73,6 +73,7 @@ export default function Player() {
 
     //console.log('Player:', player);
     console.log('Player state:', playerState);
+    console.log('Player object:', player);
 
 
     return (
