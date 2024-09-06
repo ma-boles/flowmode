@@ -26,6 +26,8 @@ export default function FlowTimer() {
     const [initialCycleCount, setInitialCycleCount] = useState(1);
     const [cycleCount, setCycleCount] = useState(initialCycleCount);
     const [currentCycleCount, setCurrentCycleCount] = useState(0);
+    const [mostRecentFlowPlaylist, setMostRecentFlowPlaylist]= useState(null);
+    const [mostRecentRestPlaylist, setMostRecentRestPlaylist] = useState(null);
 
     const handlePlayback = async (itemType, uri, accessToken) => {
         try {
@@ -162,6 +164,10 @@ export default function FlowTimer() {
                         console.log('Switching to rest interval');
                         pausePlaylist();
                         setActiveInterval('rest');
+                        setMostRecentFlowPlaylist({ 
+                            id: flowPlaylistId, 
+                            name: flowPlaylistName 
+                        });
                         playFlowRest(restPlaylistId, accessToken); // Start rest playlist
                         setFlowTime(initialFlowTime);
                     }
@@ -174,6 +180,10 @@ export default function FlowTimer() {
                             console.log('Switching to flow interval');
                             pausePlaylist();
                             setActiveInterval('flow');
+                            setMostRecentRestPlaylist({
+                                id: restPlaylistId,
+                                name: restPlaylistName
+                            });
                             playFlowRest(flowPlaylistId, accessToken); // Start flow playlist
                             setCurrentCycleCount(prevCount => prevCount + 1);
                             setRestTime(initialRestTime);
@@ -182,6 +192,16 @@ export default function FlowTimer() {
                                 console.log('All intervals complete');
                                 pausePlaylist();
                                 setIsActive(false); // Stop timer
+
+                                // Update MongoDB with most recent flow, rest, time info
+                                updateRecentlyPlayed(
+                                    flowPlaylistName,
+                                    flowPlaylistId,
+                                    restPlaylistName,
+                                    restPlaylistId,
+                                    initialFlowTime,
+                                    initialRestTime
+                                );
                         }
                     }
                 }
@@ -243,6 +263,34 @@ export default function FlowTimer() {
         setInitialCycleCount(newValue);
     };
 
+    //Function to update MongoDB with recently played info
+    async function updateRecentlyPlayed(flowPlaylistName, flowPlaylistId, restPlaylistName, restPlaylistId, initialFlowTime, initialRestTime) {
+        try {
+            const response = await fetch('/api/update-recentlyplayed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    flowPlaylistName,
+                    flowPlaylistId,
+                    restPlaylistName,
+                    restPlaylistId,
+                    initialFlowTime,
+                    initialRestTime
+                }),
+            });
+
+            if(!response.ok) {
+                throw new Error('Failed to update recently played info');
+            }
+
+            const result = await response.json();
+            console.log('Update successful:', result);
+        } catch(error) {
+            console.error('Error updating recently played info', error);
+        }
+    }
 
     return(
         <>
