@@ -47,15 +47,37 @@ const userSchema = new mongoose.Schema({
         flow: {
             title: {
                 type: String,
-                required: true,
+            },
+            lastUpdated: {
+                type: Date,
+                default: Date.now,
+            }
+        },
+        flow: {
+            title: {
+                type: String,
+            },
+            lastUpdated: {
+                type: Date,
             }
         },
         rest: {
             title: {
                 type: String,
-                required: true,
-            }
-        }
+            },
+            lastUpdated: {
+                type: Date,
+                default: Date.now,
+            },
+        },
+        rest: {
+            title: {
+                type: String,
+            },
+            lastUpdated: {
+                type: Date,
+            },
+        },
     }]
 }, { timestamps: true });
 
