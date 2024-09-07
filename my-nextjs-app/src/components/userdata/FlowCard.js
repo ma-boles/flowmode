@@ -23,4 +23,3 @@ export default function FlowCard() {
         </>
     )
 }
-/* py-6 px-12 mx-8 border-8 border-solid border-gray-100 rounded-lg */
