@@ -17,9 +17,9 @@ export default function TotalMinutesFlow () {
 
     return (
         <>
-            <div className="border-8 border-solid border-gray-100 rounded-lg border-opacity-80">
+            <div>
 
-                <div /* buttons div */ className="flex w-full justify-center">
+                <div /* buttons div */ className="px-2 flex w-full justify-center">
                     <button className={`mt-2 w-24 border border-solid border-blue-300 hover:bg-blue-600 ${minutesCard === 'today' ? 'bg-blue-600'  : 'bg-transparent'}`}
                     onClick={showMinutesDay}
                     >Today</button>
@@ -35,8 +35,8 @@ export default function TotalMinutesFlow () {
 
             {minutesCard === 'today' &&
             <>
-                <div className="px-4 py-3 mb-0 mx-8 opacity-90">
-                    <h2 className="mx-2 mt-1 font-bold text-2xl">Minutes of <br /> Focused Work:</h2>
+                <div className="px-8 py-3 mb-0 mx-8 opacity-90">
+                    <h2 className="mx-2 mt-1 font-bold text-2xl">Total Minutes:</h2>
                     <hr />
                     <h2 className="mx-2 mt-6 mb-2 font-bold text-2xl opacity-90"><span className="text-4xl">07 </span>HR <br /> <span className="text-4xl">10</span> MIN</h2>
                 </div>
@@ -45,8 +45,8 @@ export default function TotalMinutesFlow () {
 
             {minutesCard === 'week' &&
             <>
-                <div className="px-4 py-3 mb-0 mx-8 opacity-90">
-                    <h2 className="mx-2 mt-1 font-bold text-2xl">Minutes of <br /> Focused Work:</h2>
+                <div className="px-8 py-3 mb-0 mx-8 opacity-90">
+                    <h2 className="mx-2 mt-1 font-bold text-2xl">Total Minutes:</h2>
                     <hr />
                     <h2 className="mx-2 mt-6 mb-2 font-bold text-2xl opacity-90"><span className="text-4xl">15 </span>HR <br /> <span className="text-4xl">20</span> MIN</h2>
                 </div>
@@ -55,8 +55,8 @@ export default function TotalMinutesFlow () {
 
             {minutesCard === 'month' &&
             <>
-                <div className="px-4 py-3 mb-0 mx-8 opacity-90">
-                    <h2 className="mx-2 mt-1 font-bold text-2xl">Minutes of <br /> Focused Work:</h2>
+                <div className="px-8 py-3 mb-0 mx-8 opacity-90">
+                    <h2 className="mx-2 mt-1 font-bold text-2xl">Total Minutes:</h2>
                     <hr />
                     <h2 className="mx-2 mt-6 mb-2 font-bold text-2xl opacity-90"><span className="text-4xl">30 </span>HR <br /> <span className="text-4xl">30</span> MIN</h2>
                 </div>
