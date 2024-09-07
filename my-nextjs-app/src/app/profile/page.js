@@ -9,6 +9,8 @@ import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContex
 import LastPlayed from "@/components/userdata/LastPlayed";
 import TotalMinutesFlow from "@/components/userdata/TotalMinutesFlow";
 import TotalMinutesRest from "@/components/userdata/TotalMinutesRest";
+import FlowCard from "@/components/userdata/FlowCard";
+import RestCard from "@/components/userdata/RestCard";
 
 
 export default function Dashboard() {
@@ -82,14 +84,16 @@ export default function Dashboard() {
                             </div>
 
                             {showCard === 'flow' &&
-                                <TotalMinutesFlow />
+                                <FlowCard />
+                                //<TotalMinutesFlow />
                             }
                             {showCard === 'rest' &&
-                                <TotalMinutesRest />
+                                <RestCard />
+                                //<TotalMinutesRest />
                             }
                         </div>
 
-                        <LastPlayed />
+                        {/*<LastPlayed />*/}
 
                         <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
@@ -114,19 +118,3 @@ export default function Dashboard() {
         </>
     )
 }
-
-
-   {/* const handleSelectFlow = (playlistId) => {
-        console.log('Flow playlist selected:', playlistId)
-
-    };
-
-    const handleSelectRest = (playlistId) => {
-        console.log('Rest playlist selected:', playlistId)
-
-    };
-
-    const handleSelectPreview = (playlistId) => {
-        console.log('Preview playlist selected:', playlistId)
-
-    };*/}
