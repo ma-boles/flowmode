@@ -460,3 +460,10 @@
   border-width: 0.5rem 0 0.5rem 1rem;
   transform: translateY(2px);
 }
+
+/* profile */
+.flow-card {
+  background-color: rgba(20, 20, 20, 0.315);
+  border: 2px solid rgba(255, 255, 255, 0.114);
+  border-radius: 5px;
+}
