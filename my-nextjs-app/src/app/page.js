@@ -30,11 +30,10 @@ export default function HomePage(){
             {isLoggedIn && (
                 <div className="mt-8 flex justify-evenly">
                     <Link href={'/profile'}>
-                        <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Dashboard </button>
+                        <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Profile </button>
                     </Link>
                     <Link href={'/search'}>
-                        <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600">
-                    Search &gt;&gt;</button>
+                        <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> Search &gt;&gt;</button>
                     </Link>
                 </div>
                 )}
@@ -44,7 +43,7 @@ export default function HomePage(){
         </section>
 
     {!isLoggedIn && (
-        <section className="text-center w-full   min-h-screen h-auto items-center justify-center landing">
+        <section className="text-center w-full min-h-screen h-auto items-center justify-center landing">
 
             <h1 className="mb-6 pt-10 pb-4">How it works</h1>
 
@@ -80,10 +79,17 @@ export default function HomePage(){
                         <h3 className="m-auto pt-3 font-semibold text-center text-4xl">Listen and get into <span className="text-green-500 font-bold">flow</span><span className="font-light">mode</span>!</h3>
                     </div>
                 </div>
-                <div>
-                    <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 bg-transparent border-2 border-double border-white rounded-full hover:bg-green-600 transition duration-300 ease-in-out">
-                        Log In
-                    </button>
+                <div /* log in section */ className="mx-10 my-6 border border-white ">
+                    <h2 className="pt-4 text-xl font-medium">Log in with Spotify.</h2>
+                    <h2 className="text-xl font-medium">For returning users with a profile, log in with your profile.</h2>
+                    <div /* log in buttons */ className="flex justify-center" >
+                        <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 mx-4 bg-green-600 border-2 border-double border-green-600 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out">
+                            Log In w/Spotify
+                        </button>
+                        <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 mx-4 bg-transparent border-2 border-double border-white rounded-full hover:bg-gray-600 transition duration-300 ease-in-out">
+                            Log In w/Profile
+                        </button>
+                    </div>
                 </div>
 
             </section>
