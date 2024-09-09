@@ -29,7 +29,7 @@ export default function HomePage(){
 
             {isLoggedIn && (
                 <div className="mt-8 flex justify-evenly">
-                    <Link href={'/dashboard'}>
+                    <Link href={'/profile'}>
                         <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Dashboard </button>
                     </Link>
                     <Link href={'/search'}>
