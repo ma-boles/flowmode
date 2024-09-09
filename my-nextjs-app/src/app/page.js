@@ -1,9 +1,9 @@
 'use client';
-
 import React from "react";
 import { signIn, useSession } from "next-auth/react";
 import './styles/styles.css';
 import Link from "next/link";
+import Footer from "@/components/footer/Footer";
 
 
 export default function HomePage(){
@@ -94,6 +94,8 @@ export default function HomePage(){
 
             </section>
         )}
+
+        <Footer />
 
         </div>
     );
