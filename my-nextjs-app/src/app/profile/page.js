@@ -5,11 +5,10 @@ import Display from "@/components/playlists/Display";
 import Player from "@/components/player/Player";
 import { useSession } from "next-auth/react";
 import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContext";
-import FlowCard from "@/components/userdata/FlowCard";
-import RestCard from "@/components/userdata/RestCard";
+import FlowCard from "@/components/profile/FlowCard";
+import RestCard from "@/components/profile/RestCard";
 
-
-export default function Dashboard() {
+export default function Profile() {
 
     const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
@@ -63,13 +62,13 @@ export default function Dashboard() {
                 <NavBar />
             </nav>
 
-            <div className="mx-12 mb-8 mt-12">
-                {!session ? (
+            <div className="mx-12 mb-8 mt-16">
+                {/*{!session ? (
                         <h2 className="text-center">Loading...</h2>
                 ): (
                     <h1 className="pb-12 pt-0 text-5xl text-center">Welcome {session.user.name}!</h1>
 
-                )}
+                )}*/}
 
                     <div /* top section */ className="mb-16 mt-8 flex justify-center">
 
