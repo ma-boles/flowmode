@@ -9,7 +9,7 @@ export default function RestCard() {
                 <TotalMinutesRest />
             </div>
 
-            <div className="mx-4 bg-gray-700 border-4 border-gray-700 rounded-md">
+            <div className="mx-4">
                 <h2 className="px-10 my-4 font-bold text-2xl opacity-90">Recently Played:</h2>
                     <div className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer">
                         <h2 className="m-2 text-xl font-semibold">Title #1</h2>
