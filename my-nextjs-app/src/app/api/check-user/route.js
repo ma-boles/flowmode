@@ -1,11 +1,11 @@
 import dbConnect from "@/app/lib/utils/dbConnect";
 import User from "@/app/lib/models/User";
 
-export default async function handler(req, res) {
-    if(req.methoed === 'POST') {
-        const { spotifyId, email } = req.body;
+export async function POST(req) {
 
         try {
+            const { spotifyId, email } = await req.json();
+
             await dbConnect();
 
             // Query MongoDB to find the user by Spotify ID or email
@@ -14,15 +14,20 @@ export default async function handler(req, res) {
             });
 
             if(user) {
-                return res.status(200).json({ isUser: true, user});
+                return new Response(JSON.stringify({isUser:true, user}), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json '}
+                });
             } else {
-                return res.status(200).json({ isUser: false});
+                return new Response(JSON.stringify({ isUser: false }), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json '}
+                });
             }
         } catch(error) {
-            return res.status(500).json({ message: 'Error checking user', error});
+            return new Response(JSON.stringify({ message: 'Error checking user', error}), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json '}
+            });
         }
-    } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
 }
