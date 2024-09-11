@@ -81,13 +81,9 @@ export default function HomePage(){
                 </div>
                 <div /* log in section */ className="mx-10 my-6 border border-white ">
                     <h2 className="pt-4 text-xl font-medium">Log in with Spotify.</h2>
-                    <h2 className="text-xl font-medium">For returning users with a profile, log in with your profile.</h2>
                     <div /* log in buttons */ className="flex justify-center" >
                         <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 mx-4 bg-green-600 border-2 border-double border-green-600 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out">
-                            Log In w/Spotify
-                        </button>
-                        <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 mx-4 bg-transparent border-2 border-double border-white rounded-full hover:bg-gray-600 transition duration-300 ease-in-out">
-                            Log In w/Profile
+                            Log In
                         </button>
                     </div>
                 </div>
