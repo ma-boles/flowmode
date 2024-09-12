@@ -2,6 +2,11 @@ import React, { useState } from "react";
 
 export default function TotalMinutesFlow () {
 
+    const [dayFlowTime, setDayFlowTime] = useState('00:00');
+    const [weekFlowTime, setWeekFlowTime] = useState('00:00');
+    const [monthFlowTime, setMonthFlowTime] = useState('00:00');
+
+
     return (
         <>
             <div className="mx-4"> 
@@ -11,7 +16,7 @@ export default function TotalMinutesFlow () {
                          <h2 className="mx-2 mt-1 font-bold text-2xl">Day:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl text-center">07:30</h2>
+                        <h2 className="text-4xl text-center">{dayFlowTime}</h2>
                     </div>
                 </div>
 
@@ -20,7 +25,7 @@ export default function TotalMinutesFlow () {
                         <h2 className="mx-2 mt-1 font-bold text-2xl">Week:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl">15:20</h2>
+                        <h2 className="text-4xl">{weekFlowTime}</h2>
                     </div>
                 </div>
 
@@ -29,7 +34,7 @@ export default function TotalMinutesFlow () {
                         <h2 className="mx-2 mt-1 font-bold text-2xl">Month:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl">30:15</h2>
+                        <h2 className="text-4xl">{monthFlowTime}</h2>
                     </div>
                 </div>
 

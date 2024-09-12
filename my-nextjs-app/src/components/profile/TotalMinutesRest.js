@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
 export default function TotalMinutesRest () {
+
+    const [dayRestTime, setDayRestTime] = useState('00:00');
+    const [weekRestTime, setWeekRestTime] = useState('00:00');
+    const [monthRestTime, setMonthRestTime] = useState('00:00');
+
     const [restCard, setRestCard] = useState('today');
 
     const showRestDay = () => {
@@ -24,7 +29,7 @@ export default function TotalMinutesRest () {
                          <h2 className="mx-2 mt-1 font-bold text-2xl">Day:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl text-center">00:30</h2>
+                        <h2 className="text-4xl text-center">{dayRestTime}</h2>
                     </div>
                 </div>
 
@@ -33,7 +38,7 @@ export default function TotalMinutesRest () {
                         <h2 className="mx-2 mt-1 font-bold text-2xl">Week:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl">10:20</h2>
+                        <h2 className="text-4xl">{weekRestTime}</h2>
                     </div>
                 </div>
 
@@ -42,7 +47,7 @@ export default function TotalMinutesRest () {
                         <h2 className="mx-2 mt-1 font-bold text-2xl">Month:</h2>
                     </div>
                     <div className="py-2 px-6">
-                        <h2 className="text-4xl">20:15</h2>
+                        <h2 className="text-4xl">{monthRestTime}</h2>
                     </div>
                 </div>
 
