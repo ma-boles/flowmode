@@ -3,28 +3,26 @@ import User from "@/app/lib/models/User";
 
 export async function POST(req) {
     try {
-        const { userId, flowTitle, restTitle } = await req.json(); // Get values from request values
+        const { spotifyId, email, flowTitle, restTitle } = await req.json(); // Get values from request values
 
         await dbConnect(); // Connect to database
 
-        const user = await User.findById(userId);
-        if(!user) {
-            return new Response(JSON.stringify({ error: 'User not found '}),{
-                status: 404,
-            });
-        }
+        const user = await User.findOne({
+            $or: [{ spotifyId }, { email }],
+        });
+
         // Get the current date and time
         const currentTimestamp = new Date();
 
-        // Find the user by ID and update the flow n rest titles within the mostRecentlyPlayed array
+        // Find the user by ID and update the flow and rest titles within the mostRecentlyPlayed array
         await User.updateOne(
-            {_id: userId}, // Find the user by unique ID
+            {_id: spotifyId}, // Find the user by unique ID
             {
                 $set:{
                     'mostRecentlyPlayed.0.flow.title': flowTitle, // Update the flow title
-                    'mostRecentlyPlayer.0.flow.lastUpdated': currentTimestamp, // Update timestamp
+                    'mostRecentlyPlayed.0.flow.lastUpdated': currentTimestamp, // Update timestamp
                     'mostRecentlyPlayed.0.restTitle': restTitle, // Update the rest title
-                    'mostRecentlyPlayer.0.rest.lastUpdated': currentTimestamp, // Update timestamp
+                    'mostRecentlyPlayed.0.rest.lastUpdated': currentTimestamp, // Update timestamp
                 },
             }
         );
