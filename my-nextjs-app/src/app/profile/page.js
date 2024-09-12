@@ -115,7 +115,7 @@ export default function Profile() {
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 text-center bg-black bg-opacity-80 z-10">
-                            <button className="mt-28 p-4 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500" onClick={handleUserCheck}>Update Totals</button>
+                            <button className="mt-28 p-4 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out" onClick={handleUserCheck}>Update Totals</button>
                             <p className="m-2 text-lg font-semibold">*Requires the creation of a <button className="font-bold hover:underline" onClick={() => setIsOpen(true)}>profile</button>.</p>
                         </div>
                     )}
