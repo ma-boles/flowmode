@@ -53,14 +53,6 @@ const userSchema = new mongoose.Schema({
                 default: Date.now,
             }
         },
-        flow: {
-            title: {
-                type: String,
-            },
-            lastUpdated: {
-                type: Date,
-            }
-        },
         rest: {
             title: {
                 type: String,
@@ -68,14 +60,6 @@ const userSchema = new mongoose.Schema({
             lastUpdated: {
                 type: Date,
                 default: Date.now,
-            },
-        },
-        rest: {
-            title: {
-                type: String,
-            },
-            lastUpdated: {
-                type: Date,
             },
         },
     }]
