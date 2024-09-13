@@ -196,13 +196,8 @@ export default function FlowTimer() {
                                 // Update MongoDB with most recent flow, rest, time info
                                 updateRecentlyPlayed(
                                     flowPlaylistName,
-                                    flowPlaylistId,
-                                    restPlaylistName,
-                                    restPlaylistId,
-                                    initialFlowTime,
-                                    initialRestTime
+                                    restPlaylistName
                                 );
-                                console.log('updated recently played:', flowPlaylistName, flowPlaylistId, restPlaylistName, restPlaylistId, initialFlowTime, initialRestTime);
                         }
                     }
                 }
@@ -265,7 +260,7 @@ export default function FlowTimer() {
     };
 
     //Function to update MongoDB with recently played info
-    async function updateRecentlyPlayed(flowPlaylistName, flowPlaylistId, restPlaylistName, restPlaylistId, initialFlowTime, initialRestTime) {
+    async function updateRecentlyPlayed(flowPlaylistName, restPlaylistName) {
         try {
             const response = await fetch('/api/update-recentlyplayed', {
                 method: 'POST',
@@ -274,11 +269,7 @@ export default function FlowTimer() {
                 },
                 body: JSON.stringify({
                     flowPlaylistName,
-                    flowPlaylistId,
-                    restPlaylistName,
-                    restPlaylistId,
-                    initialFlowTime,
-                    initialRestTime
+                    restPlaylistName
                 }),
             });
 
@@ -288,6 +279,7 @@ export default function FlowTimer() {
 
             const result = await response.json();
             console.log('Update successful:', result);
+            console.log('Sending playlist name info:', flowPlaylistName, restPlaylistName);
         } catch(error) {
             console.error('Error updating recently played info', error);
         }
