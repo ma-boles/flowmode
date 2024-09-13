@@ -1,37 +1,69 @@
+import { NextResponse } from "next/server";
 import dbConnect from "@/app/lib/utils/dbConnect";
 import User from "@/app/lib/models/User";
 
 export async function POST(req) {
     try {
-        const { spotifyId, email, flowTitle, restTitle } = await req.json(); // Get values from request values
+        const { spotifyId, email, flowPlaylistName, restPlaylistName } = await req.json(); // Get values from request values
 
+        const body = await request.json();
+        console.log('Request body:', body);  // Log the incoming request body
+        
         await dbConnect(); // Connect to database
 
+        // Find user
         const user = await User.findOne({
             $or: [{ spotifyId }, { email }],
         });
 
+        if(!user)  {
+            throw new Error('User not found');
+        }
+
         // Get the current date and time
         const currentTimestamp = new Date();
 
-        // Find the user by ID and update the flow and rest titles within the mostRecentlyPlayed array
+        // Log received data for debugging
+        console.log('Updating for email or spotifyId:', email, spotifyId);
+        console.log('Flow Playlist:', flowPlaylistName);
+        console.log('Rest Playlist:', restPlaylistName);
+
+        // Update the flow and rest titles within the mostRecentlyPlayed array
         await User.updateOne(
-            {_id: spotifyId}, // Find the user by unique ID
+            { $or: [{ spotifyId }, { email }] }, // Match spotifyId or email to update
             {
-                $set:{
-                    'mostRecentlyPlayed.0.flow.title': flowTitle, // Update the flow title
-                    'mostRecentlyPlayed.0.flow.lastUpdated': currentTimestamp, // Update timestamp
-                    'mostRecentlyPlayed.0.restTitle': restTitle, // Update the rest title
-                    'mostRecentlyPlayed.0.rest.lastUpdated': currentTimestamp, // Update timestamp
-                },
+                $push: {
+                    "mostRecentlyPlayed": {
+                        $each: [{
+                            flow: {
+                                title: flowPlaylistName,
+                                lastUpdated: currentTimestamp,
+                            },
+                            rest: {
+                                title: restPlaylistName,
+                                lastUpdated: currentTimestamp,
+                            }
+                        }],
+                        $position: 0, // Inserts new value at the beginning
+                    }
+                }
             }
         );
-        return new Response(JSON.stringify({ message: 'Updated successfully' }), {
-            status: 200,
-        });
+
+        // Limit the array size to the 2 most recent entries
+        await User.updateOne(
+            { $or: [{ spotifyId }, { email }] },
+            {
+                $set: {
+                    mostRecentlyPlayed: {
+                        $slice: -2 // Keeps most recent 2
+                    }
+                }
+            }
+        );
+        return NextResponse.json({ message: 'Update succesful'});
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Failed to update' }), {
-            status: 500,
-        });
+        console.error('Error updating recently played:', error);
+        return NextResponse.json({ error: 'Failed to updated' }, { status: 500 });
     }
 }
