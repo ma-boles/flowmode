@@ -8,6 +8,7 @@ import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContex
 import FlowCard from "@/components/profile/FlowCard";
 import RestCard from "@/components/profile/RestCard";
 import Account from "@/components/modals/AccountModal";
+import Favorites from "@/components/profile/Favorites";
 
 export default function Profile() {
 
@@ -131,6 +132,9 @@ export default function Profile() {
                             {showCard === 'rest' &&
                                 <RestCard />
                             }
+
+                            <Favorites />
+
                         </div>
 
                         <div className="mx-2 flex flex-col justify-center items-center">
