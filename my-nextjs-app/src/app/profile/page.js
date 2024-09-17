@@ -133,8 +133,6 @@ export default function Profile() {
                                 <RestCard />
                             }
 
-                            <Favorites />
-
                         </div>
 
                         <div className="mx-2 flex flex-col justify-center items-center">
