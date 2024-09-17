@@ -6,9 +6,6 @@ export async function POST(req) {
     try {
         const { spotifyId, email, flowPlaylistName, restPlaylistName } = await req.json(); // Get values from request values
 
-        const body = await request.json();
-        console.log('Request body:', body);  // Log the incoming request body
-        
         await dbConnect(); // Connect to database
 
         // Find user
@@ -45,13 +42,14 @@ export async function POST(req) {
                             }
                         }],
                         $position: 0, // Inserts new value at the beginning
+                        $slice: -2, // Keeps most recent 2 titles
                     }
                 }
             }
         );
 
         // Limit the array size to the 2 most recent entries
-        await User.updateOne(
+        /*await User.updateOne(
             { $or: [{ spotifyId }, { email }] },
             {
                 $set: {
@@ -60,10 +58,10 @@ export async function POST(req) {
                     }
                 }
             }
-        );
+        );*/
         return NextResponse.json({ message: 'Update succesful'});
     } catch (error) {
         console.error('Error updating recently played:', error);
-        return NextResponse.json({ error: 'Failed to updated' }, { status: 500 });
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
