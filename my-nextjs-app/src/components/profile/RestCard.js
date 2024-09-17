@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TotalMinutesRest from "./TotalMinutesRest";
+import Favorites from "./Favorites";
 
 export default function RestCard() {
 
@@ -7,7 +8,7 @@ export default function RestCard() {
     const [restTitle2, setRestTitle2] = useState('Title 2');
 
     return(
-        <>
+        <div className="flex">
         <div className="flex px-4 py-6 flow-card">
             <div>
                 <TotalMinutesRest />
@@ -23,6 +24,7 @@ export default function RestCard() {
                     </div>
             </div>
         </div>
-        </>
+        <Favorites />
+        </div>
     )
 }

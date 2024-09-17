@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TotalMinutesFlow from "./TotalMinutesFlow";
+import Favorites from "./Favorites";
 
 export default function FlowCard() {
 
@@ -7,7 +8,7 @@ export default function FlowCard() {
     const [flowTitle2, setFlowTitle2] = useState('Title 2');
 
     return(
-        <>
+        <div className="flex">
         <div className="flex px-4 py-6 flow-card">
             <div /* times div */>
                 <TotalMinutesFlow />
@@ -22,8 +23,10 @@ export default function FlowCard() {
                         <h2 className="m-2 text-xl font-semibold">{flowTitle2}</h2>
                     </div>
             </div>
-        </div>
 
-        </>
+        </div>
+        <Favorites />
+
+        </div>
     )
 }
