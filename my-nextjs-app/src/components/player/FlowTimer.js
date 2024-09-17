@@ -261,6 +261,13 @@ export default function FlowTimer() {
 
     //Function to update MongoDB with recently played info
     async function updateRecentlyPlayed(flowPlaylistName, restPlaylistName) {
+
+        // Validate playlist names before sending request
+        if(!flowPlaylistName || !restPlaylistName) {
+            console.error('Flow or Rest playlist name is missing.');
+            return;
+        }
+
         try {
             const response = await fetch('/api/update-recentlyplayed', {
                 method: 'POST',
