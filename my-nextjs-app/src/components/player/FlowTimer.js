@@ -292,36 +292,7 @@ export default function FlowTimer() {
         }
     }
 
-    async function testButton() {
-
-        alert('test clicked');
-        const flowPlaylistName = 'flowtest5';
-        const restPlaylistName = 'resttest5';
-
-        try {
-            const response = await fetch('/api/update-recentlyplayed', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    flowPlaylistName,
-                    restPlaylistName
-                }),
-            });
-
-            if(!response.ok) {
-                throw new Error('Failed to update recently played info');
-            }
-
-            const result = await response.json();
-            console.log('Update successful:', result);
-            console.log('Sending playlist name info:', flowPlaylistName, restPlaylistName);
-        } catch(error) {
-            console.error('Error updating recently played info', error);
-        }
-    };
-
+    
     return(
         <>
         <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ease-in-out delay-150 ${activeInterval === 'rest' ? 'bg-blue-500' : 'bg-black'}`}>
@@ -386,7 +357,6 @@ export default function FlowTimer() {
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
                 <button className="px-8 py-2 m-2 bg-red-600"onClick={clearAll}>Clear</button>
-                <button onClick={testButton}>TEST</button>
             </div>
         </div>
         </>
