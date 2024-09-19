@@ -1,23 +1,32 @@
 import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 import dbConnect from "@/app/lib/utils/dbConnect";
 import User from "@/app/lib/models/User";
 
 export async function POST(req) {
     try {
-        const { spotifyId, email, flowPlaylistName, restPlaylistName } = await req.json(); // Get values from request values
+        // Retrieve the JWT from the request
+        const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+        if (!token) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { spotifyId, email } = token;
 
         await dbConnect(); // Connect to database
 
-        // Find user
+        // Find user based on spotifyId or email
         const user = await User.findOne({
             $or: [{ spotifyId }, { email }],
         });
 
         if(!user)  {
-            throw new Error('User not found');
+            return NextResponse.json({ error: 'User not found'}, { status: 404 });
         }
 
-        // Get the current date and time
+        // Playlist update logic continued
+        const { flowPlaylistName, restPlaylistName } = await req.json(); // Get values from request values
         const currentTimestamp = new Date();
 
         // Log received data for debugging
@@ -42,23 +51,11 @@ export async function POST(req) {
                             }
                         }],
                         $position: 0, // Inserts new value at the beginning
-                        $slice: -2, // Keeps most recent 2 titles
+                        $slice: 2, // Keeps up to 2 titles
                     }
                 }
             }
         );
-
-        // Limit the array size to the 2 most recent entries
-        /*await User.updateOne(
-            { $or: [{ spotifyId }, { email }] },
-            {
-                $set: {
-                    mostRecentlyPlayed: {
-                        $slice: -2 // Keeps most recent 2
-                    }
-                }
-            }
-        );*/
         return NextResponse.json({ message: 'Update succesful'});
     } catch (error) {
         console.error('Error updating recently played:', error);
