@@ -12,8 +12,8 @@ export async function getAuthenticatedUser (req) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Extract from token
-    const { spotifyId, email } = token;
+    // Extract spotifyId and email from the token
+    const { spotifyId, email } = token; 
 
     await dbConnect(); // Connect to database
 
