@@ -1,15 +1,30 @@
 import { NextResponse } from "next/server";
-import { getAuthenticatedUser } from "@/app/lib/utils/getAuthenticatedUser";
+import dbConnect from "@/app/lib/utils/dbConnect";
+import { getToken } from "next-auth/jwt";
+import User from "@/app/lib/models/User";
+//import { getAuthenticatedUser } from "@/app/lib/utils/getAuthenticatedUser";
 
 
 export async function GET(req) {
     try {
-        // Use the utility function to get the authenticated user 
-        const { user, error, status } = await getAuthenticatedUser(req);
+        // Retrieve the JWT from the request
+        const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-        // Handle errors
-        if(error) {
-            return NextResponse.json({ error }, { status });
+        if (!token) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { spotifyId, email } = token;
+
+        await dbConnect(); // Connect to database
+
+        // Find user based on spotifyId or email
+        const user = await User.findOne({
+            $or: [{ spotifyId }, { email }],
+        });
+
+        if(!user)  {
+            return NextResponse.json({ error: 'User not found'}, { status: 404 });
         }
 
         // Return user-specific data
