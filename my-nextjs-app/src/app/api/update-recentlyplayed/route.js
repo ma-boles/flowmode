@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import User from "@/app/lib/models/User";
 import { getToken } from "next-auth/jwt";
 import dbConnect from "@/app/lib/utils/dbConnect";
-import User from "@/app/lib/models/User";
+//import { getAuthenticatedUser } from "@/app/lib/utils/getAuthenticatedUser";
 
 export async function POST(req) {
     try {
@@ -36,7 +37,7 @@ export async function POST(req) {
 
         // Update the flow and rest titles within the mostRecentlyPlayed array
         await User.updateOne(
-            { $or: [{ spotifyId }, { email }] }, // Match spotifyId or email to update
+            { $or: [{ spotifyId: user.spotifyId }, { email: user.email }] }, // Match spotifyId or email to update
             {
                 $push: {
                     "mostRecentlyPlayed": {
@@ -62,3 +63,4 @@ export async function POST(req) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
