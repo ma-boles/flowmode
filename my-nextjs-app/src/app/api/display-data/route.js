@@ -29,12 +29,11 @@ export async function GET(req) {
 
         // Return user-specific data
             return NextResponse.json({
-                flowTitle: user.mostRecentlyPlayed[0]?.flow?.title,
-                restTitle: user.mostRecentlyPlayed[0]?.rest?.title,
+                mostRecentlyPlayed: user.mostRecentlyPlayed,
                 // add time data
                 // add favorites data
             }, { status: 200 });
         } catch (error) {
-            return NextResponse.json({ error: 'Something went wrong '}, { status: 500 });
+            return NextResponse.json({ error: 'Something went wrong'}, { status: 500 });
         }
 }
