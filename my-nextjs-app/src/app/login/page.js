@@ -23,8 +23,8 @@ export default function Login () {
 
                 {isLoggedIn && (
                     <div className="mt-8 flex justify-evenly">
-                        <Link href={'/dashboard'}>
-                            <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Dashboard </button>
+                        <Link href={'/profile'}>
+                            <button className="px-12 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600"> &lt;&lt; Profile </button>
                         </Link>
                         <Link href={'/search'}>
                             <button className="px-14 py-4 text-lg border-2 border-green-600 font-semibold rounded-full hover:bg-green-600">
