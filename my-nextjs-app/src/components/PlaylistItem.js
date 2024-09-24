@@ -50,7 +50,7 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
 
     return (
         <>
-            <li key={playlist.id} className={`bg-gray-700 ${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
+            <li key={playlist.id} className={`${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
 
                     {displayStyle === 'grid' && (
                         <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
