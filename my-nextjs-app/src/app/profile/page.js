@@ -23,6 +23,8 @@ export default function Profile() {
     const [user, setUser] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const myDisplayRef = useRef(null);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     if (status === "loading") {
         return  <div className="flex items-center justify-center h-screen">
@@ -60,6 +62,28 @@ export default function Profile() {
             }
         } catch (error) {
             console.error('Error checking user:', error);
+        }
+    };
+
+    // Handle data updates
+
+    const handleDataUpdate = async () => {
+        setLoading(true);
+        try {
+            // Make the API call to fetch data from the backend
+            const response = await fetch('/api/display-data');
+            const result = await response.json();
+
+            // If successful, update the state with the new data
+            if(response.ok) {
+                setData(result.mostRecentlyPlayed || []);
+            } else {
+                console.error('Error fetching data:', result.error );
+            }
+        } catch(error) {
+            console.error('Failed to fetch data:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -116,7 +140,7 @@ export default function Profile() {
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 text-center bg-black bg-opacity-80 z-10">
-                            <button className="mt-28 p-4 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out" onClick={handleUserCheck}>Update Totals</button>
+                            <button className="mt-28 p-4 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out" onClick={handleUserCheck}>Check User</button>
                             <p className="m-2 text-lg font-semibold">*Requires the creation of a <button className="font-bold hover:underline" onClick={() => setIsOpen(true)}>profile</button>.</p>
                         </div>
                     )}
@@ -124,16 +148,18 @@ export default function Profile() {
                             <div /* buttons div */ className="flex justify-center">
                                 <button className={`px-16 py-1 mb-2 w-1/2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
                                 <button className={`px-16 mb-2 w-1/2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
+                                <button className="ml-2 mb-2 px-2 bg-gray-600 border border-white rounded-sm" onClick={handleDataUpdate} disabled={loading}>{loading ? 'Loading...' : '#'} </button>
                             </div>
 
                             {showCard === 'flow' &&
-                                <FlowCard />
+                                <FlowCard data={data} />
                             }
                             {showCard === 'rest' &&
-                                <RestCard />
+                                <RestCard data={data} />
                             }
 
                         </div>
+
 
                         <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
