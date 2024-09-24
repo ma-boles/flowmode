@@ -24,19 +24,21 @@ export default function ProfilePlaylistCard({ playlist, onSelectFlow, onSelectRe
         }
     };*/
 
+    const handleDeleteFav = () => {
+        alert('Delete from favorites')
+    };
+
     return (
         <>
             <div className="flex w-60">
                 <div className="m-auto w-full">
-                    <ul className="mx-2 w-100 text-left">
-                        <li className="py-1 m-2 border border-white indent-2">
-                        Title 1</li>
-                        <li className="py-1 m-2 border border-white indent-2">
-                        Title 2</li>
-                        <li className="py-1 m-2 border border-white indent-2">
-                        Title 3</li>
-                        <li className="py-1 m-2 border border-white indent-2">
-                        Title 4</li>
+                    <ul className="mx-2 w-100">
+                        <li className="flex py-1 px-2 m-2 border border-white justify-between">
+                            <span>Title 1</span>
+                            <button className="px-1 bg-red-600 border border-white " onClick={handleDeleteFav}>
+                                -
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
