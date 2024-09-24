@@ -62,6 +62,9 @@ const userSchema = new mongoose.Schema({
                 default: Date.now,
             },
         },
+    }],
+    favorites: [{
+        title: String,
     }]
 }, { timestamps: true });
 
