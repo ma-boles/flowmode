@@ -1,30 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import TotalMinutesRest from "./TotalMinutesRest";
 import Favorites from "./Favorites";
 
-export default function RestCard() {
-
-    const [restTitle, setRestTitle] = useState('Title');
-    const [restTitle2, setRestTitle2] = useState('Title 2');
+export default function RestCard({ data }) {
 
     return(
         <div className="flex">
-        <div className="flex px-4 py-6 flow-card">
-            <div>
-                <TotalMinutesRest />
+            <div className="flex px-4 py-6 flow-card">
+                <div>
+                    <TotalMinutesRest />
+                </div>
+                <div className="mx-4">
+                        <h2 className="px-10 my-4 font-bold text-2xl opacity-90">Recently Played:</h2>
+                        {data.length > 0 ? (
+                            data.map((item, index) => (
+                            <div key={index} className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer hover:bg-blue-600">
+                                {/* Display relevant data here */}
+                                {/*<p>{item.flow.title}</p>  Assuming the object has a 'title' field */}
+                                <h2 className="m-2 text-xl font-semibold">{item.rest?.title || 'No recent titles'}</h2>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No data available</p>
+                    )}
+                </div>
             </div>
 
-            <div className="mx-4">
-                <h2 className="px-10 my-4 font-bold text-2xl opacity-90">Recently Played:</h2>
-                    <div className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer">
-                        <h2 className="m-2 text-xl font-semibold">{restTitle}</h2>
-                    </div>
-                    <div className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer">
-                        <h2 className="m-2 text-xl font-semibold">{restTitle2}</h2>
-                    </div>
-            </div>
-        </div>
-        <Favorites />
+            <Favorites />
+
         </div>
     )
 }
