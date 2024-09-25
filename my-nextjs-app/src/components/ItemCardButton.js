@@ -33,14 +33,12 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
 
      //Function to update MongoDB with favorites title
      async function handleFavoritesClick(favoritesTitle) {
-
         // Validate favorites title before sending request
         if(!favoritesTitle) {
             console.error('Favorites title is missing.');
             return;
         }
 
-        console.log('Sending favorites title from button click:', favoritesTitle);
         try {
             const response = await fetch('/api/add-favorite', {
                 method: 'POST',
@@ -66,7 +64,6 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
     // Set favorite title when the button is clicked 
     const handleAddToFavorites = () => {
         console.log( 'Adding to favorites:', playlist.id, playlist.name);
-        //handleFavorite(playlist.id, playlist.name);
         handleFavoritesClick(playlist.name);
     };
 
