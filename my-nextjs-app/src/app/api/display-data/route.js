@@ -30,8 +30,8 @@ export async function GET(req) {
         // Return user-specific data
             return NextResponse.json({
                 mostRecentlyPlayed: user.mostRecentlyPlayed,
+                favorites: user.favorites,
                 // add time data
-                // add favorites data
             }, { status: 200 });
         } catch (error) {
             return NextResponse.json({ error: 'Something went wrong'}, { status: 500 });
