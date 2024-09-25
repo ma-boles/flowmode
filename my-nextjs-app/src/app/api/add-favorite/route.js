@@ -40,14 +40,13 @@ export async function POST(req) {
             { $or: [{ spotifyId: user.spotifyId }, { email: user.email }] }, // Match spotifyId or email to update
             {
                 $push: {
-                    "favorites": {
-                        $each: [{
-                            title: {
-                                title: favoritesTitle,
-                            },
-                        }],
-                        $position: 0, // Inserts new value at the beginning
-                        $slice: 4, // Keeps up to 2 titles
+                    favorites: {
+                        title: favoritesTitle,
+                    },
+                    $set: {
+                        favorites: {
+                            $slice: 4
+                        } // Keeps up to 4 titles
                     }
                 }
             }
