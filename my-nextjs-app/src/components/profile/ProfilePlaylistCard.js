@@ -24,9 +24,43 @@ export default function ProfilePlaylistCard({ playlist, onSelectFlow, onSelectRe
         }
     };*/
 
-    const handleDeleteFav = () => {
-        alert('Delete from favorites')
+     //Function to update MongoDB with favorites title
+     async function handleRemoveFavoriteClick(favoritesTitle) {
+        // Validate favorites title before sending request
+        if(!favoritesTitle) {
+            console.error('Favorites title is missing.');
+            return;
+        }
+
+        console.log('Removing title from favorites:', favoritesTitle);
+        try {
+            const response = await fetch('/api/remove-favorite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    favoritesTitle,
+                }),
+            });
+
+            if(!response.ok) {
+                throw new Error('Failed to remove title from favorites');
+            }
+
+            const result = await response.json();
+            console.log('Removal successful:', result);
+        } catch(error) {
+            console.error('Error removing title from favorites', error);
+        }
     };
+
+    // Set favorite title for deletion when the button is clicked 
+    const handleRemoveFavorite = () => {
+        console.log('Removing from favorites:', playlist.id, playlist.name);
+        handleRemoveFavoriteClick(playlist.name);
+    };
+
 
     return (
         <>
@@ -35,7 +69,7 @@ export default function ProfilePlaylistCard({ playlist, onSelectFlow, onSelectRe
                     <ul className="mx-2 w-100">
                         <li className="flex py-1 px-2 m-2 border border-white justify-between">
                             <span>Title 1</span>
-                            <button className="px-1 bg-red-600 border border-white " onClick={handleDeleteFav}>
+                            <button className="px-1 bg-red-600 border border-white " onClick={handleRemoveFavorite}>
                                 -
                             </button>
                         </li>
