@@ -2,7 +2,7 @@ import React from "react";
 import TotalMinutesRest from "./TotalMinutesRest";
 import Favorites from "./Favorites";
 
-export default function RestCard({ data }) {
+export default function RestCard({ data, favorites }) {
 
     return(
         <div className="flex">
@@ -26,7 +26,7 @@ export default function RestCard({ data }) {
                 </div>
             </div>
 
-            <Favorites />
+            <Favorites favorites={favorites}/>
 
         </div>
     )

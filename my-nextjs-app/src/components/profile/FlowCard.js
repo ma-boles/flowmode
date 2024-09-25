@@ -2,7 +2,7 @@ import React from "react";
 import TotalMinutesFlow from "./TotalMinutesFlow";
 import Favorites from "./Favorites";
 
-export default function FlowCard({ data }) {
+export default function FlowCard({ data, favorites }) {
 
     return(
         <div className="flex">
@@ -21,12 +21,12 @@ export default function FlowCard({ data }) {
                         </div>
                     ))
                 ) : (
-                    <p>No data available</p>
+                    <p>No recent titles</p>
                 )}
                 </div>
             </div>
 
-            <Favorites />
+            <Favorites favorites={favorites}/>
 
         </div>
     )
