@@ -7,9 +7,11 @@ export const PlaylistProvider = ({ children }) => {
     const [flowPlaylistId, setFlowPlaylistId] = useState(null);
     const [restPlaylistId, setRestPlaylistId] = useState(null);
     const [previewId, setPreviewId] = useState(null);
+    const [favoritesTitleId, setFavoritesTitleId] = useState(null);
     const [flowPlaylistName, setFlowPlaylistName] = useState('');
     const [restPlaylistName, setRestPlaylistName] = useState('');
     const [previewName, setPreviewName] = useState('');
+    const [favoritesTitle, setFavoritesTitle] = useState('');
 
     const handleSetFlowPlaylist = (id, name) => {
         setFlowPlaylistId(id);
@@ -29,6 +31,12 @@ export const PlaylistProvider = ({ children }) => {
         console.log('Preview name:', name);
     };
 
+    const handleFavorite = (id, name) => {
+        setFavoritesTitleId(id);
+        setFavoritesTitle(name);
+        console.log('Favorites title:', id, name);
+    }
+
 
     return (
         <PlaylistContext.Provider
@@ -36,12 +44,15 @@ export const PlaylistProvider = ({ children }) => {
                 flowPlaylistId,
                 restPlaylistId,
                 previewId,
+                favoritesTitleId,
                 flowPlaylistName,
                 restPlaylistName,
                 previewName,
+                favoritesTitle,
                 handleSetFlowPlaylist,
                 handleSetRestPlaylist,
-                handleSetPreview
+                handleSetPreview,
+                handleFavorite
             }}
         >
             {children}
