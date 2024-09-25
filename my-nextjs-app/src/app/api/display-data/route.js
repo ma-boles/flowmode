@@ -23,6 +23,8 @@ export async function GET(req) {
             $or: [{ spotifyId }, { email }],
         });
 
+        //console.log('User data:', user);
+
         if(!user)  {
             return NextResponse.json({ error: 'User not found'}, { status: 404 });
         }
