@@ -61,6 +61,9 @@ export default function ProfilePlaylistCard({ playlist, onSelectFlow, onSelectRe
         handleRemoveFavoriteClick(playlist.name);
     };
 
+    
+    // add logic to disappear titles element on button click
+    // always should be at least 1 title element shown at all times
 
     return (
         <>
@@ -68,7 +71,16 @@ export default function ProfilePlaylistCard({ playlist, onSelectFlow, onSelectRe
                 <div className="m-auto w-full">
                     <ul className="mx-2 w-100">
                         <li className="flex py-1 px-2 m-2 border border-white justify-between">
-                            <span>Title 1</span>
+                            {data.length > 0 ? (
+                                data.map((item, index) => (
+                                <div key={index} className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer hover:bg-blue-600">
+                                    {/* Display favorite data here */}
+                                    <h2 className="m-2 text-xl font-semibold">{item.title || 'No titles added'}</h2>
+                                </div>
+                                ))
+                            ) : (
+                                <p>No Titles Added</p>
+                            )}
                             <button className="px-1 bg-red-600 border border-white " onClick={handleRemoveFavorite}>
                                 -
                             </button>
