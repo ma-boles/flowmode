@@ -23,7 +23,9 @@ export default function Profile() {
     const [user, setUser] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const myDisplayRef = useRef(null);
-    const [data, setData] = useState([]);
+    //const [data, setData] = useState([]);
+    const [favorites, setFavorites] = useState([]);
+    const [mostRecentlyPlayed, setMostRecentlyPlayed] = useState([]);
     const [loading, setLoading] = useState(false);
 
     if (status === "loading") {
@@ -65,7 +67,7 @@ export default function Profile() {
         }
     };
 
-    // Handle data updates
+    // Handle user updates
 
     const handleDataUpdate = async () => {
         setLoading(true);
@@ -76,7 +78,8 @@ export default function Profile() {
 
             // If successful, update the state with the new data
             if(response.ok) {
-                setData(result.mostRecentlyPlayed || []);
+                setMostRecentlyPlayed(result.mostRecentlyPlayed || []);
+                setFavorites(result.favorites || []);
             } else {
                 console.error('Error fetching data:', result.error );
             }
@@ -152,10 +155,10 @@ export default function Profile() {
                             </div>
 
                             {showCard === 'flow' &&
-                                <FlowCard data={data} />
+                                <FlowCard favorites={favorites} data={mostRecentlyPlayed}/>
                             }
                             {showCard === 'rest' &&
-                                <RestCard data={data} />
+                                <RestCard favorites={favorites} data={mostRecentlyPlayed}/>
                             }
 
                         </div>
