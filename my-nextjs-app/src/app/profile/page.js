@@ -27,6 +27,8 @@ export default function Profile() {
     const [favorites, setFavorites] = useState([]);
     const [mostRecentlyPlayed, setMostRecentlyPlayed] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [loadingCheckUser, setLoadingCheckUser] = useState(false);
+    const [loadingDataUpdate, setLoadingDataUpdate] = useState(false);
 
     if (status === "loading") {
         return  <div className="flex items-center justify-center h-screen">
@@ -36,8 +38,11 @@ export default function Profile() {
 
     // profile check
     const handleUserCheck = async () => {
+        setLoadingCheckUser(true) // Starts loading spinner
+
         if(!session) {
             console.error('No session data available');
+            setLoadingCheckUser(false); // Stops loading spinner
             return;
         }
 
@@ -55,22 +60,29 @@ export default function Profile() {
                 }),
             });
 
-            const result = await response.json();
-
-            if(result.isUser) {
-                setIsVisible(false);
+            if(response.ok) {
+                const result = await response.json();
+                if(result.isUser) {
+                    setIsVisible(false);
+                } else {
+                    alert('User profile not found');
+                }
             } else {
-                alert('User profile not found');
+                console.error('API endpoint request failed with status:', response.status)
             }
         } catch (error) {
             console.error('Error checking user:', error);
+            alert('Network error. Please check your connection.');
+        } finally {
+            setLoadingCheckUser(false); // Stops loading spinner after API call
         }
     };
 
     // Handle user updates
 
     const handleDataUpdate = async () => {
-        setLoading(true);
+        setLoadingDataUpdate(true);
+
         try {
             // Make the API call to fetch data from the backend
             const response = await fetch('/api/display-data');
@@ -86,7 +98,7 @@ export default function Profile() {
         } catch(error) {
             console.error('Failed to fetch data:', error);
         } finally {
-            setLoading(false);
+            setLoadingDataUpdate(false);
         }
     };
 
@@ -142,8 +154,14 @@ export default function Profile() {
                     <div /* minute totals div */ className="relative items-center justify-center">
 
                     {isVisible && (
-                        <div /* update buttons */ className="absolute inset-0 text-center bg-black bg-opacity-80 z-10">
-                            <button className="mt-28 p-4 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out" onClick={handleUserCheck} disabled={loading}>{loading ? 'Loading' : 'Check User'}</button>
+                        <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 z-10">
+                            <button className="mt-12 p-4 w-40 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out flex justify-center items-center" onClick={handleUserCheck} disabled={loadingCheckUser}>
+                                {loadingCheckUser ? (
+                                    <div className="spinner"></div>
+                                ) :  (
+                                    'Check User'
+                                )}
+                            </button>
                             <p className="m-2 text-lg font-semibold">*Requires the creation of a <button className="font-bold hover:underline" onClick={() => setIsOpen(true)}>profile</button>.</p>
                         </div>
                     )}
@@ -151,7 +169,14 @@ export default function Profile() {
                             <div /* buttons div */ className="flex justify-center">
                                 <button className={`px-16 py-1 mb-2 w-1/2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
                                 <button className={`px-16 mb-2 w-1/2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
-                                <button className="ml-2 mb-2 px-2 bg-gray-600 border border-white rounded-sm" onClick={handleDataUpdate} disabled={loading}>{loading ? 'Loading...' : '#'} </button>
+                                <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
+                                   {/* {loadingDataUpdate ? 'Loading...' : '#'} */}
+                                   {loadingDataUpdate ? (
+                                    <div className="spinner"></div>
+                                   ): (
+                                    <div className="refresh"></div>
+                                   )}
+                                </button>
                             </div>
 
                             {showCard === 'flow' &&
