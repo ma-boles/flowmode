@@ -41,7 +41,7 @@ export default function HomePage(){
             </div>
 
     {!isLoggedIn && (
-        <section className="text-center w-full min-h-screen h-auto items-center justify-center landing">
+        <section className="text-center w-full min-h-screen h-auto items-center justify-center bg-white bg-opacity-5">
 
             <h1 className="mb-6 pt-10 pb-4 text-3xl font-semibold">How it works</h1>
 
@@ -78,9 +78,8 @@ export default function HomePage(){
                     </div>
                 </div>
                 <div /* log in section */ className="mx-10 my-6">
-                    {/*<h2 className="pt-4 text-xl font-medium">Log in with Spotify.</h2>*/}
                     <div /* log in buttons */ className="flex justify-center" >
-                        <button onClick={() => signIn('spotify')} className="py-4 px-24 mt-10 mb-4 mx-4 border-4 border-green-600 rounded-full font-semibold hover:bg-green-600 transition duration-300 ease-in-out">
+                        <button onClick={() => signIn('spotify')} className="py-4 px-24 mt-6 mb-4 mx-4 border-4 border-green-600 rounded-full font-semibold hover:bg-green-600 transition duration-300 ease-in-out">
                             Log In w/ Spotify
                         </button>
                     </div>
