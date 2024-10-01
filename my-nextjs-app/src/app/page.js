@@ -18,13 +18,13 @@ export default function HomePage(){
 
 
     return(
-        <div>
-        <section className='text-center mx-auto w-full max-w-6xl min-h-screen h-auto flex items-center justify-center landing--header'>
-            <div>
-                <h1 className="p-0 m-0 text-8xl">
-                <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span></h1>
+        <>
+            <div className="overflow-hidden mx-auto max-w-6xl flex flex-col text-center items-center justify-center min-h-screen">
+                <h1 className="text-7xl leading-none p-4 m-0">
+                    <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span>
+                </h1>
                 {!isLoggedIn && (
-                    <h1 className="pt-4 pl-12 pr-12 text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+                    <h1 className="text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
                 )}
 
             {isLoggedIn && (
@@ -40,36 +40,34 @@ export default function HomePage(){
 
             </div>
 
-        </section>
-
     {!isLoggedIn && (
         <section className="text-center w-full min-h-screen h-auto items-center justify-center landing">
 
-            <h1 className="mb-6 pt-10 pb-4">How it works</h1>
+            <h1 className="mb-6 pt-10 pb-4 text-3xl font-semibold">How it works</h1>
 
                 <div className="inline-flex flex-wrap justify-evenly w-full">
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             1<br/>
                         </div>
-                        <h3 className="mb-2 font-bold">Explore Spotify Catalogue:</h3>
-                        <p>Explore the Spotify catalogue to discover a wide range of playlists, podcasts, audiobooks, and songs.</p>
+                        <h3 className="mb-2 font-bold text-xl">Explore Catalogue:</h3>
+                        <p className="text-lg">Explore the Spotify catalogue to discover a wide range of playlists, podcasts, audiobooks, and songs.</p>
                     </div>
 
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             2<br/>
                         </div>
-                        <h3 className="mb-2 font-bold">Make a Selection:</h3>
-                        <p>Select something to listen to during you work interval.</p>
+                        <h3 className="mb-2 font-bold text-xl">Make a Selections:</h3>
+                        <p className="text-lg">Select something to listen to during your flow and rest intervals.</p>
                     </div>
 
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             3<br/>
                         </div>
-                        <h3 className="mb-2 font-bold">Set work + rest intervals:</h3>
-                        <p>Set time intervals for both work and rest. Then set reminders to track remaining time.</p>
+                        <h3 className="mb-2 font-bold text-xl">Set flow/rest time:</h3>
+                        <p className="text-xl">Set desired length of time for flow and rest.</p>
                     </div>
 
                     <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
@@ -79,13 +77,14 @@ export default function HomePage(){
                         <h3 className="m-auto pt-3 font-semibold text-center text-4xl">Listen and get into <span className="text-green-500 font-bold">flow</span><span className="font-light">mode</span>!</h3>
                     </div>
                 </div>
-                <div /* log in section */ className="mx-10 my-6 border border-white ">
-                    <h2 className="pt-4 text-xl font-medium">Log in with Spotify.</h2>
+                <div /* log in section */ className="mx-10 my-6">
+                    {/*<h2 className="pt-4 text-xl font-medium">Log in with Spotify.</h2>*/}
                     <div /* log in buttons */ className="flex justify-center" >
-                        <button onClick={() => signIn('spotify')} className="py-2 px-20 mt-10 mb-6 mx-4 border-2 border-double border-green-600 rounded-full hover:bg-green-600 transition duration-300 ease-in-out">
-                            Log In
+                        <button onClick={() => signIn('spotify')} className="py-4 px-24 mt-10 mb-4 mx-4 border-4 border-green-600 rounded-full font-semibold hover:bg-green-600 transition duration-300 ease-in-out">
+                            Log In w/ Spotify
                         </button>
                     </div>
+                    <p className="font-normal">*Requires Spotify Premium <Link href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-500">subscription.</Link></p>
                 </div>
 
             </section>
@@ -93,6 +92,6 @@ export default function HomePage(){
 
         <Footer />
 
-        </div>
+        </>
     );
 };
