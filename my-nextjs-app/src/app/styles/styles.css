@@ -1,4 +1,7 @@
 /* nav */
+/* {
+  outline: 1px solid red;
+}*/
 
 .navbar {
   background-color: rgba(20, 20, 20, 0.509);
@@ -92,21 +95,11 @@
 }
 
 /* landing section */ 
-  h1 {
-    font-size: 3.7rem;
-    margin: 0rem 1rem;
-    padding-top: 6rem;
-    line-height: 5rem;
-  }
   strong {
     font-weight: 800;
   }
-  img {
-    height: 38rem;
-  }
   .landing {
     background-color: rgba(245, 245, 245, 0.025);
-
   }
   
 /* works */
