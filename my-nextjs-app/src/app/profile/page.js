@@ -14,6 +14,7 @@ export default function Profile() {
 
     const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
+    const { updateFavorites, favoritesList, addFavorite, removeFavorite } = usePlaylistContext();
     //const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
@@ -78,6 +79,22 @@ export default function Profile() {
         }
     };
 
+    const handleDataUpdate = async () => {
+        setLoadingDataUpdate(true);
+        try {
+            await updateFavorites();
+        } catch (error) {
+            console.error('Error updating favorites list:', error);
+        } finally {
+            setLoadingDataUpdate(false);
+        }
+    }
+
+    const handleAddToFavorites = (playlist) => {
+        const title = playlist.name;
+        addFavorite(title);
+    };
+/*
     // Handle user updates
 
     const handleDataUpdate = async () => {
@@ -101,7 +118,7 @@ export default function Profile() {
             setLoadingDataUpdate(false);
         }
     };
-
+*/
     // times data
     const handleFlowCard = () => {
         setShowCard('flow')
@@ -202,6 +219,7 @@ export default function Profile() {
                             viewMode={viewMode}
                             isDisplayOpen={isDisplayOpen}
                             setIsDisplayOpen={setIsDisplayOpen}
+                            handleAddToFavorites={handleAddToFavorites}
                             />
                         </div>
                     </PlaylistProvider>

@@ -7,7 +7,7 @@ import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
-export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* cleanDescription,*/  }) {
+export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, handleAddToFavorites/* cleanDescription,*/  }) {
     const { handleSetFlowPlaylist, handleSetRestPlaylist, handleSetPreview } = usePlaylistContext();
         //const { onSelectFlow, onSelectPreview, onSelectRest } = usePlaylistContext();
         const onSelectFlow = (id, name) => {
@@ -167,6 +167,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen,/* c
                 onSelectFlow={onSelectFlow}
                 onSelectRest={onSelectRest}
                 onSelectPreview={onSelectPreview}
+                handleAddToFavorites={handleAddToFavorites}
                 />
                 ))}
         </ul>
