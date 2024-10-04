@@ -6,7 +6,7 @@ import { playPlaylist } from "@/app/lib/playerApi";
 import "@/app/styles/styles.css";
 
 
-export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId }) {
+export default function PlaylistItem ({ playlist, displayStyle, cleanDescription, onSelectFlow, onSelectRest, onSelectPreview, flowPlaylistId, restPlaylistId, previewId, handleAddToFavorites }) {
 
     const [addedType, setAddedType] = useState(null);
     const { data: session } = useSession();
@@ -53,7 +53,7 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
             <li key={playlist.id} className={`${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
 
                     {displayStyle === 'grid' && (
-                        <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
+                        <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} title={playlist.title} handleAddToFavorites={handleAddToFavorites} accessToken={accessToken}/>
                     )}
 
                 <div /* image */className={` ${displayStyle === 'list' ? 'flex w-1/4' : 'div'}`}>
