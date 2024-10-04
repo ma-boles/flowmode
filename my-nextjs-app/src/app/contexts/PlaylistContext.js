@@ -33,12 +33,16 @@ export const PlaylistProvider = ({ children }) => {
         console.log('Preview name:', name);
     };
 
-      const updateFavorites = async () => {
+    const updateFavorites = async () => {
+        //console.log('Fetching favorites...')
         try {
           const response = await fetch('/api/display-data');
           if (!response.ok) throw new Error('Network response was not ok');
+          
           const data = await response.json();
-          setFavoritesList(data); // Assuming the response data is an array of favorite titles
+          console.log('Fetched data:', data)
+          
+          setFavoritesList(data.favorites); // Assuming the response data is an array of favorite titles
         } catch (error) {
           console.error('Error updating data:', error);
         }
@@ -89,8 +93,10 @@ export const PlaylistProvider = ({ children }) => {
           if (!response.ok){
             throw new Error('Network response was not ok');
           } 
-          const result = await response.json();
-          //setFavoritesList((prevFavorites) => prevFavorites.filter(item => item !== title));
+          //const result = await response.json();
+          // Update the local state
+          setFavoritesList((prevFavorites) => 
+            prevFavorites.filter((item) => item.title !== title));
           console.log(result.message);
           console.log(`Removed favorite: ${title}`);
         } catch (error) {
