@@ -1,5 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState } from "react";
+import { playSong } from "../lib/playerApi";
 
 const PlaylistContext = createContext();
 
@@ -11,7 +12,8 @@ export const PlaylistProvider = ({ children }) => {
     const [flowPlaylistName, setFlowPlaylistName] = useState('');
     const [restPlaylistName, setRestPlaylistName] = useState('');
     const [previewName, setPreviewName] = useState('');
-    const [favoritesTitle, setFavoritesTitle] = useState('');
+    //const [favoritesTitle, setFavoritesTitle] = useState('');
+    const [favoritesList, setFavoritesList] = useState([]);
 
     const handleSetFlowPlaylist = (id, name) => {
         setFlowPlaylistId(id);
@@ -31,12 +33,70 @@ export const PlaylistProvider = ({ children }) => {
         console.log('Preview name:', name);
     };
 
-    const handleFavorite = (id, name) => {
-        setFavoritesTitleId(id);
-        setFavoritesTitle(name);
-        console.log('Favorites title:', id, name);
-    }
-
+      const updateFavorites = async () => {
+        try {
+          const response = await fetch('/api/display-data');
+          if (!response.ok) throw new Error('Network response was not ok');
+          const data = await response.json();
+          setFavoritesList(data); // Assuming the response data is an array of favorite titles
+        } catch (error) {
+          console.error('Error updating data:', error);
+        }
+      };
+    
+      const addFavorite = async (title) => {
+        if (!title) {
+          console.log('No title provided');
+          return; // Prevent adding empty titles
+        }
+        try {
+          console.log(`Attempting to add favorite: ${title}`);
+          
+          const response = await fetch('/api/add-favorite', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ favoritesTitle: title }),
+          });
+    
+          if (!response.ok) { 
+            throw new Error('Network response was not ok');
+          }
+          const { favorites } = await response.json();
+          setFavoritesList(favorites);
+          console.log(`Updated favorites list: ${favorites}`);
+          //console.log(`Added favorite: ${title}`);
+        } catch (error) {
+          console.error('Error adding favorite:', error);
+        }
+      };
+    
+      const removeFavorite = async (title) => {
+        if (!title) {
+          console.log('No title provided');
+          return; // Prevent removing empty titles
+        }
+        try {
+          const response = await fetch('/api/remove-favorite', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title }),
+          });
+    
+          if (!response.ok){
+            throw new Error('Network response was not ok');
+          } 
+          const result = await response.json();
+          //setFavoritesList((prevFavorites) => prevFavorites.filter(item => item !== title));
+          console.log(result.message);
+          console.log(`Removed favorite: ${title}`);
+        } catch (error) {
+          console.error('Error removing favorite:', error);
+        }
+      };
 
     return (
         <PlaylistContext.Provider
@@ -48,11 +108,15 @@ export const PlaylistProvider = ({ children }) => {
                 flowPlaylistName,
                 restPlaylistName,
                 previewName,
-                favoritesTitle,
+                //favoritesTitle,
+                favoritesList, 
+                addFavorite, 
+                removeFavorite,
+                updateFavorites,
                 handleSetFlowPlaylist,
                 handleSetRestPlaylist,
                 handleSetPreview,
-                handleFavorite
+                //handleFavorite
             }}
         >
             {children}
@@ -67,3 +131,98 @@ export const usePlaylistContext = () => {
     }
     return context;
 };
+
+    /*const addFavorite = (title) => {
+        if(!title || favoritesList.includes(title)) {
+            console.error('Invalid title or title already exists:', error);
+            return;
+        }
+        setFavoritesList((prevFavorites) => [...prevFavorites, {title}]);
+        console.log('Added to favorites:', title);
+    };*/
+
+    
+   /* //Function to update MongoDB with favorites title
+    async function addFavorite(favoritesTitle) {
+        // Validate favorites title before sending request
+        if(!favoritesTitle) {
+            console.error('Favorites title is missing.');
+            return;
+        }
+    
+            try {
+                const response = await fetch('/api/add-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        favoritesTitle,
+                    }),
+                });
+    
+                if(!response.ok) {
+                    throw new Error('Failed to update recently played info');
+                }
+    
+                const result = await response.json();
+                console.log('Update successful:', result);
+    
+                // Update the UI through context
+                //addFavorite(favoritesTitle);
+                setFavoritesList(prevFavorites => {
+                    console.log('Previous favorites:', prevFavorites);
+                    console.log('Adding title:', favoritesTitle);
+
+                    const updatedFavorites = [...prevFavorites,{ title: favoritesTitle }];
+                    console.log('Updated favorites:', updatedFavorites);
+
+                    return updatedFavorites;
+            });
+            } catch(error) {
+                console.error('Error adding favorites title', error);
+            }
+    };
+
+
+  /*  //Function to update MongoDB with favorites title
+    async function removeFavorite(favoritesTitle) {
+        // Validate favorites title before sending request
+        if(!favoritesTitle) {
+            console.error('Favorites title is missing.');
+            return;
+        }
+    
+            console.log('Removing title from favorites:', favoritesTitle);
+            try {
+                const response = await fetch('/api/remove-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        favoritesTitle,
+                    }),
+                });
+    
+                if(!response.ok) {
+                    throw new Error('Failed to remove title from favorites');
+                }
+    
+                const result = await response.json();
+                console.log('Removal successful:', result);
+
+                // trigger a refresh of favorites titles
+                setFavoritesList(prevFavorites => {
+                    console.log('Previous favorites:', prevFavorites);
+                    console.log('Removing title:', favoritesTitle);
+
+                    const updatedFavorites = prevFavorites.filter(item => item.title.trim() !== favoritesTitle.trim());
+                    console.log('Updated favorites:', updatedFavorites);
+
+                    return updatedFavorites;
+            });
+            } catch(error) {
+                console.error('Error removing title from favorites', error);
+            }
+    };*/
