@@ -8,7 +8,6 @@ import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContex
 import FlowCard from "@/components/profile/FlowCard";
 import RestCard from "@/components/profile/RestCard";
 import Account from "@/components/modals/AccountModal";
-import Favorites from "@/components/profile/Favorites";
 
 export default function Profile() {
 
@@ -80,6 +79,7 @@ export default function Profile() {
     };
 
     const handleDataUpdate = async () => {
+        console.log('Data update initiated...')
         setLoadingDataUpdate(true);
         try {
             await updateFavorites();
@@ -197,10 +197,10 @@ export default function Profile() {
                             </div>
 
                             {showCard === 'flow' &&
-                                <FlowCard favorites={favorites} data={mostRecentlyPlayed}/>
+                                <FlowCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
                             }
                             {showCard === 'rest' &&
-                                <RestCard favorites={favorites} data={mostRecentlyPlayed}/>
+                                <RestCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
                             }
 
                         </div>
