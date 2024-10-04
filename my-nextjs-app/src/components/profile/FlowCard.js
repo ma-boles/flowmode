@@ -2,7 +2,7 @@ import React from "react";
 import TotalMinutesFlow from "./TotalMinutesFlow";
 import Favorites from "./Favorites";
 
-export default function FlowCard({ data, favorites }) {
+export default function FlowCard({ data, favoritesList }) {
 
     return(
         <div className="flex">
@@ -26,7 +26,7 @@ export default function FlowCard({ data, favorites }) {
                 </div>
             </div>
 
-            <Favorites favorites={favorites}/>
+            <Favorites favoritesList={favoritesList}/>
 
         </div>
     )
