@@ -92,33 +92,13 @@ export default function Profile() {
 
     const handleAddToFavorites = (playlist) => {
         const title = playlist.name;
-        addFavorite(title);
-    };
-/*
-    // Handle user updates
-
-    const handleDataUpdate = async () => {
-        setLoadingDataUpdate(true);
-
-        try {
-            // Make the API call to fetch data from the backend
-            const response = await fetch('/api/display-data');
-            const result = await response.json();
-
-            // If successful, update the state with the new data
-            if(response.ok) {
-                setMostRecentlyPlayed(result.mostRecentlyPlayed || []);
-                setFavorites(result.favorites || []);
-            } else {
-                console.error('Error fetching data:', result.error );
-            }
-        } catch(error) {
-            console.error('Failed to fetch data:', error);
-        } finally {
-            setLoadingDataUpdate(false);
+        if(title) {
+            addFavorite(title); // Call context function to add favorite
+        } else {
+            console.log('Playlist does not have a valid name');
         }
     };
-*/
+
     // times data
     const handleFlowCard = () => {
         setShowCard('flow')
