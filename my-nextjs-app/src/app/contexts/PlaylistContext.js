@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { playSong } from "../lib/playerApi";
 
 const PlaylistContext = createContext();
@@ -54,9 +54,6 @@ export const PlaylistProvider = ({ children }) => {
           return; // Prevent adding empty titles
         }
 
-        // Optimistically update the local state
-        setFavoritesList((prevFavorites) => [...prevFavorites, { title: title }]);
-
         try {
           console.log(`Attempting to add favorite: ${title}`);
           
@@ -71,20 +68,31 @@ export const PlaylistProvider = ({ children }) => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-          // Update local state
-          const { favorites } = await response.json();
 
+          // Update local state
           setFavoritesList((prevFavorites) => {
-            if(!prevFavorites.some((item) => item.title === title)) {
-              return [...prevFavorites, { title }];
+            if(!prevFavorites.some((item) => item.title === title )) {
+              // Create new array with new title added
+              const updatedFavorites = [{ title }, ...prevFavorites];
+              console.log("Updated favorites before capping:", updatedFavorites);
+
+              // Cap list at 5 by removing oldest if necessary
+              const finalFavorites = updatedFavorites.slice(0,5);
+              console.log('Final favorite list after capping:', finalFavorites);
+              return finalFavorites;
             }
+            console.log('Title already exists. Previous favorites:', prevFavorites);
             return prevFavorites;
-          })
-          console.log(`Updated favorites list: ${favorites}`);
+          });
         } catch (error) {
           console.error('Error adding favorite:', error);
         }
       };
+
+      // Assuming favoritesList is your state variable for the favorites
+      useEffect(() => {
+        console.log("Updated favorites list:", favoritesList);
+      }, [favoritesList]); // This will run every time favoritesList changes
     
       const removeFavorite = async (title) => {
         if (!title) {
