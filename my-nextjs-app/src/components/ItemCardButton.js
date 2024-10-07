@@ -33,51 +33,9 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
     const handleFavorites = () => {
         console.log(`Button clicked to add favorite: ${title}`);
         handleAddToFavorites(playlist); // Add the title to favorites
+       // handleFavoritesClick(playlist.name);
+
     };
- 
-    /*   const { data: session } = useSession();
-    const accessToken = session.accessToken;
-    //const { handleFavorite, addFavorite } = usePlaylistContext();
-
-
-
-     //Function to update MongoDB with favorites title
-     async function handleFavoritesClick(favoritesTitle) {
-        // Validate favorites title before sending request
-        if(!favoritesTitle) {
-            console.error('Favorites title is missing.');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/add-favorite', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    favoritesTitle,
-                }),
-            });
-
-            if(!response.ok) {
-                throw new Error('Failed to update recently played info');
-            }
-
-            const result = await response.json();
-            console.log('Update successful:', result);
-
-            // Update the UI through context
-            addFavorite(favoritesTitle);
-        } catch(error) {
-            console.error('Error adding favorites title', error);
-        }
-    };
-    // Set favorite title when the button is clicked 
-    const handleAddToFavorites = () => {
-        console.log( 'Adding to favorites:', playlist.id, playlist.name);
-        handleFavoritesClick(playlist.name);
-    };*/
   
     const isFlowAdded = playlist.id === flowPlaylistId && playlist.name === flowPlaylistName;
     const isRestAdded = playlist.id === restPlaylistId && playlist.name === restPlaylistName;
@@ -105,37 +63,3 @@ export default function ItemCardButton ({ playlist, onSelectFlow, onSelectRest, 
             </div>
     )
 };
-
-/*
-     //Function to update MongoDB with favorites title
-     async function handleFavoritesClick(favoritesTitle) {
-        // Validate favorites title before sending request
-        if(!favoritesTitle) {
-            console.error('Favorites title is missing.');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/add-favorite', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    favoritesTitle,
-                }),
-            });
-
-            if(!response.ok) {
-                throw new Error('Failed to update recently played info');
-            }
-
-            const result = await response.json();
-            console.log('Update successful:', result);
-
-            // Update the UI through context
-            addFavorite(favoritesTitle);
-        } catch(error) {
-            console.error('Error adding favorites title', error);
-        }
-    };*/
