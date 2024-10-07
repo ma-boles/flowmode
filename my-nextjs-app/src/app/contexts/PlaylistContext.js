@@ -74,15 +74,15 @@ export const PlaylistProvider = ({ children }) => {
           // Update local state
           const { favorites } = await response.json();
 
-          //setFavoritesList(favorites); // Update state with latest data from server
-          setFavoritesList((prevFavorites) =>
-            prevFavorites.filter((item) => item.title !== title));
+          setFavoritesList((prevFavorites) => {
+            if(!prevFavorites.some((item) => item.title === title)) {
+              return [...prevFavorites, { title }];
+            }
+            return prevFavorites;
+          })
           console.log(`Updated favorites list: ${favorites}`);
-
         } catch (error) {
           console.error('Error adding favorite:', error);
-          // Revert the local state if the API call fails
-         
         }
       };
     
