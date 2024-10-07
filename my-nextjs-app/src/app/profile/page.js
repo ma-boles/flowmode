@@ -63,6 +63,7 @@ export default function Profile() {
             if(response.ok) {
                 const result = await response.json();
                 if(result.isUser) {
+                    await handleDataUpdate(); // Call data update to update UI
                     setIsVisible(false);
                 } else {
                     alert('User profile not found');
