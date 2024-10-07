@@ -45,8 +45,8 @@ export async function POST(req) {
                     },
                     $set: {
                         favorites: {
-                            $slice: 4
-                        } // Keeps up to 4 titles
+                            $slice: 5
+                        } // Keeps up to 5 titles
                     }
                 }
             }
