@@ -167,15 +167,20 @@ export default function Profile() {
                             <div /* buttons div */ className="flex justify-center">
                                 <button className={`px-16 py-1 mb-2 w-1/2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
                                 <button className={`px-16 mb-2 w-1/2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
-                                <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
+                                <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
                                    {/* {loadingDataUpdate ? 'Loading...' : '#'} */}
                                    {loadingDataUpdate ? (
-                                    <div className="spinner"></div>
+                                    <div className="spinner "></div>
                                    ): (
                                     <div className="refresh"></div>
                                    )}
                                 </button>
+                                <span className="bg-white text-black update-tooltip">
+                                    Refresh
+                                </span>
                             </div>
+
+                            
 
                             {showCard === 'flow' &&
                                 <FlowCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
