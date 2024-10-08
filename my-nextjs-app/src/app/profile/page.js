@@ -147,7 +147,7 @@ export default function Profile() {
 
                 )}*/}
 
-                <div /* top section */ className="mb-16 mt-8 flex justify-center">
+                <div /* top section */ className="mb-16 flex justify-center">
 
                     <div /* minute totals div */ className="relative items-center justify-center">
 
@@ -188,8 +188,8 @@ export default function Profile() {
 
 
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-32 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
+                            <button className="mx-4 mb-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                            <button className="mx-4 mt-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                         </div>
                 </div>
 
