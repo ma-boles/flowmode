@@ -13,10 +13,10 @@ export default function Favorites() {
                         <div className="w-full py-1 px-1">
                             {favoritesList && favoritesList.length > 0 ? (
                                 favoritesList.map((item, index) => (
-                                <div key={index} className="flex m-2 border-b border-l border-t border-white rounded-sm justify-between opacity-90 cursor-pointer">
+                                <div key={index} className="flex m-2 border border-white rounded-sm justify-between opacity-90 cursor-pointer">
                                     <h2 className="m-2 text-lg font-semibold">{item.title || 'No titles added'}</h2>
-                                    <button className="p-2 border-r-2 border-l-2 border-red-600 rounded-sm hover:bg-red-600" onClick={() => removeFavorite(item.title)}>
-                                    -
+                                    <button className="my-auto mr-2 w-6 h-6 bg-red-600 rounded-md hover:bg-green-600" onClick={() => removeFavorite(item.title)}>
+                                        <img src="result.svg" className="m-auto w-6 h-6 invert"></img>
                                     </button>
                                 </div>
                                     ))
