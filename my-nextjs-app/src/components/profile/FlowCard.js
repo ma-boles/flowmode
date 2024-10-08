@@ -11,7 +11,7 @@ export default function FlowCard({ data, favoritesList }) {
                     <TotalMinutesFlow />
                 </div>*/}
                 <div className="w-80">
-                    <h2 className="my-2 text-center font-bold text-xl opacity-90">Recently Played:</h2>
+                    <h2 className="mb-2 text-center font-bold text-xl opacity-90">Recently Played:</h2>
                     {data.length > 0 ? (
                         data.map((item, index) => (
                         <div key={index} className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer hover:bg-blue-600">
