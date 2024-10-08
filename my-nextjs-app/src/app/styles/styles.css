@@ -26,6 +26,19 @@
 .profile-img:hover + .tooltip {
   display: block;
 }
+.update-tooltip {
+  display: none;
+  position: absolute;
+  top: 2.3rem;
+  right: 0rem;
+  padding: .35rem;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.5s ease;
+}
+.update:hover + .update-tooltip {
+  display: block;
+}
 
 /* left drop down nav menu*/
 .dropdown {
