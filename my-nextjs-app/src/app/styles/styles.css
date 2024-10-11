@@ -26,19 +26,7 @@
 .profile-img:hover + .tooltip {
   display: block;
 }
-.update-tooltip {
-  display: none;
-  position: absolute;
-  top: 2.3rem;
-  right: 0rem;
-  padding: .35rem;
-  font-size: 14px;
-  font-weight: 600;
-  transition: opacity 0.5s ease;
-}
-.update:hover + .update-tooltip {
-  display: block;
-}
+
 
 /* left drop down nav menu*/
 .dropdown {
@@ -462,12 +450,7 @@
   transform: translateY(2px);
 }
 
-/* profile */
-.flow-card {
-  background-color: rgba(20, 20, 20, 0.315);
-  border: 2px solid rgba(255, 255, 255, 0.114);
-  border-radius: 5px;
-}
+/* refesh button */
 
 .spinner {
   border: 4px solid rgba(255, 255, 255, 0.3);
@@ -483,9 +466,16 @@
   100% { transform: rotate(360deg); }
 }
 
-.refresh {
-  border: 4px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
+.update-tooltip {
+  display: none;
+  position: absolute;
+  top: 2.3rem;
+  right: 0rem;
+  padding: .35rem;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.5s ease;
+}
+.update:hover + .update-tooltip {
+  display: block;
 }
