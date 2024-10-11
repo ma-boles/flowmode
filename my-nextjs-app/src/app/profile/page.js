@@ -14,7 +14,6 @@ export default function Profile() {
     const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
     const { updateFavorites, favoritesList, addFavorite, removeFavorite } = usePlaylistContext();
-    //const { onSelectFlow, onSelectRest, onSelectPreview } = usePlaylistContext();
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
@@ -23,7 +22,6 @@ export default function Profile() {
     const [user, setUser] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const myDisplayRef = useRef(null);
-    //const [data, setData] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [mostRecentlyPlayed, setMostRecentlyPlayed] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -132,7 +130,6 @@ export default function Profile() {
         }, 0)
     };
 
-
     return (
         <>
             <nav>
@@ -140,16 +137,8 @@ export default function Profile() {
             </nav>
 
             <div className="mx-12 mb-8 mt-16">
-               {/* {!session ? (
-                        <h2 className="text-center">Loading...</h2>
-                ): (
-                    <h1 className="pb-12 pt-0 text-5xl text-center">Welcome {session.user.name}!</h1>
-
-                )}*/}
-
                 <div /* top section */ className="mb-16 flex justify-center">
-
-                    <div /* minute totals div */ className="relative items-center justify-center">
+                    <div /* user data div */ className="relative items-center justify-center">
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 z-10">
@@ -163,35 +152,27 @@ export default function Profile() {
                             <p className="m-2 text-lg font-semibold">*Requires the creation of a <button className="font-bold hover:underline" onClick={() => setIsOpen(true)}>profile</button>.</p>
                         </div>
                     )}
-
                             <div /* buttons div */ className="flex justify-center">
                                 <button className={`px-16 py-1 mb-2 w-1/2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
                                 <button className={`px-16 mb-2 w-1/2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
                                 <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
-                                   {/* {loadingDataUpdate ? 'Loading...' : '#'} */}
-                                   {loadingDataUpdate ? (
-                                    <div className="spinner "></div>
-                                   ): (
-                                    <div className="refresh"></div>
-                                   )}
+                                    {loadingDataUpdate ? (
+                                        <div className="spinner "></div>
+                                    ) : (
+                                        <div className="border-4 border-white/80 rounded-full w-5 h-5"></div>
+                                    )}
                                 </button>
                                 <span className="bg-white text-black update-tooltip">
                                     Refresh
                                 </span>
                             </div>
-
-                            
-
                             {showCard === 'flow' &&
                                 <FlowCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
                             }
                             {showCard === 'rest' &&
                                 <RestCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
                             }
-
                         </div>
-
-
                         <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-4 mb-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                             <button className="mx-4 mt-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
