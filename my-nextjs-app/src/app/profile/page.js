@@ -136,8 +136,8 @@ export default function Profile() {
                 <NavBar />
             </nav>
 
-            <div className="mx-12 mb-8 mt-16">
-                <div /* top section */ className="mb-16 flex justify-center">
+            <div className="justify-center mx-12">
+                <div /* top section */ className="flex flex-wrap mt-12 justify-center">
                     <div /* user data div */ className="relative items-center justify-center">
 
                     {isVisible && (
