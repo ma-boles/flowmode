@@ -134,7 +134,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, han
 
 
     return (
-        <>
+        <div className="mb-16">
         <div className="text-right">
             <button className="px-2 border border-solid border-white cursor-pointer" onClick={handleClose}>x</button>
         </div>
@@ -176,6 +176,6 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, han
             <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${currentPage === 1 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handlePreviousPage} disabled={currentPage === 1}>Last</button>
             <button className={`m-1 px-3 py-1 bg-gray-900 rounded-md ${remainingPlaylists.length === 0 ? 'opacity-0' : 'bg-gray-900'}`} onClick={handleNextPage} disabled={remainingPlaylists.length === 0}>Next</button>
         </div>
-        </>
+        </div>
     );
 }
