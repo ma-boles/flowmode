@@ -158,8 +158,8 @@ export default function SearchComponent ({ playlist/*, previewId*/ }) {
                         >Search</button>
                     </div>
                 </div>
-                <div /*results*/ className="my-8 w-full ">
 
+                <div /*results*/ className="my-8 pb-16 w-full">
                 {category === 'artist' &&
                     <div className="flex flex-wrap justify-center">
                         {searchResults.map((artist, index) => (
