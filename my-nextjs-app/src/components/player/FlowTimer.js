@@ -234,13 +234,6 @@ export default function FlowTimer() {
         pausePlaylist();
     };
 
-    const clearAll = () => {
-        setIsActive(false);
-        setFlowTime(0);
-        setRestTime(0);
-        setCycleCount(0);
-    };
-
     const handleFlowTimeChange = (event) => {
         const newValue = Math.min(parseInt(event.target.value),60) * 60; // converts minutes to seconds
         setFlowTime(newValue);
@@ -290,9 +283,20 @@ export default function FlowTimer() {
         } catch(error) {
             console.error('Error updating recently played info', error);
         }
-    }
+    };
 
-    
+    const clearAll = () => {
+        setIsActive(false);
+        setFlowTime(0);
+        setRestTime(0);
+        setCycleCount(0);
+    };
+
+    const saveTemplate = () => {
+        alert('Save Template')
+    };
+
+
     return(
         <>
         <div /* flow div */ className={`mx-32 mt-36 mb-10 border border-solid border-gray-800 rounded-md transition-bg ease-in-out delay-150 ${activeInterval === 'rest' ? 'bg-blue-500' : 'bg-black'}`}>
@@ -335,7 +339,7 @@ export default function FlowTimer() {
                     )}
                 </div>
 
-                <div className="my-auto mr-8 py-4 w-1/5 h-1/4 rounded-md cyclesDiv">
+                <div className="my-auto mr-8 py-4 w-1/5 h-1/4 bg-white bg-opacity-5 rounded-md">
                     <h2 className="py-2 font-bold text-2xl"># of Cycles:</h2>
                     {isActive ? (
                         <div /* interval count */ className="mt-6 mx-6 font-bold text-6xl text-center">
@@ -357,6 +361,7 @@ export default function FlowTimer() {
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
                 <button className="px-8 py-2 m-2 bg-red-600"onClick={clearAll}>Clear</button>
+                <button className="px-8 py-2 m-2 bg-purple-700"onClick={saveTemplate}>Save</button>
             </div>
         </div>
         </>
