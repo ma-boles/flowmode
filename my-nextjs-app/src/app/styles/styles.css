@@ -224,10 +224,6 @@
   font-size: x-large;
   padding-left: 1rem;
  }
- .cyclesDiv {
-  background-color: rgb(33, 33, 33);
-  box-shadow: inset 0px 0px 20px 10px rgba(0, 0, 0, 0.74);
- }
 
  .playerBtn {
   border: 2px solid white;
