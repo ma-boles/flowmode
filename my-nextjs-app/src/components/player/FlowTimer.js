@@ -164,9 +164,9 @@ export default function FlowTimer() {
                         console.log('Switching to rest interval');
                         pausePlaylist();
                         setActiveInterval('rest');
-                        setMostRecentFlowPlaylist({ 
-                            id: flowPlaylistId, 
-                            name: flowPlaylistName 
+                        setMostRecentFlowPlaylist({
+                            id: flowPlaylistId,
+                            name: flowPlaylistName
                         });
                         playFlowRest(restPlaylistId, accessToken); // Start rest playlist
                         setFlowTime(initialFlowTime);
@@ -293,7 +293,9 @@ export default function FlowTimer() {
     };
 
     const saveTemplate = () => {
-        alert('Save Template')
+        alert('Template saved!');
+        console.log(`Saving titles: Flow: ${flowPlaylistName}, Rest: ${restPlaylistName}`)
+        // send title to database via api route
     };
 
 
