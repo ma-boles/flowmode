@@ -1,5 +1,6 @@
 import React from "react";
 import Favorites from "./Favorites";
+import Templates from "./Templates";
 
 export default function RestCard({ data, favoritesList }) {
 
@@ -20,6 +21,7 @@ export default function RestCard({ data, favoritesList }) {
                 </div>
             </div>
 
+            <Templates />
             <Favorites favoritesList={favoritesList}/>
 
         </div>
