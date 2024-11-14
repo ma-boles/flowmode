@@ -65,6 +65,11 @@ const userSchema = new mongoose.Schema({
     }],
     favorites: [{
         title: String,
+    }],
+    templates: [{
+        title: String,
+        flow: String,
+        rest: String
     }]
 }, { timestamps: true });
 
