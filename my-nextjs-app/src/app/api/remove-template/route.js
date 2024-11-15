@@ -16,19 +16,28 @@ export async function POST(req) {
 
         await dbConnect(); // Connect to database
 
+        // Find user based on spotifyId or email
+        const user = await User.findOne({
+            $or: [{ spotifyId }, { email }],
+        });
+
+        if(!user)  {
+            return NextResponse.json({ error: 'User not found'}, { status: 404 });
+        }
+
         // Extract templateTitle from request body
         const { templateTitle } = await req.json();
 
         if(!templateTitle) {
             return NextResponse.json({ error: 'Template title required' }, { status: 400 });
         }
-
+        
         // Log received data for debugging
         console.log('Template to delete:', templateTitle);
 
         // Update the templates array
-        const result = await User.updateOne(
-            { $or: [{ spotifyId }, { email }] }, // Match spotifyId or email to update
+        await User.updateOne(
+            { $or: [{ spotifyId: user.spotifyId }, { email: user.email }] }, // Match spotifyId or email to update
             {
                 $pull: {
                     templates: {
@@ -37,16 +46,6 @@ export async function POST(req) {
                 }
             }
         );
-
-        // Check if a document was matched and updated
-        if(result.matchedCount === 0) {
-            return NextResponse.json({ error: 'User not found'}, { status: 404 });
-        }
-
-        if(result.modifiedCount === 0) {
-            return NextResponse.json({ message: 'Template not found or already removed'}, { status: 404 });
-        }
-
         return NextResponse.json({ message: 'Template removed successfully'});
     } catch (error) {
         console.error('Error deleting title from templates:', error);
