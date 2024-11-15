@@ -4,6 +4,7 @@ import usePlayer from "@/app/hooks/usePlayer";
 import { PlayerContext } from "@/app/providers/PlayerProvider";
 import { useSession } from "next-auth/react";
 import { playAlbum, playAudiobook, playEpisode, playSong, playPlaylist, stopPlayback, resumePlayback } from "@/app/lib/playerApi";
+import TemplateButton from "./TemplateButton";
 
 
 export default function FlowTimer() {
@@ -292,12 +293,6 @@ export default function FlowTimer() {
         setCycleCount(0);
     };
 
-    const saveTemplate = () => {
-        alert('Template saved!');
-        console.log(`Saving titles: Flow: ${flowPlaylistName}, Rest: ${restPlaylistName}`)
-        // send title to database via api route
-    };
-
 
     return(
         <>
@@ -363,7 +358,7 @@ export default function FlowTimer() {
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <button className="px-8 py-2 m-2 bg-blue-600"onClick={resetTimer}>Reset</button>
                 <button className="px-8 py-2 m-2 bg-red-600"onClick={clearAll}>Clear</button>
-                <button className="px-8 py-2 m-2 bg-purple-700"onClick={saveTemplate}>Save</button>
+                <TemplateButton />
             </div>
         </div>
         </>
