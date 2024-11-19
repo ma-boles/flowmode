@@ -8,12 +8,14 @@ import { PlaylistProvider, usePlaylistContext } from "../contexts/PlaylistContex
 import FlowCard from "@/components/profile/FlowCard";
 import RestCard from "@/components/profile/RestCard";
 import Account from "@/components/modals/AccountModal";
+import { useTemplateContext } from "../contexts/TemplatesContext";
 
 export default function Profile() {
 
     const { data: session, status } = useSession();
     const accessToken = session?.accessToken;
     const { updateFavorites, favoritesList, addFavorite, removeFavorite } = usePlaylistContext();
+    const { templatesList, updateTemplates } = useTemplateContext();
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
@@ -82,8 +84,9 @@ export default function Profile() {
         setLoadingDataUpdate(true);
         try {
             await updateFavorites();
+            await updateTemplates();
         } catch (error) {
-            console.error('Error updating favorites list:', error);
+            console.error('Error updating favorites/templates list:', error);
         } finally {
             setLoadingDataUpdate(false);
         }
@@ -170,7 +173,7 @@ export default function Profile() {
                                 <FlowCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
                             }
                             {showCard === 'rest' &&
-                                <RestCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
+                                <RestCard favoritesList={favoritesList} data={mostRecentlyPlayed} templatesList={templatesList}/>
                             }
                         </div>
                         <div className="mx-2 flex flex-col justify-center items-center">
