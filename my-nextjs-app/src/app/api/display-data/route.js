@@ -24,7 +24,7 @@ export async function GET(req) {
             $or: [{ spotifyId }, { email }],
         });
 
-        //console.log('User data:', user);
+        console.log('User data:', user);
 
         if(!user)  {
             console.error('User not found:', { spotifyId, email });
@@ -35,6 +35,7 @@ export async function GET(req) {
             return NextResponse.json({
                 mostRecentlyPlayed: user.mostRecentlyPlayed || [],
                 favorites: user.favorites || [],
+                templates: user.templates || [],
                 // add time data
             }, { status: 200 });
         } catch (error) {
