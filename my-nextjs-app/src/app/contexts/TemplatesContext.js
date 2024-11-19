@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 
 const TemplateContext = createContext();
 
@@ -39,6 +39,11 @@ export default function TemplateProvider ({ children }) {
           console.error('Error removing template:', error);
         }
       };
+
+      // Assuming templatesList is your state variable for the templates
+      useEffect(() => {
+        console.log("Updated templates list:", templatesList);
+      }, [templatesList]); // This will run every time templatesList changes
 
       return (
         <TemplateContext.Provider
