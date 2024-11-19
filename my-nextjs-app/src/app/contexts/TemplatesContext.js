@@ -22,7 +22,7 @@ export default function TemplateProvider ({ children }) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ templatesTitle: title }),
+            body: JSON.stringify({ templateTitle: title }),
           });
     
           if (!response.ok){
@@ -40,6 +40,21 @@ export default function TemplateProvider ({ children }) {
         }
       };
 
+      const updateTemplates = async () => {
+        //console.log('Fetching favorites...')
+        try {
+          const response = await fetch('/api/display-data');
+          if (!response.ok) throw new Error('Network response was not ok');
+          
+          const data = await response.json();
+          console.log('Fetched data:', data)
+          
+          setTemplatesList(data.templates); // Assuming the response data is an array of templates 
+        } catch (error) {
+          console.error('Error updating data:', error);
+        }
+      };
+
       // Assuming templatesList is your state variable for the templates
       useEffect(() => {
         console.log("Updated templates list:", templatesList);
@@ -50,6 +65,7 @@ export default function TemplateProvider ({ children }) {
             value={{
                 removeTemplate,
                 sendToFlow,
+                updateTemplates,
                 templatesList
             }} 
         >
