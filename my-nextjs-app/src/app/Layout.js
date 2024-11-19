@@ -6,6 +6,7 @@ import '@/app/styles/styles.css';
 import PageWrapper from '@/components/PageWrapper';
 import { PlaylistProvider } from './contexts/PlaylistContext';
 import { PlayerProvider } from './providers/PlayerProvider';
+import TemplateProvider from './contexts/TemplatesContext';
 
 
 export default function RootLayout ({ metadata, children, session }) {
@@ -16,11 +17,13 @@ export default function RootLayout ({ metadata, children, session }) {
         <HeadComponent metadata={metadata}/>
           <body>
             <PlaylistProvider>
-              <PageWrapper session={session}>
-                <PlayerProvider>
-                  {children}
-                </PlayerProvider>
-              </PageWrapper>
+              <TemplateProvider>
+                <PageWrapper session={session}>
+                  <PlayerProvider>
+                    {children}
+                  </PlayerProvider>
+                </PageWrapper>
+              </TemplateProvider>
             </PlaylistProvider>
           </body>
       </html>
