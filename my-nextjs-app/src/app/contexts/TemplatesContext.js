@@ -6,11 +6,6 @@ const TemplateContext = createContext();
 export default function TemplateProvider ({ children }) {
     const [templatesList, setTemplatesList] = useState([]);
 
-    const sendToFlow = () => {
-        alert('Sending template to flow player')
-        // send saved titles (template, flow, rest) to flow player
-    };
-
     const removeTemplate = async (title) => {
         if (!title) {
           console.log('No title provided');
@@ -64,7 +59,6 @@ export default function TemplateProvider ({ children }) {
         <TemplateContext.Provider
             value={{
                 removeTemplate,
-                sendToFlow,
                 updateTemplates,
                 templatesList
             }} 
