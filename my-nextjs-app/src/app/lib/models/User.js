@@ -69,7 +69,9 @@ const userSchema = new mongoose.Schema({
     templates: [{
         title: String,
         flow: String,
-        rest: String
+        flowId: String,
+        rest: String,
+        restId: String
     }]
 }, { timestamps: true });
 
