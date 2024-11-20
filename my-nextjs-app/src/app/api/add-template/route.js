@@ -26,7 +26,7 @@ export async function POST(req) {
         }
 
         // Extract flow playlist name, rest playlist name, template title from request body
-        const { flowPlaylistName, restPlaylistName, title } = await req.json();
+        const { flowPlaylistName, flowPlaylistId, restPlaylistName, restPlaylistId, title } = await req.json();
 
         if(!flowPlaylistName && !restPlaylistName) {
             return NextResponse.json({ error: 'Flow and Rest titles required' }, { status: 400 });
@@ -47,7 +47,9 @@ export async function POST(req) {
                     templates: {
                         title: templateTitle,
                         flow: flowPlaylistName,
-                        rest: restPlaylistName
+                        flowId: flowPlaylistId,
+                        rest: restPlaylistName,
+                        restId: restPlaylistId
                     },
                     $set: {
                         templates: {
