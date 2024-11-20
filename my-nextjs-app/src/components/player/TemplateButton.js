@@ -3,14 +3,14 @@ import React from "react";
 
 export default function TemplateButton () {
 
-    const { flowPlaylistName, restPlaylistName } = usePlaylistContext();
+    const { flowPlaylistName, restPlaylistName, flowPlaylistId, restPlaylistId } = usePlaylistContext();
     const saveTemplate = async () => {
         //alert('Template saved!');
         //console.log(`Saving titles: Flow: ${flowPlaylistName}, Rest: ${restPlaylistName}`)
 
         // Send title to database via api route
         try {
-            console.log(`Saving titles: Flow: ${flowPlaylistName}, Rest: ${restPlaylistName}`);
+            console.log(`Saving titles: Flow: ${flowPlaylistName}, ${flowPlaylistId}; Rest: ${restPlaylistName}, ${restPlaylistId}`);
 
             // Call the API to save template
             const response = await fetch('/api/add-template', {
@@ -20,7 +20,9 @@ export default function TemplateButton () {
                 },
                 body: JSON.stringify({
                     flowPlaylistName,
-                    restPlaylistName
+                    flowPlaylistId,
+                    restPlaylistName,
+                    restPlaylistId
                 })
             });
 
