@@ -2,14 +2,30 @@ import React, { useState } from "react";
 //import TemplateForm from "./TemplateForm";
 import { useTemplateContext } from "@/app/contexts/TemplatesContext";
 
-export default function Templates () {
-  const { removeTemplate, sendToFlow, templatesList } = useTemplateContext();
+export default function Templates ({ onSelectFlow, onSelectRest }) {
+  const { removeTemplate, templatesList } = useTemplateContext();
+  const [activeTemplateId, setActieTemplateId] = useState('');
 
-    const expandTitle = () => {
+    const handleTemplate = (template) => {
+        if(!template) return;
+        const isActiveTemplate = activeTemplateId === template.id;
+        if(isActiveTemplate) {
+            // If the teamplte is already active, clear flow and rest
+            onSelectFlow(null, null);
+            onSelectRest(null, null);
+            setActieTemplateId(null);
+        } else {
+            onSelectFlow(template.flow, `Flow: ${template.flow}`);
+            onSelectRest(template.rest, `Rest ${template.rest}`);
+            setActieTemplateId(template.id)
+        }
+    };
+
+  /*  const expandTitle = () => {
         alert('Expanding title')
         // expand section to show details
     };
-
+*/
 
         return (
         <>
@@ -30,7 +46,7 @@ export default function Templates () {
                           <li><span className="font-semibold">Rest:</span> {item.rest}</li>
                       </div>
                       <div /* buttons div */ className="flex flex-col my-3 ml-2 justify-between">
-                          <button className="px-1 bg-black hover:bg-white rounded-md" onClick={sendToFlow}>+</button>
+                          <button className="px-1 bg-black hover:bg-white rounded-md" onClick={handleTemplate}>+</button>
                           <button className="px-2 bg-black hover:bg-white rounded-md" onClick={() => removeTemplate(item.title)}>-</button>
                       </div>
                   </div>
