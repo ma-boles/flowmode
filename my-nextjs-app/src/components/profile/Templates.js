@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 //import TemplateForm from "./TemplateForm";
 import { useTemplateContext } from "@/app/contexts/TemplatesContext";
+import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 
-export default function Templates ({ onSelectFlow, onSelectRest }) {
-  const { removeTemplate, templatesList } = useTemplateContext();
-  const [activeTemplateId, setActieTemplateId] = useState('');
+export default function Templates () {
+    const { handleSetFlowPlaylist, handleSetRestPlaylist } = usePlaylistContext();
+    const { removeTemplate, templatesList } = useTemplateContext();
+    const [activeTemplateId, setActieTemplateId] = useState('');
 
-    const handleTemplate = (template) => {
-        if(!template) return;
-        const isActiveTemplate = activeTemplateId === template.id;
-        if(isActiveTemplate) {
-            // If the teamplte is already active, clear flow and rest
-            onSelectFlow(null, null);
-            onSelectRest(null, null);
-            setActieTemplateId(null);
-        } else {
-            onSelectFlow(template.flow, `Flow: ${template.flow}`);
-            onSelectRest(template.rest, `Rest ${template.rest}`);
-            setActieTemplateId(template.id)
-        }
+    const onTemplateFlow = (id, name) => {
+        handleSetFlowPlaylist(id, name);
+        console.log('Template flow:', id, name);
+    };
+
+    const onTemplateRest = (id, name) => {
+        handleSetRestPlaylist(id, name);
+        console.log('Template rest:', id, name);
+    };
+
+    const handleTemplate = (item) => {
+        handleSetFlowPlaylist(item.flowId, item.flow);
+        handleSetRestPlaylist(item.restId, item.rest);
+
+        console.log('Template selected:', {
+            flow: item.flow,
+            flowId: item.flowId,
+            rest: item.rest,
+            restId: item.restId,
+        });
     };
 
   /*  const expandTitle = () => {
@@ -46,7 +55,7 @@ export default function Templates ({ onSelectFlow, onSelectRest }) {
                           <li><span className="font-semibold">Rest:</span> {item.rest}</li>
                       </div>
                       <div /* buttons div */ className="flex flex-col my-3 ml-2 justify-between">
-                          <button className="px-1 bg-black hover:bg-white rounded-md" onClick={handleTemplate}>+</button>
+                          <button className="px-1 bg-black hover:bg-white rounded-md" onClick={() => handleTemplate(item)}>+</button>
                           <button className="px-2 bg-black hover:bg-white rounded-md" onClick={() => removeTemplate(item.title)}>-</button>
                       </div>
                   </div>
