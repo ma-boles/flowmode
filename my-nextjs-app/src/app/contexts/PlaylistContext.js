@@ -18,13 +18,13 @@ export const PlaylistProvider = ({ children }) => {
     const handleSetFlowPlaylist = (id, name) => {
         setFlowPlaylistId(id);
         setFlowPlaylistName(name);
-        console.log('Flow playlist name:', id, name);
+        console.log('Flow playlist name (Context):', id, name);
     };
 
     const handleSetRestPlaylist = (id, name) => {
         setRestPlaylistId(id);
         setRestPlaylistName(name);
-        console.log('Rest playlist name:', id, name);
+        console.log('Rest playlist name (Context):', id, name);
     };
 
     const handleSetPreview = (id, name) => {
