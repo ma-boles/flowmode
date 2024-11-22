@@ -4,10 +4,10 @@ import Favorites from "./Favorites";
 export default function FlowCard({ data, favoritesList }) {
 
     return(
-        <div className="flex">
-            <div className="flex px-4 py-6 bg-black bg-opacity-20 border-2 border-white border-opacity-10 rounded-sm">
+        <div className="flex h-40">
+            <div className="flex px-4 py-2 my-1 mx-1 border-2 border-green-600 border-opacity-50 bg-white bg-opacity-5 rounded-lg">
                 <div className="w-80">
-                    <h2 className="mb-2 text-center font-bold text-xl opacity-90">Recently Played:</h2>
+                    <h2 className="mb-2 text-center font-semibold text-xl opacity-90">Flow</h2>
                     {data.length > 0 ? (
                         data.map((item, index) => (
                         <div key={index} className="flex flex-col m-2 border border-white rounded-sm opacity-90 cursor-pointer hover:bg-blue-600">
@@ -20,7 +20,7 @@ export default function FlowCard({ data, favoritesList }) {
                 </div>
             </div>
 
-            <Favorites favoritesList={favoritesList}/>
+          {/*  <Favorites favoritesList={favoritesList}/>*/}
 
         </div>
     )
