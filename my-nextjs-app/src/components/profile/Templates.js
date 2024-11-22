@@ -38,13 +38,12 @@ export default function Templates () {
 
         return (
         <>
-        <div className="p-4 my-1  bg-white bg-opacity-20 border border-white">
-            <h1 className="mb-2 text-center font-bold text-xl opacity-90">Templates:</h1>
-            <div className="my-2">
+        <div className="w-80 h-85 p-2 my-1">
+            <div className="pb-2 p-1 bg-green-600 bg-opacity-60 border border-white  rounded-md">
               {templatesList && templatesList.length > 0 ? (
                 templatesList.map((item) => (
                   <div className="flex w-full justify-between" key={item.title} >
-                      <div className="px-1 my-1 flex-grow bg-blue-700 w-4/5 border border-white text-start">
+                      <div className="px-1 my-1 flex-grow w-4/5 text-start">
                           <ul className="flex justify-between font-bold ">
                               <div /* title div */  className="flex justify-between w-full">
                                   <h2>{item.title}</h2>
