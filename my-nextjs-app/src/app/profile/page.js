@@ -9,6 +9,9 @@ import FlowCard from "@/components/profile/FlowCard";
 import RestCard from "@/components/profile/RestCard";
 import Account from "@/components/modals/AccountModal";
 import { useTemplateContext } from "../contexts/TemplatesContext";
+import Favorites from "@/components/profile/Favorites";
+import Templates from "@/components/profile/Templates";
+import UserData from "@/components/profile/UserData";
 
 export default function Profile() {
 
@@ -19,7 +22,7 @@ export default function Profile() {
 
     const [viewMode, setViewMode] = useState('userOwnedPlaylists');
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
-    const [showCard, setShowCard] = useState('flow');
+    const [showCard, setShowCard] = useState('templates');
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
@@ -102,12 +105,12 @@ export default function Profile() {
     };
 
     // times data
-    const handleFlowCard = () => {
-        setShowCard('flow')
+    const handleTemplatesCard = () => {
+        setShowCard('templates')
     };
 
-    const handleRestCard = () => {
-        setShowCard('rest')
+    const handleFavoritesCard = () => {
+        setShowCard('favorites')
     };
 
     // playlist display
@@ -138,9 +141,11 @@ export default function Profile() {
             <nav>
                 <NavBar />
             </nav>
-
-            <div className="justify-center mx-12">
-                <div /* top section */ className="flex flex-wrap mt-12 justify-center">
+            {/* mx-12 */}
+            <div className="justify-center m-4">
+                <h1 className="font-bold text-4xl">Profile</h1>
+                {/* mt-12 */}
+                <div /* top section */ className="flex flex-wrap justify-center">
                     <div /* user data div */ className="relative items-center justify-center">
 
                     {isVisible && (
@@ -156,8 +161,8 @@ export default function Profile() {
                         </div>
                     )}
                             <div /* buttons div */ className="flex justify-center">
-                                <button className={`px-16 py-1 mb-2 w-1/2 border-r border-solid border-white  hover:bg-blue-600 ${showCard === 'flow' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFlowCard}>Flow</button>
-                                <button className={`px-16 mb-2 w-1/2 border-l border-solid border-white hover:bg-blue-600 ${showCard === 'rest' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleRestCard}>Rest</button>
+                                <button className={`py-1 mb-2 w-1/2 border-r border-solid border-white border-opacity-50 hover:bg-blue-600 ${showCard === 'templates' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleTemplatesCard}>Templates</button>
+                                <button className={`mb-2 w-1/2 border-l border-solid border-white border-opacity-50 hover:bg-blue-600 ${showCard === 'favorites' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFavoritesCard}>Favorites</button>
                                 <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
                                     {loadingDataUpdate ? (
                                         <div className="spinner "></div>
@@ -169,16 +174,27 @@ export default function Profile() {
                                     Refresh
                                 </span>
                             </div>
-                            {showCard === 'flow' &&
-                                <FlowCard favoritesList={favoritesList} data={mostRecentlyPlayed}/>
-                            }
-                            {showCard === 'rest' &&
-                                <RestCard favoritesList={favoritesList} data={mostRecentlyPlayed} templatesList={templatesList}/>
-                            }
+                            <div className="flex">
+                                <div>
+                                    {showCard === 'templates' &&
+                                        <Templates templatesList={templatesList} />
+                                    }
+                                    {showCard === 'favorites' &&
+                                        <Favorites favoritesList={favoritesList} />
+                                    }
+                                </div>
+                                <div className="ml-4">
+                                    <h2 className="text-xl font-semibold text-center">Recently Played</h2>
+                                    <FlowCard data={mostRecentlyPlayed}/>
+                                    <RestCard data={mostRecentlyPlayed}/>
+                                </div>
+                            </div>
                         </div>
+                        {/*<UserData />*/}
+                        
                         <div className="mx-2 flex flex-col justify-center items-center">
-                            <button className="mx-4 mb-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
-                            <button className="mx-4 mt-4 h-40 w-80 font-semibold bg-blue-700 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
+                            <button className="mx-2 mb-4 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                            <button className="mx-2 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                         </div>
                 </div>
 
