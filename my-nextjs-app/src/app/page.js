@@ -20,11 +20,11 @@ export default function HomePage(){
     return(
         <>
             <div className="overflow-hidden mx-auto max-w-6xl flex flex-col text-center items-center justify-center min-h-screen">
-                <h1 className="text-7xl leading-none p-4 m-0">
+                <h1 className="text-8xl leading-none p-4 m-0">
                     <span className="font-bold  text-green-500">flow</span><span className="font-light">mode</span>
                 </h1>
                 {!isLoggedIn && (
-                    <h1 className="text-3xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h1>
+                    <h2 className="text-4xl font-semibold">Boost your productivity with use of Spotify's audio to guide your work and rest intervals for optimal <span className="font-bold text-green-500">focus</span> and <span className="font-bold text-green-500">refresh</span>.</h2>
                 )}
 
             {isLoggedIn && (
@@ -43,10 +43,10 @@ export default function HomePage(){
     {!isLoggedIn && (
         <section className="text-center w-full min-h-screen h-auto items-center justify-center bg-white bg-opacity-5">
 
-            <h1 className="mb-6 pt-10 pb-4 text-3xl font-semibold">How it works</h1>
+            <h1 className="mb-6 pt-10 pb-4 text-4xl font-bold">How It Works</h1>
 
                 <div className="inline-flex flex-wrap justify-evenly w-full">
-                    <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
+                    <div className="m-8 p-8 w-64 h-68 bg-white bg-opacity-20 rounded-2xl shadow-2xl">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             1<br/>
                         </div>
@@ -54,7 +54,7 @@ export default function HomePage(){
                         <p className="text-lg">Explore the Spotify catalogue to discover a wide range of playlists, podcasts, audiobooks, and songs.</p>
                     </div>
 
-                    <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
+                    <div className="m-8 p-8 w-64 h-68 bg-white bg-opacity-20 rounded-2xl shadow-2xl">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             2<br/>
                         </div>
@@ -62,7 +62,7 @@ export default function HomePage(){
                         <p className="text-lg">Select something to listen to during your flow and rest intervals.</p>
                     </div>
 
-                    <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
+                    <div className="m-8 p-8 w-64 h-68 bg-white bg-opacity-20 rounded-2xl shadow-2xl">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             3<br/>
                         </div>
@@ -70,7 +70,7 @@ export default function HomePage(){
                         <p className="text-xl">Set desired length of time for flow and rest.</p>
                     </div>
 
-                    <div className="m-8 p-8 w-64 h-68 rounded-lg works--card">
+                    <div className="m-8 p-8 w-64 h-68 bg-white bg-opacity-20 rounded-2xl shadow-2xl">
                         <div className="mx-auto mb-3 w-12 border-2 border-single border-white">
                             4<br/>
                         </div>
