@@ -38,7 +38,8 @@ export default function Templates () {
 
         return (
         <>
-        <div className="w-80 h-85 p-2 my-1">
+        <div className="w-80 h-85 p-2 m-2 bg-white bg-opacity-5 border border-white border-opacity-50 rounded-2xl">
+            <h1 className="p-2 text-2xl font-semibold text-center">Templates</h1>
             <div className="pb-2 p-1 bg-green-600 bg-opacity-60 border border-white  rounded-md">
               {templatesList && templatesList.length > 0 ? (
                 templatesList.map((item) => (
