@@ -142,11 +142,17 @@ export default function Profile() {
                 <NavBar />
             </nav>
             {/* mx-12 */}
-            <div className="justify-center m-4">
-                <h1 className="font-bold text-4xl">Profile</h1>
+            <div className="justify-center ml-48 mb-48">
+                <h1 className="m-4 font-bold text-4xl">Profile</h1>
+                <div className="flex justify-center items-center p-4 bg-black bg-opacity-30 rounded-2xl">
+                    <button className="mx-4 w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+                    <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
+                    <button className="mx-4 w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" >Stats</button>
+                </div>
                 {/* mt-12 */}
                 <div /* top section */ className="flex flex-wrap justify-center">
-                    <div /* user data div */ className="relative items-center justify-center">
+
+                    <div /* user data div */ className="flex relative items-center justify-center">
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 z-10">
@@ -160,21 +166,32 @@ export default function Profile() {
                             <p className="m-2 text-lg font-semibold">*Requires the creation of a <button className="font-bold hover:underline" onClick={() => setIsOpen(true)}>profile</button>.</p>
                         </div>
                     )}
-                            <div /* buttons div */ className="flex justify-center">
-                                <button className={`py-1 mb-2 w-1/2 border-r border-solid border-white border-opacity-50 hover:bg-blue-600 ${showCard === 'templates' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleTemplatesCard}>Templates</button>
-                                <button className={`mb-2 w-1/2 border-l border-solid border-white border-opacity-50 hover:bg-blue-600 ${showCard === 'favorites' ? 'bg-blue-600' : 'bg-transparent'}`} onClick={handleFavoritesCard}>Favorites</button>
-                                <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
-                                    {loadingDataUpdate ? (
-                                        <div className="spinner "></div>
-                                    ) : (
-                                        <div className="border-4 border-white/80 rounded-full w-5 h-5"></div>
-                                    )}
-                                </button>
-                                <span className="bg-white text-black update-tooltip">
-                                    Refresh
-                                </span>
+
+                            <div className="flex mt-8">
+                                <Templates templatesList={templatesList}/>
+                                <Favorites favoritesList={favoritesList}/>
                             </div>
-                            <div className="flex">
+                            <div>
+                                <div className="flex justify-between">
+                                    <h2 className="p-2 font-semibold text-xl">Recently Played</h2>
+                                    <div /* buttons div */ className="my-auto">
+                                    <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
+                                        {loadingDataUpdate ? (
+                                            <div className="spinner"></div>
+                                        ) : (
+                                            <div className="border-4 border-white/80 rounded-full w-5 h-5"></div>
+                                        )}
+                                    </button>
+                                    <span className="bg-white text-black update-tooltip">
+                                        Refresh
+                                    </span>
+                                    </div>
+                                </div>
+                                <FlowCard data={mostRecentlyPlayed} />
+                                <RestCard data={mostRecentlyPlayed}/>
+                            </div>
+
+                           {/* <div className="flex">
                                 <div>
                                     {showCard === 'templates' &&
                                         <Templates templatesList={templatesList} />
@@ -188,14 +205,15 @@ export default function Profile() {
                                     <FlowCard data={mostRecentlyPlayed}/>
                                     <RestCard data={mostRecentlyPlayed}/>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
                         {/*<UserData />*/}
                         
-                        <div className="mx-2 flex flex-col justify-center items-center">
+                       {/* <div className="mx-2 flex flex-col justify-center items-center">
                             <button className="mx-2 mb-4 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                             <button className="mx-2 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
-                        </div>
+                            <button className="mx-2 mt-4 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" >Stats</button>
+                        </div>*/}
                 </div>
 
                 {isDisplayOpen && (
