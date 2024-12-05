@@ -38,7 +38,7 @@ const NavBar = () => {
     return(
         <>
        <div className={`${
-        isProfile ? 'fixed top-0 left-0 h-screen flex flex-col bg-black'
+        isProfile ? 'fixed px-4 top-0 left-0 h-screen flex flex-col bg-black'
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
         >
@@ -67,15 +67,24 @@ const NavBar = () => {
             </div>
 
             <div /*dropdown content */ className={`${isProfile ? 'flex flex-col' : 'hidden'}`}>
-                <ul className="flex flex-col">
-                    <button className="flex w-full text-left justify-between border-t border-gray-400 hover:bg-green-600 transition duration-300 ease-in-out dropdown-link" onClick={() => setIsOpen(true)}>
+                <ul className="flex flex-col border-t border-white">
+                    <button className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                    
+                    /*className="flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out sideNav-link"*/ onClick={() => setIsOpen(true)}>
                         Create Profile
                         <div className="transparent">
                             <img src="caret-left-solid.svg" className="m-auto ml-2 w-5 h-5 invert rotate-180"></img>
                         </div>
                     </button>
                     <Link href='/search'>
-                        <div className="flex justify-between hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                        >
                         Search
                             <div className="transparent">
                                 <img src="magnifying-glass-solid.svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
@@ -83,7 +92,11 @@ const NavBar = () => {
                         </div>
                     </Link>
                     <Link href="/get-started">
-                        <div className="flex justify-between hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                        >
                         Get Started
                             <div className="transparent">
                                 <img src="circle-info-solid (1).svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
@@ -91,26 +104,40 @@ const NavBar = () => {
                         </div>
                     </Link>
                     <Link href="/about">
-                        <div className="flex justify-between hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">
+                        <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                        >
                         Mission・Story
                             <div className="transparent">
                                 <img src="pen-to-square-regular (1).svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
                             </div>
                         </div>
                     </Link>
-                    <button onClick={() => signOut('spotify')} className="flex justify-between bg-red-600 w-full text-left hover:bg-gray-600 transition duration-300 ease-in-out dropdown-link">
+                    <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                    >
+                        Settings
+                            <div className="transparent">
+                                <img src="pen-to-square-regular (1).svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
+                            </div>
+                    </div>
+                    <button onClick={() => signOut('spotify')} 
+                    className={`flex justify-between bg-red-600 w-full text-left hover:bg-gray-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'dropdown-link'
+                        }`}
+                        >
                     Log Out
 
                         <div className="transparent">
                             <img src="right-from-bracket-solid.svg" className="m-auto ml-2 w-5 h-5 invert"></img>
                         </div>
                     </button>
-                    <div className="flex justify-between hover:bg-gray-600 transition duration-300 ease-in-out dropdown-link">
-                        Settings
-                            <div className="transparent">
-                                <img src="pen-to-square-regular (1).svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
-                            </div>
-                        </div>
+                    
                 </ul>
             </div>
             {/* Account modal */}
