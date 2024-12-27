@@ -44,7 +44,7 @@ const NavBar = () => {
         >
 
             {/*<div className="dropdown">*/}
-                <button className={`${isProfile ? 'mb-2 bg-gray-500 ' : 'p-0.5 my-2 bg-gray-400 profile-img'} cursor-pointer profile-img`}
+                <button className={`${isProfile ? 'mb-2 mt-6' : 'p-0.5 my-2 bg-gray-400 profile-img'} cursor-pointer`}
                  >
                     {session.user.image ? (
                         <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
@@ -67,7 +67,7 @@ const NavBar = () => {
             </div>
 
             <div /*dropdown content */ className={`${isProfile ? 'flex flex-col' : 'hidden'}`}>
-                <ul className="flex flex-col border-t border-white">
+                <ul className="flex flex-col border-t border-white-1">
                     <button className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
                         :'dropdown-link'
