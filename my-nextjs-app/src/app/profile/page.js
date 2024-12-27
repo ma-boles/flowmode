@@ -138,21 +138,22 @@ export default function Profile() {
 
     return (
         <>
-            <nav>
+        <div className="flex">
+            {/*<nav className="fixed top-0 left-0 h-full px-24 bg-white">*/}
                 <NavBar />
-            </nav>
+           {/* </nav>*/}
             {/* mx-12 */}
-            <div className="justify-center ml-48 mb-48">
-                <h1 className="m-4 font-bold text-4xl">Profile</h1>
-                <div className="flex justify-center items-center p-4 bg-black bg-opacity-30 rounded-2xl">
-                    <button className="mx-4 w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
+            <div /* dashboard container*/ className="p-2 ml-56 h-screen flex-grow">
+                <div /* top container */ className="flex my-2 justify-around">
+                    <h1 className="w-1/5 h-24 border-2 border-white font-bold text-4xl rounded-lg text-center flex items-center justify-center">Profile</h1>
+                    <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                     <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
-                    <button className="mx-4 w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" >Stats</button>
+                    <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" >Stats</button>
                 </div>
                 {/* mt-12 */}
-                <div /* top section */ className="flex flex-wrap justify-center">
+                <div /* top section - user data div */ className="flex flex-wrap relative justify-center h-2/3">
 
-                    <div /* user data div */ className="flex relative items-center justify-center">
+                   {/* <div /* user data div *//* className="flex relative items-center justify-center bg-blue-600">*/}
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 z-10">
@@ -167,28 +168,34 @@ export default function Profile() {
                         </div>
                     )}
 
-                            <div className="flex mt-8">
-                                <Templates templatesList={templatesList}/>
+                            <div className="flex-1 w-full">
+                                <Templates templatesList={templatesList} />
+                            </div>
+                            <div className="flex-1">
                                 <Favorites favoritesList={favoritesList}/>
                             </div>
                             <div>
-                                <div className="flex justify-between">
-                                    <h2 className="p-2 font-semibold text-xl">Recently Played</h2>
-                                    <div /* buttons div */ className="my-auto">
-                                    <button className="ml-2 mb-2 px-2 border border-gray-600 rounded-sm hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
-                                        {loadingDataUpdate ? (
-                                            <div className="spinner"></div>
-                                        ) : (
-                                            <div className="border-4 border-white/80 rounded-full w-5 h-5"></div>
-                                        )}
-                                    </button>
-                                    <span className="bg-white text-black update-tooltip">
-                                        Refresh
-                                    </span>
+                                <div className="mx-2 h-full">
+                                    <div className="flex justify-between bg-purple-600 rounded-lg">
+                                        <h2 className="p-2 font-semibold text-xl">Recently Played</h2>
+                                        <div /* buttons div */ className="my-auto">
+                                        <button className="mx-2 p-2 border-none rounded-md hover:bg-gray-600 update" onClick={handleDataUpdate} disabled={loadingDataUpdate}>
+                                            {loadingDataUpdate ? (
+                                                <div className="spinner"></div>
+                                            ) : (
+                                                <div className="border-4 border-white/80 rounded-full w-5 h-5"></div>
+                                            )}
+                                        </button>
+                                        <span className="bg-white text-black update-tooltip">
+                                            Refresh
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 mt-2">
+                                        <FlowCard data={mostRecentlyPlayed} />
+                                        <RestCard data={mostRecentlyPlayed}/>
                                     </div>
                                 </div>
-                                <FlowCard data={mostRecentlyPlayed} />
-                                <RestCard data={mostRecentlyPlayed}/>
                             </div>
 
                            {/* <div className="flex">
@@ -214,8 +221,8 @@ export default function Profile() {
                             <button className="mx-2 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                             <button className="mx-2 mt-4 w-80 h-1/2 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" >Stats</button>
                         </div>*/}
+               {/* </div>*/}
                 </div>
-
                 {isDisplayOpen && (
                     <PlaylistProvider>
                         <div ref={myDisplayRef} style={{ marginTop: '50px' }}>
