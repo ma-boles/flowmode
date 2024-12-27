@@ -7,7 +7,8 @@ export default function Favorites() {
     //console.log(favoritesList);
    
            return (
-               <div className="w-80 h-85 p-2 m-2 text-center rounded-2xl border border-white border-opacity-50 bg-white bg-opacity-10">
+            <>
+               <div className="h-full p-2 text-center rounded-2xl border-2 border-white border-opacity-80 bg-white bg-opacity-10">
                 <h1 className="p-2 text-2xl font-semibold">Favorites</h1>
                    <div className="flex">
                         <div className="w-full pb-2 p-1">
@@ -26,5 +27,6 @@ export default function Favorites() {
                         </div>
                    </div>
                </div>
+               </>
            );
         }
