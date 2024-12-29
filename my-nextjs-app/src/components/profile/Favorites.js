@@ -8,8 +8,8 @@ export default function Favorites() {
    
            return (
             <>
-               <div className="h-full p-2 text-center rounded-2xl border-2 border-white border-opacity-80 bg-white bg-opacity-10">
-                <h1 className="p-2 text-2xl font-semibold">Favorites</h1>
+               <div className="p-2 mx-1 mt-2 text-center rounded-2xl bg-black bg-opacity-40 card-border">
+                <h1 className="p-2 text-2xl font-semibold text-left">Favorites</h1>
                    <div className="flex">
                         <div className="w-full pb-2 p-1">
                             {favoritesList && favoritesList.length > 0 ? (
@@ -22,7 +22,7 @@ export default function Favorites() {
                                 </div>
                                     ))
                                 ) : (
-                                    <p>No Titles Added</p>
+                                    <p className="text-left">No Titles Added</p>
                                 )}
                         </div>
                    </div>

@@ -38,9 +38,9 @@ export default function Templates () {
 
         return (
         <>
-        <div className="h-full p-2 mx-2 bg-white bg-opacity-5 border border-white border-opacity-70 rounded-2xl">
-            <h1 className="p-2 text-2xl font-semibold text-center">Templates</h1>
-            <div className="pb-2 p-1 bg-green-600 bg-opacity-60 border border-white  rounded-md">
+        <div className="h-90 p-2 mx-2 mt-2 bg-black bg-opacity-40 rounded-2xl card-border">
+            <h1 className="p-2 text-2xl font-semibold text-left">Templates</h1>
+            <div className="pb-2 p-1 bg-blue-800 rounded-md">
               {templatesList && templatesList.length > 0 ? (
                 templatesList.map((item) => (
                   <div className="flex w-full justify-between" key={item.title} >
@@ -54,9 +54,9 @@ export default function Templates () {
                           <li><span className="font-semibold">Flow:</span> {item.flow}</li>
                           <li><span className="font-semibold">Rest:</span> {item.rest}</li>
                       </div>
-                      <div /* buttons div */ className="flex flex-col my-3 ml-2 justify-between">
-                          <button className="px-1 bg-black hover:bg-white rounded-md" onClick={() => handleTemplate(item)}>+</button>
-                          <button className="px-2 bg-black hover:bg-white rounded-md" onClick={() => removeTemplate(item.title)}>-</button>
+                      <div /* buttons div */ className="flex flex-col my-2 ml-2 justify-between">
+                          <button className="px-1 my-1 text-black font-extrabold text-xl bg-white bg-opacity-60 hover:bg-white rounded-md" onClick={() => handleTemplate(item)}>+</button>
+                          <button className="px-1 text-black font-extrabold text-xl bg-white bg-opacity-60 hover:bg-white rounded-md" onClick={() => removeTemplate(item.title)}>-</button>
                       </div>
                   </div>
                   ))
