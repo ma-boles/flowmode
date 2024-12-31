@@ -26,14 +26,14 @@ const DropdownMenu = () => {
                         Profile
                         </div>
                     </Link>
-                    <Link href='/search'>
+                    {/*<Link href='/search'>
                         <div className="flex hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">
                             <div className="transparent">
                                 <img src="magnifying-glass-solid.svg" className="m-auto mr-4 mt-1 w-4 h-4 invert"></img>
                             </div>
                             Search
                         </div>
-                    </Link>
+                    </Link>*/}
                     <Link href="/get-started">
                         <div className="flex hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">
                             <div className="transparent">
