@@ -38,7 +38,7 @@ export default function Templates () {
 
         return (
         <>
-        <div className="h-90 p-2 mx-2 mt-2 bg-black bg-opacity-40 rounded-2xl card-border">
+        <div className="h-90 px-2 mx-2 mt-2 pb-4 pt-2 bg-black bg-opacity-40 rounded-2xl card-border">
             <h1 className="p-2 text-2xl font-semibold text-left">Templates</h1>
             <div className="pb-2 p-1 bg-blue-800 rounded-md">
               {templatesList && templatesList.length > 0 ? (
