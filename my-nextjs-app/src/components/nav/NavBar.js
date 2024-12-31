@@ -27,18 +27,20 @@ const NavBar = () => {
     };
 
     if (!session) {
-        return <h2 className="m-4 text-center text-2xl font-semibold">Please{' '}
+        return <div className="bg-black w-1/4">
+        <h2 className="mt-12 text-center text-3xl font-bold">Please{' '}
             <Link href="/login">
                 <span className="cursor-pointer underline hover:text-green-500">log in</span>
             </Link>
             </h2>
+        </div>
     }
 
 
     return(
         <>
        <div className={`${
-        isProfile ? 'fixed px-4 top-0 left-0 h-screen flex flex-col bg-black'
+        isProfile ? 'fixed px-4 top-0 left-0 h-screen flex flex-col bg-black w-1/6'
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
         >
@@ -72,7 +74,6 @@ const NavBar = () => {
                         isProfile ? 'sideNav-link'
                         :'dropdown-link'
                         }`}
-                    
                     /*className="flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out sideNav-link"*/ onClick={() => setIsOpen(true)}>
                         Create Profile
                         <div className="transparent">
@@ -115,7 +116,7 @@ const NavBar = () => {
                             </div>
                         </div>
                     </Link>
-                    <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                    {/*<div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
                         :'dropdown-link'
                         }`}
@@ -124,7 +125,7 @@ const NavBar = () => {
                             <div className="transparent">
                                 <img src="pen-to-square-regular (1).svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
                             </div>
-                    </div>
+                    </div>*/}
                     <button onClick={() => signOut('spotify')} 
                     className={`flex justify-between bg-red-600 w-full text-left hover:bg-gray-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
@@ -137,7 +138,7 @@ const NavBar = () => {
                             <img src="right-from-bracket-solid.svg" className="m-auto ml-2 w-5 h-5 invert"></img>
                         </div>
                     </button>
-                    
+
                 </ul>
             </div>
             {/* Account modal */}
@@ -147,7 +148,7 @@ const NavBar = () => {
 
             <div className="dropdown">
                 {/* dropdown nav icon */}
-                <button className={`${ isProfile ? 'hidden' : 
+                <button className={`${ isProfile ? 'hidden' :
                 'dropdown-btn'}`}>
                     <div className="bar1"></div>
                     <div className="bar2"></div>
