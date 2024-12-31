@@ -143,7 +143,11 @@ export default function Profile() {
                 <NavBar />
            {/* </nav>*/}
             {/* mx-12 */}
-            <div /* dashboard container*/ className="p-2 ml-56 h-screen flex-grow">
+            <div /* dashboard container */ 
+            className={`p-2 h-screen flex-grow ${
+                session ? 'ml-56' : 'ml-0'
+              }`}
+                >
                 <div /* top container */ className="flex my-2 justify-around">
                     <h1 className="w-1/5 h-24 border-2 border-white font-bold text-4xl rounded-lg text-center flex items-center justify-center">Profile</h1>
                     <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
