@@ -4,7 +4,7 @@ import "@/app/styles/styles.css"
 import { getPlaylists } from "@/app/lib/apiCall";
 import PlaylistItem from "../PlaylistItem";
 import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
-import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
+//import { getUserOwnedPlaylists } from "@/app/lib/apiCall";
 
 
 export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, handleAddToFavorites/* cleanDescription,*/  }) {
@@ -40,7 +40,7 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, han
         const divDescription = document.createElement('div');
         // Set the HTML content with the provided description
         divDescription.innerHTML = description;
-        // Retrieve the tect content which will decode the HTML entittie
+        // Retrieve the txt content which will decode the HTML entitie
         return divDescription.textContent || divDescription.innerText || "";
     };
 
@@ -139,9 +139,9 @@ export default function Display({ viewMode, isDisplayOpen, setIsDisplayOpen, han
             <button className="px-2 border border-solid border-white cursor-pointer" onClick={handleClose}>x</button>
         </div>
 
-        <div className="px-20 flex justify-between">
+        <div className="pr-20 pl-4 flex justify-between">
 
-            <div className="flex justify-around w-1/3 my-6 mx-2 border border-solid border-gray-700 rounded-md displaySearchInput">
+            <div className="flex justify-around w-2/5 my-6 border-2 border-gray-400 rounded-md displaySearchInput">
                         <input className="outline-none p-2 m-2 text-xl displaySearchInput" /*text-slate-800 */
                         type="text"
                         placeholder="Title..."
