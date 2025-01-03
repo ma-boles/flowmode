@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import NavBar from "@/components/nav/NavBar";
 import Display from "@/components/playlists/Display";
 import Player from "@/components/player/Player";
@@ -108,24 +108,23 @@ export default function Profile() {
     const displayUserOwnedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('userOwnedPlaylists');
-
-        setTimeout(() => {
-            if(myDisplayRef.current) {
-                myDisplayRef.current.scrollIntoView({ behavior: 'smooth'});
-            }
-        }, 0)
     };
 
     const displayFollowedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('followedPlaylists');
-
-        setTimeout(() => {
-            if(myDisplayRef.current) {
-                myDisplayRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 0)
     };
+
+    // Scroll to div once visible
+    useEffect(() => {
+        if(isDisplayOpen && myDisplayRef.current) {
+            setTimeout(() => {
+                myDisplayRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                });
+            }, 100)
+        }
+    }, [isDisplayOpen]);
 
     return (
         <>
@@ -165,7 +164,8 @@ export default function Profile() {
                         <div className="flex-1">
                             <Favorites favoritesList={favoritesList}/>
                         </div>
-                        <div>
+                        {/* adjust scrolling */}
+                        <div className="overflow-y-hidden">
                             <div className="mx-2 mt-2 h-full w-80">
                                 <div className="flex justify-between bg-black bg-opacity-60 rounded-lg">
                                     <h2 className="p-2 font-semibold text-xl">Recently Played</h2>
@@ -182,7 +182,7 @@ export default function Profile() {
                                     </span>
                                     </div>
                                 </div>
-                                <div className="flex-1 mt-2">
+                                <div className="flex-1 mt-2 overflow-y-scroll">
                                     <FlowCard data={mostRecentlyPlayed} />
                                     <RestCard data={mostRecentlyPlayed}/>
                                 </div>
@@ -192,7 +192,7 @@ export default function Profile() {
 
                 {isDisplayOpen && (
                     <PlaylistProvider>
-                        <div ref={myDisplayRef} style={{ marginTop: '50px' }}>
+                        <div ref={myDisplayRef} style={{ marginTop: '50px', height: '100vh' }}>
                             <Display
                             viewMode={viewMode}
                             isDisplayOpen={isDisplayOpen}
