@@ -39,6 +39,8 @@ export default function Profile() {
                 </div>
     }
 
+    const isLoggedIn = status === 'authenticated';
+
     // profile check
     const handleUserCheck = async () => {
         setLoadingCheckUser(true) // Starts loading spinner
@@ -108,27 +110,34 @@ export default function Profile() {
     const displayUserOwnedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('userOwnedPlaylists');
+
+        setTimeout(() => {
+            if(myDisplayRef.current) {
+                myDisplayRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+            }
+        }, 100);
     };
 
     const displayFollowedPlaylists = () => {
         setIsDisplayOpen(true);
         setViewMode('followedPlaylists');
-    };
 
-    // Scroll to div once visible
-    useEffect(() => {
-        if(isDisplayOpen && myDisplayRef.current) {
-            setTimeout(() => {
+        setTimeout(() => {
+            if(myDisplayRef.current) {
                 myDisplayRef.current.scrollIntoView({
                     behavior: 'smooth',
+                    block: 'start',
                 });
-            }, 100)
-        }
-    }, [isDisplayOpen]);
+            }
+        }, 100);
+    };
 
     return (
         <>
-        <div className="flex">
+        <div className="flex overflow-y-auto">
                 <NavBar />
 
             <div /* dashboard container */
@@ -190,7 +199,7 @@ export default function Profile() {
                         </div>
                 </div>
 
-                {isDisplayOpen && (
+                {isLoggedIn && isDisplayOpen && (
                     <PlaylistProvider>
                         <div ref={myDisplayRef} style={{ marginTop: '50px', height: '100vh' }}>
                             <Display
