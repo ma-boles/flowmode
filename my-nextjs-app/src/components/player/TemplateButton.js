@@ -13,7 +13,7 @@ export default function TemplateButton () {
             console.log(`Saving titles: Flow: ${flowPlaylistName}, ${flowPlaylistId}; Rest: ${restPlaylistName}, ${restPlaylistId}`);
 
             // Call the API to save template
-            const response = await fetch('/api/add-template', {
+            const response = await fetch('/api/template', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
