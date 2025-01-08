@@ -7,6 +7,8 @@ export default function Templates () {
     const { handleSetFlowPlaylist, handleSetRestPlaylist } = usePlaylistContext();
     const { removeTemplate, templatesList } = useTemplateContext();
     const [activeTemplateId, setActieTemplateId] = useState('');
+    const [newTitle, setNewTitle] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
 
     const onTemplateFlow = (id, name) => {
         handleSetFlowPlaylist(id, name);
@@ -30,7 +32,14 @@ export default function Templates () {
         });
     };
 
-  /*  const expandTitle = () => {
+    const handleChange = (event) => {
+        setNewTitle(event.target.value);
+    };
+
+    const handleBlur = () => {
+        setIsEditing(false);
+    };
+   /*  const expandTitle = () => {
         alert('Expanding title')
         // expand section to show details
     };
@@ -47,8 +56,28 @@ export default function Templates () {
                       <div className="px-1 my-1 flex-grow w-4/5 text-start">
                           <ul className="flex justify-between font-bold ">
                               <div /* title div */  className="flex justify-between w-full">
-                                  <h2>{item.title}</h2>
-                                  {/*<button className="px-1 font-light bg-purple-700" onClick={expandTitle}>v</button>*/}
+                              {isEditing ? (
+                                <div className="flex">
+                                <input 
+                                    type="text"
+                                    value={newTitle}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    placeholder="New Title"
+                                    autofocus
+                                    style={{
+                                        border: isEditing ? '1px solid white': 'initial',
+                                        outline: isEditing ? 'none': '',
+                                        backgroundColor: 'transparent',
+                                        textIndent: 5,
+                                        borderRadius: 5
+                                    }}/>
+                                    <div className="mx-1 px-1 border border-white cursor-pointer hover:bg-green-600">V</div>
+                                    </div>
+                              ): (
+                                <h2 onClick={() => setIsEditing(true)}>{item.title}</h2>
+                                  /*<button className="px-1 font-light bg-purple-700" onClick={expandTitle}>v</button>*/
+                              )}
                               </div>
                           </ul>
                           <li><span className="font-semibold">Flow:</span> {item.flow}</li>
