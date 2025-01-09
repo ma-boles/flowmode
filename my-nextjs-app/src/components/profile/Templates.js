@@ -5,7 +5,7 @@ import { usePlaylistContext } from "@/app/contexts/PlaylistContext";
 
 export default function Templates () {
     const { handleSetFlowPlaylist, handleSetRestPlaylist } = usePlaylistContext();
-    const { removeTemplate, templatesList } = useTemplateContext();
+    const { removeTemplate, templatesList, updateTemplateTitle } = useTemplateContext();
     const [activeTemplateId, setActieTemplateId] = useState('');
     const [newTitle, setNewTitle] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +32,14 @@ export default function Templates () {
         });
     };
 
+    const handleRemoveTemplate = () => {
+        // remove template
+    }
+
+    const handleUpdateTitle = () => {
+        // update template title
+    }
+
     const handleChange = (event) => {
         setNewTitle(event.target.value);
     };
@@ -52,7 +60,7 @@ export default function Templates () {
             <div className="pb-2 p-1 bg-blue-800 rounded-md">
               {templatesList && templatesList.length > 0 ? (
                 templatesList.map((item) => (
-                  <div className="flex w-full justify-between" key={item.title} >
+                  <div className="flex w-full justify-between" key={item._id}>
                       <div className="px-1 my-1 flex-grow w-4/5 text-start">
                           <ul className="flex justify-between font-bold ">
                               <div /* title div */  className="flex justify-between w-full">
@@ -72,7 +80,7 @@ export default function Templates () {
                                         textIndent: 5,
                                         borderRadius: 5
                                     }}/>
-                                    <div className="mx-1 px-1 border border-white cursor-pointer hover:bg-green-600">V</div>
+                                    <div className="mx-1 px-1 border border-white cursor-pointer hover:bg-green-600" onClick={() => updateTemplateTitle(item._id)}>V</div>
                                     </div>
                               ): (
                                 <h2 onClick={() => setIsEditing(true)}>{item.title}</h2>
