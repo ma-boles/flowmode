@@ -6,27 +6,27 @@ const TemplateContext = createContext();
 export default function TemplateProvider ({ children }) {
     const [templatesList, setTemplatesList] = useState([]);
 
-    const removeTemplate = async (title) => {
-        if (!title) {
-          console.log('No title provided');
+    const removeTemplate = async (templateId) => {
+        if (!templateId) {
+          console.log('No templates ID provided');
           return; // Prevent removing empty titles
         }
         try {
-          const response = await fetch('/api/remove-template', {
-            method: 'POST',
+          const response = await fetch(`/api/template?templateId=${templateId}`, {
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ templateTitle: title }),
+            }
           });
     
           if (!response.ok){
-            throw new Error('Network response was not ok');
+            throw new Error('Failed to remove template');
           }
+
           // Update the local state
           const { templates } = await response.json();
           setTemplatesList((prevTemplates) =>
-            prevTemplates.filter((item) => item.title !== title));
+            prevTemplates.filter((item) => item.id !== templateId));
     
           console.log(`Updated templates list: ${templates}`);
     
@@ -35,6 +35,7 @@ export default function TemplateProvider ({ children }) {
         }
       };
 
+      // Update Templates array
       const updateTemplates = async () => {
         //console.log('Fetching favorites...')
         try {
@@ -55,11 +56,48 @@ export default function TemplateProvider ({ children }) {
         console.log("Updated templates list:", templatesList);
       }, [templatesList]); // This will run every time templatesList changes
 
+      // Update Titles 
+      const updateTemplateTitle = async(templateId) => {
+        if(!newTitle.trim()) {
+            alert('Title cannot be empty!');
+            return;
+        }
+
+        try {
+            console.log(`New Template Title: ${newTitle}`);
+
+            // Call the API to update template
+            const response = await fetch('/api/template/', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    templateId: templateId,
+                    newTitle: newTitle
+                })
+            });
+
+            if(!response.ok) {
+                throw new Error('Failed to save new title');
+            }
+
+            const result = await response.json();
+            console.log('New title saved successfully!');
+
+            alert('New title saved!');
+        } catch(error) {
+            console.error('Error saving new title', error);
+            alert('Failed to save new title. Please again later.');
+        }
+    };
+
       return (
         <TemplateContext.Provider
             value={{
                 removeTemplate,
                 updateTemplates,
+                updateTemplateTitle,
                 templatesList
             }} 
         >
