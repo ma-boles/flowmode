@@ -251,7 +251,12 @@ export default function SearchComponent ({ playlist/*, previewId*/ }) {
                                     <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} accessToken={accessToken}/>
                                     <div className="px-4">
                                         <button onClick={() => handleItemSelect(playlist, 'playlist')} className="playImgButton">
-                                            <img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" />
+                                            {/*<img src={playlist.images[0].url} alt={`Image of ${playlist.name}`} className="trackImg" /> */} 
+                                           <img 
+                                           src={playlist.images?.[0]?.url || ''} 
+                                           alt={`Image of ${playlist.name || 'Unknown'}`} 
+                                           className="trackImg" 
+                                           />
                                             <div className="overlay">
                                                 <span className="playIcon"></span>
                                             </div>
