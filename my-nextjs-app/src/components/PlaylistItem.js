@@ -40,6 +40,13 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
         }
     };
 
+    const handleFavorites = () => {
+        console.log(`Button clicked to add favorite: ${title}`);
+        handleAddToFavorites(playlist); // Add the title to favorites
+       // handleFavoritesClick(playlist.name);
+
+    };
+
     const isFlowAdded = playlist.id === flowPlaylistId;
     const isRestAdded = playlist.id === restPlaylistId;
     const isPreviewAdded = playlist.id === previewId;
@@ -52,31 +59,50 @@ export default function PlaylistItem ({ playlist, displayStyle, cleanDescription
         <>
             <li key={playlist.id} className={`${displayStyle === 'grid' ? 'playlistCard' : 'playlistCardList'}`}>
 
-                    {displayStyle === 'grid' && (
+                    {/*{displayStyle === 'grid' && (
                         <ItemCardButton playlist={playlist} onSelectFlow={onSelectFlow} onSelectRest={onSelectRest} title={playlist.title} handleAddToFavorites={handleAddToFavorites} accessToken={accessToken}/>
-                    )}
+                    )}*/}
 
-                <div /* image */className={` ${displayStyle === 'list' ? 'flex w-1/4' : 'div'}`}>
+
+                <div /* Image */className={` ${displayStyle === 'list' ? 'flex w-1/4' : 'div'}`}>
                     {playlist.images && playlist.images[0] ? (
-                        <button onClick={() => handlePreview(playlist, 'playlist')} className="playImgButton">
+                        <div className="relative image--container">
                             <img src={playlist.images[0].url}
                             alt={`Cover of ${playlist.name}`}
                             className={`${displayStyle === 'grid' ? 'playlistImg' : 'playlistImgList' }`}
                             />
-                            <div className="overlay">
-                                <span className="playIcon"></span>
+                            <div className="overlay flex-col">
+                                <button className="py-1 font-semibold border-b border-solid border-gray-500 active:bg-green-500 focus:bg-green-500 hover:bg-gray-500"
+                                    onClick={() => handlePreview(playlist, 'playlist')}>
+                                    <img src="play-solid.svg" className="m-auto mb-1 w-5 h-5 invert"></img>
+                                </button>
+
+                                <button className={`py-1 font-semibold border-b border-solid border-gray-500 active:bg-green-500 focus:bg-green-500 hover:bg-gray-500`}
+                                    onClick={isFlowAdded || addedType === 'flow' ? null : handleFlowClick}>
+                                    Flow
+                                </button>
+
+                                <button className={`py-1 font-semibold border-b border-solid border-gray-500  active:bg-blue-600 focus:bg-blue-600 hover:bg-gray-500`}
+                                    onClick={isRestAdded || addedType === 'rest' ? null : handleRestClick}>
+                                    Rest
+                                </button>
+
+                                <button className={`py-1 font-semibold active:bg-red-500 focus:bg-red-500 hover:bg-gray-500`}
+                                    onClick={handleFavorites}>
+                                    <img src="heart-regular (1).svg" className="m-auto mb-1 w-5 h-5 invert"></img>
+                                </button>
                             </div>
-                        </button>
+                        </div>
                         ) : (
                         <div className={`flex justify-center items-center ${displayStyle === 'list' ? 'fallBackImgList' : 'fallBackImg'}`}>
                             <p className="fallBackText">No Image <br />Available</p>
                         </div>
                         )}
                 </div>
-                <div className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
+                <div /* Title */ className={`${displayStyle === 'list' ? 'm-auto w-1/4': 'div'}`}>
                     <h2 className={` ${displayStyle === 'list' ? 'text-xl text-left' : 'text-center'}`}>{cleanDescription(playlist.name)} </h2>
                 </div>
-                <div className={`mx-4 ${displayStyle === 'list' ? 'm-auto w-2/4' : 'div w-5/6'}`}>
+                <div /* Description */className={`mx-4 ${displayStyle === 'list' ? 'm-auto w-2/4' : 'div w-5/6'}`}>
                     <p className={`w-full truncate-text ${displayStyle === 'list' ? 'font-thin text-lg text-left' : 'font-thin text-center'}`}>{cleanDescription(playlist.description)}</p>
                 </div>
 
