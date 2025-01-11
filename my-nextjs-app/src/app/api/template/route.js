@@ -92,7 +92,7 @@ export async function handler(req) {
               }
 
               // Extract templateId and newTitle from reuqest body
-              const { templateId, newTitle } = await req.json();
+              const { templateId, newTitle } = await req.body();
 
               if(!templateId || !newTitle) {
                 return NextResponse.json({ error: 'Template ID and new title are required' }, { status: 400 });
@@ -111,13 +111,14 @@ export async function handler(req) {
               // Save the updated user document
               await user.save();
 
-              return NextResponse.jso({ message: 'Template title updated successfully' });
+              return NextResponse.json({ message: 'Template title updated successfully' });
         } catch(error) {
             console.error('Error updating template:', error);
             return NextResponse.jso({ error: 'Failed to update template title' }, { status: 500 });
         }
     }
 
+    // Handle DELETE request (Remove Template)
     if(req.method === 'DELETE') {
         try {
             // Retrieve the JWT from the request
@@ -162,7 +163,7 @@ export async function handler(req) {
                 }
             );
 
-            if(result.nModified === 0) {
+            if(result.modifiedCount === 0) {
                 return NextResponse.json({ error: 'Template not found or not deleted' }, { status: 400 });
             }
             
