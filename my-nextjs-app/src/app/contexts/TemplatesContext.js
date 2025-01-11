@@ -26,7 +26,7 @@ export default function TemplateProvider ({ children }) {
           // Update the local state
           const { templates } = await response.json();
           setTemplatesList((prevTemplates) =>
-            prevTemplates.filter((item) => item.id !== templateId));
+            prevTemplates.filter((item) => item._id !== templateId));
     
           console.log(`Updated templates list: ${templates}`);
     
@@ -66,7 +66,7 @@ export default function TemplateProvider ({ children }) {
         try {
             console.log(`New Template Title: ${newTitle}`);
 
-            // Call the API to update template
+            // Call the API to update template title
             const response = await fetch('/api/template/', {
                 method: 'PUT',
                 headers: {
