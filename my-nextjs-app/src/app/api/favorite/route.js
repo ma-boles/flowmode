@@ -86,7 +86,7 @@ export async function handler(req) {
             }
 
             // Extract favoritesId from request body
-            const { favoritesId } =  req.jquery;
+            const { favoritesId } =  req.query;
 
             if(!favoritesId) {
                 return NextResponse.json({ error: 'Favorites ID required' }, { status: 400 });
@@ -107,7 +107,7 @@ export async function handler(req) {
                 }
             );
 
-            if(result.nModified === 0) {
+            if(result.modifiedCount === 0) {
                 return NextResponse.json({ error: 'Favorite not found or deleted' }, { status: 400 });
             }
             return NextResponse.json({ message: 'Favorite removed successfully'});
