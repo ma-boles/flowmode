@@ -33,11 +33,11 @@ export default function Templates () {
     };
 
     const handleRemoveTemplate = () => {
-        // remove template
+        removeTemplate(item.templateId)
     }
 
     const handleUpdateTitle = () => {
-        // update template title
+        updateTemplateTitle(item.templateId)
     }
 
     const handleChange = (event) => {
@@ -47,6 +47,7 @@ export default function Templates () {
     const handleBlur = () => {
         setIsEditing(false);
     };
+
    /*  const expandTitle = () => {
         alert('Expanding title')
         // expand section to show details
@@ -60,7 +61,7 @@ export default function Templates () {
             <div className="pb-2 p-1 bg-blue-800 rounded-md">
               {templatesList && templatesList.length > 0 ? (
                 templatesList.map((item) => (
-                  <div className="flex w-full justify-between" key={item._id}>
+                  <div className="flex w-full justify-between" key={item.templateId}>
                       <div className="px-1 my-1 flex-grow w-4/5 text-start">
                           <ul className="flex justify-between font-bold ">
                               <div /* title div */  className="flex justify-between w-full">
@@ -80,7 +81,7 @@ export default function Templates () {
                                         textIndent: 5,
                                         borderRadius: 5
                                     }}/>
-                                    <div className="mx-1 px-1 border border-white cursor-pointer hover:bg-green-600" onClick={() => updateTemplateTitle(item._id)}>V</div>
+                                    <div className="mx-1 px-1 border border-white cursor-pointer hover:bg-green-600" onClick={handleUpdateTitle}>V</div>
                                     </div>
                               ): (
                                 <h2 onClick={() => setIsEditing(true)}>{item.title}</h2>
@@ -93,7 +94,7 @@ export default function Templates () {
                       </div>
                       <div /* buttons div */ className="flex flex-col my-2 ml-2 justify-between">
                           <button className="px-1 my-1 text-black font-extrabold text-xl bg-white bg-opacity-60 hover:bg-white rounded-md" onClick={() => handleTemplate(item)}>+</button>
-                          <button className="px-1 text-black font-extrabold text-xl bg-white bg-opacity-60 hover:bg-white rounded-md" onClick={() => removeTemplate(item.title)}>-</button>
+                          <button className="px-1 text-black font-extrabold text-xl bg-white bg-opacity-60 hover:bg-white rounded-md" onClick={handleRemoveTemplate}>-</button>
                       </div>
                   </div>
                   ))
