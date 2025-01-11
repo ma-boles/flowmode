@@ -57,7 +57,7 @@ export const PlaylistProvider = ({ children }) => {
         try {
           console.log(`Attempting to add favorite: ${title}`);
           
-          const response = await fetch('/api/add-favorite', {
+          const response = await fetch('/api/favorite', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -94,27 +94,26 @@ export const PlaylistProvider = ({ children }) => {
         console.log("Updated favorites list:", favoritesList);
       }, [favoritesList]); // This will run every time favoritesList changes
     
-      const removeFavorite = async (title) => {
-        if (!title) {
-          console.log('No title provided');
+      const removeFavorite = async (favoritesId) => {
+        if (!favoritesId) {
+          console.log('No favorites ID provided');
           return; // Prevent removing empty titles
         }
         try {
-          const response = await fetch('/api/remove-favorite', {
-            method: 'POST',
+          const response = await fetch(`/api/favorite?favoritesId=${favoritesId}`, {
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ favoritesTitle: title }),
           });
     
           if (!response.ok){
-            throw new Error('Network response was not ok');
+            throw new Error('Failed to remove favorite');
           }
           // Update the local state
           const { favorites } = await response.json();
           setFavoritesList((prevFavorites) =>
-            prevFavorites.filter((item) => item.title !== title));
+            prevFavorites.filter((item) => item._id !== favoritesId));
 
           console.log(`Updated favorites list: ${favorites}`);
 
