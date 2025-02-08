@@ -40,7 +40,7 @@ const NavBar = () => {
     return(
         <>
        <div className={`${
-        isProfile ? 'fixed px-4 top-0 left-0 h-screen flex flex-col bg-black w-1/6'
+        isProfile ? 'fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[230px] rounded-br-md'
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
         >
@@ -154,11 +154,10 @@ const NavBar = () => {
                     <div className="bar2"></div>
                     <div className="bar3"></div>
                 </button>
-
                 <DropdownMenu />
-
             </div>
         </div>
+
         </>
     );
 };
