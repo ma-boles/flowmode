@@ -152,10 +152,10 @@ export default function Profile() {
                     <div className="w-1/4 h-24 bg-blue-700 rounded-lg" ></div>
                 </div>
 
-                <div /* top section - user data div */ className="flex flex-wrap relative justify-center h-2/3">
+                <div /* top section - user data div */ className="flex flex-wrap relative justify-center h-[417px]">
 
                     {isVisible && (
-                        <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 z-10">
+                        <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 rounded-md z-10">
                             <button className="mt-12 p-4 w-40 bg-green-600 font-bold border-2 border-green-600 rounded-md hover:bg-green-500 transition duration-300 ease-in-out flex justify-center items-center" onClick={handleUserCheck} disabled={loadingCheckUser}>
                                 {loadingCheckUser ? (
                                     <div className="spinner"></div>
