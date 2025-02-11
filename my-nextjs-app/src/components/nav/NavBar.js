@@ -27,7 +27,7 @@ const NavBar = () => {
     };
 
     if (!session) {
-        return <div className="bg-black w-1/4">
+        return <div className="bg-black w-1/6">
         <h2 className="mt-12 text-center text-3xl font-bold">Please{' '}
             <Link href="/login">
                 <span className="cursor-pointer underline hover:text-green-500">log in</span>
@@ -40,7 +40,7 @@ const NavBar = () => {
     return(
         <>
        <div className={`${
-        isProfile ? 'fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[230px] rounded-br-md'
+        isProfile ? 'fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[225px] rounded-br-md'
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
         >
