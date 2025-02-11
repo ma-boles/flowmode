@@ -141,18 +141,18 @@ export default function Profile() {
                 <NavBar />
 
             <div /* dashboard container */
-            className={`p-2 h-screen flex-grow ${
+            className={`p-2 h-screen flex-grow overflow-x-scroll ${
                 session ? 'ml-56' : 'ml-0'
               }`}
                 >
-                <div /* top container */ className="flex my-2 justify-around">
+                <div /* top container */ className="flex my-2 justify-around w-[1130px]">
                     <h1 className="w-1/5 h-24 border-2 border-white font-bold text-4xl rounded-lg text-center flex items-center justify-center">Profile</h1>
                     <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayUserOwnedPlaylists}>My<br/>Playlists</button>
                     <button className="w-1/4 h-24 font-semibold bg-blue-700 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out border-2 border-transparent focus:border-white" onClick={displayFollowedPlaylists}>All<br/>Playlists</button>
                     <div className="w-1/4 h-24 bg-blue-700 rounded-lg" ></div>
                 </div>
 
-                <div /* top section - user data div */ className="flex flex-wrap relative justify-center h-[417px]">
+                <div /* top section - user data div */ className="flex flex-wrap relative justify-center h-[417px] w-[1130px]">
 
                     {isVisible && (
                         <div /* update buttons */ className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-80 rounded-md z-10">
@@ -167,15 +167,15 @@ export default function Profile() {
                         </div>
                     )}
 
-                        <div className="flex-1 w-full">
+                        <div className="flex-1">
                             <Templates templatesList={templatesList} />
                         </div>
                         <div className="flex-1">
                             <Favorites favoritesList={favoritesList}/>
                         </div>
                         {/* adjust scrolling */}
-                        <div className="overflow-y-hidden">
-                            <div className="mx-2 mt-2 h-full w-80">
+                        <div className="flex-1 overflow-y-hidden">
+                            <div className="mx-2 mt-2 h-full">
                                 <div className="flex justify-between bg-black bg-opacity-60 rounded-lg">
                                     <h2 className="p-2 font-semibold text-xl">Recently Played</h2>
                                     <div /* buttons div */ className="my-auto">
