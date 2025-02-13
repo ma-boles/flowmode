@@ -3,7 +3,7 @@ import React from "react";
 import NavBar from "@/components/nav/NavBar";
 import Footer from "@/components/footer/Footer";
 
-
+// Add replacement for Player if not signed in
 export default function About () {
     return (
         <>
@@ -11,7 +11,7 @@ export default function About () {
             <NavBar />
         </div>
 
-        <div className="min-h-screen mx-24">
+        <div className='p-2 ml-56 h-screen flex-grow overflow-x-screen'>
 
             <div /* mission */ className="my-24 px-12 pt-4 pb-8 rounded-lg about--content">
                 <h2 className="my-4 text-3xl font-bold">Our Mission</h2>
