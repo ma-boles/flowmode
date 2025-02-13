@@ -5,7 +5,6 @@ import Link from "next/link";
 import DropdownMenu from "./DropdownMenu";
 import { usePathname } from "next/navigation";
 
-// expand navbar to the bottom of screen and add line above player
 
 const NavBar = () => {
     const pathname = usePathname();
@@ -28,7 +27,7 @@ const NavBar = () => {
     };
 
     if (!session) {
-        return <div className="bg-black w-1/6">
+        return <div className="px-4 w-[225px] h-screen bg-black">
         <h2 className="mt-12 text-center text-3xl font-bold">Please{' '}
             <Link href="/login">
                 <span className="cursor-pointer underline hover:text-green-500">log in</span>
@@ -45,7 +44,7 @@ const NavBar = () => {
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
         >*/}
-        <div className='fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[225px] rounded-br-md'
+        <div className='fixed px-4 top-0 left-0 h-full flex flex-col bg-black w-[225px] rounded-br-md z-10'
         >
             {/*<div className="dropdown">*/}
                 {/*<button className={`${isProfile ? 'mb-2 mt-6' : 'p-0.5 my-2 bg-gray-400 profile-img'} cursor-pointer`}
