@@ -50,8 +50,8 @@ return(
             session ? 'ml-56' : 'ml-0'
           }`}>
         {/*className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto"*/}
-            <div className="w-full border-none">
-                <h2 className="pb-4 mt-8 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
+            {/*<div className="mt-20 w-full border-none">*/}
+                <h2 className="pb-4 mt-28 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
                 </h2>
                 <SearchComponent 
                     accessToken={accessToken} 
@@ -63,7 +63,7 @@ return(
                     previewId={previewId}
                     handleSetPreview={handleSetPreview}
                 />
-            </div>
+            {/*</div>*/}
         </section>
         </div>
 
