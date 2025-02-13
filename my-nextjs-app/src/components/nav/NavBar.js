@@ -5,6 +5,7 @@ import Link from "next/link";
 import DropdownMenu from "./DropdownMenu";
 import { usePathname } from "next/navigation";
 
+// expand navbar to the bottom of screen and add line above player
 
 const NavBar = () => {
     const pathname = usePathname();
@@ -39,14 +40,17 @@ const NavBar = () => {
 
     return(
         <>
-       <div className={`${
+       {/*<div className={`${
         isProfile ? 'fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[225px] rounded-br-md'
         :'flex px-8 justify-between w-full items-center navbar'
         }`}
+        >*/}
+        <div className='fixed px-4 top-0 left-0 h-[537px] flex flex-col bg-black w-[225px] rounded-br-md'
         >
-
             {/*<div className="dropdown">*/}
-                <button className={`${isProfile ? 'mb-2 mt-6' : 'p-0.5 my-2 bg-gray-400 profile-img'} cursor-pointer`}
+                {/*<button className={`${isProfile ? 'mb-2 mt-6' : 'p-0.5 my-2 bg-gray-400 profile-img'} cursor-pointer`}
+                 >*/}
+                <button className={`${isProfile ? 'mb-2 mt-6' : 'mb-2 mt-6'} cursor-pointer`}
                  >
                     {session.user.image ? (
                         <a rel="noopener noreferrer" href="https://open.spotify.com/" target="_blank">
@@ -62,17 +66,17 @@ const NavBar = () => {
                     Open Spotify
                 </span>
 
-            <div /* center logo */ className={`${isProfile ? 'hidden': ''}`}>
+           {/* <div /* center logo *//* className={`${isProfile ? 'hidden': 'hidden'}`}>
                 <button className=" hover:bg-gray-600">
                     <h1 className="p-1 text-5xl"><span className="font-bold text-green-500">f</span><span className="font-normal">m</span></h1>
                 </button>
-            </div>
+            </div>*/}
 
-            <div /*dropdown content */ className={`${isProfile ? 'flex flex-col' : 'hidden'}`}>
+            <div /*dropdown content */ className={`${isProfile ? 'flex flex-col' : 'flex flex-col'}`}>
                 <ul className="flex flex-col border-t border-white-1">
                     <button className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
-                        :'dropdown-link'
+                        :'sideNav-link'
                         }`}
                     /*className="flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out sideNav-link"*/ onClick={() => setIsOpen(true)}>
                         Create Profile
@@ -80,10 +84,23 @@ const NavBar = () => {
                             <img src="caret-left-solid.svg" className="m-auto ml-2 w-5 h-5 invert rotate-180"></img>
                         </div>
                     </button>
+                    <Link href='/profile'>
+                        {/*<div className="flex hover:bg-green-600 transition duration-300 ease-in-out dropdown-link">*/}
+                        <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
+                        isProfile ? 'sideNav-link'
+                        :'sideNav-link'
+                        }`}
+                        >
+                        Profile
+                            <div className="transparent">
+                                <img src="user-regular.svg" className="m-auto ml-4 mt-1 w-4 h-4 invert"></img>
+                            </div>
+                        </div>
+                    </Link>
                     <Link href='/search'>
                         <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
-                        :'dropdown-link'
+                        :'sideNav-link'
                         }`}
                         >
                         Search
@@ -95,7 +112,7 @@ const NavBar = () => {
                     <Link href="/get-started">
                         <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
-                        :'dropdown-link'
+                        :'sideNav-link'
                         }`}
                         >
                         Get Started
@@ -107,7 +124,7 @@ const NavBar = () => {
                     <Link href="/about">
                         <div className={`flex w-full text-left justify-between hover:bg-green-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
-                        :'dropdown-link'
+                        :'sideNav-link'
                         }`}
                         >
                         Mission・Story
@@ -129,7 +146,7 @@ const NavBar = () => {
                     <button onClick={() => signOut('spotify')} 
                     className={`flex justify-between bg-red-600 w-full text-left hover:bg-gray-600 transition duration-300 ease-in-out ${
                         isProfile ? 'sideNav-link'
-                        :'dropdown-link'
+                        :'sideNav-link'
                         }`}
                         >
                     Log Out
@@ -146,8 +163,8 @@ const NavBar = () => {
                 {isOpen && <Account setIsOpen={setIsOpen} />}
             </div>
 
-            <div className="dropdown">
-                {/* dropdown nav icon */}
+            {/*<div className="dropdown">
+                {/* dropdown nav icon *//*}
                 <button className={`${ isProfile ? 'hidden' :
                 'dropdown-btn'}`}>
                     <div className="bar1"></div>
@@ -155,7 +172,7 @@ const NavBar = () => {
                     <div className="bar3"></div>
                 </button>
                 <DropdownMenu />
-            </div>
+            </div>*/}
         </div>
 
         </>
