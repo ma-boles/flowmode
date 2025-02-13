@@ -39,11 +39,17 @@ const Search = ({ playlist }) => {
 
 return(
     <div>
-        <nav className="flex justify-around w-full browse--nav">
+        {/*<nav className="flex justify-around w-full browse--nav">
             <NavBar />
-        </nav>
+        </nav>*/}
+        <div className="flex overflow-y-auto">
+            <NavBar />
 
-        <section className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto">
+        <section 
+        className={`p-2 h-screen flex-grow overflow-x-scroll ${
+            session ? 'ml-56' : 'ml-0'
+          }`}>
+        {/*className="flex items-center justify-center mx-auto max-w-6xl min-h-screen h-auto"*/}
             <div className="w-full border-none">
                 <h2 className="pb-4 mt-8 font-semibold text-center text-5xl">What <span className="font-extrabold text-green-500">would </span> you like <br/>to <span className="font-extrabold text-green-500">listen </span> to?
                 </h2>
@@ -59,7 +65,8 @@ return(
                 />
             </div>
         </section>
-        
+        </div>
+
         <Player accessToken={accessToken}/>
 
     </div>
